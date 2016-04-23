@@ -1,2 +1,2 @@
 # JavaScript-jQuery-Demo
-前端工程师必备
+JavaScript与jQuery中文在线文档及Demo
