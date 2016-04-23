@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>Using Bing Maps</title>
+</head>
+
+<body>
+
+<div id="pageBanner">Using Bing Maps</div>
+
+<div id="nstext">
+
+<!--***START TEXT - DO NOT WRITE ABOVE THIS LINE***-->
+
+<p>The <a href="../jsapi/vetiledlayer.htm">VETiledLayer</a> class allows you to bring Bing Maps (formerly Microsoft Virtual Earth) into your ArcGIS JavaScript API applications. VETiledLayer requires that you supply the URL to a page you've configured for getting Bing Maps tokens. For more information on setting up this "Get Virtual Earth Token" page, see <A href="../jshelp/ve_getting_started.htm">Getting started with Bing Maps in the ArcGIS JavaScript API</A>.</p>
+<p>You can optionally supply other information in the VETiledLayer constructor. For example, you can override the default settings for token duration, the environment from which to request tiles (staging or production), and the type of Bing Maps service to request (Road, Aerial, or Aerial with Labels).</p>
+<p>The following code shows one example of how you might create a VETiledLayer:</p>
+
+<pre>var tokenUrl = "http://myserver:8081/ve/vetoken.jsp";
+var duration = 15;
+var environment = "production";
+
+veTileLayer = new esri.virtualearth.VETiledLayer({
+  tokenUrl: tokenUrl,
+  tokenDuration: duration,
+  environment: environment,
+  mapStyle: esri.virtualearth.VETiledLayer.MAP_STYLE_AERIAL
+});
+
+map.addLayer(veTileLayer);</pre>
+
+<!--***END TEXT - DO NOT WRITE BELOW THIS LINE***-->
+</div>
+
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>ArcGIS JavaScript API</title>
+</head>
+
+<body>
+
+<!--***REQUIRED TITLE***-->
+<div id="pageBanner">Identify features on a map</div>
+<!--***END REQUIRED TITLE***-->
+
+  <div id="nstext">
+
+	<H4 class=dtH4><a href="../../demos/identifytask/identify_drilldown.html" target="_blank">View live sample</a></H4>
+  <H4 class=dtH4>描述</H4>
+
+  <!--***START TEXT - DO NOT WRITE ABOVE THIS LINE***-->
+
+  <p>This sample demonstrates how to identify features at a point you click on the 
+			map. You can do this with the Identify task. The Identify task can retrive 
+			information from multiple layers at once, whereas the similar Query task only 
+			works with one layer at a time.</p>
+		<p>Identify operations can potentially return a lot of information, depending on 
+			the number of layers being identified and the tolerance you set. The tolerance 
+			is the number of pixels a feature is allowed to lie away from the clicked point 
+			in order to be counted as a result. You can limit the layers and the tolerance 
+			using identify parameters, but organizing the results in a small space can 
+			still be a challenge. This sample uses a TabContainer from the <A href="http://dojotoolkit.org/" target="_blank">
+				Dojo</A> <a href="http://dojotoolkit.org/projects/dijit" target="_blank">Dijit</a>
+			library to organize the results in a tabbed interface.</p>
+		<p>This sample contains numerous functions that run in the following sequence:</p>
+		<ul>
+			<li>
+				<b>init</b> - Sets up the map and adds an imagery base map from ArcGIS Online, 
+				as well as a zoning/cadastral map of Portland from the <a href="http://sampleserver1.arcgisonline.com/ArcGIS/rest/services" target="_blank">
+					ESRI Sample Server</a>.
+			<li>
+				<b>initFunctionality</b> - Called when the map loads. Sets up the <A href="../jsapi/identifytask.htm">
+					IdentifyTask</A>, the <A href="../jsapi/identifyparameters.htm">IdentifyParameters</A>, 
+				and some of the options for the <A href="../jsapi/symbol.htm">Symbol</A> and <A href="../jsapi/infowindow.htm">
+					InfoWindow</A> that will display the results. Notice that the Identify task 
+				requires the URL to the ArcGIS Server map service whose layers will be 
+				identified. You can discover this URL for your own services using the <A href="../jshelp/ags_rest.htm">
+					Services Directory</A>.
+			<li>
+				<b>doIdentify</b>
+			- Called when someone clicks the map. Clears any existing graphics, adds the 
+			clicked point coordinates to the identify parameters, and executes the 
+			identify.
+			<li>
+				<b>addToMap</b>
+			- Called when the Identify task completes. Loops through each result and adds 
+			it to an array, depending on which layer the result came from. This produces 
+			three arrays; one for each layer. These are then designated as content for the 
+			TabContainer Dijit. This function also displays an info window with the tabbed 
+			result information.
+			<li>
+				<b>layerTabContent</b> - Called as a helper function to <b>addToMap</b>. 
+			Formats the result information for inclusion in the TabContainer Dijit.
+			<li>
+				<b>showFeature</b> - Called when someone clicks the "Show" link in the result 
+				tab. Clears any existing features from the map and highlights the input 
+				parameter feature.</li>
+		</ul>
+
+<!--***END TEXT - DO NOT WRITE BELOW THIS LINE***--> 
+
+  <H4 class=dtH4>Code</H4>
+  <div class="detailSample">
+  <code>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"&gt;<br/>
+&lt;html&gt;<br/>
+&nbsp;&nbsp;&lt;head&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8"/&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;meta http-equiv="X-UA-Compatible" content="IE=7" /&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;title&gt;Identify Sample&lt;/title&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;script type="text/javascript"&gt;djConfig = { parseOnLoad:true }&lt;/script&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"&gt;&lt;/script&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;script type="text/javascript"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dojo.require("esri.map");<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dojo.require("esri.tasks.identify");<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dojo.require("dijit.layout.ContentPane");<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dojo.require("dijit.layout.TabContainer");<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dojo.require("dijit.form.Button");<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var map, identifyTask, identifyParams, symbol;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var layer2results, layer3results, layer4results;<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function init() {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map = new esri.Map("mapDiv", { extent: new esri.geometry.Extent(-122.580,45.482,-122.571,45.488, new esri.SpatialReference({wkid:4326})) });<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dojo.connect(map, "onLoad", initFunctionality);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var imageryPrime = new esri.layers.ArcGISTiledMapServiceLayer("http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer");<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map.addLayer(imageryPrime);<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var portlandLandBase = new esri.layers.ArcGISTiledMapServiceLayer("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Portland/Portland_ESRI_LandBase_AGO/MapServer");<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;portlandLandBase.setOpacity(0.65);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map.addLayer(portlandLandBase);<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dojo.connect(map.infoWindow, "onShow", function() {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dijit.byId("tabs").resize();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function initFunctionality(map) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dojo.connect(map, "onClick", doIdentify);<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;identifyTask = new esri.tasks.IdentifyTask("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Portland/Portland_ESRI_LandBase_AGO/MapServer");<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;identifyParams = new esri.tasks.IdentifyParameters();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;identifyParams.tolerance = 3;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;identifyParams.returnGeometry = true;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;identifyParams.layerIds = [2,3,4];<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;identifyParams.layerOption = esri.tasks.IdentifyParameters.LAYER_OPTION_ALL;<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map.infoWindow.resize(415, 200);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map.infoWindow.setContent(dijit.byId("tabs").domNode);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map.infoWindow.setTitle("Identify Results");<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;symbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([255,0,0]), 2), new dojo.Color([255,255,0,0.5]));<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function doIdentify(evt) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map.graphics.clear();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;identifyParams.geometry = evt.mapPoint;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;identifyParams.mapExtent = map.extent;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;identifyTask.execute(identifyParams, function(idResults) { addToMap(idResults, evt); });<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function addToMap(idResults, evt) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;layer2results = {displayFieldName:null,features:[]};<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;layer3results = {displayFieldName:null,features:[]};<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;layer4results = {displayFieldName:null,features:[]};<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (var i=0, il=idResults.length; i&lt;il; i++) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var idResult = idResults[i];<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (idResult.layerId === 2) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (!layer2results.displayFieldName) {layer2results.displayFieldName = idResult.displayFieldName};<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;layer2results.features.push(idResult.feature);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} else if (idResult.layerId === 3) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (!layer3results.displayFieldName) {layer3results.displayFieldName = idResult.displayFieldName};<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;layer3results.features.push(idResult.feature);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} else if (idResult.layerId === 4) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (!layer4results.displayFieldName) {layer4results.displayFieldName = idResult.displayFieldName};<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;layer4results.features.push(idResult.feature);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dijit.byId("layer2Tab").setContent(layerTabContent(layer2results,"layer2results"));<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dijit.byId("layer3Tab").setContent(layerTabContent(layer3results,"layer3results"));<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dijit.byId("layer4Tab").setContent(layerTabContent(layer4results,"layer4results"));<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map.infoWindow.show(evt.screenPoint, map.getInfoWindowAnchor(evt.screenPoint));<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function layerTabContent(layerResults, layerName) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var content = "";<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;switch (layerName) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case "layer2results":<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content = "&lt;i&gt;Total features returned: " + layerResults.features.length + "&lt;/i&gt;";<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content += "&lt;table border='1'&gt;&lt;tr&gt;&lt;th&gt;TLID&lt;/th&gt;&lt;th&gt;Owner&lt;/th&gt;&lt;th&gt;Value&lt;/th&gt;&lt;/tr&gt;";<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (var i=0, il=layerResults.features.length; i&lt;il; i++) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content+="&lt;tr&gt;&lt;td&gt;"+layerResults.features[i].attributes['TLID']+" &lt;a href='#' onclick='showFeature(" + layerName + ".features[" + i + "]); return false;'&gt;(show)&lt;/a&gt;&lt;/td&gt;";<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content+="&lt;td&gt;"+layerResults.features[i].attributes['OWNER1']+"&lt;/td&gt;";<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content+="&lt;td&gt;"+layerResults.features[i].attributes['TOTALVAL']+"&lt;/td&gt;";<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content+="&lt;/tr&gt;&lt;/table&gt;";<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case "layer3results":<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content = "&lt;i&gt;Total features returned: " + layerResults.features.length + "&lt;/i&gt;";<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content += "&lt;table border='1'&gt;&lt;tr&gt;&lt;th&gt;Building ID&lt;/th&gt;&lt;th&gt;Area&lt;/th&gt;&lt;/tr&gt;";<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (var i=0, il=layerResults.features.length; i&lt;il; i++) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content+="&lt;tr&gt;&lt;td&gt;"+layerResults.features[i].attributes['OBJECTID_1']+" &lt;a href='#' onclick='showFeature(" + layerName + ".features[" + i + "]); return false;'&gt;(show)&lt;/a&gt;&lt;/td&gt;";<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content+="&lt;td&gt;"+layerResults.features[i].attributes['Shape_Area']+"&lt;/td&gt;";<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content+="&lt;/tr&gt;&lt;/table&gt;";<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case "layer4results":<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content = "&lt;i&gt;Total features returned: " + layerResults.features.length + "&lt;/i&gt;";<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content += "&lt;table border='1'&gt;&lt;tr&gt;&lt;th&gt;ID&lt;/th&gt;&lt;th&gt;Zone&lt;/th&gt;&lt;th&gt;Zone Class&lt;/th&gt;&lt;th&gt;General Class&lt;/th&gt;&lt;/tr&gt;";<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (var i=0, il=layerResults.features.length; i&lt;il; i++) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content+="&lt;tr&gt;&lt;td&gt;"+layerResults.features[i].attributes['OBJECTID']+" &lt;a href='#' onclick='showFeature(" + layerName + ".features[" + i + "]); return false;'&gt;(show)&lt;/a&gt;&lt;/td&gt;";<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content+="&lt;td&gt;"+layerResults.features[i].attributes['ZONE']+"&lt;/td&gt;";<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content+="&lt;td&gt;"+layerResults.features[i].attributes['ZONE_CLASS']+"&lt;/td&gt;";<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content+="&lt;td&gt;"+layerResults.features[i].attributes['ZONEGEN_CL']+"&lt;/td&gt;";<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content+="&lt;/tr&gt;&lt;/table&gt;";<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return content;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function showFeature(feature) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map.graphics.clear();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;feature.setSymbol(symbol);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map.graphics.add(feature);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dojo.addOnLoad(init);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/script&gt;<br/>
+<br/>
+&nbsp;&nbsp;&lt;/head&gt;<br/>
+&nbsp;&nbsp;&lt;body class="tundra"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Click the map to identify buildings, parcels, and zoning information.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;div id="mapDiv" style="width:800px; height:600px; border:1px solid #000;"&gt;&lt;/div&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;!-- info window tabs --&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;div id="tabs" dojoType="dijit.layout.TabContainer" style="width:385px;height:150px;"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div id="layer2Tab" dojoType="dijit.layout.ContentPane" title="Tax Lots"&gt;&lt;/div&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div id="layer3Tab" dojoType="dijit.layout.ContentPane" title="Buildings"&gt;&lt;/div&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div id="layer4Tab" dojoType="dijit.layout.ContentPane" title="Zoning"&gt;&lt;/div&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br/>
+&nbsp;&nbsp;&lt;/body&gt;<br/>
+&lt;/html&gt;</code>
+  			</div>
+
+
+<br/><br/></div> 
+</body>
+</html>

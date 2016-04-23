@@ -1,0 +1,278 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>ImageParameters</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: ImageParameters</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	表示图像参数选项，用于<a href="arcgisdynamicmapservicelayer.htm#exportMapImage">ArcGISDynamicMapServiceLayer.exportMapImage</a>, <a href="geoprocessor.htm#getresultimage">Geoprocessor.getResultImage</a>, 和 <a href="geoprocessor.htm#getresultimagelayer">Geoprocessor.getResultImageLayer</a>调用。
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.layers.ImageParameters
+</pre>
+
+<H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#ImageParametersConst">esri.layers.ImageParameters()</a></td>
+		<td class="syntaxTABLE">创建新的ImageParameters对象。构造函数没有参数。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#bbox">bbox</a></td>
+<td class="syntaxTABLE">
+<a href="extent.htm">Extent</a>
+</td>
+
+<td class="syntaxTABLE">
+将被导出的地图的范围。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#dpi">dpi</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+为<a href="arcgisdynamicmapservicelayer.htm">ArcGISDynamicMapServiceLayer</a>设置的DPI。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#format">format</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+地图图片格式。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#height">height</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+请求图像高（单位：像素）。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#imageSpatialReference">imageSpatialReference</a></td>
+<td class="syntaxTABLE">
+<a href="spatialreference.htm">SpatialReference</a>
+</td>
+
+<td class="syntaxTABLE">
+导出地图空间参考。  支持的空间参考列表，见<a href="../jshelp/pcs.htm">投影坐标系统</a>和<a href="../jshelp/gcs.htm">地理坐标系统</a>。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#layerDefinitions">layerDefinitions</a></td>
+<td class="syntaxTABLE">
+String[]
+</td>
+
+<td class="syntaxTABLE">
+图层数组定义表达式，允许用户在导出地图图片中过滤单个图层的要素。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#layerIds">layerIds</a></td>
+<td class="syntaxTABLE">
+Number[]
+</td>
+
+<td class="syntaxTABLE">
+图层ID列表，表示导出地图里包含哪些图层。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#layerOption">layerOption</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+显示或隐藏图层的选项。有效值见常量表。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#transparent">transparent</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+动态图片背景是否是透明的。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#width">width</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+请求的图像的高（单位：像素）。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>常量</H4>
+
+	<table CLASS="syntaxTABLE" cellspacing="0">
+	<tr>
+	<th class="tableheader" width="20%">常量</th>
+		<th class="tableheader">描述</th>
+	</tr>
+
+		<tr>
+		<td class="syntaxTABLE">LAYER_OPTION_EXCLUDE</td>
+			<td class="syntaxTABLE">			显示所有除了指定的图层ID的图层以外的默认可见的图层。		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">LAYER_OPTION_HIDE</td>
+			<td class="syntaxTABLE">显示除了指定图层ID的图层以外的所有图层。</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">LAYER_OPTION_INCLUDE</td>
+			<td class="syntaxTABLE">			显示指定图层ID的图层和默认可见的图层。	</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">LAYER_OPTION_SHOW</td>
+			<td class="syntaxTABLE">			仅仅显示指定图层ID的图层。	</td>
+	</tr>
+
+</table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="ImageParametersConst"></a><H4>esri.layers.ImageParameters()</H4>
+		</div>
+
+<div class="detaildesc">创建新的ImageParameters对象。构造函数没有参数。</div>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="bbox"></a>
+&lt;<a href="extent.htm">Extent</a>> bbox</H4></div>
+
+<div class="detaildesc">将被导出的地图的范围。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="dpi"></a>
+&lt;Number> dpi</H4></div>
+
+<div class="detaildesc">为<a href="arcgisdynamicmapservicelayer.htm">ArcGISDynamicMapServiceLayer</a>设置的DPI。</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> 96
+			</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="format"></a>
+&lt;String> format</H4></div>
+
+<div class="detaildesc">地图图片格式。</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> png | png8 | png24 | jpg | pdf | bmp | gif | svg
+			</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> png8
+			</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="height"></a>
+&lt;Number> height</H4></div>
+
+<div class="detaildesc">请求图像高（单位：像素）。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="imageSpatialReference"></a>
+&lt;<a href="spatialreference.htm">SpatialReference</a>> imageSpatialReference</H4></div>
+
+<div class="detaildesc">导出地图空间参考。  支持的空间参考列表，见<a href="../jshelp/pcs.htm">投影坐标系统</a>和<a href="../jshelp/gcs.htm">地理坐标系统</a>。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="layerDefinitions"></a>
+&lt;String[]> layerDefinitions</H4></div>
+
+<div class="detaildesc">图层数组定义表达式，允许用户在导出地图图片中过滤单个图层的要素。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="layerIds"></a>
+&lt;Number[]> layerIds</H4></div>
+
+<div class="detaildesc">图层ID列表，表示导出地图里包含哪些图层。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="layerOption"></a>
+&lt;String> layerOption</H4></div>
+
+<div class="detaildesc">显示或隐藏图层的选项。有效值见常量表。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="transparent"></a>
+&lt;Boolean> transparent</H4></div>
+
+<div class="detaildesc">动态图片背景是否是透明的。</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> true
+			</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="width"></a>
+&lt;Number> width</H4></div>
+
+<div class="detaildesc">请求的图像的高（单位：像素）。</div>
+
+</div>
+
+<br/></div></body></html> 

@@ -1,0 +1,140 @@
+<html>
+<head>
+  <script language="javascript">
+  <!--
+  function CloseNav() {
+    if ((top.right.location == null) || (top.right.location == undefined) || (typeof(top.right.location.href) != "string") || (top.right.location.href == ""))
+      top.location="arcims_banner.htm";
+    else
+      top.location=top.right.location;
+  }
+  function IndexListOnChange() { //Listbox select -> Put selected text into Entry field
+    var iSelect = document.getElementById("indexcontainer").selectedIndex;
+    var text = document.getElementById("indexcontainer").item(iSelect).text;
+    //Remove leading spaces - &#160; &nbsp; %A0 -- Finding it hard to remove Non-breaking space. JScript does not see %A0 as White space
+    text = escape(text);    text = text.replace(/^(%A0)+/g, "");
+    text = unescape(text);  text = text.replace(/^\s+/g, "");
+    document.getElementById("IndexEntry").value = text;
+  }
+  function IndexEntryOnKeyUp() { //text typed -> select closest listbox entry 
+    var oList = document.getElementById("indexcontainer"); 
+    var ListLen = oList.length; 
+    var iCurSel = oList.selectedIndex; 
+    var text = document.getElementById("IndexEntry").value.toUpperCase(); 
+    var TextLen = text.length; 
+    for (var i = 0; i < ListLen; i++) { 
+      var listitem = oList.item(i).text.substr(0, TextLen).toUpperCase(); 
+      if (listitem == text) { 
+        if (i != iCurSel) oList.selectedIndex = i; 
+        break; 
+      } 
+    } 
+    return(true); //do not gobble keypress 
+  } 
+  function OpenSelected() {  //Dblclick list item -> open item
+    var iSelect = document.getElementById("indexcontainer").selectedIndex;
+    if (iSelect >= 0) {
+      var URL = document.getElementById("indexcontainer").item(iSelect).value;
+      if (URL.length > 0) top.right.location = URL;  //right pane has name "right"
+    }
+  }
+  function KeyDownEvent(event) {
+    if ((event.which && event.which==13) || (event.keyCode && event.keyCode==13)) {
+      OpenSelected();
+      IndexListOnChange();  //update entry field to list box selected text
+      return(false);        //gobble text
+      } else return(true);
+  }
+
+  function GetFrameWidth() { 
+    var x = 300; 
+    if (self.innerHeight) // all except Explorer 
+	x = self.innerWidth; 
+    else if (document.documentElement && document.documentElement.clientHeight) // Explorer 6 Strict Mode 
+	x = document.documentElement.clientWidth; 
+    else if (document.body) // other Explorers 
+	x = document.body.clientWidth; 
+    return(x); 
+  } 
+
+  function GetFrameHeight() { 
+    var y = 400; 
+    if (self.innerHeight) // all except Explorer 
+      y = self.innerHeight; 
+    else if (document.documentElement && document.documentElement.clientWidth) // Explorer 6 Strict Mode 
+      y = document.documentElement.clientHeight; 
+    else if (document.body) // other Explorers 
+      y = document.body.clientHeight; 
+    return(y); 
+  } 
+
+  function resizeIndex() {
+    var indexDiv = document.getElementById("indexcontainer");
+    var xTop = indexDiv.offsetTop;
+    indexDiv.style.width = GetFrameWidth() - 10; //working with 5px each side
+    var HH = GetFrameHeight(); 
+    if (HH -  xTop > 0)
+      indexDiv.style.height = HH -  xTop;
+  }
+  -->
+  </script>
+
+
+<meta HTTP-EQUIV=REFRESH>
+<title>Index</title>
+<meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5" />
+
+  <style>
+  .docstyle
+  {
+    font-size: 85%;
+    font-family: verdana,arial,sans-serif;
+  }
+  </style>
+
+</head>
+
+<body id="docBody" style="color: Black; margin: 5px 0px 0px 0px;" onload="resizeIndex()" onresize="resizeIndex()">
+
+
+<div style="display: inline; white-space: nowrap; margin: 0px 0px 0px 5px;">
+<a href="arcims_toc.htm"><img src="hh_navtab21.gif" width="54" height="21" border="0"></a>
+<!--- <a href="arcims_index.htm"><img src="hh_navtab22.gif" width="46" height="21" border="0"></a>
+<a href="arcims_search.htm"><img src="hh_navtab23.gif" width="48" height="21" border="0"></a> --->
+<a href="javascript:CloseNav()"><img src="hh_navtab0x.gif" width="100" height="21" border="0"></a>
+</div>
+
+
+  <div style="margin: 11px 0px 0px 0px; padding: 0px 5px 0px 5px;">
+     <input type="text" id="IndexEntry" class="docstyle"
+       style="width:100%;"
+       onkeydown="javascript:return(KeyDownEvent(event));"
+       onkeyup="javascript:return(IndexEntryOnKeyUp());">
+  </div>
+
+<div style="margin: 5px 0px 0px 0px; padding: 0px 5px 0px 5px;">
+<select id="indexcontainer" name="IndexListbox" class="docstyle"
+  style="width:200; height:200;"
+  size="500"
+  onchange="javascript:IndexListOnChange();"
+  ondblclick="javascript:OpenSelected();return(true);"
+  onkeydown="javascript:return(KeyDownEvent(event));">
+<option value="topics/net_copyright.htm">Adding a copyright to your map</option>
+<option value="topics/net_northarrow.htm">Adding a north arrow to your map</option>
+<option value="topics/net_toolbar.htm">Adding and removing tools from the toolbar</option>
+<option value="topics/net_navigation.htm">Changing navigation properties</option>
+<option value="topics/net_scalebar.htm">Changing scale bar properties</option>
+<option value="topics/net_toc.htm">Changing table of content properties</option>
+<option value="topics/net_contents.htm">File structure of a Web Mapping Application</option>
+<option value="topics/overview_start.htm">Introduction</option>
+<option value="topics/overview_wma.htm">Layout of a Web Mapping Application</option>
+<option value="topics/net_open_ide.htm">Opening an application in an IDE</option>
+<option value="topics/java_start.htm">Overview of customizing a Web Mapping Application</option>
+<option value="topics/net_start.htm">Overview of customizing a Web Mapping Application</option>
+<option value="topics/net_ovmap.htm">Selecting a different overview map</option>
+<option value="topics/overview_manager.htm">Understanding Web Manager functionality</option>
+</select>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>ArcGIS JavaScript API</title>
+</head>
+
+<body>
+
+<!--***REQUIRED TITLE***-->
+<div id="pageBanner">显示地图属性</div>
+<!--***END REQUIRED TITLE***-->
+
+  <div id="nstext">
+
+	<H4 class=dtH4><a href="../../demos/map/map_showproperties.html" target="_blank">查看在线示例</a></H4>
+  <H4 class=dtH4>描述</H4>
+
+  <!--***START TEXT - DO NOT WRITE ABOVE THIS LINE***-->
+
+  <p>
+  本例展示了如哦读取地图和图层的属性和返回信息给用户。本例中的四个按钮允许用户接收地图属性。每个按钮调用不同的函数。</p>
+		<ul>
+			<li>
+				<b>Get All Map Layers</b> - 这个按钮调用<b>getMapLayers</b>函数，循环地图里的每个图层并在报警框中报告<A href="../jsapi/layer.htm#id">
+					layer ID</A>，<A href="../jsapi/layer.htm#visible">visibility</A>和<A href="../jsapi/layer.htm#opacity">
+					opacity</A>信息
+			<li>
+				<b>Get SR</b> - 这个按钮调用<b>getSR</b>函数，在报警框中报告地图的<A href="../jsapi/spatialreference.htm">空间参考</A>的WKID。
+			<li>
+				<b>Get Scales for portlandParcels</b> - 这个按钮调用函数<b>getScales</b>，在地图服务图层的portlandParcels切片中报告关于每个比例级别。该函数使用<A href="../jsapi/arcgistiledmapservicelayer.htm#tileInfo">
+					ArcGISTiledMapServiceLayer.tileInfo</A>属性，这个属性能显示<a href="http://webhelp.esri.com/arcgisserver/9.3/dotNet/what_is_map_caching.htm" target="_blank">
+					map cache</a>里有多少个比例级别，级别是什么比例的，每个比例的分辨率是什么。
+			<li>
+				<b>Get Map Width Height</b> - 这个按钮调用函数<b>getMapWidthHeight</b>，在报警框里报告地图的<A href="../jsapi/map.htm#width">width</A>和<A href="../jsapi/map.htm#height">
+					height</A>，单位是像素。
+			</li>
+		</ul>
+
+<!--***END TEXT - DO NOT WRITE BELOW THIS LINE***--> 
+
+  <H4 class=dtH4>代码</H4>
+  <div class="detailSample">
+  <code>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"&gt;<br/>
+&lt;html&gt;<br/>
+&nbsp;&nbsp;&lt;head&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8"/&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;meta http-equiv="X-UA-Compatible" content="IE=7" /&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;title&gt;ArcGIS JavaScript API Map Layer&lt;/title&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"&gt;&lt;/script&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;script type="text/javascript"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dojo.require("esri.map");<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var myMap, portlandParcels, transportation, census;<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function init() {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;myMap = new esri.Map("mapDiv");<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;portlandParcels = new esri.layers.ArcGISTiledMapServiceLayer("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Portland/Portland_ESRI_LandBase_AGO/MapServer");<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;myMap.addLayer(portlandParcels);<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;transportation = new esri.layers.ArcGISTiledMapServiceLayer("http://server.arcgisonline.com/ArcGIS/rest/services/Reference/ESRI_Transportation_World_2D/MapServer", {"id":"agoreference", "opacity":0.5});<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;myMap.addLayer(transportation);<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;census = new esri.layers.ArcGISDynamicMapServiceLayer("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Census_USA/MapServer", {"id":"census","opacity":0.5});<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;myMap.addLayer(census);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function getMapLayers() {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (var j=0, jl=myMap.layerIds.length; j&lt;jl; j++) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var currentLayer = myMap.getLayer(myMap.layerIds[j]);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert("id: " + currentLayer.id + ", visible: " + currentLayer.visible + ", opacity: " + currentLayer.opacity);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function getSr() {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert("Spatial Reference WKID: " + myMap.spatialReference.wkid);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function getScales() {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var tileInfo = portlandParcels.tileInfo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var scales = "";<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (var j=0, jl=tileInfo.lods.length; j&lt;jl; j++) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var level = tileInfo.lods[j].level;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var scale = tileInfo.lods[j].scale;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var resolution = tileInfo.lods[j].resolution;<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scales = scales + "level: " + level + ", scale: " + scale + ", resolution: " + resolution + "\n";<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert(scales);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function getMapWidthHeight() {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert("Width = " + myMap.width + "; Height = " + myMap.height);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dojo.addOnLoad(init);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/script&gt;<br/>
+&nbsp;&nbsp;&lt;/head&gt;<br/>
+&nbsp;&nbsp;&lt;body class="tundra"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;div id="mapDiv" style="width:900px; height:600px; border:1px solid #000;"&gt;&lt;/div&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Simple example illustrating working with map and layer properties&lt;br /&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;input type="button" value="Get All Map Layers" onclick="getMapLayers()" /&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;input type="button" value="Get SR" onclick="getSr()" /&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;input type="button" value="Get Scales for portlandParcels" onclick="getScales()" /&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;input type="button" value="Get Map Width Height" onclick="getMapWidthHeight()" /&gt; &lt;br /&gt;<br/>
+&nbsp;&nbsp;&lt;/body&gt;<br/>
+&lt;/html&gt;</code>
+  			</div>
+
+
+<br/><br/></div> 
+</body>
+</html>

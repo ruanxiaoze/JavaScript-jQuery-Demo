@@ -1,0 +1,340 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>Polyline</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: Polyline</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+    路径数组，每个路径是一个点的数组。
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+<a href="geometry.htm">esri.geometry.Geometry</a>
+  |_ esri.geometry.Polyline
+</pre><H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#PolylineConst1">esri.geometry.Polyline(spatialReference)</a></td>
+		<td class="syntaxTABLE">创建一个Polyline对象。</td>
+		</tr>
+<tr><td class="syntaxTABLE"><a href="#PolylineConst2">esri.geometry.Polyline(json)</a></td>
+		<td class="syntaxTABLE">创建一个Polyline对象。使用JSON对象。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#paths">paths</a></td>
+<td class="syntaxTABLE">
+Number[][][]
+</td>
+
+<td class="syntaxTABLE">
+路径数组。每个路径由两个或多个点的数组构成。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>方法表</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+		<th class="tableheader">方法</th>
+		<th class="tableheader">返回值</th>
+		<th class="tableheader">描述</th>
+		</tr>
+
+<tr>
+<td class="syntaxTABLE"><a href="#addPath1">addPath(points or path or pointJson)</a></td><td class="syntaxTABLE">
+<a href="polyline.htm">Polyline</a>
+</td>
+<td class="syntaxTABLE">增加路径到Polyline。路径能够是下列类型之一：数字数组，点的数组，JSON对象。当增加时路径索引递增一。<br/><br/>
+
+<code>Polyline</code>返回值在v1.4增加的。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#getExtent">getExtent()</a></td><td class="syntaxTABLE">
+<a href="extent.htm">Extent</a>
+</td>
+<td class="syntaxTABLE">返回Polyline的范围。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#getPoint">getPoint(pathIndex, pointIndex)</a></td><td class="syntaxTABLE">
+<a href="point.htm">Point</a>
+</td>
+<td class="syntaxTABLE">返回通过路径和路径里的点指定的点。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#insertPoint">insertPoint(pathIndex, pointIndex, point)</a></td><td class="syntaxTABLE">
+<a href="polyline.htm">Polyline</a>
+</td>
+<td class="syntaxTABLE">插入一个新的点到polyline。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#removePath">removePath(pathIndex)</a></td><td class="syntaxTABLE">
+<a href="point.htm">Point[]</a>
+</td>
+<td class="syntaxTABLE">从Polyline删除一个路径。索引指定的路径将删除。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setPoint">setPoint(pathIndex, pointIndex, point)</a></td><td class="syntaxTABLE">
+<a href="polyline.htm">Polyline</a>
+</td>
+<td class="syntaxTABLE">在polyline中更新点。</td>	</tr></table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="PolylineConst1"></a><H4>esri.geometry.Polyline(spatialReference)</H4>
+		</div>
+
+<div class="detaildesc">创建一个Polyline对象。</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;<a href="spatialreference.htm">SpatialReference</a>>
+<B>spatialReference</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			几何体的空间参考。
+			</td>
+			</tr>
+</table>
+
+</div><div class="detaildiv"><div class="detailname"><a name="PolylineConst2"></a><H4>esri.geometry.Polyline(json)</H4>
+		</div>
+
+<div class="detaildesc">创建一个Polyline对象。使用JSON对象。</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;Object>
+<B>json</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			JSON对象表示的几何体。
+			</td>
+			</tr>
+</table>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="paths"></a>
+&lt;Number[][][]> paths</H4></div>
+
+<div class="detaildesc">路径数组。每个路径由两个或多个点的数组构成。</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#addPath">addPath</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class=sectionDivider>方法详细信息</div>
+<div class="detaildiv">
+		<div class="detailname"><a name="addPath1"></a><H4>
+addPath(points or path or pointJson)</H4></div>
+
+<div class="detaildesc">增加路径到Polyline。路径能够是下列类型之一：数字数组，点的数组，JSON对象。当增加时路径索引递增一。<br/><br/>
+
+<code>Polyline</code>返回值在v1.4增加的。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="polyline.htm">Polyline</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="point.htm">Point[]</a>> <B>points</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+            创建路径的ESRI点的数组。
+</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Number[][]> <B>path</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+            创建路径的成对x，y坐标的数组。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Object> <B>pointJson</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+            JSON对象表示的路径。</td>
+			</tr>
+</table>
+
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>polyline.addPath([new esri.geometry.Point(10,10), new esri.geometry.Point(20,20), new esri.geometry.Point(30,30)]);</pre><br/>
+		</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="getExtent"></a><H4>
+getExtent()</H4></div>
+
+<div class="detaildesc">返回Polyline的范围。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="extent.htm">Extent</a></div>
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="getPoint"></a><H4>
+getPoint(pathIndex, pointIndex)</H4></div>
+
+<div class="detaildesc">返回通过路径和路径里的点指定的点。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="point.htm">Point</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>pathIndex</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+在polyline里的一个路径的索引。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>pointIndex</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+            在路径中的一个点的索引。</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="insertPoint"></a><H4>
+insertPoint(pathIndex, pointIndex, point)</H4></div>
+
+<div class="detaildesc">插入一个新的点到polyline。<i> (As of v1.4)</i></div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="polyline.htm">Polyline</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>pathIndex</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+            要插入点的路径。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>pointIndex</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+            路径中插入的点的索引。
+</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="point.htm">Point</a>> <B>point</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+            要插入路径中的点。</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="removePath"></a><H4>
+removePath(pathIndex)</H4></div>
+
+<div class="detaildesc">从Polyline删除一个路径。索引指定的路径将删除。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="point.htm">Point[]</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>pathIndex</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+            要删除的路径的索引。</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setPoint"></a><H4>
+setPoint(pathIndex, pointIndex, point)</H4></div>
+
+<div class="detaildesc">在polyline中更新点。<i> (As of v1.4)</i></div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="polyline.htm">Polyline</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>pathIndex</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+            更新点的路径索引。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>pointIndex</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+            路径中更新的点的索引。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="point.htm">Point</a>> <B>point</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+            要更新到路径中的点。</td>
+			</tr>
+</table>
+
+</div>
+
+<br/></div></body></html> 

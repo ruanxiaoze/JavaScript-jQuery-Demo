@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>ArcGIS JavaScript API</title>
+</head>
+
+<body>
+
+<!--***REQUIRED TITLE***-->
+<div id="pageBanner">Show Find Task results in DataGrid</div>
+<!--***END REQUIRED TITLE***-->
+
+  <div id="nstext">
+
+	<H4 class=dtH4><a href="../../demos/findtask/find_map_datagrid.html" target="_blank">View live sample</a></H4>
+  <H4 class=dtH4>描述</H4>
+
+  <!--***START TEXT - DO NOT WRITE ABOVE THIS LINE***-->
+
+<p>This sample demonstrates how you can display the results of a Find Task in a Dojo <a href="http://api.dojotoolkit.org/jsdoc/dojox/1.2/dojox.grid.DataGrid" target="_blank">DataGrid</a> control. This control is new at Dojo 1.2, and is therefore available starting with version 1.2 of the ArcGIS JavaScript API.</p>
+<p>The DataGrid allows users to sort and resize columns, and provides many events that you can handle. You can use these events to tie the grid to the map. In this sample, when the user clicks a row, the map zooms to the associated tax lot.</p>
+<p>The <a href="../jsapi/findtask.htm">FindTask</a> returns an array of <a href="../jsapi/findresult.htm">FindResult</a>. Each result contains attributes that can be pushed to an array and associated with a Dojo <a href="http://api.dojotoolkit.org/jsdoc/dojo/1.2/dojo.data.ItemFileReadStore" target="_blank">ItemFileReadStore</a>. The ItemFileReadStore is a valid type of data store for the DataGrid and is appropriate for displaying task results from the ArcGIS JavaScript API. You can find a variety of other interesting data store types in <a href="http://api.dojotoolkit.org/jsdoc/dojo/1.2/dojo.data" target="_blank">dojo.data</a> and <a href="http://api.dojotoolkit.org/jsdoc/dojox/1.2/dojox.data" target="_blank">dojox.data</a>.</p>
+<p>The logic that zooms the map to the clicked row is in the <b>onRowClickHandler</b> function. The tax lot ID is retrieved from the clicked row, and then existing graphics are searched for that tax lot ID. When the graphic with the correct tax lot ID is found, the map is set to the extent of that graphic.</p>
+
+<!--***END TEXT - DO NOT WRITE BELOW THIS LINE***--> 
+
+  <H4 class=dtH4>Code</H4>
+  <div class="detailSample">
+  <code>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"&gt;<br/>
+&lt;html&gt;<br/>
+&nbsp;&nbsp;&lt;head&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8"/&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;meta http-equiv="X-UA-Compatible" content="IE=7" /&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;title&gt;Display Find Task results in Dojo DataGrid&lt;/title&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dojox/grid/resources/Grid.css"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dojox/grid/resources/tundraGrid.css"&gt;<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;script type="text/javascript"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;djConfig = {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parseOnLoad:true<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/script&gt;<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"&gt;&lt;/script&gt;<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;script type="text/javascript"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dojo.require("esri.map");<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dojo.require("dojox.grid.DataGrid");<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dojo.require("dojo.data.ItemFileReadStore");<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dojo.require("esri.tasks.find");<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var findTask, findParams;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var map, startExtent;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var grid, store;<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function init() {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dojo.connect(grid, "onRowClick", onRowClickHandler);<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//Create map and add the ArcGIS Online imagery layer<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;startExtent = new esri.geometry.Extent(-122.9, 45.3, -122.4, 45.7, new esri.SpatialReference({wkid:4326}));<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map = new esri.Map("map", { extent: startExtent });<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var streetMapLayer = new esri.layers.ArcGISTiledMapServiceLayer("http://services.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer");<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map.addLayer(streetMapLayer);<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//Create Find Task using the URL of the map service to search<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;findTask = new esri.tasks.FindTask("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Portland/Portland_ESRI_LandBase_AGO/MapServer");<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//Create the find parameters<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;findParams = new esri.tasks.FindParameters();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;findParams.returnGeometry = true;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;findParams.layerIds = [1];<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;findParams.searchFields = ["OWNER1","OWNER2","OWNER3"];<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function doFind() {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//Set the search text to the value in the box<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;findParams.searchText = dojo.byId("ownerName").value;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;findTask.execute(findParams,showResults);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function showResults(results) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//This function works with an array of FindResult that the task returns<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map.graphics.clear();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var symbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_NULL, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([255,255,0]), 2), new dojo.Color([0,0,0,0]));<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//Create items array to be added to store's data<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var items = []; //all items to be stored in data store<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (var i=0, il=results.length; i&lt;il; i++) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;items.push(results[i].feature.attributes);&nbsp;&nbsp;//append each attribute list as item in store<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var graphic = results[i].feature;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;graphic.setSymbol(symbol);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map.graphics.add(graphic);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//Create data object to be used in store<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var data = {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;identifier: "TLID",&nbsp;&nbsp;//This field needs to have unique values<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label: "TLID", //Name field for display. Not pertinent to a grid but may be used elsewhere.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;items: items<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;};<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //Create data store and bind to grid.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;store = new dojo.data.ItemFileReadStore({ data:data });<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;grid.setStore(store);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;grid.setQuery({ TLID: '*' });<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//Zoom back to the initial map extent<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map.setExtent(startExtent);<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//Zoom to the parcel when the user clicks a row<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function onRowClickHandler(evt){<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var clickedTaxLotId = grid.getItem(evt.rowIndex).TLID;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var selectedTaxLot;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (var i=0, il=map.graphics.graphics.length; i&lt;il; i++) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var currentGraphic = map.graphics.graphics[i];<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ((currentGraphic.attributes) &amp;&amp; currentGraphic.attributes.TLID == clickedTaxLotId){<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;selectedTaxLot = currentGraphic;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var taxLotExtent = selectedTaxLot.geometry.getExtent();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map.setExtent(taxLotExtent);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dojo.addOnLoad(init);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/script&gt;<br/>
+&nbsp;&nbsp;&lt;/head&gt;<br/>
+&nbsp;&nbsp;&lt;body class="tundra"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Owner name: &lt;input type="text" id="ownerName" size="60" value="Quinteros" /&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;input type="button" value="Search" onclick="doFind();" /&gt;&lt;br /&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;br /&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;div id="map" style="width:600px; height:300px; border:1px solid #000;"&gt;&lt;/div&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp; &lt;table dojoType="dojox.grid.DataGrid" jsid="grid" id="grid" rowsPerPage="5" rowSelector="20px" style="height:300px; width:600px"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;thead&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;tr&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;th field="TLID"&gt;Tax lot ID&lt;/th&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;th field="OWNER1"&gt;Owner 1&lt;/th&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;th field="OWNER2"&gt;Owner 2&lt;/th&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;th field="OWNER3"&gt;Owner 3&lt;/th&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;th field="TOTALVAL"&gt;Total value&lt;/th&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;th field="SITECITY"&gt;City&lt;/th&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/tr&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/thead&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/table&gt;<br/>
+&nbsp;&nbsp;&lt;/body&gt;<br/>
+&lt;/html&gt;<br/>
+</code>
+  			</div>
+
+
+<br/><br/></div> 
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>What's new in Version 1.2</title>
+</head>
+
+<body>
+
+<div id="pageBanner">What's new in Version 1.2</div>
+
+<div id="nstext">
+
+<!--***START TEXT - DO NOT WRITE ABOVE THIS LINE***-->
+
+<p>The following are new features in the ArcGIS JavaScript API version 1.2: </p>
+
+<H4 class=dtH4>Support for Image Services</H4>
+<p>You can add ArcGIS Server Image Services to the map using <a href="../jsapi/arcgisimageservicelayer.htm">ArcGISImageServiceLayer</a>. Image services represent file-based raster datasets or raster collections published with the ArcGIS Server Image extension. You can control the image type, compression type for JPG, image bands, and interpolation type.</p>
+
+<H4 class=dtH4>Support for Dojo 1.2.</H4>
+<p>When you reference the ArcGIS JavaScript API in your code, you also get a reference to version 1.2 of the Dojo Toolkit. See the <a href="http://dojotoolkit.org/book/dojo-1-2-release-notes" target="_blank">Dojo 1.2 Release Notes</a> for migration information and a full list of improvements.</p>
+
+<H4 class=dtH4>More flexibility with cached and dynamic layers</H4>
+<p>You can now define which tile levels of a cached service are exposed in the map. For example, you may want to use ArcGIS Online data for small scales only, then switch to your own cached data at large scales. Or you may want to make a cached service available at large scales only in order to focus the map on a certain geographic area.</p>
+
+<p>You can also force dynamic maps to conform to the scale levels in a tiling scheme. This allows you to show a cached map at small scales, then easily switch to a dynamic map at large scales. </p>
+
+<H4 class=dtH4>Refreshable map layers</H4>
+<p>Map service layers have a refresh() method. This is useful if back-end editors are modifying the data and you want to ensure the end user of the application sees the most recent data from the server.</p>
+
+<H4 class=dtH4>Improved graphics performance</H4>
+<p>The performance of the graphics layer is improved when adding a large number of graphics to the map.
+</p>
+
+<H4 class=dtH4>Projection of dynamic map services on the fly</H4>
+<p>Dynamic map services can be projected on the fly to match the spatial reference you set for the map. Previously, the spatial reference was defined by the base layer.  Now the map can be defined using any spatial reference.  Valid only with dynamic map layers. </p>
+
+<H4 class=dtH4>New methods for the geometry service</H4>
+<p><a href="../jsapi/geometryservice.htm">GeometryService</a> has new methods that allow for creating points in polygons for labeling purposes, and determining spatial relations of geometries. These geometries do not have to come from a map service; they can be geometries returned from a task or a query to a non-ArcGIS Web service.</p>
+
+
+<H4 class=dtH4>Changes to the ArcGIS JavaScript API version 1.2</H4>
+
+<p><b><a href="../jsapi/arcgisdynamicmapservicelayer.htm">ArcGISDynamicMapServiceLayer</a></b></p>
+<ul>
+<li>New properties:  disableCilentCaching, layerDefintions, useJSON, visibleLayer </li>
+<li>New properties moved from ArcGISMapServiceLayer: copyright, description, layerInfos, units </li>
+<li>New methods:  setDisableClientCaching</li>
+<li>New constructor options: imageParameters, useMapImage</li>
+<li>The imageParameters parameter in exportMapImage is optional. </li>
+</ul>
+
+<p><b><a href="../jsapi/arcgisimageservicelayer.htm">ArcGISImageServiceLayer</a></b></p>
+<ul>
+<li>New class</li>
+</ul>
+
+<p><b><a href="../jsapi/tiledmapservicelayer.htm">ArcGISMapServiceLayer</a></b></p>
+<ul>
+<li>Removed.  See <a href="../jsapi/tiledmapservicelayer.htm">TiledMapServiceLayer</a> and <a href="../jsapi/dynamicmapservicelayer.htm">DynamicMapServiceLayer</a> instead.</li>
+</ul>
+
+<p><b><a href="../jsapi/arcgistiledmapservicelayer.htm">ArcGISTiledMapServiceLayer</a></b></p>
+<ul>
+<li>New constructor option:  displayLevels </li>
+<li>New properties moved from ArcGISMapServiceLayer: copyright, description, layerInfos, units </li>
+</ul>
+
+<p><b><a href="../jsapi/dynamicmapservicelayer.htm">DynamicMapServiceLayer</a></b></p>
+<ul>
+<li>New class</li>
+</ul>
+
+<p><b><a href="../jsapi/geometryservice.htm">GeometryService</a></b></p>
+<ul>
+<li>Added Constants Table  </li>
+<li>New methods: labelPoints, relation </li>
+<li>New events: onLabelPointsComplete, onRelationComplete </li>
+</ul>
+
+<p><b><a href="../jsapi/imageserviceparameters.htm">ImageServiceParameters</a></b></p>
+<ul>
+<li>New class</li>
+</ul>
+
+<p><b><a href="../jsapi/layer.htm">Layer</a></b></p>
+<ul>
+<li>New property moved from ArcGISMapServiceLayer:  url </li>
+<!--<li>New methods: setMap </li>-->
+<li>New events: onUpdate </li>
+</ul>
+<!--LOD has constructor-->
+<p><b><a href="../jsapi/map.htm">Map</a></b></p>
+<ul>
+<li>New constructor option:  lods </li>
+<li>New properties: isShiftDoubleClickZoom </li>
+<li>New methods: centerAndZoom, disableShiftdoubleClickZoom, enableShiftDoubleClickZoom </li>
+<li>Change in behavior:  "double click zoom" (disableDoubleClickZoom, enableDoubleClickZoom) previously required using the shift key.  This is no longer the case.  If you want to continue using "shift double click zoom" use enableShiftDoubleClickZoom/disableShiftDoubleClickZoom instead. </li>
+</ul>
+
+<p><b><a href="../jsapi/tiledmapservicelayer.htm">TiledMapServiceLayer</a></b></p>
+<ul>
+<li>New class</li>
+</ul>
+
+<p><b><a href="../jsapi/namespace_esri.htm">esri namespace</a></b></p>
+<ul>
+<li>New properties:  version </li>
+<li>New methods:  filter</li>
+</ul>
+
+<!--***END TEXT - DO NOT WRITE BELOW THIS LINE***-->
+</div>
+
+</body>
+</html>

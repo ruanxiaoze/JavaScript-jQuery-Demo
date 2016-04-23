@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>QueryTask with query geometry from another task</title>
+    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css">
+    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"></script>
+    <script type="text/javascript">
+      dojo.require("esri.map");
+      dojo.require("esri.tasks.query");
+      dojo.require("esri.tasks.geometry");
+
+      /*Initialize map, buffer, & query params*/
+      function init() {
+        var startExtent = new esri.geometry.Extent(-95.271, 38.933, -95.228, 38.976, new esri.SpatialReference({wkid:4326}) );
+        var map = new esri.Map("mapDiv", { extent: startExtent });
+        //listen for when map is loaded and then add query functionality
+        dojo.connect(map, "onLoad", initFunctionality);
+
+        var streetMap = new esri.layers.ArcGISTiledMapServiceLayer("http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer");
+        //var censusMap = new esri.layers.ArcGISDynamicMapServiceLayer("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Census_USA/MapServer/");
+        map.addLayer(streetMap);
+      }
+
+      function initFunctionality(map) {
+        var queryTask = new esri.tasks.QueryTask("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Census_USA/MapServer/0");
+
+        //identify proxy page to use if the toJson payload to the geometry service is greater than 2000 characters.
+        //If this null or not available the buffer operation will not work.  Otherwise it will do a http post to the proxy.
+        esriConfig.defaults.io.proxyUrl = "/arcgisserver/apis/javascript/proxy/proxy.ashx";
+        esriConfig.defaults.io.alwaysUseProxy = false;
+
+        // Query
+        var query = new esri.tasks.Query();
+        query.returnGeometry = true;
+        query.outFields = ["POP2000","HOUSEHOLDS","HSE_UNITS", "TRACT", "BLOCK"];
+
+        //Geometry Service Endpoint
+        var gsvc = new esri.tasks.GeometryService("http://sampleserver1.arcgisonline.com/arcgis/rest/services/Geometry/GeometryServer");
+
+        // +++++Listen for map onClick event+++++
+        dojo.connect(map, "onClick", function(evt) {
+          map.graphics.clear();
+          var symbol = new esri.symbol.SimpleMarkerSymbol();
+          var graphic = new esri.Graphic(evt.mapPoint, symbol);
+
+          var params = new esri.tasks.BufferParameters();
+          params.features = [ graphic ];
+
+          // CASE [1]: if you want to buffer in linear units such as meters, km, miles etc.
+          params.distances = [ dojo.byId('bufferDistance').value ];
+          params.unit = esri.tasks.BufferParameters.UNIT_KILOMETER;
+          params.bufferSpatialReference = new esri.SpatialReference({wkid: 102113});
+          gsvc.buffer(params);
+          dojo.byId('messages').innerHTML = "<b>Creating Buffer Using Geometry Service...</b>";
+        });
+
+        // +++++Listen for GeometryService onBufferComplete event+++++
+        dojo.connect(gsvc, "onBufferComplete", function(graphics) {
+          var symbol = new esri.symbol.SimpleFillSymbol("none", new esri.symbol.SimpleLineSymbol("dashdot", new dojo.Color([255,0,0]), 2), new dojo.Color([255,255,0,0.25]));
+          var graphic = new esri.Graphic(graphics[0].geometry,symbol);
+          map.graphics.add(graphic);
+
+          query.geometry = graphic.geometry;
+          queryTask.execute(query);
+          dojo.byId('messages').innerHTML = "<b>Executing Query with Result Buffer Geometry...</b>";
+        });
+
+        // +++++Listen for QueryTask executecomplete event+++++
+        dojo.connect(queryTask, "onComplete", function(fset) {
+          //create symbol for selected features
+          var symbol = new esri.symbol.SimpleMarkerSymbol();
+          symbol.style = esri.symbol.SimpleMarkerSymbol.STYLE_SQUARE;
+          symbol.setSize(8);
+          symbol.setColor(new dojo.Color([255,255,0,0.5]));
+
+          var infoTemplate = new esri.InfoTemplate("Block: ${BLOCK}", "${*}");
+
+          var resultFeatures = fset.features;
+          for (var i=0, il=resultFeatures.length; i<il; i++) {
+            var graphic = resultFeatures[i];
+            graphic.setSymbol(symbol);
+            graphic.setInfoTemplate(infoTemplate);
+            map.graphics.add(graphic);
+          }
+          var totalPopulation = sumPopulation(fset);
+          var r = "";
+          r = "<b>The total Census Block population within the buffer is <i>" + totalPopulation + "</i>.</b>";
+          dojo.byId('messages').innerHTML = r;
+        });
+      }
+
+      function sumPopulation(fset) {
+        var features = fset.features;
+        var popTotal = 0;
+        for (var x = 0; x < features.length; x++) {
+          popTotal = popTotal + features[x].attributes['POP2000'];
+        }
+        return popTotal;
+      }
+
+      dojo.addOnLoad(init);
+    </script>
+  </head>
+
+  <body class="tundra">
+    Zoom to area and click on map to select census block points within the buffered circle.<br/>
+    Buffer distance (in kilometers):&nbsp;<input type="text" id="bufferDistance" value="1" size="5"/>
+    <div id="mapDiv" style="width: 500px; height:500px;"></div>
+    <span id="messages"></span>
+  </body>
+</html>

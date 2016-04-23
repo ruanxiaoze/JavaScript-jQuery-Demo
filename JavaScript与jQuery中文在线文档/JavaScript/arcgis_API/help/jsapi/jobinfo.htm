@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>JobInfo</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: JobInfo</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	表示与服务器上异步GP任务的执行有关的信息。JobInfo没有构造方法。
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.tasks.JobInfo
+</pre>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#jobId">jobId</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+ArcGIS Server分配的唯一工作ID。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#jobStatus">jobStatus</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+工作状态。返回值见常量表。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#messages">messages</a></td>
+<td class="syntaxTABLE">
+GpMessage[]
+</td>
+
+<td class="syntaxTABLE">
+信息的数组，包含信息类型和描述。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>常量</H4>
+
+	<table CLASS="syntaxTABLE" cellspacing="0">
+	<tr>
+	<th class="tableheader" width="20%">常量</th>
+		<th class="tableheader">描述</th>
+	</tr>
+
+		<tr>
+		<td class="syntaxTABLE">STATUS_CANCELLED</td>
+			<td class="syntaxTABLE">			工作被取消。	</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">STATUS_CANCELLING</td>
+			<td class="syntaxTABLE">			工作正在取消中。</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">STATUS_DELETED</td>
+			<td class="syntaxTABLE">			工作被删除。</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">STATUS_DELETING</td>
+			<td class="syntaxTABLE">			工作正在删除中。		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">STATUS_EXECUTING</td>
+			<td class="syntaxTABLE">	工作正在被工作处理器执行中。	</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">STATUS_FAILED</td>
+			<td class="syntaxTABLE">			工作执行失败。		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">STATUS_NEW</td>
+			<td class="syntaxTABLE">			工作是新的。	</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">STATUS_SUBMITTED</td>
+			<td class="syntaxTABLE">			工作被提交。		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">STATUS_SUCCEEDED</td>
+			<td class="syntaxTABLE">			工作成功完成。	</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">STATUS_TIMED_OUT</td>
+			<td class="syntaxTABLE">			工作执行超时。		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">STATUS_WAITING</td>
+			<td class="syntaxTABLE">			工作正等待可用工作处理器。	</td>
+	</tr>
+
+</table>
+
+<div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="jobId"></a>
+&lt;String> jobId</H4></div>
+
+<div class="detaildesc">ArcGIS Server分配的唯一工作ID。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="jobStatus"></a>
+&lt;String> jobStatus</H4></div>
+
+<div class="detaildesc">工作状态。返回值见常量表。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="messages"></a>
+&lt;GpMessage[]> messages</H4></div>
+
+<div class="detaildesc">信息的数组，包含信息类型和描述。</div>
+
+</div>
+
+<br/></div></body></html> 

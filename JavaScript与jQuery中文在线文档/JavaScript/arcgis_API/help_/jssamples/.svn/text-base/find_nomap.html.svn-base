@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>ArcGIS JavaScript API</title>
+</head>
+
+<body>
+
+<!--***REQUIRED TITLE***-->
+<div id="pageBanner">Find features without a map</div>
+<!--***END REQUIRED TITLE***-->
+
+  <div id="nstext">
+
+	<H4 class=dtH4><a href="../../demos/findtask/find_nomap.html" target="_blank">View live sample</a></H4>
+  <H4 class=dtH4>描述</H4>
+
+  <!--***START TEXT - DO NOT WRITE ABOVE THIS LINE***-->
+
+  <p>This sample demonstrates how to use the find task to search for records in your 
+			data, then display the results in an HTML table.</p>
+		<p>Although the <A href="../jsapi/findtask.htm">FindTask</A> does not require you 
+			to display a map, its constructor requires a URL to an ArcGIS Server map 
+			service. This example uses the <a href="http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StatesCitiesRivers_USA/MapServer/"
+				target="_blank">ESRI_StatesCitiesRivers_USA</a> service on the <a href="http://sampleserver1.arcgisonline.com/ArcGIS/rest/services" target="_blank">
+				ESRI sample server</a>. The <A href="../jsapi/findparameters.htm">FindParameters</A>
+			restrict the search to only the STATE_NAME and STATE_FIPS fields of the States 
+			layer (index 2).</p>
+		<pre>params = new esri.tasks.FindParameters();
+params.layerIds = [2];
+params.searchFields = ["STATE_NAME","STATE_FIPS"];</pre>
+		<p>When you click the Find button, the function <b>doFind</b> reads the input box 
+			and uses it as the search text. The find is then executed:</p>
+		<pre>params.searchText = dojo.byId("searchText").value;
+find.execute(params, showResults);
+</pre>
+		<p>The results are returned as an array of <A href="../jsapi/findresult.htm">FindResult</A>
+			objects. These are <A href="../jsapi/graphic.htm">graphics</A>, which have 
+			attributes that you can retrieve through syntax such as 
+			result.feature.attributes.STATE_NAME. After the find task completes, the 
+			callback function <b>showResults</b> loops through these features and 
+			constructs an HTML table from their attributes. The function then writes the 
+			table to the "tbl" div.</p>
+
+<!--***END TEXT - DO NOT WRITE BELOW THIS LINE***--> 
+
+  <H4 class=dtH4>Code</H4>
+  <div class="detailSample">
+  <code>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"&gt;<br/>
+&lt;html&gt;<br/>
+&nbsp;&nbsp;&lt;head&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8"/&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;meta http-equiv="X-UA-Compatible" content="IE=7" /&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;title&gt;Simple Find&lt;/title&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"&gt;&lt;/script&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;script type="text/javascript"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dojo.require("esri.tasks.find");<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var find, params;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function init() {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;find = new esri.tasks.FindTask("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StatesCitiesRivers_USA/MapServer/");<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;params = new esri.tasks.FindParameters();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;params.layerIds = [2];<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;params.searchFields = ["STATE_NAME","STATE_FIPS"];<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function doFind() {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;params.searchText = dojo.byId("searchText").value;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;find.execute(params, showResults);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function showResults(results) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var result, attribs;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var s = ["&lt;table border=\"1\"&gt;&lt;thead&gt;&lt;tr style=\"background-color:#ccc;\"&gt;&lt;td&gt;State Name&lt;/td&gt;&lt;td&gt;FIPS&lt;/td&gt;&lt;td&gt;Population (1990)&lt;/td&gt;&lt;td&gt;Population (1999)&lt;/td&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody id=\"states\"&gt;"];<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (var i=0, il=results.length; i&lt;il; i++) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result = results[i];<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;attribs = result.feature.attributes;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;s.push("&lt;tr&gt;&lt;td&gt;" + attribs.STATE_NAME + "&lt;/td&gt;&lt;td&gt;" + attribs.STATE_FIPS + "&lt;/td&gt;&lt;td&gt;" + attribs.POP1990 + "&lt;/td&gt;&lt;td&gt;" + attribs.POP1999 + "&lt;/td&gt;&lt;/tr&gt;");<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;s.push("&lt;/tbody&gt;&lt;/table&gt;");<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dojo.byId("tbl").innerHTML = s.join("");<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dojo.addOnLoad(init);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/script&gt;<br/>
+<br/>
+&nbsp;&nbsp;&lt;/head&gt;<br/>
+&nbsp;&nbsp;&lt;body class="tundra"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Find by State Name or State FIPS: &lt;input type="text" id="searchText" size="40" value="Kansas" /&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;input type="button" value="Find" onclick="doFind()" /&gt;<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;div id="tbl"&gt;&lt;/div&gt;<br/>
+<br/>
+&nbsp;&nbsp;&lt;/body&gt;<br/>
+&lt;/html&gt;<br/>
+</code>
+  			</div>
+
+
+<br/><br/></div> 
+</body>
+</html>

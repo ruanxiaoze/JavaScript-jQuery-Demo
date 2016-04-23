@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>Class Breaks Renderer</title>
+
+    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css">
+        <script type="text/javascript">var djConfig = {parseOnLoad: true }</script>
+    <script type="text/javascript" src= "http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"></script>
+
+    <script type="text/javascript" charset="utf-8">
+      dojo.require("esri.map");
+      dojo.require("esri.tasks.query");
+
+      var map;
+      var stateName = "Florida";
+      var attributeField = "POP1990";
+
+      function init() {
+        map = new esri.Map("map", {
+          extent: new esri.geometry.Extent({xmin:-88.06640625,ymin:24.45556640625,xmax:-79.27734375,ymax:31.04736328125,spatialReference:{wkid:4326}}),
+          slider: false
+        });
+        dojo.connect(map, "onLoad", doQuery);
+        map.addLayer(new esri.layers.ArcGISTiledMapServiceLayer("http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer"));
+      }
+
+      dojo.addOnLoad(init);
+
+      //query Florida cities
+      function doQuery() {
+        var queryTask = new esri.tasks.QueryTask("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StatesCitiesRivers_USA/MapServer/0");
+        var query = new esri.tasks.Query();
+        query.where = "STATE_NAME = '" + stateName + "'";
+        query.outFields = [attributeField];
+        query.returnGeometry = true;
+        queryTask.execute(query, addFeatureSetToMap);
+      }
+
+       function addFeatureSetToMap(featureSet) {
+         var features = featureSet.features;
+
+         var min = max = parseFloat(features[0].attributes[attributeField]);
+
+         //find minimum and maximum population values for Florida cities
+         dojo.forEach(features, function(feature) {
+           min = Math.min(min, feature.attributes[attributeField]);
+           max = Math.max(max, feature.attributes[attributeField]);
+         });
+
+         //divide the range of values by the number of classes to find the interval
+         var numRanges = 7;
+         var breaks = (max - min) / numRanges;
+
+         var outline = new esri.symbol.SimpleLineSymbol().setWidth(1);
+         var fillColor = new dojo.Color([240,150,240,0.75]);
+         var defaultSymbol = new esri.symbol.SimpleMarkerSymbol().setSize(1).setOutline(outline);
+
+         var renderer = new esri.renderer.ClassBreaksRenderer(defaultSymbol, attributeField);
+
+         //add the breaks using the interval calculated above
+         for (var i=0; i<numRanges; i++) {
+           renderer.addBreak(parseFloat(min + (i*breaks)),
+               parseFloat(min + ((i+1)*breaks)),
+               new esri.symbol.SimpleMarkerSymbol().setSize((i+1)*6).setColor(fillColor).setOutline(outline));
+         }
+
+         map.graphics.setRenderer(renderer);
+
+         // add features to map
+         dojo.forEach(featureSet.features, function(feature) {
+           map.graphics.add(feature);
+         });
+       }
+
+    </script>
+
+  </head>
+  <body>
+    <div id="map" class="tundra" style="width:800px; height:600px; border:1px solid #000;"></div>
+  </body>
+</html>

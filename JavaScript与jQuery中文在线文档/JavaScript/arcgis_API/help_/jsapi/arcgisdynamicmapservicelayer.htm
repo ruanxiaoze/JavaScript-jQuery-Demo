@@ -1,0 +1,738 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>ArcGISDynamicMapServiceLayer</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: ArcGISDynamicMapServiceLayer</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+    可以使用ArcGIS Server REST API提供的动态地图服务资源。动态地图服务联机生成图像。对于缓存地图服务，见<a href="arcgistiledmapservicelayer.htm">ArcGISTiledMapServiceLayer</a>.
+
+
+<br /><br />
+如果第一个加到地图里的图层是ArcGISDynamicMapServiceLayer，地图将呈现这个图层的投影。
+
+  </div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+<a href="layer.htm">esri.Layer</a>
+  |_ <a href="dynamicmapservicelayer.htm">esri.layers.DynamicMapServiceLayer</a>
+        |_ esri.layers.ArcGISDynamicMapServiceLayer
+</pre><H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#ArcGISDynamicMapServiceLayerConst">esri.layers.ArcGISDynamicMapServiceLayer(url, options?)</a></td>
+		<td class="syntaxTABLE">
+        
+    创建新的ArcGISDynamicMapServiceLayer对象。URL是必需的参数。这个图层接受一些可选参数。这些可选参数可以包容任意顺序。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#copyright">copyright</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+地图服务定义的版权字符串。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#description">description</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+地图服务定义的地图描述。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#disableClientCaching">disableClientCaching</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+当值为true时，图片总是从服务器上获取，忽略浏览器的缓存。这将被用于地图服务的数据时常修改的情况。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#dpi">dpi</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+动态地图服务层的输出dpi。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#imageFormat">imageFormat</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+输出图片类型。自ArcGIS Server9.3.1起，支持的图片格式列表被包含在服务目录里地图服务描述的“支持的图片格式类型”下。另外，自ArcGIS Server9.3.1起，优化的地图服务能支持真PNG32图片。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#imageTransparency">imageTransparency</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">&nbsp;
+</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#layerDefinitions">layerDefinitions</a></td>
+<td class="syntaxTABLE">
+String[]
+</td>
+
+<td class="syntaxTABLE">&nbsp;
+</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#layerInfos">layerInfos</a></td>
+<td class="syntaxTABLE">
+<a href="layerinfo.htm">LayerInfo[]</a>
+</td>
+
+<td class="syntaxTABLE">&nbsp;
+</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#units">units</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">&nbsp;
+</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#useMapImage">useMapImage</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+<i>useMapImage</i>设置。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#visibleLayers">visibleLayers</a></td>
+<td class="syntaxTABLE">
+Number[]
+</td>
+
+<td class="syntaxTABLE">
+获得导出地图的可见图层。
+		</td></tr>
+</table>
+
+<H4 class=dtH4>方法表</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+		<th class="tableheader">方法</th>
+		<th class="tableheader">返回值</th>
+		<th class="tableheader">描述</th>
+		</tr>
+
+<tr>
+<td class="syntaxTABLE"><a href="#exportMapImage">exportMapImage(imageParameters?, callback?)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">使用<a href="imageparameters.htm">ImageParameters</a>指定的值导出地图。结束时，返回<a href="mapimage.htm">MapImage</a>。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setDefaultLayerDefinitions">setDefaultLayerDefinitions()</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">重设服务上所有定义的图层的定义。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setDefaultVisibleLayers">setDefaultVisibleLayers()</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">清除<a href="#setVisibleLayers">setVisibleLayers</a>定义的可见图层，重置可见图层为地图服务的默认图层。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setDisableClientCaching">setDisableClientCaching(disable)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">设置图片是否总是从服务上获得并忽略浏览器缓存。当地图服务支持数据经常改变时被用到。	</td></tr><tr>
+<td class="syntaxTABLE"><a href="#setDPI">setDPI(dpi)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">设置导出地图的dip。默认值为96。	</td></tr><tr>
+<td class="syntaxTABLE"><a href="#setImageFormat">setImageFormat(imageFormat)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">设置导出地图的图片格式。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setImageTransparency">setImageTransparency(transparent)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">设置动态图片的背景是否透明。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setLayerDefinitions">setLayerDefinitions(layerDefinitions)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">设置图层定义用于过滤地图服务里个别的图层的要素。 layerDefinitions参数是图层定义表达式数组，如下面的代码片段：<br /><br />
+<pre>
+var layerDefinitions = [];
+layerDefinitions[0] = "POPULATION > 5000000";
+layerDefinitions[5] = "AREA > 100000";
+dynamicMapServiceLayer.setLayerDefinitions(layerDefinitions);
+</pre>
+<br />
+注意这个数组目录0和5是有效图层ID，POPULATION和AREA是各自图层相关的属性字段。当前不可见的图层的定义表达式会被服务器忽略。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setVisibleLayers">setVisibleLayers(ids)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">设置导出地图的可见的图层。默认情况下，可视的图层通过<a href="layerinfo.htm">LayerInfo</a>的默认可见性定义。</td>	</tr></table>
+
+<H4 class=dtH4>事件</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">事件</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#onMapImageExport">onMapImageExport(mapImage)
+		</a></td>
+
+<td class="syntaxTABLE">当图层导出完成时触发。</td>
+		</tr></table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="ArcGISDynamicMapServiceLayerConst"></a><H4>esri.layers.ArcGISDynamicMapServiceLayer(url, options?)</H4>
+		</div>
+
+<div class="detaildesc">创建新的ArcGISDynamicMapServiceLayer对象。URL是必需的参数。这个图层接受一些可选参数。这些可选参数可以包容任意顺序。</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;String>
+<B>url</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			代表一个地图服务的ArcGIS Server REST资源的URL。例如：http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Population_World/MapServer。更多构造URL的信息，见<a href="../jshelp/ags_rest.htm">服务目录和REST API</a>。</td>
+			</tr>
+<tr>
+<td class="detailTABLE">
+&lt;Object>
+<B>options</B></td>
+<td class="detailTABLE">
+Optional	</td>
+<td class="detailTABLE">
+			可选参数。见选选项列表。
+			</td>
+			</tr>
+</table>
+
+<div class="detaildesc"><strong>可选项:</strong></div><table CLASS="detailTABLE" cellspacing="0" >
+<tr>
+			<td class="detailTABLE">
+&lt;String>
+<B>id</B></td>
+			<td class="detailTABLE">
+			指定给图层的Id。如果没有指定，esri.Map 指定该值。
+			</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="imageparameters.htm">ImageParameters</a>>
+<B>imageParameters</B></td>
+			<td class="detailTABLE">
+            表现图片参数选项。
+
+			</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Number>
+<B>opacity</B></td>
+			<td class="detailTABLE">
+            地图最初的透明度或不透明度。值范围从0.0到1.0，0.0是指100%透明，1.0指不透明。默认值是1.0。
+
+			</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Boolean>
+<B>useMapImage</B></td>
+			<td class="detailTABLE">
+            默认情况下，图片被导出为MIME格式，图片以流的方式返回客户端。当useMapImage参数被设置为true，图片被保存到服务器上，JSON格式的响应通过图片URL地址返回客户端。第二个调用自动在服务器上搜素图片。对于穿过代理服务器的安全服务这个方法是必需的。在这个情况下，地图图片不能是图片流。<i>(As of v1.2)</i>
+
+			</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Boolean>
+<B>visible</B></td>
+			<td class="detailTABLE">
+            图层最初的可见性。默认为true。
+			</td>
+			</tr>
+</table>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="copyright"></a>
+&lt;String> copyright</H4></div>
+
+<div class="detaildesc">地图服务定义的版权字符串。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="description"></a>
+&lt;String> description</H4></div>
+
+<div class="detaildesc">地图服务定义的地图描述。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="disableClientCaching"></a>
+&lt;Boolean> disableClientCaching</H4></div>
+
+<div class="detaildesc">当值为true时，图片总是从服务器上获取，忽略浏览器的缓存。这将被用于地图服务的数据时常修改的情况。<i> (As of v1.2)</i></div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> false
+			</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setDisableClientCaching">setDisableClientCaching</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="dpi"></a>
+&lt;Number> dpi</H4></div>
+
+<div class="detaildesc">动态地图服务层的输出dpi。</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> 96
+			</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setDPI">setDPI</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="imageFormat"></a>
+&lt;String> imageFormat</H4></div>
+
+<div class="detaildesc">输出图片类型。自ArcGIS Server9.3.1起，支持的图片格式列表被包含在服务目录里地图服务描述的“支持的图片格式类型”下。另外，自ArcGIS Server9.3.1起，优化的地图服务能支持真PNG32图片。</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> png | png8 | png24 | png32 |  jpg | pdf | bmp | gif | svg
+			</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> png8
+			</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setImageFormat">setImageFormat</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="imageTransparency"></a>
+&lt;Boolean> imageTransparency</H4></div>
+
+<div class="detaildesc">动态图片背景是否是透明的。</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> true
+			</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setImageTransparency">setImageTransparency</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="layerDefinitions"></a>
+&lt;String[]> layerDefinitions</H4></div>
+
+<div class="detaildesc">设置图层定义用于过滤地图服务里个别的图层的要素。<i> (As of v1.2)</i></div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setLayerDefinitions">setLayerDefinitions</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="layerInfos"></a>
+&lt;<a href="layerinfo.htm">LayerInfo[]</a>> layerInfos</H4></div>
+
+<div class="detaildesc">返回服务里的有效图层和默认可见性。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="units"></a>
+&lt;String> units</H4></div>
+
+<div class="detaildesc">由服务定义的图层默认单位。如果图层是地图底图，地图是一样的单位。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="useMapImage"></a>
+&lt;Boolean> useMapImage</H4></div>
+
+<div class="detaildesc">当值为true时图片被保存到服务器上，JSON格式响应通过图片的URL地址返回客户端。第二个调用自动到服务器上检索图片。值在构造函数里用<i>useMapImage</i>设置。<i> (As of v1.2)</i></div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> false
+			</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="visibleLayers"></a>
+&lt;Number[]> visibleLayers</H4></div>
+
+<div class="detaildesc">获得导出地图的可见图层。<i> (As of v1.2)</i></div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setVisibleLayers">setVisibleLayers</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class=sectionDivider>方法详细信息</div>
+<div class="detaildiv">
+		<div class="detailname"><a name="exportMapImage"></a><H4>
+exportMapImage(imageParameters?, callback?)</H4></div>
+
+<div class="detaildesc">使用<a href="imageparameters.htm">ImageParameters</a>指定的值导出地图。结束时，返回<a href="mapimage.htm">MapImage</a>。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="imageparameters.htm">ImageParameters</a>> <B>imageParameters</B></td>
+			<td class="detailTABLE">
+可选项</td>
+			<td class="detailTABLE">
+            导出地图图片前指定的图片输入参数。
+</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>callback</B></td>
+			<td class="detailTABLE">
+可选项</td>
+			<td class="detailTABLE">
+            当方法已经完成，调用该函数。函数内的参数和<a href="#onMapImageExport">onMapImageExport</a>事件一致。</td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onMapImageExport">onMapImageExport</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setDefaultLayerDefinitions"></a><H4>
+setDefaultLayerDefinitions()</H4></div>
+
+<div class="detaildesc">重设服务上所有定义的图层的定义。<i> (As of v1.1)</i></div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setLayerDefinitions">setLayerDefinitions</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setDefaultVisibleLayers"></a><H4>
+setDefaultVisibleLayers()</H4></div>
+
+<div class="detaildesc">清除<a href="#setVisibleLayers">setVisibleLayers</a>定义的可见图层，重置可见图层为地图服务的默认图层。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setDisableClientCaching"></a><H4>
+setDisableClientCaching(disable)</H4></div>
+
+<div class="detaildesc">设置图片是否总是从服务上获得并忽略浏览器缓存。当地图服务支持数据经常改变时被用到。<i> (As of v1.2)</i></div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Boolean> <B>disable</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">&nbsp;
+</td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#disableClientCaching">disableClientCaching</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setDPI"></a><H4>
+setDPI(dpi)</H4></div>
+
+<div class="detaildesc">设置导出地图的dip。默认值为96。
+
+</div><div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>dpi</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+DPI 值。</td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#dpi">dpi</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setImageFormat"></a><H4>
+setImageFormat(imageFormat)</H4></div>
+
+<div class="detaildesc">设置导出地图的图片格式。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>imageFormat</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+有效值是 png | png8 | png24 | jpg | pdf | bmp | gif | svg.</td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#imageFormat">imageFormat</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setImageTransparency"></a><H4>
+setImageTransparency(transparent)</H4></div>
+
+<div class="detaildesc">设置动态图片的背景是否透明。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Boolean> <B>transparent</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+有效值是 true | false.  默认值是true。</td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#imageTransparency">imageTransparency</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setLayerDefinitions"></a><H4>
+setLayerDefinitions(layerDefinitions)</H4></div>
+
+<div class="detaildesc">设置图层定义用于过滤地图服务里个别的图层的要素。 layerDefinitions参数是图层定义表达式数组，如下面的代码片段：<br /><br />
+<pre>
+var layerDefinitions = [];
+layerDefinitions[0] = "POPULATION > 5000000";
+layerDefinitions[5] = "AREA > 100000";
+dynamicMapServiceLayer.setLayerDefinitions(layerDefinitions);
+</pre>
+<br />
+注意这个数组目录0和5是有效图层ID，POPULATION和AREA是各自图层相关的属性字段。当前不可见的图层的定义表达式会被服务器忽略。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;String[]> <B>layerDefinitions</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+            包含每个图层的定义的数组。</td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setDefaultLayerDefinitions">setDefaultLayerDefinitions</a>&nbsp;&nbsp;
+<a href="#layerDefinitions">layerDefinitions</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setVisibleLayers"></a><H4>
+setVisibleLayers(ids)</H4></div>
+
+<div class="detaildesc">设置导出地图的可见的图层。默认情况下，可视的图层通过<a href="layerinfo.htm">LayerInfo</a>的默认可见性定义。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Number[]> <B>ids</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">图层ID数组。</td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#visibleLayers">visibleLayers</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<H4 class=dtH4>Events Detail</H4>
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onMapImageExport"></a><H4>
+onMapImageExport(mapImage)	</H4></div>
+
+
+<div class="detaildesc">当图层导出完成时触发。</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="mapimage.htm">MapImage</a>> <B>mapImage</B>
+			</td>
+
+<td class="detailTABLE">
+			包含动态生成地图图片的属性。
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#exportMapImage">exportMapImage</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<br/></div></body></html> 

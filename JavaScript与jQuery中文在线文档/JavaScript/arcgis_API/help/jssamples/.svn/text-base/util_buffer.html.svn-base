@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>ArcGIS JavaScript API</title>
+</head>
+
+<body>
+
+<!--***REQUIRED TITLE***-->
+<div id="pageBanner">Buffer a point</div>
+<!--***END REQUIRED TITLE***-->
+
+  <div id="nstext">
+
+	<H4 class=dtH4><a href="../../demos/utilities/util_buffer.html" target="_blank">View live sample</a></H4>
+  <H4 class=dtH4>描述</H4>
+
+  <!--***START TEXT - DO NOT WRITE ABOVE THIS LINE***-->
+
+  <p>This sample creates buffers around a point that you click on the map. This 
+			example just draws the buffers, but the buffers could also be used to perform a 
+			task such as returning a list of addresses of people who live within the 
+			buffered area.</p>
+		<p>The buffers are created using an <a href="http://webhelp.esri.com/arcgisserver/9.3/dotNet/geometry_service.htm" target="_blank">
+				ArcGIS Server geometry service</a>. This type of service is new at ArcGIS 
+			Server 9.3 and you can use it for buffering, projecting, and geometry 
+			simplification in JavaScript applications. This line creates the geometry 
+			service:</p>
+		<pre>gsvc = new esri.tasks.GeometryService("http://sampleserver1a.arcgisonline.com/arcgis/rest/services/Geometry/GeometryServer");</pre>
+		<p>You can use the <a href="../jshelp/ags_rest.htm">Services Directory</a> to 
+			discover the URL to your own geometry service. Since the service name is 
+			required to be Geometry, the URL will be very similar to this one.</p>
+		<p>
+			Notice that you can use an array of distances to create multiple ring buffers. 
+			This example creates buffers of 5 and 10 kilometers. Because the buffer 
+			distance is specified using a linear unit, the spatial reference used to create 
+			the buffers must be a projected coordinate system. If the buffer distance were 
+			specified as an angular unit (for example, degrees) you would use a geographic 
+			coordinate system. Ideally you will choose to create the buffers with the 
+			coordinate system that matches your source data. Since this sample uses ArcGIS 
+			Online, whose source data uses the WGS 1984 geographic coordinate system, the 
+			sample must use a different coordinate system to create the buffers (WGS 1984 Plate 
+			Caree&nbsp;[well-known ID 32662]).</p>
+		<pre>params.distances = [ 5, 10 ];
+params.unit = esri.tasks.BufferParameters.UNIT_KILOMETER;
+params.bufferSpatialReference = new esri.SpatialReference({wkid: 32662});
+
+gsvc.buffer(params, showBuffer);</pre>
+		<p>The callback function <b>showBuffer</b> creates a symbol and adds the buffers as 
+			graphics on the map. This sample uses the same semi-transparent symbol for both 
+			buffers, therefore the inner buffer looks darker than the outer buffer.</p>
+
+<!--***END TEXT - DO NOT WRITE BELOW THIS LINE***--> 
+
+  <H4 class=dtH4>Code</H4>
+  <div class="detailSample">
+  <code>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"&gt;<br/>
+&lt;html&gt;<br/>
+&nbsp;&nbsp;&lt;head&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8"/&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;meta http-equiv="X-UA-Compatible" content="IE=7" /&gt;<br/>
+&nbsp;&nbsp;&lt;title&gt;Buffer&lt;/title&gt;<br/>
+&nbsp;&nbsp;&lt;link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css"&gt;<br/>
+&nbsp;&nbsp;&lt;script src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5" type="text/javascript"&gt;&lt;/script&gt;<br/>
+<br/>
+&nbsp;&nbsp;&lt;script type="text/javascript"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;dojo.require("esri.map");<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;dojo.require("esri.tasks.geometry");<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;var map = null;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;var gsvc = null;<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;function initialize() {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map = new esri.Map("map");<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var layer = new esri.layers.ArcGISTiledMapServiceLayer("http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer");<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map.addLayer(layer);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map.setExtent(new esri.geometry.Extent(-97.76, 32.32, -96.11, 33.42, new esri.SpatialReference({wkid: 4326})));<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gsvc = new esri.tasks.GeometryService("http://sampleserver1.arcgisonline.com/arcgis/rest/services/Geometry/GeometryServer");<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dojo.connect(map, "onClick", doBuffer);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;function doBuffer(evt) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map.graphics.clear();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var symbol = new esri.symbol.SimpleMarkerSymbol();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var graphic = new esri.Graphic(evt.mapPoint, symbol);<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var params = new esri.tasks.BufferParameters();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;params.features = [ graphic ];<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// CASE [1]: if you want to buffer in angular units.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//params.distances = [ 5, 10 ];<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//params.unit = esri.tasks.BufferParameters.UNIT_DEGREE;<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// CASE [2]: if you want to buffer in linear units such as meters, km, miles etc.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;params.distances = [ 5, 10 ];<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;params.unit = esri.tasks.BufferParameters.UNIT_KILOMETER;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;params.bufferSpatialReference = new esri.SpatialReference({wkid: 32662});<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;params.outSpatialReference = map.spatialReference;<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gsvc.buffer(params, showBuffer);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;function showBuffer(features) {<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var symbol = new esri.symbol.SimpleFillSymbol(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;esri.symbol.SimpleFillSymbol.STYLE_SOLID,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new esri.symbol.SimpleLineSymbol(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;esri.symbol.SimpleLineSymbol.STYLE_SOLID,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new dojo.Color([0,0,255,0.65]), 2<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new dojo.Color([0,0,255,0.35])<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (var j=0, jl=features.length; j&lt;jl; j++) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;features[j].setSymbol(symbol);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map.graphics.add(features[j]);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;dojo.addOnLoad(initialize);<br/>
+&nbsp;&nbsp;&lt;/script&gt;<br/>
+<br/>
+&lt;/head&gt;<br/>
+<br/>
+&lt;body class="tundra"&gt;<br/>
+&nbsp;&nbsp;&lt;b&gt;Click a location on the map to buffer. Click again on another location to buffer again.&lt;/b&gt;<br/>
+&nbsp;&nbsp;&lt;div id="map" style="width:600px; height:400px; border:1px solid #000;"&gt;&lt;/div&gt;<br/>
+&lt;/body&gt;<br/>
+<br/>
+&lt;/html&gt;</code>
+  			</div>
+
+
+<br/><br/></div> 
+</body>
+</html>

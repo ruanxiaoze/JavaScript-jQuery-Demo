@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>Navigation toolbar</title>
+    <style type="text/css">
+      @import "http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css";
+      .zoominIcon { background-image:url(images/nav_zoomin.png); width:16px; height:16px; }
+      .zoomoutIcon { background-image:url(images/nav_zoomout.png); width:16px; height:16px; }
+      .zoomfullextIcon { background-image:url(images/nav_fullextent.png); width:16px; height:16px; }
+      .zoomprevIcon { background-image:url(images/nav_previous.png); width:16px; height:16px; }
+      .zoomnextIcon { background-image:url(images/nav_next.png); width:16px; height:16px; }
+      .panIcon { background-image:url(images/nav_pan.png); width:16px; height:16px; }
+      .deactivateIcon { background-image:url(images/nav_decline.png); width:16px; height:16px; }
+    </style>
+    <script type="text/javascript">djConfig = { parseOnLoad:true }</script>
+    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"></script>
+
+    <script type="text/javascript">
+      dojo.require("esri.map");
+      dojo.require("esri.toolbars.navigation");
+
+      dojo.require("dijit.form.Button");
+      dojo.require("dijit.Toolbar");
+
+      var map, navToolbar;
+      function init() {
+        esriConfig.defaults.map.sliderLabel = null;
+
+        map = new esri.Map("map");
+        map.addLayer(new esri.layers.ArcGISTiledMapServiceLayer("http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer"));
+
+        navToolbar = new esri.toolbars.Navigation(map);
+        dojo.connect(navToolbar, "onExtentHistoryChange", extentHistoryChangeHandler);
+      }
+
+      function extentHistoryChangeHandler() {
+        dijit.byId("zoomprev").disabled = navToolbar.isFirstExtent();
+        dijit.byId("zoomnext").disabled = navToolbar.isLastExtent();
+      }
+
+      dojo.addOnLoad(init);
+    </script>
+  </head>
+  <body class="tundra">
+    <div id="navToolbar" dojoType="dijit.Toolbar">
+      <div dojoType="dijit.form.Button" id="zoomin" iconClass="zoominIcon" onClick="navToolbar.activate(esri.toolbars.Navigation.ZOOM_IN);">Zoom In</div>
+      <div dojoType="dijit.form.Button" id="zoomout" iconClass="zoomoutIcon" onClick="navToolbar.activate(esri.toolbars.Navigation.ZOOM_OUT);">Zoom Out</div>
+      <div dojoType="dijit.form.Button" id="zoomfullext" iconClass="zoomfullextIcon" onClick="navToolbar.zoomToFullExtent();">Full Extent</div>
+      <div dojoType="dijit.form.Button" id="zoomprev" iconClass="zoomprevIcon" onClick="navToolbar.zoomToPrevExtent();">Prev Extent</div>
+      <div dojoType="dijit.form.Button" id="zoomnext" iconClass="zoomnextIcon" onClick="navToolbar.zoomToNextExtent();">Next Extent</div>
+      <div dojoType="dijit.form.Button" id="pan" iconClass="panIcon" onClick="navToolbar.activate(esri.toolbars.Navigation.PAN);">Pan</div>
+      <div dojoType="dijit.form.Button" id="deactivate" iconClass="deactivateIcon" onClick="navToolbar.deactivate()">Deactivate</div>
+    </div>
+    <div id="map" style="width:1024px; height:512px; border:1px solid #000;"></div>
+  </body>
+</html>

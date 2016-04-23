@@ -1,0 +1,187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>DirectionsFeatureSet</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: DirectionsFeatureSet</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	<i>Class added v1.4.</i><br/><br/>  A <a href="featureset.htm">FeatureSet</a> that has properties specific to routing. The <a href="featureset.htm#features">FeatureSet.features</a> property contains the turn by turn directions text and geometry of the route. The attributes for each feature provide information associated with the corresponding route segment. The following attributes are returned:
+<br/><br/>
+
+<ul>
+<li>text - The direction text. </li>
+<li>length - The length of the route segment. </li>
+<li>time - The time to travel along the route segment. </li>
+<li>ETA - The estimated time of arrival at the route segment in the local time. </li>
+<li><a href="http://resources.esri.com/help/9.3/ArcGISDesktop/ArcObjects/esriNetworkAnalyst/esriDirectionsManeuverType.htm" target="_blank">maneuverType</a> - The type of maneuver that the direction represents. </li>
+</ul>
+
+<br/>
+DirectionsFeatureSet has no constructor.  For more information, see <a href="../jshelp/intro_route_directions.htm">Getting driving directions</a>.
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+<a href="featureset.htm">esri.tasks.FeatureSet</a>
+  |_ esri.tasks.DirectionsFeatureSet
+</pre><H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#extent">extent</a></td>
+<td class="syntaxTABLE">
+<a href="extent.htm">Extent</a>
+</td>
+
+<td class="syntaxTABLE">
+The extent of the route.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#mergedGeometry">mergedGeometry</a></td>
+<td class="syntaxTABLE">
+<a href="polyline.htm">Polyline</a>
+</td>
+
+<td class="syntaxTABLE">
+A single polyline representing the route.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#routeId">routeId</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+The ID of the route returned from the server.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#routeName">routeName</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+Name specified in <code>RouteParameters.stops</code>.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#totalDriveTime">totalDriveTime</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+Actual drive time calculated for the route.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#totalLength">totalLength</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+The length of the route as specified in <code>RouteParameters.directionsLengthUnits</code>.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#totalTime">totalTime</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+The total time calculated for the route as specified in <code>RouteParameters.directionsTimeAttribute</code>.</td>
+		</tr>
+</table>
+
+<div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="extent"></a>
+&lt;<a href="extent.htm">Extent</a>> extent</H4></div>
+
+<div class="detaildesc">The extent of the route.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="mergedGeometry"></a>
+&lt;<a href="polyline.htm">Polyline</a>> mergedGeometry</H4></div>
+
+<div class="detaildesc">A single polyline representing the route.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="routeId"></a>
+&lt;String> routeId</H4></div>
+
+<div class="detaildesc">The ID of the route returned from the server.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="routeName"></a>
+&lt;String> routeName</H4></div>
+
+<div class="detaildesc">Name specified in <code>RouteParameters.stops</code>.</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="RouteParameters.htm#stops">RouteParameters.stops</a>
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="totalDriveTime"></a>
+&lt;Number> totalDriveTime</H4></div>
+
+<div class="detaildesc">Actual drive time calculated for the route.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="totalLength"></a>
+&lt;Number> totalLength</H4></div>
+
+<div class="detaildesc">The length of the route as specified in <code>RouteParameters.directionsLengthUnits</code>.</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="RouteParameters.htm#directionsLengthUnits">RouteParameters.directionsLengthUnits</a>
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="totalTime"></a>
+&lt;Number> totalTime</H4></div>
+
+<div class="detaildesc">The total time calculated for the route as specified in <code>RouteParameters.directionsTimeAttribute</code>.</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="RouteParameters.htm#directionsTimeAttribute">RouteParameters.directionsTimeAttribute</a>
+</div>
+
+</div>
+
+<br/></div></body></html> 

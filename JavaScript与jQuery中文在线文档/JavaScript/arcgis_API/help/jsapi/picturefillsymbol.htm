@@ -1,0 +1,438 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>PictureFillSymbol</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: PictureFillSymbol</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	填充符号用于在图形图层上绘出多边体要素。 PictureFillSymbol使用循环样式的图片。  此外， 该符号能有一个可选的轮廓线，轮廓线通过线符号定义。
+<br/><br/>
+已知的限制：  PictureFillSymbol不能在FireFox 2.x正常工作。支持Internet Explorer 6和7以及FireFox 3.x。
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+<a href="symbol.htm">esri.symbol.Symbol</a>
+  |_ <a href="fillsymbol.htm">esri.symbol.FillSymbol</a>
+        |_ esri.symbol.PictureFillSymbol
+</pre><H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#PictureFillSymbolConst2">esri.symbol.PictureFillSymbol(json)</a></td>
+		<td class="syntaxTABLE">使用JSON对象创建新的PictureFillSymbol对象</td>
+		</tr>
+<tr><td class="syntaxTABLE"><a href="#PictureFillSymbolConst1">esri.symbol.PictureFillSymbol(url, outline, width, height)</a></td>
+		<td class="syntaxTABLE">创建新的PictureFillSymbol对象。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#height">height</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+图片高度（单位：像素）。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#url">url</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+图片的URL。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#width">width</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+图片宽度（单位：像素）</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#xoffset">xoffset</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+x轴偏移量（单位：像素）。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#xscale">xscale</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+x方向比例系数。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#yoffset">yoffset</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+y轴偏移量（单位：像素）</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#yscale">yscale</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+y方向比例系数。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>方法表</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+		<th class="tableheader">方法</th>
+		<th class="tableheader">返回值</th>
+		<th class="tableheader">描述</th>
+		</tr>
+
+<tr>
+<td class="syntaxTABLE"><a href="#setHeight">setHeight(height)</a></td><td class="syntaxTABLE">
+<a href="picturefillsymbol.htm">PictureFillSymbol</a>
+</td>
+<td class="syntaxTABLE">设置符号高度。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setOffset">setOffset(x, y)</a></td><td class="syntaxTABLE">
+<a href="picturefillsymbol.htm">PictureFillSymbol</a>
+</td>
+<td class="syntaxTABLE">设置符号偏移量。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setUrl">setUrl(url)</a></td><td class="syntaxTABLE">
+<a href="picturefillsymbol.htm">PictureFillSymbol</a>
+</td>
+<td class="syntaxTABLE">设置符号的位置的URL。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setWidth">setWidth(width)</a></td><td class="syntaxTABLE">
+<a href="picturefillsymbol.htm">PictureFillSymbol</a>
+</td>
+<td class="syntaxTABLE">设置符号宽度。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setXScale">setXScale(scale)</a></td><td class="syntaxTABLE">
+<a href="picturefillsymbol.htm">PictureFillSymbol</a>
+</td>
+<td class="syntaxTABLE">设置符号x方向比例系数。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setYScale">setYScale(scale)</a></td><td class="syntaxTABLE">
+<a href="picturefillsymbol.htm">PictureFillSymbol</a>
+</td>
+<td class="syntaxTABLE">设置y方向比例系数。</td>	</tr></table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="PictureFillSymbolConst2"></a><H4>esri.symbol.PictureFillSymbol(json)</H4>
+		</div>
+
+<div class="detaildesc">使用JSON对象创建新的PictureFillSymbol对象</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;Object>
+<B>json</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			JSON对象表示的PictureFillSymbol</td>
+			</tr>
+</table>
+
+</div><div class="detaildiv"><div class="detailname"><a name="PictureFillSymbolConst1"></a><H4>esri.symbol.PictureFillSymbol(url, outline, width, height)</H4>
+		</div>
+
+<div class="detaildesc">创建新的PictureFillSymbol对象。</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;String>
+<B>url</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			图片的URL。
+			</td>
+			</tr>
+<tr>
+<td class="detailTABLE">
+&lt;<a href="simplelinesymbol.htm">SimpleLineSymbol</a>>
+<B>outline</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			符号的轮廓线。</td>
+			</tr>
+<tr>
+<td class="detailTABLE">
+&lt;Number>
+<B>width</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			图片宽度（单位：像素）
+			</td>
+			</tr>
+<tr>
+<td class="detailTABLE">
+&lt;Number>
+<B>height</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			图片高度（单位：像素）。
+			</td>
+			</tr>
+</table>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="height"></a>
+&lt;Number> height</H4></div>
+
+<div class="detaildesc">图片高度（单位：像素）。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="url"></a>
+&lt;String> url</H4></div>
+
+<div class="detaildesc">图片的URL。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="width"></a>
+&lt;Number> width</H4></div>
+
+<div class="detaildesc">图片宽度（单位：像素）</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="xoffset"></a>
+&lt;Number> xoffset</H4></div>
+
+<div class="detaildesc">x轴偏移量（单位：像素）。</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> 0
+			</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="xscale"></a>
+&lt;Number> xscale</H4></div>
+
+<div class="detaildesc">x方向比例系数。</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> 1
+			</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="yoffset"></a>
+&lt;Number> yoffset</H4></div>
+
+<div class="detaildesc">y轴偏移量（单位：像素）</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> 0
+			</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="yscale"></a>
+&lt;Number> yscale</H4></div>
+
+<div class="detaildesc">y方向比例系数。</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> 1
+			</div>
+
+</div>
+
+<div class=sectionDivider>方法详细信息</div>
+<div class="detaildiv">
+		<div class="detailname"><a name="setHeight"></a><H4>
+setHeight(height)</H4></div>
+
+<div class="detaildesc">设置符号高度。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="picturefillsymbol.htm">PictureFillSymbol</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>height</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+符号的高度（单位：像素）。</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setOffset"></a><H4>
+setOffset(x, y)</H4></div>
+
+<div class="detaildesc">设置符号偏移量。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="picturefillsymbol.htm">PictureFillSymbol</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>x</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+x方向的偏移量（单位：像素）</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>y</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+y方向的偏移量（单位：像素）</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setUrl"></a><H4>
+setUrl(url)</H4></div>
+
+<div class="detaildesc">设置符号的位置的URL。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="picturefillsymbol.htm">PictureFillSymbol</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>url</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+URL 字符串.</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setWidth"></a><H4>
+setWidth(width)</H4></div>
+
+<div class="detaildesc">设置符号宽度。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="picturefillsymbol.htm">PictureFillSymbol</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>width</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+符号宽度（单位：像素）</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setXScale"></a><H4>
+setXScale(scale)</H4></div>
+
+<div class="detaildesc">设置符号x方向比例系数。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="picturefillsymbol.htm">PictureFillSymbol</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>scale</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+x方向比例系数。</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setYScale"></a><H4>
+setYScale(scale)</H4></div>
+
+<div class="detaildesc">设置y方向比例系数。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="picturefillsymbol.htm">PictureFillSymbol</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>scale</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+y方向比例系数。</td>
+			</tr>
+</table>
+
+</div>
+
+<br/></div></body></html> 

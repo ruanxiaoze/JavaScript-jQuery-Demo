@@ -1,0 +1,31 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>Create a Map</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css">
+
+    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"></script>
+    <script type="text/javascript">
+      dojo.require("esri.map");
+
+      function init() {
+        var myMap = new esri.Map("mapDiv");
+
+        var myTiledMapServiceLayer = new esri.layers.ArcGISTiledMapServiceLayer("http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer");
+        myMap.addLayer(myTiledMapServiceLayer);
+      }
+
+      dojo.addOnLoad(init);
+    </script>
+  </head>
+  <body>
+    <div id="mapDiv" class="tundra" style="width:900px; height:600px; border:1px solid #000;"></div>
+    <h4>Work flow:</h4>
+	<ul>
+	<li>Create a map.</li>
+	<li>Add an ArcGISTiledMapServiceLayer.</li>
+	</ul>
+  </body>
+</html>

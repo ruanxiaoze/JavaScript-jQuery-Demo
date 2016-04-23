@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>FindParameters</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: FindParameters</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	This data object  is used as the findParameters argument to FindTask.execute method. It specifies the search criteria for a find operation.
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.tasks.FindParameters
+</pre>
+
+<H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#FindParametersConst">esri.tasks.FindParameters()</a></td>
+		<td class="syntaxTABLE">Creates a new FindParameters object.  The constructor takes no parameters.</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#contains">contains</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+If "false", the operation searches for an exact match of the <I>searchText</I> string. Otherwise, it searches for a value that contains the <I>searchText</I> provided. The default is "true".</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#layerIds">layerIds</a></td>
+<td class="syntaxTABLE">
+Number[]
+</td>
+
+<td class="syntaxTABLE">
+The layers to perform the find operation on. The layers are specified as a comma-separated list of layer ids.  The list of ids is returned in <a href="arcgismapservicelayer.htm#layerInfos">ArcGISMapServiceLayer</a> <i>layerInfos</i>.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#outSpatialReference">outSpatialReference</a></td>
+<td class="syntaxTABLE">
+<a href="spatialreference.htm">SpatialReference</a>
+</td>
+
+<td class="syntaxTABLE">
+The spatial reference of the output geometries. If <I>outSR</I> is not specified, the output geometries are returned in the spatial reference of the map.  支持的空间参考列表，见<a href="../jshelp/pcs.htm">投影坐标系统</a> and <a href="../jshelp/gcs.htm">地理坐标系统</a>。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#returnGeometry">returnGeometry</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+If "true", the result set include the geometry associated with each result. The default is "false".</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#searchFields">searchFields</a></td>
+<td class="syntaxTABLE">
+String[]
+</td>
+
+<td class="syntaxTABLE">
+The names of the fields of a layer to search. The fields are specified as a comma-separated list of field names. If this parameter is not specified, all fields are searched.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#searchText">searchText</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+The search string text that is searched across the layers and the fields as specified in the <i>layers</i> and <i>searchFields</i> parameters.</td>
+		</tr>
+</table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="FindParametersConst"></a><H4>esri.tasks.FindParameters()</H4>
+		</div>
+
+<div class="detaildesc">Creates a new FindParameters object.  The constructor takes no parameters.</div>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="contains"></a>
+&lt;Boolean> contains</H4></div>
+
+<div class="detaildesc">If "false", the operation searches for an exact match of the <I>searchText</I> string. Otherwise, it searches for a value that contains the <I>searchText</I> provided. The default is "true".</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> true
+			</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="layerIds"></a>
+&lt;Number[]> layerIds</H4></div>
+
+<div class="detaildesc">The layers to perform the find operation on. The layers are specified as a comma-separated list of layer ids.  The list of ids is returned in <a href="arcgismapservicelayer.htm#layerInfos">ArcGISMapServiceLayer</a> <i>layerInfos</i>.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="outSpatialReference"></a>
+&lt;<a href="spatialreference.htm">SpatialReference</a>> outSpatialReference</H4></div>
+
+<div class="detaildesc">The spatial reference of the output geometries. If <I>outSR</I> is not specified, the output geometries are returned in the spatial reference of the map.  支持的空间参考列表，见<a href="../jshelp/pcs.htm">投影坐标系统</a> and <a href="../jshelp/gcs.htm">地理坐标系统</a>。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="returnGeometry"></a>
+&lt;Boolean> returnGeometry</H4></div>
+
+<div class="detaildesc">If "true", the result set include the geometry associated with each result. The default is "false".</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> false
+			</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="searchFields"></a>
+&lt;String[]> searchFields</H4></div>
+
+<div class="detaildesc">The names of the fields of a layer to search. The fields are specified as a comma-separated list of field names. If this parameter is not specified, all fields are searched.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="searchText"></a>
+&lt;String> searchText</H4></div>
+
+<div class="detaildesc">The search string text that is searched across the layers and the fields as specified in the <i>layers</i> and <i>searchFields</i> parameters.</div>
+
+</div>
+
+<br/></div></body></html> 

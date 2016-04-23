@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>ArcGIS Geoprocessing and ArcGIS Server JavaScript API</title>
+    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css">
+    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"></script>
+    <script type="text/javascript">
+      dojo.require("esri.map");
+      dojo.require("esri.tasks.gp");
+      dojo.require("esri.toolbars.draw");
+
+      var map, gp, toolbar;
+
+      function init() {
+        map = new esri.Map("mapDiv");
+        var streetMap = new esri.layers.ArcGISTiledMapServiceLayer("http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer");
+        map.addLayer(streetMap);
+        gp = new esri.tasks.Geoprocessor("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_Currents_World/GPServer/MessageInABottle");
+
+        toolbar = new esri.toolbars.Draw(map);
+        dojo.connect(toolbar, "onDrawEnd", executeParticleTrack);
+      }
+
+      function executeParticleTrack(geometry) {
+        map.graphics.clear();
+        //var simpleMarkerSymbol = new esri.symbol.SimpleMarkerSymbol();
+        var simplePictureMarkerSymbol = new esri.symbol.PictureMarkerSymbol('http://www.esri.com/graphics/aexicon.jpg', 26, 26);
+        var graphic = new esri.Graphic(geometry,simplePictureMarkerSymbol);
+        map.graphics.add(graphic);
+        toolbar.deactivate();
+
+        var features= [];
+        features.push(graphic);
+        var featureSet = new esri.tasks.FeatureSet();
+        featureSet.features = features;
+
+        //set the input parameters.  View the task in the services explorer to see the input variables required to run the model.
+        //see http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_Currents_World/GPServer/MessageInABottle
+        var params = { "Input_Point":featureSet, "Days": dojo.byId("days").value };
+        gp.execute(params, displayTrack);
+      }
+
+      function displayTrack(results, messages) {
+        var simpleLineSymbol = new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([255,255,0]), 1);
+        var features = results[0].value.features;
+        for (var f=0, fl=features.length; f<fl; f++) {
+          var feature = features[f];
+          feature.setSymbol(simpleLineSymbol);
+          map.graphics.add(feature);
+        }
+      }
+      dojo.addOnLoad(init);
+    </script>
+  </head>
+  <body class="tundra">
+    <table>
+      <tbody>
+        <tr>
+          <td>Select tool to draw and execute the particle tracker model.
+            <br>Start season is Spring. Number of days to track = <input type="text" id="days" value="180" size="3"/>.
+            &nbsp;&nbsp;<button onclick="toolbar.activate(esri.toolbars.Draw.POINT);">Draw and execute particle track.</button>
+          </td>
+        </tr>
+        <tr>
+          <td id="mapDiv" style="width:800px; height:600px; border:1px solid #000;"></td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

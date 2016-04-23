@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>NAOutputLine</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: NAOutputLine</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	<i>Class added v1.4.</i><br/><br/>   Contstants representing how the geometry is returned.  NAOutputLine has no constructor.
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.tasks.NAOutputLine
+</pre>
+
+<H4 class=dtH4>常量</H4>
+
+	<table CLASS="syntaxTABLE" cellspacing="0">
+	<tr>
+	<th class="tableheader" width="20%">常量</th>
+		<th class="tableheader">描述</th>
+	</tr>
+
+		<tr>
+		<td class="syntaxTABLE">NONE</td>
+			<td class="syntaxTABLE">			Do not return geometries.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">STRAIGHT</td>
+			<td class="syntaxTABLE">			Return polylines containing striaght lines between input locations.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">TRUE_SHAPE</td>
+			<td class="syntaxTABLE">			Return polylines based on the underlying street geometries.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">TRUE_SHAPE_WITH_MEASURE</td>
+			<td class="syntaxTABLE">			Return polylines based on the underlying street geometries with the M values set based on the accumulated impedance at each vertex.		</td>
+	</tr>
+
+</table>
+
+<br/></div></body></html> 

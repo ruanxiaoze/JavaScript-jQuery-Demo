@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+  <title>Project a point</title>
+
+  <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css">
+  <script src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5" type="text/javascript"></script>
+
+  <script type="text/javascript">
+    dojo.require("esri.map");
+    dojo.require("esri.tasks.geometry");
+
+    var map = null;
+    var gsvc = null;
+    var pt = null;
+
+    function initialize() {
+      map = new esri.Map("map");
+      var layer = new esri.layers.ArcGISTiledMapServiceLayer("http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer");
+      map.addLayer(layer);
+      map.setExtent(new esri.geometry.Extent(-144.13584773952124, 7.981485927970198, -52.76454682003924, 68.8956865409582, new esri.SpatialReference({wkid: 4326})));
+
+      gsvc = new esri.tasks.GeometryService("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Geometry/GeometryServer");
+      dojo.connect(map, "onClick", projectToWebMercator);
+    }
+
+    function projectToWebMercator(evt) {
+      map.graphics.clear();
+      var point = evt.mapPoint;
+      var symbol = new esri.symbol.SimpleMarkerSymbol().setStyle(esri.symbol.SimpleMarkerSymbol.STYLE_DIAMOND);
+      var graphic = new esri.Graphic(point, symbol);
+      var outSR = new esri.SpatialReference({ wkid: 102113});
+      map.graphics.add(graphic);
+
+      gsvc.project([ graphic ], outSR, function(features) {
+        pt = features[0].geometry;
+        graphic.setInfoTemplate(new esri.InfoTemplate("Coordinates",
+          "<p>&nbsp;X: " + pt.x +
+          "<br/>&nbsp;Y: " + pt.y +
+          "</p>"  +
+          "<input type='button' value='Convert back to LatLong' onclick='projectToLatLong();' />" +
+          "<div id='latlong'></div>"));
+        map.infoWindow
+          .setTitle(graphic.getTitle())
+          .setContent(graphic.getContent())
+          .show(evt.screenPoint, map.getInfoWindowAnchor(evt.screenPoint));
+      });
+    }
+
+    function projectToLatLong() {
+      var symbol = new esri.symbol.SimpleMarkerSymbol();
+      var graphic = new esri.Graphic(pt, symbol);
+      var outSR = new esri.SpatialReference({ wkid: 4326});
+
+      gsvc.project([ graphic ], outSR, function(features) {
+        pt = features[0].geometry;
+        dojo.byId("latlong").innerHTML = "&nbsp;Latitude = " + pt.y + "<br/>&nbsp;Longitude = " + pt.x;
+      });
+    }
+
+    dojo.addOnLoad(initialize);
+  </script>
+
+</head>
+
+<body class="tundra">
+  <b>Click a location on the map to Project from LatLng -> Web Mercator:</b>
+  <div id="map" style="width:600px; height:400px; border:1px solid #000;"></div>
+</body>
+
+</html>

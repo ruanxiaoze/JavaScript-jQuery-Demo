@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>Measure Distances</title>
+    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css">
+    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"></script>
+
+    <script type="text/javascript">
+      dojo.require("esri.map");
+      dojo.require("esri.tasks.geometry");
+      dojo.require("esri.toolbars.draw");
+      dojo.require("dojo.number");
+
+      var geometryService;
+
+      function init() {
+        //identify proxy page to use if the toJson payload to the geometry service is greater than 2000 characters.
+        //If this null or not available the project and lengths operation will not work.  Otherwise it will do a http post to the proxy.
+        esriConfig.defaults.io.proxyUrl = "/arcgisserver/apis/javascript/proxy/proxy.ashx";
+        esriConfig.defaults.io.alwaysUseProxy = false;
+
+        var startExtent = new esri.geometry.Extent(-80.0571,41.3697,-74.4321,44.0822, new esri.SpatialReference({wkid:4326}) );
+        var map = new esri.Map("map", {extent:startExtent});
+        dojo.connect(map, "onLoad", initFunctionality);
+
+        map.addLayer(new esri.layers.ArcGISTiledMapServiceLayer("http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer"));
+
+        geometryService = new esri.tasks.GeometryService("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Geometry/GeometryServer");
+
+        dojo.connect(geometryService, "onLengthsComplete", outputDistance);
+        dojo.connect(geometryService, "onProjectComplete", function(graphics) {
+          //call GeometryService.lengths() with projected geometry
+          geometryService.lengths(graphics);
+        });
+      }
+
+      function initFunctionality(map) {
+        var tb = new esri.toolbars.Draw(map);
+
+        //on draw end add graphic, project it, and get new length
+        dojo.connect(tb, "onDrawEnd", function(geometry) {
+          map.graphics.clear();
+          var graphic = map.graphics.add(new esri.Graphic(geometry, new esri.symbol.SimpleLineSymbol()));
+          //add graphic to the map and then call GeometryService.project() to get graphic into a coordinate system that
+          //can be used to generate an accurate length.
+          geometryService.project([graphic],new esri.SpatialReference({"wkid":32618}));
+        });
+        tb.activate(esri.toolbars.Draw.FREEHAND_POLYLINE);
+      }
+
+      function outputDistance(result) {
+        dojo.byId("distance").innerHTML = dojo.number.format(result.lengths[0] / 1000) + " kilometers";
+      }
+
+      dojo.addOnLoad(init);
+    </script>
+  </head>
+  <body>
+    Click and hold down on the map to draw a line that will be added to the map.  The application will then use the geometry service to project and compute the length of the line.
+    <div id="map" class="tundra" style="width:1024px; height:512px; border:1px solid #000;"></div>
+    Distance: <span id="distance"></span>
+  </body>
+</html>

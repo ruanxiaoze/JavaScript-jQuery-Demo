@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>VEAddress</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: VEAddress</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	<i>v1.4增加的类。</i><br/><br/>  The Bing Maps address details. The property definitions are taken from the Bing Maps documentation <a href="http://msdn.microsoft.com/en-us/library/cc966788.aspx" target="_blank">Address Class</a>.  VEAddress没有构造方法。
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.virtualearth.VEAddress
+</pre>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#addressLine">addressLine</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+Specifies the street line of an address. This property is the most precise, official line for an address relative to the postal agency servicing the area specified by the Locality, PostalTown, or PostalCode properties. Typical use of this element would be to enclose a street address, private bag, or any other similar official address.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#adminDistrict">adminDistrict</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+Specifies the subdivision name within the country or region for an address. This element is also commonly treated as the first order administrative subdivision, but in some cases it is the second, third, or fourth order subdivision within a country, dependency, or region.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#countryRegion">countryRegion</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+Specifies the country or region name of an address.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#district">district</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+Specifies the higher level administrative subdivision used in some countries or regions.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#formattedAddress">formattedAddress</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+Contains the complete address.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#locality">locality</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+Specifies the populated place for the address. This commonly refers to a city, but may refer to a suburb or neighborhood in certain countries.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#postalCode">postalCode</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+Specifies the post code, postal code, or ZIP Code of an address.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#postalTown">postalTown</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+Specifies the postal city of an address.</td>
+		</tr>
+</table>
+
+<div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="addressLine"></a>
+&lt;String> addressLine</H4></div>
+
+<div class="detaildesc">Specifies the street line of an address. This property is the most precise, official line for an address relative to the postal agency servicing the area specified by the Locality, PostalTown, or PostalCode properties. Typical use of this element would be to enclose a street address, private bag, or any other similar official address.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="adminDistrict"></a>
+&lt;String> adminDistrict</H4></div>
+
+<div class="detaildesc">Specifies the subdivision name within the country or region for an address. This element is also commonly treated as the first order administrative subdivision, but in some cases it is the second, third, or fourth order subdivision within a country, dependency, or region.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="countryRegion"></a>
+&lt;String> countryRegion</H4></div>
+
+<div class="detaildesc">Specifies the country or region name of an address.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="district"></a>
+&lt;String> district</H4></div>
+
+<div class="detaildesc">Specifies the higher level administrative subdivision used in some countries or regions.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="formattedAddress"></a>
+&lt;String> formattedAddress</H4></div>
+
+<div class="detaildesc">Contains the complete address.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="locality"></a>
+&lt;String> locality</H4></div>
+
+<div class="detaildesc">Specifies the populated place for the address. This commonly refers to a city, but may refer to a suburb or neighborhood in certain countries.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="postalCode"></a>
+&lt;String> postalCode</H4></div>
+
+<div class="detaildesc">Specifies the post code, postal code, or ZIP Code of an address.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="postalTown"></a>
+&lt;String> postalTown</H4></div>
+
+<div class="detaildesc">Specifies the postal city of an address.</div>
+
+</div>
+
+<br/></div></body></html> 

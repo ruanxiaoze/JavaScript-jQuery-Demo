@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>LayerInfo</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: LayerInfo</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	Contains information about each layer in a map service.  LayerInfo has no constructor.
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.layers.LayerInfo
+</pre>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#defaultVisibility">defaultVisibility</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+Default visibility of the layers in the map service.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#id">id</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+Layer ID assigned by ArcGIS Server for a layer.  The topmost layer is 0, and each layer follows sequentially.  If a layer is added or removed from the source map document, the ID values will shift accordingly.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#name">name</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+Layer name as defined in the  map service.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#parentLayerId">parentLayerId</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+If the layer is part of a group layer, it will include the parent ID of the group layer. Otherwise, the value is -1.  If a layer is added or removed from the source map document, the ID values will shift accordingly.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#subLayerIds">subLayerIds</a></td>
+<td class="syntaxTABLE">
+Number[]
+</td>
+
+<td class="syntaxTABLE">
+If the layer is a parent layer, it will have one or more sublayers included in an array.  Otherwise, the value is null.  If a layer is added or removed from the source map document, the ID values will shift accordingly.</td>
+		</tr>
+</table>
+
+<div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="defaultVisibility"></a>
+&lt;Boolean> defaultVisibility</H4></div>
+
+<div class="detaildesc">Default visibility of the layers in the map service.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="id"></a>
+&lt;Number> id</H4></div>
+
+<div class="detaildesc">Layer ID assigned by ArcGIS Server for a layer.  The topmost layer is 0, and each layer follows sequentially.  If a layer is added or removed from the source map document, the ID values will shift accordingly.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="name"></a>
+&lt;String> name</H4></div>
+
+<div class="detaildesc">Layer name as defined in the  map service.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="parentLayerId"></a>
+&lt;Number> parentLayerId</H4></div>
+
+<div class="detaildesc">If the layer is part of a group layer, it will include the parent ID of the group layer. Otherwise, the value is -1.  If a layer is added or removed from the source map document, the ID values will shift accordingly.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="subLayerIds"></a>
+&lt;Number[]> subLayerIds</H4></div>
+
+<div class="detaildesc">If the layer is a parent layer, it will have one or more sublayers included in an array.  Otherwise, the value is null.  If a layer is added or removed from the source map document, the ID values will shift accordingly.</div>
+
+</div>
+
+<br/></div></body></html> 

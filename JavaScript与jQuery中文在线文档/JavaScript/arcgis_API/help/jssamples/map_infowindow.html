@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>ArcGIS JavaScript API</title>
+</head>
+
+<body>
+
+<!--***REQUIRED TITLE***-->
+<div id="pageBanner">显示一个信息窗口</div>
+<!--***END REQUIRED TITLE***-->
+
+  <div id="nstext">
+
+	<H4 class=dtH4><a href="../../demos/map/map_infowindow.html" target="_blank">查看在线示例</a></H4>
+  <H4 class=dtH4>描述</H4>
+
+  <!--***START TEXT - DO NOT WRITE ABOVE THIS LINE***-->
+
+  <p>
+  这个示例展示了在用户单击地图时如何在<A href="../jsapi/infoWindow.htm">
+				InfoWindow</A>中显示信息。信息窗口是一个dijit (Dojo 
+			widget).信息窗口能够包含文本，字符，图片和任何通过HTML表示的事物。这个例子在信息窗口中显示地图和鼠标单击的屏幕坐标。
+  </p>
+		<p>
+        注意一旦地图被创建，信息窗口属性立即可用。例如，这行代码明确地设置信息窗口的大小：</p>
+		<pre>map.infoWindow.resize(195, 75);</pre>
+		<p>
+        能够选择显示信息窗口的操作类型。在本例中，地图单击显示信息窗口。为<A href="../jsapi/map.htm#onClick">onClick</A>事件增加监听器:</p>
+		<pre>dojo.connect(map, "onClick", addPoint);</pre>
+		<p>
+        每当地图被单击，上面的代码行调用<b>addPoint</b>函数。该函数用<A href="../jsapi/infowindow.htm#settitle">setTitle</A> 和 <A href="../jsapi/infowindow.htm#setcontent">
+				setContent</A>方法来指定显示在窗口中的内容。注意传入<b>addPoint</b>函数的evt参数包含地图和屏幕坐标。这是很重要的因为信息窗口需要在屏幕坐标上定位。因此用来显示信息窗口的代码行传递evt.screenPoint：
+        
+        </p>
+		<pre>map.infoWindow.show(evt.screenPoint);</pre>
+
+<!--***END TEXT - DO NOT WRITE BELOW THIS LINE***--> 
+
+  <H4 class=dtH4>代码</H4>
+  <div class="detailSample">
+  <code>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"&gt;<br/>
+&lt;html&gt;<br/>
+&nbsp;&nbsp;&lt;head&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8"/&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;meta http-equiv="X-UA-Compatible" content="IE=7" /&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;title&gt;Non graphic info window&lt;/title&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"&gt;&lt;/script&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;style type="text/css"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* set title font properties */<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.infowindow .window .top .right .user .titlebar .title { font-family:Arial, Helvetica, sans-serif; font-weight:bold; font-size:14pt; }<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* set content font properties */<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.infowindow .window .top .right .user .content { font-style:italic; font-size:10pt; }<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/style&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;script type="text/javascript"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dojo.require("esri.map");<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var map;<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function init() {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map = new esri.Map("map");<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dojo.connect(map,"onLoad", function(map) {map.infoWindow.resize(250, 100);} );<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map.addLayer(new esri.layers.ArcGISTiledMapServiceLayer("http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer"));<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dojo.connect(map, "onClick", addPoint);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function addPoint(evt) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map.infoWindow.setTitle("Coordinates");<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map.infoWindow.setContent("lat/lon : " + evt.mapPoint.y + ", " + evt.mapPoint.x +<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"&lt;br /&gt;screen x/y : " + evt.screenPoint.x + ", " + evt.screenPoint.y);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map.infoWindow.show(evt.screenPoint,map.getInfoWindowAnchor(evt.screenPoint));<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dojo.addOnLoad(init);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/script&gt;<br/>
+&nbsp;&nbsp;&lt;/head&gt;<br/>
+&nbsp;&nbsp;&lt;body class="tundra"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;div id="map" style="width:1024px; height:512px; border:1px solid #000;"&gt;&lt;/div&gt;<br/>
+&nbsp;&nbsp;&lt;/body&gt;<br/>
+&lt;/html&gt;<br/>
+</code>
+  			</div>
+
+
+<br/><br/></div> 
+</body>
+</html>

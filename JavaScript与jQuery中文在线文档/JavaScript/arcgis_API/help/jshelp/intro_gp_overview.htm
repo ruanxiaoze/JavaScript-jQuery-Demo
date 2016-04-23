@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>An overview of geoprocessing with the ArcGIS JavaScript API</title>
+</head>
+
+<body>
+
+<div id="pageBanner">An overview of geoprocessing with the ArcGIS JavaScript API</div>
+
+<div id="nstext">
+
+<!--***START TEXT - DO NOT WRITE ABOVE THIS LINE***-->
+
+<style type="text/css">
+#sidebar {
+	FLOAT: right; WIDTH: 240px; MARGIN-RIGHT: 10px;
+	BORDER-RIGHT: #256F92 1px solid; BORDER-TOP: #256F92 1px solid; MARGIN: 5px 2px 10px; BORDER-LEFT: #256F92 1px solid; BORDER-BOTTOM: #256F92 1px solid; BACKGROUND: #ffffff;
+	}
+#sidebar H3 {
+	PADDING-RIGHT: 5px; PADDING-LEFT: 17px; FONT-WEIGHT: bold; FONT-SIZE: 1.00em; BACKGROUND: url(../images/sideBarH2BackgroundLtBlue.gif) #AED7EB repeat-x left top; PADDING-BOTTOM: 5px; MARGIN: 0px 0px 5px; COLOR: #256F92; PADDING-TOP: 6px; BORDER-BOTTOM: #d3d3d3 1px solid
+}
+#sidebar UL {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px 0px 10px; PADDING-TOP: 0px
+}
+#sidebar LI {
+	PADDING-RIGHT: 0pt; LIST-STYLE: none none outside; PADDING-LEFT: 5px; FONT-SIZE: 0.86em; BACKGROUND: url(images/playarrow.gif) no-repeat 10px 10px; PADDING-BOTTOM: 0pt; LINE-HEIGHT: 18px; PADDING-TOP: 2px; background-color: #ffffff;
+}
+#sidebar a:link {
+
+	color: #256F92; text-decoration: none; 
+	}
+#sidebar a:visited
+	{
+	color: #256F92; text-decoration: none; 
+	}
+#sidebar a:hover
+	{
+	color: #3366ff; text-decoration: none;
+	}
+	
+</style>
+
+<div id="sidebar">
+	<h3>Geoprocessing Videos</h3>
+		<ul>
+              <li><img src="images/bluearrow.gif" align="absmiddle"  /><a href="videos/clip_and_ship_1.htm" target="_blank">Creating a geoprocessing service</a></li>
+			  <li><img src="images/bluearrow.gif" align="absmiddle"  /><a href="videos/clip_and_ship_2.htm" target="_blank">Using the geoprocessing service in a JavaScript application</a></li>
+		</ul>
+</div>
+
+
+<p>Geoprocessing allows you to automate and chain together GIS analysis operations. 
+				You do this through creating custom tools and models with ArcGIS. A <a href="http://webhelp.esri.com/arcgisdesktop/9.3/index.cfm?TopicName=An_overview_of_models"
+					target="_blank">model</a> generally consists of a series of tools you might 
+				see in ESRI's ArcToolbox, chained together in a logical way to accomplish a 
+				specific thing. For example, a model might interpolate an elevation surface 
+				from a set of input spot heights, then create contours from that surface. 
+				Instead of manually opening two different tools from ArcToolbox, you just run 
+				the model. If you need to do this operation on 100 datasets, you can automate 
+				the model to run 100 times. This makes geoprocessing both powerful and 
+				convenient.</p>
+			<p>The <A href="../jsapi/Geoprocessor.htm">Geoprocessor</A> class in the ArcGIS 
+				JavaScript API gives you access to geoprocessing models that run on ArcGIS 
+				Server. These models are exposed through <a href="http://webhelp.esri.com/arcgisserver/9.3/dotNet/geoprocessing/an_ove-2102662086.htm"
+					target="_blank">geoprocessing services</a>. These services are useful 
+				because geoprocessing can be computationally intensive and requires GIS 
+				software to run the tools and models. It's often more efficient to send 
+				geoprocessing jobs to a centralized server instead of installing software on 
+				each machine and using each machine's processing power to perform the analysis.</p>
+			<p>To use the Geoprocessor, you need to know three things:</p>
+			<ul>
+
+				<li>
+				The URL of the geoprocessing model (task), that you're using.
+				<li>
+				The required inputs and outputs of the task
+				<li>
+					Whether the task is asynchronous or synchronous
+				</li>
+			</ul>
+			<p>You can discover all of the above items in the <A href="../jshelp/ags_rest.htm">Services 
+					Directory</A>, which is a browseable depiction of what's available on an 
+				ArcGIS Server. The URL for the Services Directory is http://&lt;server 
+				name&gt;/&lt;instance name&gt;/rest/services. Ask your ArcGIS Server 
+				administrator if you are unsure how to construct this URL.</p>
+			<p>The remaining topics in this section explain how to create the geoprocessor, 
+				discover the required parameters for a task, and run the task.</p>
+
+<!--***END TEXT - DO NOT WRITE BELOW THIS LINE***-->
+</div>
+
+</body>
+</html>

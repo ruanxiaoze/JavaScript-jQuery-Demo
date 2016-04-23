@@ -1,0 +1,256 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>PictureMarkerSymbol</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: PictureMarkerSymbol</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+    
+	标记符号用于在图形图层上绘出points和multipoints。PictureMarkerSymbol使用一个图片作为标记。
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+<a href="symbol.htm">esri.symbol.Symbol</a>
+  |_ <a href="markersymbol.htm">esri.symbol.MarkerSymbol</a>
+        |_ esri.symbol.PictureMarkerSymbol
+</pre><H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#PictureMarkerSymbolConst2">esri.symbol.PictureMarkerSymbol(json)</a></td>
+		<td class="syntaxTABLE">使用JSON对象新建一个新的PictureMarkerSymbol对象。</td>
+		</tr>
+<tr><td class="syntaxTABLE"><a href="#PictureMarkerSymbolConst1">esri.symbol.PictureMarkerSymbol(url, width, height)</a></td>
+		<td class="syntaxTABLE">新建一个PictureMarkerSymbol对象。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#height">height</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+图片的高度（单位：像素）。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#url">url</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+图片的URL。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#width">width</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+图片的宽度（单位：像素）。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>方法表</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+		<th class="tableheader">方法</th>
+		<th class="tableheader">返回值</th>
+		<th class="tableheader">描述</th>
+		</tr>
+
+<tr>
+<td class="syntaxTABLE"><a href="#setHeight">setHeight(height)</a></td><td class="syntaxTABLE">
+<a href="picturemarkersymbol.htm">PictureMarkerSymbol</a>
+</td>
+<td class="syntaxTABLE">设置图片显示高度。  高度可以大于或小于实际的图片高度。随着图片变大，图片将变得更多像素。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setUrl">setUrl(url)</a></td><td class="syntaxTABLE">
+<a href="picturemarkersymbol.htm">PictureMarkerSymbol</a>
+</td>
+<td class="syntaxTABLE">设置图片位置的URL。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setWidth">setWidth(width)</a></td><td class="syntaxTABLE">
+<a href="picturemarkersymbol.htm">PictureMarkerSymbol</a>
+</td>
+<td class="syntaxTABLE">设置图片显示宽度。宽度可以大于或小于图片实际宽度。随着图片变大，图片将变为更多像素。</td>	</tr></table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="PictureMarkerSymbolConst2"></a><H4>esri.symbol.PictureMarkerSymbol(json)</H4>
+		</div>
+
+<div class="detaildesc">使用JSON对象新建一个新的PictureMarkerSymbol对象。</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;Object>
+<B>json</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			JSON对象表示PictureMarkerSymbol.
+			</td>
+			</tr>
+</table>
+
+</div><div class="detaildiv"><div class="detailname"><a name="PictureMarkerSymbolConst1"></a><H4>esri.symbol.PictureMarkerSymbol(url, width, height)</H4>
+		</div>
+
+<div class="detaildesc">新建一个PictureMarkerSymbol对象。</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;String>
+<B>url</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			图片的URL。
+			</td>
+			</tr>
+<tr>
+<td class="detailTABLE">
+&lt;Number>
+<B>width</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			图片的宽度（单位：像素）。  默认值是图片实际宽度。
+			</td>
+			</tr>
+<tr>
+<td class="detailTABLE">
+&lt;Number>
+<B>height</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			图片的高度（单位：像素）。  默认值是图片实际高度。
+			</td>
+			</tr>
+</table>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="height"></a>
+&lt;Number> height</H4></div>
+
+<div class="detaildesc">图片的高度（单位：像素）。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="url"></a>
+&lt;String> url</H4></div>
+
+<div class="detaildesc">图片的URL。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="width"></a>
+&lt;Number> width</H4></div>
+
+<div class="detaildesc">图片的宽度（单位：像素）。</div>
+
+</div>
+
+<div class=sectionDivider>方法详细信息</div>
+<div class="detaildiv">
+		<div class="detailname"><a name="setHeight"></a><H4>
+setHeight(height)</H4></div>
+
+<div class="detaildesc">设置图片显示高度。  高度可以大于或小于实际的图片高度。随着图片变大，图片将变得更多像素。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="picturemarkersymbol.htm">PictureMarkerSymbol</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>height</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+标记高度（单位：像素）。</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setUrl"></a><H4>
+setUrl(url)</H4></div>
+
+<div class="detaildesc">设置图片位置的URL。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="picturemarkersymbol.htm">PictureMarkerSymbol</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>url</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+标记图片位置的URL。</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setWidth"></a><H4>
+setWidth(width)</H4></div>
+
+<div class="detaildesc">设置图片显示宽度。宽度可以大于或小于图片实际宽度。随着图片变大，图片将变为更多像素。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="picturemarkersymbol.htm">PictureMarkerSymbol</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>width</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+标记的宽度（单位：像素）。</td>
+			</tr>
+</table>
+
+</div>
+
+<br/></div></body></html> 

@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>Getting started with Bing Maps in the ArcGIS JavaScript API</title>
+</head>
+
+<body>
+
+<div id="pageBanner">Getting started with Bing Maps in the ArcGIS JavaScript API</div>
+
+<div id="nstext">
+
+<!--***START TEXT - DO NOT WRITE ABOVE THIS LINE***-->
+
+
+<p>Beginning at version 1.4 of the ArcGIS JavaScript API, you can use Bing Maps (formerly Microsoft Virtual Earth) maps and geocoding in your Web applications. To get started, you need to do the following:</p>
+
+<ol>
+<li>Obtain your Bing Maps user name and password from your ArcGIS Server administrator.</li>
+<li>Download and configure the "Get Virtual Earth Token" page that matches your development platform.</li>
+<li>Write client-side code that requests a token and uses it to access Bing Maps.</li>
+</ol>
+
+<h3>1. Obtain your Bing Maps user name and password from your ArcGIS Server administrator</h3>
+
+<p>To work with Bing Maps, you need a Bing Maps account. Access to the free (staging) and for-fee (production) Bing Maps services is bundled with purchases of ArcGIS Server. Talk with your ArcGIS Server administrator to learn the user name and password assigned to you for using Bing Maps. If your administrator does not know about the name and password, contact ESRI Customer Service to learn which Bing Maps services you can access and to obtain your name and password.</p>
+
+<h3>2. Download and configure the "Get Virtual Earth Token" page that matches your development platform</h3>
+
+<p>Bing Maps services require authentication using tokens. Instead of sending a name and password to Bing Maps every time you want to see a map or geocode a place, you use the name and password to get a token. The token is a string of characters that Bing Maps recognizes as valid for obtaining a service for a limited period of time. Whenever your application needs to geocode an address or display a map, it can pass the token to Bing Maps.</p>
+
+<p>To get tokens for Bing Maps, you need to configure a "Get Virtual Earth Token" page on your Web server. Choose the link below that corresponds to your development platform. You'll be taken to a download page with instructions on how to configure the "Get Virtual Earth Token" page:</p>
+
+<ul>
+<li><a href="../jshelp/ve_token_page_net.htm">.NET</a></li>
+<li><a href="../jshelp/ve_token_page_jsp.htm">Java/JSP</a></li>
+<li><a href="../jshelp/ve_token_page_php.htm">PHP</a></li>
+<li><a href="../jshelp/ve_token_page_cf.htm">ColdFusion</a></li>
+</ul>
+
+<h3>3. Write client-side code that requests a token and uses it to access Bing Maps</h3>
+
+<p>The ArcGIS JavaScript API includes classes you can use to work with Bing Maps services. The online SDK contains the following samples that use Bing Maps.</p>
+
+<ul>
+<li><a href="../jssamples/ve_layer.html">Add a Bing Maps layer</a></li>
+<li><a href="../jssamples/ve_geocode.html">Geocode with Bing Maps</a></li>
+</ul>
+
+<p>The following information about how tokens are requested and used may help you better understand the code required to work with Bing Maps services.</p>
+
+<p>When your application needs to connect to Bing Maps, it uses the "Get Virtual Earth Token" page to securely send your user name and password to an ESRI-hosted <i>REST adapter service</i> that can communicate with Bing Maps through SOAP.</p> 
+
+<p>The REST adapter requests two tokens. The <i>client token</i> can be used by your browser to request map tiles directly from Bing Maps. The <i>server token</i> is used for functions that have to go through the REST adapter, namely geocoding operations and initial back-end calls for metadata that occur when you connect to Bing Maps services.</p>
+
+<p>Each token has a duration, which is the amount of time in minutes for which the token will be valid before the application requests another one. Each token is also valid for one type of server environment (staging or production). The Bing Maps staging server is free and is for development purposes only. Map tiles from the staging server contain a watermark. The production server charges against your account, but its tiles contain no watermark.</p>
+
+<p>The "Get Virtual Earth Token" page contains defaults for the duration and environment. You can override these default values in the VETiledLayer and VEGeocoder constructors.</p>
+
+<h3>More information about Bing Maps</h3>
+
+<p>The Bing Maps road and aerial maps can provide detailed context for your proprietary data. The maps are served directly by Microsoft as tiled images, which means they perform quickly, you don't have to maintain them, and they're available in a growing number of languages. Similarly, the Bing Maps geocoding accesses a constantly growing worldwide catalog of places, maintained by Microsoft and exposed through a Web service.</p>
+
+
+<!--***END TEXT - DO NOT WRITE BELOW THIS LINE***-->
+</div>
+
+</body>
+</html>

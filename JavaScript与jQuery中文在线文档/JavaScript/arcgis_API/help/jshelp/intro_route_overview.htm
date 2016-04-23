@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<meta name="keywords" content="ArcGIS JavaScript API" />
+		<link href="jsdoc.css" rel="stylesheet" type="text/css" />
+		<title>An overview of routing with the ArcGIS JavaScript API</title>
+	</head>
+	<body>
+		<div id="pageBanner">An overview of routing with the ArcGIS JavaScript API</div>
+		<div id="nstext">
+			<!--***START TEXT - DO NOT WRITE ABOVE THIS LINE***-->
+			<p>The ArcGIS JavaScript API's <a href="../jsapi/routetask.htm">RouteTask</a> allows 
+				you to find routes between two or more locations and optionally get driving 
+				directions. The RouteTask uses ArcGIS Server network analysis services to 
+				calculate routes. Network analysis services allow you to solve simple routing 
+				problems as well as complex ones that take into account multiple stops, 
+				barriers, and time windows.</p>
+			<p><b>Note: </b>The ability to expose network analysis services through REST (and 
+				therefore the ArcGIS JavaScript API) begins at ArcGIS Server version 9.3.1. 
+				Network analysis services published from prior versions of ArcGIS Server cannot 
+				be consumed using the ArcGIS JavaScript API.</p>
+			<h3>How do I create a network analysis service?</h3>
+			<p>To get a network analysis service, you'll need to do the following:</p>
+			<ol>
+				<li>
+					Create an ArcMap document (MXD) and add a network analysis layer that 
+					references a network dataset.</li>
+				<li>
+					Publish that map document to ArcGIS Server as a map service.</li>
+				<li>
+					Enable the Network Analysis capability on the map service.</li>
+			</ol>
+			<p>The above steps show that a network analysis service really originates from a 
+				map service and a map document. It's a good practice for performance to 
+				maintain the network analysis service separate from other map services in your 
+				Web application. In other words, don't put your network analysis layer in the 
+				map that will primarily be used for display.</p>
+			<p>If you're new to ESRI network analysis, the following reading will give you some 
+				more background on Network Analyst and network analysis services:</p>
+			<ul>
+				<li>
+					<a href="http://webhelp.esri.com/arcgisdesktop/9.3/index.cfm?TopicName=An_overview_of_Network_Analyst"
+						target="_blank">An overview of Network Analyst</a></li>
+				<li>
+					<a href="http://webhelp.esri.com/arcgisdesktop/9.3/index.cfm?TopicName=Network_analysis_work_flow"
+						target="_blank">Network analysis workflow</a></li>
+				<li>
+					<a href="http://webhelp.esri.com/arcgisserver/9.3.1/dotNet/network_service.htm" target="_blank">
+						Network analysis services</a></li>
+			</ul>
+			<h3>What can the RouteTask do?</h3>
+			<p>The RouteTask helps you solve a routing problem, meaning that it finds a 
+				least-cost path between multiple locations that lie on a network. Cost is 
+				calculated based on an impedance attribute which you define in a <a href="http://webhelp.esri.com/arcgisdesktop/9.3/index.cfm?TopicName=What_is_a_network_dataset%3F"
+					target="_blank">network dataset</a>. Impedance can be time or distance, or 
+				even a more abstract variable such as "scenic value".</p>
+			<p>The RouteTask can help you find the best sequence of stops. For example, if the 
+				cost of traveling from Stop A to Stop B is higher than the opposite direction 
+				because of one-way streets, you will get a solution where Stop B is visited 
+				first. Also, if you have multiple stops that can be visited in any order, the 
+				RouteTask will find the most efficient sequence. You can optionally choose to 
+				keep the first or last stop fixed in case the route needs to start or end at a 
+				certain point.</p>
+			<p>The RouteTask can also work with time windows, which are designated intervals of 
+				time in which stops must be made (for example 3:00 - 4:00 AM for Stop A). If 
+				your stops have time windows defined, the RouteTask will find a sequence of 
+				stops where the time windows are met and the overall cost is minimized. 
+				Additionally, the RouteTask can consider barriers which block particular road 
+				segments, as well as restrictions of use such as one-way streets.</p>
+			<p>The RouteTask can return a route with its geometry, cost, turn-by-turn 
+				directions, and other accumulated values that you specify such as "walk time".</p>
+			<!--***END TEXT - DO NOT WRITE BELOW THIS LINE***-->
+		</div>
+	</body>
+</html>

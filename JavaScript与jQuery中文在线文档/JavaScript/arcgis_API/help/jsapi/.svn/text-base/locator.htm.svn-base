@@ -1,0 +1,363 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>Locator</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: Locator</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	Represents a geocode service resource exposed by the ArcGIS Server REST API. It is used to generate candidates for an address.  It also used to find an address for a given location.
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.tasks.Locator
+</pre>
+
+<H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#LocatorConst">esri.tasks.Locator(url)</a></td>
+		<td class="syntaxTABLE">Creates a new Locator object.</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#url">url</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+URL to the ArcGIS Server REST resource that represents a locator service. To obtain the URL, use <a href="../jshelp/ags_rest.htm">Services Directory</a>.</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>方法表</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+		<th class="tableheader">方法</th>
+		<th class="tableheader">返回值</th>
+		<th class="tableheader">描述</th>
+		</tr>
+
+<tr>
+<td class="syntaxTABLE"><a href="#addressToLocations">addressToLocations(address, outFields?, callback?, errback?)</a></td><td class="syntaxTABLE">
+<a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a>
+</td>
+<td class="syntaxTABLE">Sends a request to the ArcGIS REST geocode resource to find candidates for a single address specified in the <span class="code">address</span> argument. On completion, the onAddressToLocationsComplete event is fired and the optional callback function is invoked.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#locationToAddress">locationToAddress(location, distance, callback?, errback?)</a></td><td class="syntaxTABLE">
+<a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a>
+</td>
+<td class="syntaxTABLE">Locates an address based on a given point.</td>	</tr></table>
+
+<H4 class=dtH4>事件</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">事件</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#onAddressToLocationsComplete">onAddressToLocationsComplete(addressCandidates)
+		</a></td>
+
+<td class="syntaxTABLE">Fires when Locator.addressToLocation() has completed.  The result is an array of <a href="addresscandidate.htm">AddressCandidate</a>. This is the same signature returned if the optional callback is specified.</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onError">onError(error)
+		</a></td>
+
+<td class="syntaxTABLE">Fires when an error occurs when executing the task.</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onLocationToAddressComplete">onLocationToAddressComplete(addressCandidate)
+		</a></td>
+
+<td class="syntaxTABLE">Fires when Locator.locationToAddress() has completed.  The result is an <a href="addresscandidate.htm">AddressCandidate</a>. This is the same signature returned if the optional callback is specified.</td>
+		</tr></table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="LocatorConst"></a><H4>esri.tasks.Locator(url)</H4>
+		</div>
+
+<div class="detaildesc">Creates a new Locator object.</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;String>
+<B>url</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			URL to the ArcGIS Server REST resource that represents a locator service.  An example is 
+http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Locators/ESRI_Geocode_USA/GeocodeServer.  For more information on constructing a URL, see <a href="../jshelp/ags_rest.htm">The Services Directory and the REST API</a>.
+			</td>
+			</tr>
+</table>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="url"></a>
+&lt;String> url</H4></div>
+
+<div class="detaildesc">URL to the ArcGIS Server REST resource that represents a locator service. To obtain the URL, use <a href="../jshelp/ags_rest.htm">Services Directory</a>.</div>
+
+</div>
+
+<div class=sectionDivider>方法详细信息</div>
+<div class="detaildiv">
+		<div class="detailname"><a name="addressToLocations"></a><H4>
+addressToLocations(address, outFields?, callback?, errback?)</H4></div>
+
+<div class="detaildesc">Sends a request to the ArcGIS REST geocode resource to find candidates for a single address specified in the <span class="code">address</span> argument. On completion, the onAddressToLocationsComplete event is fired and the optional callback function is invoked.<br/><br/>The return object of <code>dojo.Deferred</code> was added at v1.4.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Object> <B>address</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+The address argument is data object that contains properties representing the various address fields accepted by the corresponding geocode service. These fields are listed in the addressFields property of the associated geocode service resource. For example, if the addressFields of a geocode service resource includes fields with the following names: Street, City, State and Zone, then the address argument is of the form:
+                            <br/>
+                            <pre>{
+  Street: "&lt;street&gt;",
+  City: "&lt;city&gt;",
+  State: "&lt;state&gt;",
+  Zone: "&lt;zone&gt;"
+}
+</pre>
+
+<a href="../jshelp/ags_rest.htm">Services Directory</a> can be used to find out the required and optional address fields.</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;String[]> <B>outFields</B></td>
+			<td class="detailTABLE">
+Optional</td>
+			<td class="detailTABLE">
+The list of fields included in the returned result set. This list is a comma delimited list of field names. If you specify the shape field in the list of return fields, it is ignored. For non-intersection addresses you can specify the candidate fields as defined in the geocode service. For intersection addresses you can specify the intersection candidate fields.</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>callback</B></td>
+			<td class="detailTABLE">
+Optional</td>
+			<td class="detailTABLE">
+The function to call when the method has completed.  The arguments in the function are the same as the <a href="#onAddressToLocationsComplete">onAddressToLocationsComplete</a> event.</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>errback</B></td>
+			<td class="detailTABLE">
+Optional</td>
+			<td class="detailTABLE">
+An error object is returned if an error occurs on the Server during task execution. <i>(As of v1.3) </i></td>
+			</tr>
+</table>
+
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>
+function locate() {
+  var address = {
+    street: "380 New York",
+    city: "Redlands",
+    state: "CA",
+    zip: "92373"
+  };
+  locator.addressToLocations(address);
+}
+</pre><br/>
+		</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onAddressToLocationsComplete">onAddressToLocationsComplete</a>&nbsp;&nbsp;
+<a href="#onError">onError</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="locationToAddress"></a><H4>
+locationToAddress(location, distance, callback?, errback?)</H4></div>
+
+<div class="detaildesc">Locates an address based on a given point.<br/><br/>The return object of <code>dojo.Deferred</code> was added at v1.4.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="point.htm">Point</a>> <B>location</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+The point at which to search for the closest address. The location should be in the same spatial reference as that of the geocode service.</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>distance</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+The distance in meters from the given location within which a matching address should be searched. If this parameter is not provided or an invalid value is provided, a default value of 0 meters is used.</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>callback</B></td>
+			<td class="detailTABLE">
+Optional</td>
+			<td class="detailTABLE">
+The function to call when the method has completed.  The arguments in the function are the same as the <a href="#onLocationToAddressComplete">onLocationToAddressComplete</a> event.</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>errback</B></td>
+			<td class="detailTABLE">
+Optional</td>
+			<td class="detailTABLE">
+An error object is returned if an error occurs on the Server during task execution. <i>(As of v1.3) </i></td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onLocationToAddressComplete">onLocationToAddressComplete</a>&nbsp;&nbsp;
+<a href="#onError">onError</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<H4 class=dtH4>Events Detail</H4>
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onAddressToLocationsComplete"></a><H4>
+onAddressToLocationsComplete(addressCandidates)	</H4></div>
+
+
+<div class="detaildesc">Fires when Locator.addressToLocation() has completed.  The result is an array of <a href="addresscandidate.htm">AddressCandidate</a>. This is the same signature returned if the optional callback is specified.</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="addresscandidate.htm">AddressCandidate[]</a>> <B>addressCandidates</B>
+			</td>
+
+<td class="detailTABLE">
+ 			Contains an array of candidates that match the given address as well as their scores.
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#addressToLocations">addressToLocations</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onError"></a><H4>
+onError(error)	</H4></div>
+
+
+<div class="detaildesc">Fires when an error occurs when executing the task.<i> (As of v1.3)</i></div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;Error> <B>error</B>
+			</td>
+
+<td class="detailTABLE">
+ 			ArcGIS Server error message returned in a <a href="http://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/Error" target="_blank">JavaScript error object</a>.
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#addressToLocations">addressToLocations</a>&nbsp;&nbsp;
+<a href="#locationToAddress">locationToAddress</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onLocationToAddressComplete"></a><H4>
+onLocationToAddressComplete(addressCandidate)	</H4></div>
+
+
+<div class="detaildesc">Fires when Locator.locationToAddress() has completed.  The result is an <a href="addresscandidate.htm">AddressCandidate</a>. This is the same signature returned if the optional callback is specified.</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="addresscandidate.htm">AddressCandidate</a>> <B>addressCandidate</B>
+			</td>
+
+<td class="detailTABLE">
+ 			Contains a candidate that best matches the input criteria as well as its score.
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#locationToAddress">locationToAddress</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<br/></div></body></html> 

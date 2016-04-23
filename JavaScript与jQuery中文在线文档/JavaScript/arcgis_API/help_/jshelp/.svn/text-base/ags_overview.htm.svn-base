@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>ArcGIS Server services overview</title>
+</head>
+
+<body>
+
+<div id="pageBanner">ArcGIS Server services overview</div>
+
+<div id="nstext">
+
+<!--***START TEXT - DO NOT WRITE ABOVE THIS LINE***-->
+
+<p>ArcGIS Server allows you to publish services for visualization, spatial analysis, and spatial data management. Once the services are published, several frameworks are available for accessing and using these services, including the ArcGIS JavaScript API.  </p> 
+
+<p>If you are unfamiliar with ArcGIS Server services, a good place to start is the <a href="http://resources.esri.com/arcgisserver/index.cfm?fa=services" target="_blank">overview of services page</a> in the <a href="http://resources.esri.com/arcgisserver/index.cfm?fa=home" target="_blank">ArcGIS Server Resource Center</a>. </p> 
+
+<p>After you are familiar with ArcGIS Server services, the following topics offer additional information on using these services successfully in the  JavaScript API:</p>
+
+<ul>
+<li><a href="ags_rest.htm">The Services Directory and the REST API</a>:  This topic introduces Services Directory, which provides an easy way to generate URL's for referencing services.</li>
+<li><a href="ags_security.htm">Working with secure ArcGIS services</a>:  At times you will need to work with secure services.  This topic provides information about how to properly connect to these services.</li>
+<li><a href="ags_proxy.htm">Using the proxy page</a>:  A proxy page is necessary if your URL becomes too long and you must use a POST instead of a GET.  The proxy page is also necessary when you do not want users to view a token used with secure services.  This topic covers how to set up the proxy page. </li>
+
+</ul>
+
+<!--***END TEXT - DO NOT WRITE BELOW THIS LINE***-->
+</div>
+
+</body>
+</html>

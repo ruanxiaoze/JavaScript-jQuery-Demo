@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<title>Geocoding with Bing Maps</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta content="ArcGIS JavaScript API" name="keywords">
+		<LINK href="jsdoc.css" type="text/css" rel="stylesheet"></head>
+	<body>
+		<div id="pageBanner">Geocoding with Bing Maps</div>
+		<div id="nstext">
+			<!--***START TEXT - DO NOT WRITE ABOVE THIS LINE***-->
+			<p>Bing Maps (formerly Microsoft Virtual Earth) offers a geocoding service that can return the 
+				coordinates of addresses and places. When you use Bing Maps geocoding, you 
+				can take advantage of Bing Maps large, expanding database of locations. The 
+				geocoder also allows flexible search terms, which can be helpful if you're 
+				missing some piece of an address. When searching for a well-known place, such 
+				as "Dodger Stadium" or "Disneyland", you don't even have to know the address.</p>
+			<p>The ArcGIS JavaScript API exposes Bing Maps geocoding through the class <a href="../jsapi/vegeocoder.htm">
+					VEGeocoder</a>. At a minimum, you need to supply the URL to your "Get 
+				Virtual Earth Token" page in the constructor. Optionally, you can also override 
+				the default values for token duration and environment (staging or production).</p>
+			<pre>var tokenUrl = "http://myserver:8080/VE/vetoken.jsp";
+var environment = "production";
+var duration = 60;
+
+veGeocoder = new esri.virtualearth.VEGeocoder({
+  tokenUrl: tokenUrl,
+  environment: environment,
+  tokenDuration: duration,
+});
+</pre>
+			<p>The method used for geocoding is <a href="../jsapi/vegeocoder.htm#addresstolocations">
+					VEGeocoder.addressToLocations()</a>, where the parameter is the search 
+				string.</p>
+			<pre>var query = dojo.byId("address").value;
+veGeocoder.addressToLocations(query);
+</pre>
+			<p>To get the results, you'll need to listen for the <a href="../jsapi/vegeocoder.htm#onaddresstolocationscomplete">
+					VEGeocoder.onAddressToLocationsComplete</a> event. The results will be 
+				passed to your handler function as an array of <a href="../jsapi/vegeocoderesult.htm">
+					VEGeocodeResult</a>. From here you can get the extent (<a href="../jsapi/vegeocoderesult.htm#bestview">VEGeocodeResult.bestView</a>) 
+				and coordinates (<a href="../jsapi/vegeocoderesult.htm#location">VEGeocodeResult.location</a>) 
+				of your result. All results are returned as geographic coordinates (latitude / 
+				longitude), so to display the results on a Bing Maps map layer, you'll need 
+				to use <a href="../jsapi/namespace_geometry.htm#geographictowebmercator">esri.geometry.geographicToWebMercator()</a>
+				to get projected coordinates.</p>
+			<pre>
+dojo.connect(veGeocoder, "onAddressToLocationsComplete", function(geocodeResults) {
+  map.setExtent(esri.geometry.geographicToWebMercator(geocodeResults[0].bestView));
+});
+</pre>
+			<p>Reverse geocoding with Bing Maps is not available in the ArcGIS JavaScript 
+				API.</p>
+			<!--***END TEXT - DO NOT WRITE BELOW THIS LINE***--></div>
+	</body>
+</html>

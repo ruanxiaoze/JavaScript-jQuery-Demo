@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>Multiple Routes</title>
+
+    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css">
+    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"></script>
+
+    <script type="text/javascript">
+      dojo.require("esri.map");
+      dojo.require("esri.tasks.route");
+
+      var map, routeTask, routeParams, routes = [];
+      var stopSymbol, barrierSymbol, routeSymbols;
+      var mapOnClick_addStops_connect, mapOnClick_addBarriers_connect;
+
+      function init() {
+        esri.config.defaults.io.proxyUrl = "/proxy/proxy.ashx";
+
+        map = new esri.Map("map", {
+          extent:new esri.geometry.Extent({xmin:-122.42885112762451,ymin:37.79326915740967,xmax:-122.40310192108154,ymax:37.81043529510498,spatialReference:{wkid:4326}})
+        });
+
+        map.addLayer(new esri.layers.ArcGISTiledMapServiceLayer("http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer"));
+
+        routeTask = new esri.tasks.RouteTask("http://tasks.arcgisonline.com/ArcGIS/rest/services/NetworkAnalysis/ESRI_Route_NA/NAServer/Route");
+        routeParams = new esri.tasks.RouteParameters();
+        routeParams.stops = new esri.tasks.FeatureSet();
+        routeParams.barriers = new esri.tasks.FeatureSet();
+
+        dojo.connect(routeTask, "onSolveComplete", showRoute);
+        dojo.connect(routeTask, "onError", errorHandler);
+
+        stopSymbol = new esri.symbol.SimpleMarkerSymbol().setStyle(esri.symbol.SimpleMarkerSymbol.STYLE_CROSS).setSize(15);
+        stopSymbol.outline.setWidth(3);
+
+        barrierSymbol = new esri.symbol.SimpleMarkerSymbol().setStyle(esri.symbol.SimpleMarkerSymbol.STYLE_X).setSize(10);
+        barrierSymbol.outline.setWidth(3).setColor(new dojo.Color([255,0,0]));
+
+        routeSymbols = {
+          "Route 1": new esri.symbol.SimpleLineSymbol().setColor(new dojo.Color([0,0,255,0.5])).setWidth(5),
+          "Route 2": new esri.symbol.SimpleLineSymbol().setColor(new dojo.Color([0,255,0,0.5])).setWidth(5),
+          "Route 3": new esri.symbol.SimpleLineSymbol().setColor(new dojo.Color([255,0,255,0.5])).setWidth(5)
+        };
+      }
+
+      dojo.addOnLoad(init);
+
+      //Begins listening for click events to add stops
+      function addStops() {
+        removeEventHandlers();
+        mapOnClick_addStops_connect = dojo.connect(map, "onClick", addStop);
+      }
+
+      //Clears all stops
+      function clearStops() {
+        removeEventHandlers();
+        for (var i=routeParams.stops.features.length-1; i>=0; i--) {
+          map.graphics.remove(routeParams.stops.features.splice(i, 1)[0]);
+        }
+      }
+
+      //Adds a stop. The stop is associated with the route currently displayed in the dropdown
+      function addStop(evt) {
+        routeParams.stops.features.push(
+          map.graphics.add(
+            new esri.Graphic(
+              evt.mapPoint,
+              stopSymbol,
+              { RouteName:dojo.byId("routeName").value }
+            )
+          )
+        );
+      }
+
+      //Begins listening for click events to add barriers
+      function addBarriers() {
+        removeEventHandlers();
+        mapOnClick_addBarriers_connect = dojo.connect(map, "onClick", addBarrier);
+      }
+
+      //Clears all barriers
+      function clearBarriers() {
+        removeEventHandlers();
+        for (var i=routeParams.barriers.features.length-1; i>=0; i--) {
+          map.graphics.remove(routeParams.barriers.features.splice(i, 1)[0]);
+        }
+      }
+
+      //Adds a barrier
+      function addBarrier(evt) {
+        routeParams.barriers.features.push(
+          map.graphics.add(
+            new esri.Graphic(
+              evt.mapPoint,
+              barrierSymbol
+            )
+          )
+        );
+      }
+
+      //Stops listening for click events to add barriers and stops
+      function removeEventHandlers() {
+        dojo.disconnect(mapOnClick_addStops_connect);
+        dojo.disconnect(mapOnClick_addBarriers_connect);
+      }
+
+      //Solves the routes. Any errors will trigger the errorHandler function.
+      function solveRoute() {
+        removeEventHandlers();
+        routeTask.solve(routeParams);
+      }
+
+      //Clears all routes
+      function clearRoutes() {
+        for (var i=routes.length-1; i>=0; i--) {
+          map.graphics.remove(routes.splice(i, 1)[0]);
+        }
+        routes = [];
+      }
+
+      //Draws the resulting routes on the map
+      function showRoute(routeResults, barriers, messages) {
+        clearRoutes();
+
+        dojo.forEach(routeResults, function(routeResult, i) {
+          routes.push(
+            map.graphics.add(
+              routeResult.route.setSymbol(routeSymbols[routeResult.routeName])
+            )
+          );
+        });
+
+        var msgs = ["Server messages:"];
+        dojo.forEach(messages, function(message) {
+          msgs.push(message.type + " : " + message.description);
+        });
+        if (msgs.length > 1) {
+          alert(msgs.join("\n - "));
+        }
+      }
+
+      //Reports any errors that occurred during the solve
+      function errorHandler(err) {
+        alert("An error occured\n" + err.message + "\n" + err.details.join("\n"));
+      }
+    </script>
+
+  </head>
+  <body class="tundra">
+
+    Select route name: <select id="routeName">
+        <option value="Route 1">Route 1</option>
+
+        <option value="Route 2">Route 2</option>
+        <option value="Route 3">Route 3</option>
+      </select> to <button onclick="addStops();">Add Stops</button><button onclick="clearStops();">Clear Stops</button>
+    <button onclick="addBarriers();">Add Barriers</button><button onclick="clearBarriers();">Clear Barriers</button>
+    <button onclick="solveRoute();">Solve Routes</button><button onclick="clearRoutes();">Clear Routes</button>
+
+    <br /><br />
+    <div id="map" style="width:600px; height:400px; border:1px solid #000;"></div>
+     <ol>
+      <li>Select a route name from the drop down.</li>
+      <li>Click 'Add stops', then click on map to add stops to route.</li>
+
+      <li>Click the 'Add Barriers', then click on map to add barriers.</li>
+      <li>Optionally, repeat the above steps to add more routes.</li>
+      <li>Click the 'Solve Routes' to solve.</li>
+    </ul>
+    <p>Any server error messages will be displayed in an alert box.</p>
+  </body>
+</html>

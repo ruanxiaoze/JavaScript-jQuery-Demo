@@ -1,0 +1,464 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>Layer</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: Layer</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+    所有可以加到地图里的图层的基础类。<br /><br />
+
+Layer没有构造函数。使用 <a href="arcgisdynamicmapservicelayer.htm">ArcGISDynamicMapServiceLayer</a> 或 <a href="arcgistiledmapservicelayer.htm">ArcGISTiledMapServiceLayer</a>.
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.layers.Layer
+</pre>
+
+<H4 class=dtH4>子类</H4>
+
+<a href="dynamicmapservicelayer.htm">DynamicMapServiceLayer</a>&nbsp;&nbsp;<a href="graphicslayer.htm">GraphicsLayer</a>&nbsp;&nbsp;<a href="tiledmapservicelayer.htm">TiledMapServiceLayer</a>&nbsp;&nbsp;<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#id">id</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+图层ID。如果没有指定，esri.Map指定值。 默认情况下，图层ID是"layer"+数字。ID仅仅能在图层构造函数中被用户定义。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#loaded">loaded</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+当图层被加载时，值变为true，图层属性可以被访问。<a href="#onLoad">onLoad</a>事件也被触发。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#opacity">opacity</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+图层的不透明或透明度。属性值范围从0.0到1.0，当值是0.0时，100%透明，当值为1.0时，不透明。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#url">url</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+指向ArcGIS Server REST地图服务资源的URL。 使用<a href="../jshelp/ags_rest.htm">Services Directory</a>获得URL。  ArcGIS Online上街道地图服务的URL示例是： <br /> <a href="http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer" target="_blank"> http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer</a>.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#visible">visible</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+图层的可见性。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>方法表</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+		<th class="tableheader">方法</th>
+		<th class="tableheader">返回值</th>
+		<th class="tableheader">描述</th>
+		</tr>
+
+<tr>
+<td class="syntaxTABLE"><a href="#hide">hide()</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">设置图层的可见性。设置为false，图层没有删除，但是从视窗隐藏。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setOpacity">setOpacity(opacity)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">设置图层不透明度。  值范围从0.0到1.0，0.0是100%透明，1.0是不透明。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#show">show()</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">设置图层的可见性为"true".</td>	</tr></table>
+
+<H4 class=dtH4>事件</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">事件</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#onError">onError(error)
+		</a></td>
+
+<td class="syntaxTABLE">当接收图层出现问题时触发该事件。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onLoad">onLoad(layer)
+		</a></td>
+
+<td class="syntaxTABLE">图层的属性成功填充后触发事件。图层加到地图以前该事件必须是成功的。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onOpacityChange">onOpacityChange(opacity)
+		</a></td>
+
+<td class="syntaxTABLE">当图层不透明度被修改时触发，返回不透明度的值。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onUpdate">onUpdate()
+		</a></td>
+
+<td class="syntaxTABLE">图层完成加载或自身修改的时候触发事件。  对于<a href="arcgistiledmapservicelayer.htm">ArcGISTiledMapServiceLayer</a>，已经接收并显示所有请求的切片时触发事件。 对于<a href="arcgisdynamicmapservicelayer.htm">ArcGISDynamicMapServiceLayer</a> 或 <a href="arcgisimageservicelayer.htm">ArcGISImageServiceLayer</a>，地图图像已经接收并显示时触发事件。对于<a href="graphicslayer.htm">GraphicsLayer</a>，当移动或缩放后所有图形已经被变形时触发事件。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onVisibilityChange">onVisibilityChange(visbility)
+		</a></td>
+
+<td class="syntaxTABLE">当图层可见性已经被修改时触发，返回新的可见性。</td>
+		</tr></table>
+
+<div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="id"></a>
+&lt;String> id</H4></div>
+
+<div class="detaildesc">图层ID。如果没有指定，esri.Map指定值。 默认情况下，图层ID是"layer"+数字。ID仅仅能在图层构造函数中被用户定义。</div>
+
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<ul>
+<li>在图层构造函数中设置图层ID。
+  <pre>
+population = new esri.layers.ArcGISDynamicMapServiceLayer("http://myserver/arcgis/rest/population/MapServer/Layers", {id:"population"});
+</pre>
+</li>
+<li>图层初始化时设置图层ID。
+  <pre>population.id = "population";</pre></li>
+
+<li>检索图层ID.
+  <pre>
+function getMapLayers() {
+  for (var j=0, jl=myMap.layerIds.length; j&lt;jl; j++) {
+    var currentLayer = myMap.getLayer(myMap.layerIds[j]);
+    alert("id: " + currentLayer.id);
+  }
+}
+</pre></li>
+</ul><br/>
+		</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="loaded"></a>
+&lt;Boolean> loaded</H4></div>
+
+<div class="detaildesc">当图层被加载时，值变为true，图层属性可以被访问。<a href="#onLoad">onLoad</a>事件也被触发。</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onLoad">onLoad</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="opacity"></a>
+&lt;Number> opacity</H4></div>
+
+<div class="detaildesc">图层的不透明或透明度。属性值范围从0.0到1.0，当值是0.0时，100%透明，当值为1.0时，不透明。</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> 0.0 - 1.0
+			</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> 1.0
+			</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setOpacity">setOpacity</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="url"></a>
+&lt;String> url</H4></div>
+
+<div class="detaildesc">指向ArcGIS Server REST地图服务资源的URL。 使用<a href="../jshelp/ags_rest.htm">Services Directory</a>获得URL。  ArcGIS Online上街道地图服务的URL示例是： <br /> <a href="http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer" target="_blank"> http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer</a>.<i> (As of v1.2)</i></div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="visible"></a>
+&lt;Boolean> visible</H4></div>
+
+<div class="detaildesc">图层的可见性。</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> true
+			</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#show">show</a>&nbsp;&nbsp;
+<a href="#hide">hide</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class=sectionDivider>方法详细信息</div>
+<div class="detaildiv">
+		<div class="detailname"><a name="hide"></a><H4>
+hide()</H4></div>
+
+<div class="detaildesc">设置图层的可见性。设置为false，图层没有删除，但是从视窗隐藏。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#show">show</a>&nbsp;&nbsp;
+<a href="#onVisibilityChange">onVisibilityChange</a>&nbsp;&nbsp;
+<a href="#visible">visible</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setOpacity"></a><H4>
+setOpacity(opacity)</H4></div>
+
+<div class="detaildesc">设置图层不透明度。  值范围从0.0到1.0，0.0是100%透明，1.0是不透明。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>opacity</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+Opacity value.  值范围从0.0到1.0，0.0是100%透明，1.0是不透明。</td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onOpacityChange">onOpacityChange</a>&nbsp;&nbsp;
+<a href="#opacity">opacity</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="show"></a><H4>
+show()</H4></div>
+
+<div class="detaildesc">设置图层的可见性为"true".</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onVisibilityChange">onVisibilityChange</a>&nbsp;&nbsp;
+<a href="#visible">visible</a>&nbsp;&nbsp;
+<a href="#hide">hide</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<H4 class=dtH4>Events Detail</H4>
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onError"></a><H4>
+onError(error)	</H4></div>
+
+
+<div class="detaildesc">当接收图层出现问题时触发该事件。<i> (As of v1.3)</i></div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;Error> <B>error</B>
+			</td>
+
+<td class="detailTABLE">
+ 			ArcGIS Server错误信息用<a href="http://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/Error" target="_blank">JavaScript error对象</a>返回。
+			</td>
+			</tr>
+
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onLoad"></a><H4>
+onLoad(layer)	</H4></div>
+
+
+<div class="detaildesc">图层的属性成功填充后触发事件。图层加到地图以前该事件必须是成功的。</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="layer.htm">Layer</a>> <B>layer</B>
+			</td>
+
+<td class="detailTABLE">
+ 			加载的图层。
+			</td>
+			</tr>
+
+</table>
+
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<p>Internet Explorer里, 由于资源缓存, 一旦图层被构建，onLoad事件就会被触发。因此在为onLoad事件注册监听器以前可以检查图层的加载属性是否是true：</p>
+
+<pre>function init() {
+  //setting initial extent in constructor
+  var map = new esri.Map("mapDiv", { extent: new esri.geometry.Extent(...) });
+
+  //or use set extent method
+  var map = new esri.Map("mapDiv");
+  map.setExtent(new esri.geometry.Extent(...));
+
+  //add first layer
+  map.addLayer(...);
+}
+</pre>
+		</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#loaded">loaded</a>&nbsp;&nbsp;
+<a href="Map.htm#onLoad">Map.onLoad</a>
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onOpacityChange"></a><H4>
+onOpacityChange(opacity)	</H4></div>
+
+
+<div class="detaildesc">当图层不透明度被修改时触发，返回不透明度的值。</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;Number> <B>opacity</B>
+			</td>
+
+<td class="detailTABLE">
+ 			图层的不透明或透明度。属性值范围从0.0到1.0，当值是0.0时，100%透明，当值为1.0时，不透明。
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setOpacity">setOpacity</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onUpdate"></a><H4>
+onUpdate()	</H4></div>
+
+
+<div class="detaildesc">图层完成加载或自身修改的时候触发事件。  对于<a href="arcgistiledmapservicelayer.htm">ArcGISTiledMapServiceLayer</a>，已经接收并显示所有请求的切片时触发事件。 对于<a href="arcgisdynamicmapservicelayer.htm">ArcGISDynamicMapServiceLayer</a> 或 <a href="arcgisimageservicelayer.htm">ArcGISImageServiceLayer</a>，地图图像已经接收并显示时触发事件。对于<a href="graphicslayer.htm">GraphicsLayer</a>，当移动或缩放后所有图形已经被变形时触发事件。<i> (As of v1.2)</i></div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onVisibilityChange"></a><H4>
+onVisibilityChange(visbility)	</H4></div>
+
+
+<div class="detaildesc">当图层可见性已经被修改时触发，返回新的可见性。</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;Boolean> <B>visbility</B>
+			</td>
+
+<td class="detailTABLE">
+ 			判断地图上的图层是否可见。
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#hide">hide</a>&nbsp;&nbsp;
+<a href="#show">show</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<br/></div></body></html> 

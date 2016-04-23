@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>Get Virtual Earth Token page - ASP.NET</title>
+</head>
+
+<body>
+
+<div id="pageBanner">Get Virtual Earth Token page - ASP.NET</div>
+
+<div id="nstext">
+
+<!--***START TEXT - DO NOT WRITE ABOVE THIS LINE***-->
+
+<p>This page contains a download and instructions for configuring the "Get Virtual Earth Token" page for ASP.NET applications.</p>
+<p>Before following these instructions, ensure that ASP.NET version 2.0 or higher is installed on your server and is registered with your Internet Information Services (IIS) Web server. For Windows Server 2003, ensure that ASP.NET is allowed on the server. See the <a href="http://www.microsoft.com/technet/prodtechnol/WindowsServer2003/Library/IIS/0e923661-a628-4f16-8e52-9d63587b9d72.mspx?mfr=true" target="_blank">Microsoft ASP.NET help</a> or other resources for configuring ASP.NET on your server. The folder for your application does not need to allow script execution, as long as the root Web site is configured for ASP.NET.</p>
+<ol>
+<li>Download <a href="vetokendotnet.zip">vetokenDotNet.zip</a>.</li>
+<li>Extract the contents of vetokenDotNet.zip to a Web-accessible IIS folder.</li>
+<li>Open the file vetoken.ashx in a text editor and edit the "userName" and "password" variables near the top of the file to contain your credentials for accessing Microsoft Virtual Earth.</li>
+<li>Edit the "refererURLs" to include the URL of the server that hosts your Web site. For example, if your application is running at http://myserver.com/myApp.html, set your allowed refererUrls to include http://myserver.com. Only applications hosted on http://myserver.com can use your Get Virtual Earth Token page.</li>
+</ol>
+
+<!--***END TEXT - DO NOT WRITE BELOW THIS LINE***-->
+</div>
+
+</body>
+</html>

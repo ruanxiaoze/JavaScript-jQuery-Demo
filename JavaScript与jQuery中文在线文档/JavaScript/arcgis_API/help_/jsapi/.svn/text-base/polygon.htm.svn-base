@@ -1,0 +1,361 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>Polygon</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: Polygon</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+    环形的数组，每个环形都是一个点数组。环形的第一个点和最后一个点必须是一样的。
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+<a href="geometry.htm">esri.geometry.Geometry</a>
+  |_ esri.geometry.Polygon
+</pre><H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#PolygonConst1">esri.geometry.Polygon(spatialReference)</a></td>
+		<td class="syntaxTABLE">创建一个新的Polygon对象。</td>
+		</tr>
+<tr><td class="syntaxTABLE"><a href="#PolygonConst2">esri.geometry.Polygon(json)</a></td>
+		<td class="syntaxTABLE">创建一个新的Polygon对象。使用JSON对象。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#rings">rings</a></td>
+<td class="syntaxTABLE">
+Number[][][]
+</td>
+
+<td class="syntaxTABLE">
+环形数组。每个环形是由三个或多个点组成。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>方法表</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+		<th class="tableheader">方法</th>
+		<th class="tableheader">返回值</th>
+		<th class="tableheader">描述</th>
+		</tr>
+
+<tr>
+<td class="syntaxTABLE"><a href="#addRing1">addRing(points or ring or pointJson)</a></td><td class="syntaxTABLE">
+<a href="polygon.htm">Polygon</a>
+</td>
+<td class="syntaxTABLE">增加环形到Polygon。环形能使下面的形式：数字数组，点数组，JSON对象。增加时环形的索引会递增一个。<br/><br/>
+
+<code>Polygon</code>返回值在v1.4被增加。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#contains">contains(point)</a></td><td class="syntaxTABLE">
+Boolean
+</td>
+<td class="syntaxTABLE">客户端检查指定点是否在polygon里面。polygon线上的点被认为是在里面的。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#getExtent">getExtent()</a></td><td class="syntaxTABLE">
+<a href="extent.htm">Extent</a>
+</td>
+<td class="syntaxTABLE">返回polygon的范围。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#getPoint">getPoint(ringIndex, pointIndex)</a></td><td class="syntaxTABLE">
+<a href="point.htm">Point</a>
+</td>
+<td class="syntaxTABLE">返回通过环形和路径中的点指定的点。	</td></tr><tr>
+<td class="syntaxTABLE"><a href="#insertPoint">insertPoint(ringIndex, pointIndex, point)</a></td><td class="syntaxTABLE">
+<a href="polygon.htm">Polygon</a>
+</td>
+<td class="syntaxTABLE">插入新的点到polygon。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#removeRing">removeRing(ringIndex)</a></td><td class="syntaxTABLE">
+<a href="point.htm">Point[]</a>
+</td>
+<td class="syntaxTABLE">从Polygon里面删除一个环形。索引指定了要删除的环形。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setPoint">setPoint(ringIndex, pointIndex, point)</a></td><td class="syntaxTABLE">
+<a href="polygon.htm">Polygon</a>
+</td>
+<td class="syntaxTABLE">更新polygon里的一个点。</td>	</tr></table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="PolygonConst1"></a><H4>esri.geometry.Polygon(spatialReference)</H4>
+		</div>
+
+<div class="detaildesc">创建一个新的Polygon对象。</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;<a href="spatialreference.htm">SpatialReference</a>>
+<B>spatialReference</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			几何体的空间参考。
+			</td>
+			</tr>
+</table>
+
+</div><div class="detaildiv"><div class="detailname"><a name="PolygonConst2"></a><H4>esri.geometry.Polygon(json)</H4>
+		</div>
+
+<div class="detaildesc">创建一个新的Polygon对象。使用JSON对象。</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;Object>
+<B>json</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			JSON对象表现的几何体。
+			</td>
+			</tr>
+</table>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="rings"></a>
+&lt;Number[][][]> rings</H4></div>
+
+<div class="detaildesc">环形数组。每个环形是由三个或多个点组成。</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#addRing">addRing</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class=sectionDivider>方法详细信息</div>
+<div class="detaildiv">
+		<div class="detailname"><a name="addRing1"></a><H4>
+addRing(points or ring or pointJson)</H4></div>
+
+<div class="detaildesc">增加环形到Polygon。环形能使下面的形式：数字数组，点数组，JSON对象。增加时环形的索引会递增一个。<br/><br/>
+
+<code>Polygon</code>返回值在v1.4被增加。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="polygon.htm">Polygon</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="point.htm">Point[]</a>> <B>points</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+ESRI点数组去创建环形。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Number[][]> <B>ring</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+x，y坐标数组去创建环形。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Object> <B>pointJson</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+JSON对象表示的环形。</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="contains"></a><H4>
+contains(point)</H4></div>
+
+<div class="detaildesc">客户端检查指定点是否在polygon里面。polygon线上的点被认为是在里面的。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> Boolean</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="point.htm">Point</a>> <B>point</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+通过地图单位的x坐标和y坐标定义的位置。</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="getExtent"></a><H4>
+getExtent()</H4></div>
+
+<div class="detaildesc">返回polygon的范围。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="extent.htm">Extent</a></div>
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="getPoint"></a><H4>
+getPoint(ringIndex, pointIndex)</H4></div>
+
+<div class="detaildesc">返回通过环形和路径中的点指定的点。
+
+</div><div class="detaildesc"><strong>返回值:</strong> <a href="point.htm">Point</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>ringIndex</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+环形的索引。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>pointIndex</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+环形中点的索引。</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="insertPoint"></a><H4>
+insertPoint(ringIndex, pointIndex, point)</H4></div>
+
+<div class="detaildesc">插入新的点到polygon。<i> (As of v1.4)</i></div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="polygon.htm">Polygon</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>ringIndex</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+插入点的环形索引。
+			</td></tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>pointIndex</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+            在环形中的插入点的索引。
+</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="point.htm">Point</a>> <B>point</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+插入到环形里的点。</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="removeRing"></a><H4>
+removeRing(ringIndex)</H4></div>
+
+<div class="detaildesc">从Polygon里面删除一个环形。索引指定了要删除的环形。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="point.htm">Point[]</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>ringIndex</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+            要删除的环形的索引。</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setPoint"></a><H4>
+setPoint(ringIndex, pointIndex, point)</H4></div>
+
+<div class="detaildesc">更新polygon里的一个点。<i> (As of v1.4)</i></div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="polygon.htm">Polygon</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>ringIndex</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+            更新点的环形索引。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>pointIndex</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+            在环形中的更新的点的索引。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="point.htm">Point</a>> <B>point</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+            要更新到环形中的点。</td>
+			</tr>
+</table>
+
+</div>
+
+<br/></div></body></html> 

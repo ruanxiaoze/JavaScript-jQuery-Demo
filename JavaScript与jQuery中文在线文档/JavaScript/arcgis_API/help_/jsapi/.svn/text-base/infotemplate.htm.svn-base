@@ -1,0 +1,227 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>InfoTemplate</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: InfoTemplate</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+    InfoTemplate包括标题和用于转换<a href="graphic.htm#attributes">Graphic.attributes</a>为HTML表示法的内容模板字符串。Dojo语法${&lt;key>}执行参数的置换。此外，通配符${*}能作为模板字符串。通配符输出所有属性的值。图形上的默认行为是在图形上单击后显示地图的<a href="infowindow.htm">信息窗口</a>，因此模板是必需的。
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.InfoTemplate
+</pre>
+
+<H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="24%">构造函数</th>
+	<th width="76%" class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#InfoTemplateConst1">esri.InfoTemplate()</a></td>
+		<td class="syntaxTABLE">创建一个空的模板对象。</td>
+		</tr>
+<tr><td class="syntaxTABLE"><a href="#InfoTemplateConst2">esri.InfoTemplate(title, content)</a></td>
+		<td class="syntaxTABLE">创建模板对象。所有参数都是必需的并要按顺序指定。</td>
+		</tr>
+<tr><td class="syntaxTABLE"><a href="#InfoTemplateConst3">esri.InfoTemplate(json)</a></td>
+		<td class="syntaxTABLE">使用JSON对象创建信息模板对象。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#content">content</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+
+<a href="infowindow.htm">信息窗口</a>的内容格式模板。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#title">title</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+<a href="infowindow.htm">信息窗口</a>的标题格式模板。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>方法表</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+		<th class="tableheader">方法</th>
+		<th class="tableheader">返回值</th>
+		<th class="tableheader">描述</th>
+		</tr>
+
+<tr>
+<td class="syntaxTABLE"><a href="#setContent">setContent(template)</a></td><td class="syntaxTABLE">
+<a href="infotemplate.htm">InfoTemplate</a>
+</td>
+<td class="syntaxTABLE">设置内容模板。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setTitle">setTitle(template)</a></td><td class="syntaxTABLE">
+<a href="infotemplate.htm">InfoTemplate</a>
+</td>
+<td class="syntaxTABLE">设置标题模板</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#toJson">toJson()</a></td><td class="syntaxTABLE">
+Object
+</td>
+<td class="syntaxTABLE">转换为ArcGIS Server JSON表示法。</td>	</tr></table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="InfoTemplateConst1"></a><H4>esri.InfoTemplate()</H4>
+		</div>
+
+<div class="detaildesc">创建一个空的模板对象。</div>
+
+</div><div class="detaildiv"><div class="detailname"><a name="InfoTemplateConst2"></a><H4>esri.InfoTemplate(title, content)</H4>
+		</div>
+
+<div class="detaildesc">创建模板对象。所有参数都是必需的并要按顺序指定。</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;String>
+<B>title</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			<a href="infowindow.htm">信息窗口</a>的标题格式模板。
+			</td>
+			</tr>
+<tr>
+<td class="detailTABLE">
+&lt;String>
+<B>content</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			<a href="infowindow.htm">信息窗口</a>的内容格式模板。
+			</td>
+			</tr>
+</table>
+
+</div><div class="detaildiv"><div class="detailname"><a name="InfoTemplateConst3"></a><H4>esri.InfoTemplate(json)</H4>
+		</div>
+
+<div class="detaildesc"><span class="syntaxTABLE">使用JSON对象创建信息模板对象。</span></div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;Object>
+<B>json</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			JSON对象表现的信息模板。<br/>
+
+<pre>
+{title:"Test Title", content:"Test Content"}
+</pre>
+			</td>
+			</tr>
+</table>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="content"></a>
+&lt;String> content</H4></div>
+
+<div class="detaildesc"><a href="infowindow.htm">信息窗口</a>的内容格式模板。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="title"></a>
+&lt;String> title</H4></div>
+
+<div class="detaildesc"><a href="infowindow.htm">信息窗口</a>的标题格式模板。</div>
+
+</div>
+
+<div class=sectionDivider>方法详细信息</div>
+<div class="detaildiv">
+		<div class="detailname"><a name="setContent"></a><H4>
+setContent(template)</H4></div>
+
+<div class="detaildesc">设置内容模板。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="infotemplate.htm">InfoTemplate</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>template</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+内容的模板。</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setTitle"></a><H4>
+setTitle(template)</H4></div>
+
+<div class="detaildesc">设置标题模板</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="infotemplate.htm">InfoTemplate</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>template</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+标题的模板。</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="toJson"></a><H4>
+toJson()</H4></div>
+
+<div class="detaildesc">转换为ArcGIS Server JSON表示法。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> Object</div>
+</div>
+
+<br/></div></body></html> 

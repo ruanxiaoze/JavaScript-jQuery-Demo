@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>Samples Overview</title>
+</head>
+
+<body>
+
+<div id="pageBanner">Samples Overview</div>
+
+<div id="nstext">
+
+<!--***START TEXT - DO NOT WRITE ABOVE THIS LINE***-->
+
+<style type="text/css">
+#sidebar {
+	FLOAT: right; WIDTH: 240px; MARGIN-RIGHT: 10px;
+	BORDER-RIGHT: #256F92 1px solid; BORDER-TOP: #256F92 1px solid; MARGIN: 5px 2px 10px; BORDER-LEFT: #256F92 1px solid; BORDER-BOTTOM: #256F92 1px solid; BACKGROUND: #ffffff;
+	}
+#sidebar H3 {
+	PADDING-RIGHT: 5px; PADDING-LEFT: 17px; FONT-WEIGHT: bold; FONT-SIZE: 1.00em; BACKGROUND: url(../images/sideBarH2BackgroundLtBlue.gif) #AED7EB repeat-x left top; PADDING-BOTTOM: 5px; MARGIN: 0px 0px 5px; COLOR: #256F92; PADDING-TOP: 6px; BORDER-BOTTOM: #d3d3d3 1px solid
+}
+#sidebar UL {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px 0px 10px; PADDING-TOP: 0px
+}
+#sidebar LI {
+	PADDING-RIGHT: 0pt; LIST-STYLE: none none outside; PADDING-LEFT: 5px; FONT-SIZE: 0.86em; BACKGROUND: url(images/playarrow.gif) no-repeat 10px 10px; PADDING-BOTTOM: 0pt; LINE-HEIGHT: 18px; PADDING-TOP: 2px; background-color: #ffffff;
+}
+#sidebar a:link {
+
+	color: #256F92; text-decoration: none; 
+	}
+#sidebar a:visited
+	{
+	color: #256F92; text-decoration: none; 
+	}
+#sidebar a:hover
+	{
+	color: #3366ff; text-decoration: none;
+	}
+	
+</style>
+<div id="sidebar">
+
+
+	<h3>Getting Started Videos</h3>
+
+		<ul>
+              <li><img src="images/bluearrow.gif" align="absmiddle"  /><a href="videos/sample_using.htm" target="_blank">Copy code and run on your machine</a></li>
+			  <li><img src="images/bluearrow.gif" align="absmiddle"  /><a href="videos/sample_extend.htm" target="_blank">Extend a sample to create a starting point for your own application</a></li>
+
+		</ul>
+
+
+
+
+</div>
+
+<p>These samples demonstrate how to use various features in the ArcGIS JavaScript API. Each sample page contains a live demo, a description of what happens in the sample, and the source code. <a href="videos/sample_using.htm" target="_blank">Watch a video</a> that shows how you can copy the code from the samples to run them on your machine.</p>
+
+<p>The samples are ranked by relative complexity using one, two, or three stars. If you're just learning the ArcGIS JavaScript API, you will be able to better understand the samples if you start with the one star samples and work your way up. In many cases you can extend or combine the samples to create a starting point for your own applications. <a href="videos/sample_extend.htm" target="_blank">Watch a video</a> to see how this is done.</p>
+
+<p>The samples use services from the ESRI sample servers (<a href="http://sampleserver1.arcgisonline.com/arcgis/rest/services" target="_blank">sampleserver1</a> and <a href="http://sampleserver2.arcgisonline.com/arcgis/rest/services" target="_blank">sampleserver2</a>) and <a href="http://server.arcgisonline.com/arcgis/rest/services" target="_blank">ArcGIS Online</a>. You can use the services from the ESRI sample servers in your own test applications as you learn the API. You can also use ArcGIS Online layers in your applications. See the ArcGIS Online home page for terms of use.</p>
+
+
+
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+
+<!--***END TEXT - DO NOT WRITE BELOW THIS LINE***-->
+</div>
+
+</body>
+</html>

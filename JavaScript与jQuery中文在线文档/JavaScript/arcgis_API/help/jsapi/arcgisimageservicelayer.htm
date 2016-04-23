@@ -1,0 +1,605 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>ArcGISImageServiceLayer</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: ArcGISImageServiceLayer</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+    可以用ArcGIS Server REST API提供的图像地图服务资源工作。   <i>(As of v1.2)</i>
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+<a href="layer.htm">esri.Layer</a>
+  |_ <a href="dynamicmapservicelayer.htm">esri.layers.DynamicMapServiceLayer</a>
+        |_ esri.layers.ArcGISImageServiceLayer
+</pre><H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#ArcGISImageServiceLayerConst">esri.layers.ArcGISImageServiceLayer(url, options?)</a></td>
+		<td class="syntaxTABLE">创建新的ArcGISImageServiceLayer对象。URL是必需的参数，也接受一些可选参数。这些可选参数可以是任意顺序。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#bandCount">bandCount</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+ArcGISImageServiceLayer里波段的数量。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#bandIds">bandIds</a></td>
+<td class="syntaxTABLE">
+Number[]
+</td>
+
+<td class="syntaxTABLE">
+当前波段选择的数组。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#bands">bands</a></td>
+<td class="syntaxTABLE">
+Object[]
+</td>
+
+<td class="syntaxTABLE">
+光栅数据集组成的光栅波段和统计信息。数组长度给出波段的数量，数组索引代表波段ID。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#compressionQuality">compressionQuality</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+当前压缩质量值。压缩质量控制了有多少损失的图片。仅仅对JPG图片类型有效。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#copyrightText">copyrightText</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+图像服务定义的版权字符串。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#Description">Description</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+图像服务定义的描述。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#disableClientCaching">disableClientCaching</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+当值为true时，图片总是从服务器上获取，忽略浏览器的缓存。这将被用于地图服务的数据时常修改的情况。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#format">format</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+输出图像类型。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#interpolation">interpolation</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+当前插值方法。插值方法影响当栅格数据集变形或改变坐标空间时，栅格数据集如何变换。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#pixelSizeX">pixelSizeX</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+X方向的像素大小。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#pixelSizeY">pixelSizeY</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+Y方向的像素大小。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#pixelType">pixelType</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+图像服务像素类型。保存在光栅图里面的值的类型，例如有符号整数，无符号整数，或浮点数。整数全是数字，而浮点数有小数位。
+		</td></tr>
+</table>
+
+<H4 class=dtH4>方法表</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+		<th class="tableheader">方法</th>
+		<th class="tableheader">返回值</th>
+		<th class="tableheader">描述</th>
+		</tr>
+
+<tr>
+<td class="syntaxTABLE"><a href="#exportMapImage">exportMapImage(imageServiceParameters?, callback?)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">用通过<a href="imageserviceparameters.htm">ImageServiceParameters</a>指定的值导出地图。完成时，返回<a href="mapimage.htm">MapImage</a>。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setBandIds">setBandIds(bandIds)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">设置导出图像的R,G,B为合适的ImageService波段ID。BandIds是0基准。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setCompressionQuality">setCompressionQuality(quality)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">设置导出图片的压缩质量。仅仅对JPG图片格式有效。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setDisableClientCaching">setDisableClientCaching(disable)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">设置图片是否总是从服务器获取，忽略浏览器缓存。当地图服务提供数据经常修改时使用。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setInterpolation">setInterpolation(interpolation)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">设置插值方法。插值方法影响当栅格数据集变形或改变坐标空间时，栅格数据集如何变换。</td>	</tr></table>
+
+<H4 class=dtH4>事件</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">事件</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#onMapImageExport">onMapImageExport(mapImage)
+		</a></td>
+
+<td class="syntaxTABLE">当地图导出完成时触发。</td>
+		</tr></table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="ArcGISImageServiceLayerConst"></a><H4>esri.layers.ArcGISImageServiceLayer(url, options?)</H4>
+		</div>
+
+<div class="detaildesc">创建新的ArcGISImageServiceLayer对象。URL是必需的参数，也接受一些可选参数。这些可选参数可以是任意顺序。</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;String>
+<B>url</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			代表一个地图服务的ArcGIS Server REST资源的URL。例如：http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Population_World/MapServer。更多构造URL的信息，见<a href="../jshelp/ags_rest.htm">服务目录和REST API</a>。
+			</td>
+			</tr>
+<tr>
+<td class="detailTABLE">
+&lt;Object>
+<B>options</B></td>
+<td class="detailTABLE">
+Optional	</td>
+<td class="detailTABLE">
+			可选参数。见选选项列表。
+			</td>
+			</tr>
+</table>
+
+<div class="detaildesc"><strong>可选项:</strong></div><table CLASS="detailTABLE" cellspacing="0" >
+<tr>
+			<td class="detailTABLE">
+&lt;String>
+<B>id</B></td>
+			<td class="detailTABLE">
+			指定给图层的Id。如果没有指定，esri.Map 指定该值。
+			</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="imageserviceparameters.htm">ImageServiceParameters</a>>
+<B>imageServiceParameters</B></td>
+			<td class="detailTABLE">
+			导出图像服务图层时使用的图像服务参数选项。
+			</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Number>
+<B>opacity</B></td>
+			<td class="detailTABLE">
+			地图最初的透明度或不透明度。值范围从0.0到1.0，0.0是指100%透明，1.0指不透明。默认值是1.0。
+			</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Boolean>
+<B>visible</B></td>
+			<td class="detailTABLE">
+			图层最初的可见性。默认为true。
+			</td>
+			</tr>
+</table>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="bandCount"></a>
+&lt;Number> bandCount</H4></div>
+
+<div class="detaildesc">ArcGISImageServiceLayer里波段的数量。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="bandIds"></a>
+&lt;Number[]> bandIds</H4></div>
+
+<div class="detaildesc">当前波段选择的数组。</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setBandIds">setBandIds</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="bands"></a>
+&lt;Object[]> bands</H4></div>
+
+<div class="detaildesc">光栅数据集组成的光栅波段和统计信息。数组长度给出波段的数量，数组索引代表波段ID。</div>
+
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		The array is an对象 of the form: <br />
+<pre> 
+[
+ {
+   "min": &lt;Number>,
+   "max": &lt;Number>,
+   "mean": &lt;Number>,
+   "stddev": &lt;Number>
+
+ },
+ ...
+]
+</pre><br/>
+		</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="compressionQuality"></a>
+&lt;Number> compressionQuality</H4></div>
+
+<div class="detaildesc">当前压缩质量值。压缩质量控制了有多少损失的图片。仅仅对JPG图片类型有效。</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setCompressionQuality">setCompressionQuality</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="copyrightText"></a>
+&lt;String> copyrightText</H4></div>
+
+<div class="detaildesc">图像服务定义的版权字符串。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="Description"></a>
+&lt;String> Description</H4></div>
+
+<div class="detaildesc">图像服务定义的描述。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="disableClientCaching"></a>
+&lt;Boolean> disableClientCaching</H4></div>
+
+<div class="detaildesc">当值为true时，图片总是从服务器上获取，忽略浏览器的缓存。这将被用于地图服务的数据时常修改的情况。<i> (As of v1.2)</i></div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> false
+			</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="format"></a>
+&lt;String> format</H4></div>
+
+<div class="detaildesc">输出图像类型。</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> png8 | png24 | jpg | bmp | gif
+			</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> png8
+			</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="interpolation"></a>
+&lt;String> interpolation</H4></div>
+
+<div class="detaildesc">当前插值方法。插值方法影响当栅格数据集变形或改变坐标空间时，栅格数据集如何变换。</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setInterpolation">setInterpolation</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="pixelSizeX"></a>
+&lt;Number> pixelSizeX</H4></div>
+
+<div class="detaildesc">X方向的像素大小。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="pixelSizeY"></a>
+&lt;Number> pixelSizeY</H4></div>
+
+<div class="detaildesc">Y方向的像素大小。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="pixelType"></a>
+&lt;Number> pixelType</H4></div>
+
+<div class="detaildesc">图像服务像素类型。保存在光栅图里面的值的类型，例如有符号整数，无符号整数，或浮点数。整数全是数字，而浮点数有小数位。
+
+</div><div class="detaildesc">
+<strong>已知值:</strong> C64 | C128 | F32 | F64 | S8 | S16 | S32 | U1 | U2 | U4 | U8 | U16 | U32 | UNKNOWN
+			</div>
+
+</div>
+
+<div class=sectionDivider>方法详细信息</div>
+<div class="detaildiv">
+		<div class="detailname"><a name="exportMapImage"></a><H4>
+exportMapImage(imageServiceParameters?, callback?)</H4></div>
+
+<div class="detaildesc">用通过<a href="imageserviceparameters.htm">ImageServiceParameters</a>指定的值导出地图。完成时，返回<a href="mapimage.htm">MapImage</a>。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="imageserviceparameters.htm">ImageServiceParameters</a>> <B>imageServiceParameters</B></td>
+			<td class="detailTABLE">
+可选项</td>
+			<td class="detailTABLE">
+导出地图图像前指定的输入参数。
+			</td></tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>callback</B></td>
+			<td class="detailTABLE">
+可选项</td>
+			<td class="detailTABLE">
+当方法已经完成时，调用该函数。函数内的参数和<a href="#onMapImageExport">onMapImageExport</a>事件一致。</td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onMapImageExport">onMapImageExport</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setBandIds"></a><H4>
+setBandIds(bandIds)</H4></div>
+
+<div class="detaildesc">设置导出图像的R,G,B为合适的ImageService波段ID。BandIds是0基准。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Number[]> <B>bandIds</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+在导出的图像中使用的波段ID数组。<br />
+
+
+<pre>
+myArcGISImageServiceLayer.setBandIds([2,1,0]);
+</pre></td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#bandIds">bandIds</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setCompressionQuality"></a><H4>
+setCompressionQuality(quality)</H4></div>
+
+<div class="detaildesc">设置导出图片的压缩质量。仅仅对JPG图片格式有效。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>quality</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+值从0到100。100是最好的质量但是文件大小最大。</td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#compressionQuality">compressionQuality</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setDisableClientCaching"></a><H4>
+setDisableClientCaching(disable)</H4></div>
+
+<div class="detaildesc">设置图片是否总是从服务器获取，忽略浏览器缓存。当地图服务提供数据经常修改时使用。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Boolean> <B>disable</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+当值为true时，浏览器客户端缓存被禁止。
+			</td></tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setInterpolation"></a><H4>
+setInterpolation(interpolation)</H4></div>
+
+<div class="detaildesc">设置插值方法。插值方法影响当栅格数据集变形或改变坐标空间时，栅格数据集如何变换。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>interpolation</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+<a href="imageserviceparameters.htm">ImageServiceParameters</a>常量表里定义的插入值。</td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#interpolation">interpolation</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<H4 class=dtH4>Events Detail</H4>
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onMapImageExport"></a><H4>
+onMapImageExport(mapImage)	</H4></div>
+
+
+<div class="detaildesc">当地图导出完成时触发。</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="mapimage.htm">MapImage</a>> <B>mapImage</B>
+			</td>
+
+<td class="detailTABLE">
+ 			包含动态生成地图图像的属性。
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#exportMapImage">exportMapImage</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<br/></div></body></html> 

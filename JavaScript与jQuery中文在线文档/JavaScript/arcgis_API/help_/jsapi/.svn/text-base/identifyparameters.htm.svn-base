@@ -1,0 +1,274 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>IdentifyParameters</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: IdentifyParameters</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	This data object is used as the identifyParameters argument to IdentifyTask.execute method. It specifies the criteria used to identify the features.
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.tasks.IdentifyParameters
+</pre>
+
+<H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#IdentifyParametersConst">esri.tasks.IdentifyParameters()</a></td>
+		<td class="syntaxTABLE">Creates a new IdentifyParameters object.  The constructor takes no parameters.</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#dpi">dpi</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+Resolution of the current map view in dots per inch.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#geometry">geometry</a></td>
+<td class="syntaxTABLE">
+<a href="geometry.htm">Geometry</a>
+</td>
+
+<td class="syntaxTABLE">
+The geometry used to select features during Identify. The type of the geometry is specified by <a href="geometry.htm#type">Geometry</a> <i>type</i>. The most common geometry used with Identify is a <a href="point.htm">Point</a>.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#height">height</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+Height of the map currently being viewed in pixels.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#layerIds">layerIds</a></td>
+<td class="syntaxTABLE">
+Number[]
+</td>
+
+<td class="syntaxTABLE">
+The layers to perform the find operation on. The layers are specified as a comma-separated list of layer ids.  The list of ids is returned in <a href="arcgismapservicelayer.htm#layerInfos">ArcGISMapServiceLayer</a> <I>layerInfos</I>.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#layerOption">layerOption</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+Specifies which layers to use when using Identify.  See the Constants table for valid values.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#mapExtent">mapExtent</a></td>
+<td class="syntaxTABLE">
+<a href="extent.htm">Extent</a>
+</td>
+
+<td class="syntaxTABLE">
+The <a href="extent.htm">Extent</a> or bounding box of the map currently being viewed. The <I>mapExtent</I> property is assumed to be in the spatial reference of the map unless <I>sr</I> has been specified.<br/><br/>
+
+The values for <I>mapExtent</I>, <i>height</i>, <i>width</i>, and <I>dpi</I> are used to determine the layers visible in the current extent. They are also used to calculate the search distance on the map based on the <I>tolerance</I> in screen pixels.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#returnGeometry">returnGeometry</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+If "true", the result set includes the geometry associated with each result.  The default is "false".</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#spatialReference">spatialReference</a></td>
+<td class="syntaxTABLE">
+<a href="spatialreference.htm">SpatialReference</a>
+</td>
+
+<td class="syntaxTABLE">
+The spatial reference of the input and output geometries as well as of the <I>mapExtent</I>. If <i>sr</i> is not specified, the geometry and the extent are assumed to be in the spatial reference of the map, and the output geometries will also be in the spatial reference of the map.  支持的空间参考列表，见<a href="../jshelp/pcs.htm">投影坐标系统</a> and <a href="../jshelp/gcs.htm">地理坐标系统</a>。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#tolerance">tolerance</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+The distance in screen pixels from the specified geometry within which the identify should be performed.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#width">width</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+Width of the map currently being viewed in pixels.</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>常量</H4>
+
+	<table CLASS="syntaxTABLE" cellspacing="0">
+	<tr>
+	<th class="tableheader" width="20%">常量</th>
+		<th class="tableheader">描述</th>
+	</tr>
+
+		<tr>
+		<td class="syntaxTABLE">LAYER_OPTION_ALL</td>
+			<td class="syntaxTABLE">			All layers are identified, even if they are not visible. Performance note: if your service has many layers, a request using ths option will not perform well. 
+A visible layer means you can see it in the map at the current extent. If a layer is turned off or not in range based on its scale dependency settings, it cannot be identified.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">LAYER_OPTION_TOP</td>
+			<td class="syntaxTABLE">			Only the top-most visible layer is identified.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">LAYER_OPTION_VISIBLE</td>
+			<td class="syntaxTABLE">			All visible layers are identified.		</td>
+	</tr>
+
+</table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="IdentifyParametersConst"></a><H4>esri.tasks.IdentifyParameters()</H4>
+		</div>
+
+<div class="detaildesc">Creates a new IdentifyParameters object.  The constructor takes no parameters.</div>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="dpi"></a>
+&lt;Number> dpi</H4></div>
+
+<div class="detaildesc">Resolution of the current map view in dots per inch.</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> 96
+			</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="geometry"></a>
+&lt;<a href="geometry.htm">Geometry</a>> geometry</H4></div>
+
+<div class="detaildesc">The geometry used to select features during Identify. The type of the geometry is specified by <a href="geometry.htm#type">Geometry</a> <i>type</i>. The most common geometry used with Identify is a <a href="point.htm">Point</a>.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="height"></a>
+&lt;Number> height</H4></div>
+
+<div class="detaildesc">Height of the map currently being viewed in pixels.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="layerIds"></a>
+&lt;Number[]> layerIds</H4></div>
+
+<div class="detaildesc">The layers to perform the find operation on. The layers are specified as a comma-separated list of layer ids.  The list of ids is returned in <a href="arcgismapservicelayer.htm#layerInfos">ArcGISMapServiceLayer</a> <I>layerInfos</I>.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="layerOption"></a>
+&lt;String> layerOption</H4></div>
+
+<div class="detaildesc">Specifies which layers to use when using Identify.  See the Constants table for valid values.</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> LAYER_OPTION_TOP
+			</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="mapExtent"></a>
+&lt;<a href="extent.htm">Extent</a>> mapExtent</H4></div>
+
+<div class="detaildesc">The <a href="extent.htm">Extent</a> or bounding box of the map currently being viewed. The <I>mapExtent</I> property is assumed to be in the spatial reference of the map unless <I>sr</I> has been specified.<br/><br/>
+
+The values for <I>mapExtent</I>, <i>height</i>, <i>width</i>, and <I>dpi</I> are used to determine the layers visible in the current extent. They are also used to calculate the search distance on the map based on the <I>tolerance</I> in screen pixels.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="returnGeometry"></a>
+&lt;Boolean> returnGeometry</H4></div>
+
+<div class="detaildesc">If "true", the result set includes the geometry associated with each result.  The default is "false".</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> false
+			</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="spatialReference"></a>
+&lt;<a href="spatialreference.htm">SpatialReference</a>> spatialReference</H4></div>
+
+<div class="detaildesc">The spatial reference of the input and output geometries as well as of the <I>mapExtent</I>. If <i>sr</i> is not specified, the geometry and the extent are assumed to be in the spatial reference of the map, and the output geometries will also be in the spatial reference of the map.  支持的空间参考列表，见<a href="../jshelp/pcs.htm">投影坐标系统</a> and <a href="../jshelp/gcs.htm">地理坐标系统</a>。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="tolerance"></a>
+&lt;Number> tolerance</H4></div>
+
+<div class="detaildesc">The distance in screen pixels from the specified geometry within which the identify should be performed.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="width"></a>
+&lt;Number> width</H4></div>
+
+<div class="detaildesc">Width of the map currently being viewed in pixels.</div>
+
+</div>
+
+<br/></div></body></html> 

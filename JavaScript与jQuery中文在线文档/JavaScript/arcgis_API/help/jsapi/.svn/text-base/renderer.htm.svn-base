@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>Renderer</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: Renderer</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	<i>Class added v1.4.</i><br/><br/>
+The base class for all renderers used with a <a href="graphicslayer.htm">GraphicsLayer</a>.  Renderer has no constructor. Use <a href="simplerenderer.htm">SimpleRenderer</a>, <a href="classbreaksrenderer.htm">ClassBreaksRenderer</a>, or <a href="uniquevaluerenderer.htm">UniqueValueRenderer</a>.
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.renderer.Renderer
+</pre>
+
+<H4 class=dtH4>Subclasses</H4>
+
+<a href="classbreaksrenderer.htm">ClassBreaksRenderer</a>&nbsp;&nbsp;<a href="simplerenderer.htm">SimpleRenderer</a>&nbsp;&nbsp;<a href="uniquevaluerenderer.htm">UniqueValueRenderer</a>&nbsp;&nbsp;<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#defaultSymbol">defaultSymbol</a></td>
+<td class="syntaxTABLE">
+<a href="symbol.htm">Symbol</a>
+</td>
+
+<td class="syntaxTABLE">
+Default symbol used when a value or break cannot be matched.</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>方法表</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+		<th class="tableheader">方法</th>
+		<th class="tableheader">返回值</th>
+		<th class="tableheader">描述</th>
+		</tr>
+
+<tr>
+<td class="syntaxTABLE"><a href="#getSymbol">getSymbol(graphic)</a></td><td class="syntaxTABLE">
+<a href="symbol.htm">Symbol</a>
+</td>
+<td class="syntaxTABLE">Gets the symbol for the Graphic.</td>	</tr></table>
+
+<div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="defaultSymbol"></a>
+&lt;<a href="symbol.htm">Symbol</a>> defaultSymbol</H4></div>
+
+<div class="detaildesc">Default symbol used when a value or break cannot be matched.</div>
+
+</div>
+
+<div class=sectionDivider>方法详细信息</div>
+<div class="detaildiv">
+		<div class="detailname"><a name="getSymbol"></a><H4>
+getSymbol(graphic)</H4></div>
+
+<div class="detaildesc">Gets the symbol for the Graphic.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="symbol.htm">Symbol</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="graphic.htm">Graphic</a>> <B>graphic</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+Graphic to symbolize.  Used when creating a custom renderer.</td>
+			</tr>
+</table>
+
+</div>
+
+<br/></div></body></html> 

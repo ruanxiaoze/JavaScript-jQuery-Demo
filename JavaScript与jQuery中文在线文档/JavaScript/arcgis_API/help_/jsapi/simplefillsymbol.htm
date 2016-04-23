@@ -1,0 +1,238 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>SimpleFillSymbol</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: SimpleFillSymbol</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	填充符号用于在图形图层上绘出多边体要素。 SimpleFillSymbol可以是实心的，透明的，或几个网纹网状线模型之一。  此外， 该符号能有一个可选的轮廓线，轮廓线通过线符号定义。
+<br/><br/>
+已知的限制：当使用FireFox 2.x, 仅仅STYLE_SOLID和STYLE_NULL是可用的。所有填充样式都能在Internet Explorer 6和7以及FireFox 3.x上正确地工作。
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+<a href="symbol.htm">esri.symbol.Symbol</a>
+  |_ <a href="fillsymbol.htm">esri.symbol.FillSymbol</a>
+        |_ esri.symbol.SimpleFillSymbol
+</pre><H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#SimpleFillSymbolConst1">esri.symbol.SimpleFillSymbol()</a></td>
+		<td class="syntaxTABLE">创建新的空SimpleFillSymbol对象。</td>
+		</tr>
+<tr><td class="syntaxTABLE"><a href="#SimpleFillSymbolConst3">esri.symbol.SimpleFillSymbol(json)</a></td>
+		<td class="syntaxTABLE">使用JSON对象创建一个新的SimpleFillSymbol对象</td>
+		</tr>
+<tr><td class="syntaxTABLE"><a href="#SimpleFillSymbolConst">esri.symbol.SimpleFillSymbol(style, outline, color)</a></td>
+		<td class="syntaxTABLE">通过参数创建新的SimpleFillSymbol对象。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#style">style</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+填充样式。 可用值见常量表。  默认值是STYLE_SOLID.  颜色仅对STYLE_SOLID样式有效。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>常量</H4>
+
+	<table CLASS="syntaxTABLE" cellspacing="0">
+	<tr>
+	<th class="tableheader" width="20%">常量</th>
+		<th class="tableheader">描述</th>
+	</tr>
+
+		<tr>
+		<td class="syntaxTABLE">STYLE_BACKWARD_DIAGONAL</td>
+			<td class="syntaxTABLE">			填充<span sdata="memberAuthoredSummary">从右上向左下倾斜的线条的图案</span>。</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">STYLE_CROSS</td>
+			<td class="syntaxTABLE">			填充相互交叉的水平线和垂直线的图案.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">STYLE_DIAGONAL_CROSS</td>
+			<td class="syntaxTABLE">			填充<span sdata="memberAuthoredSummary">交叉对角线的图案。</span></td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">STYLE_FORWARD_DIAGONAL</td>
+			<td class="syntaxTABLE">			填充<span sdata="memberAuthoredSummary">从左上向右下倾斜的线条的图案。</span></td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">STYLE_HORIZONTAL</td>
+			<td class="syntaxTABLE">			填充<span sdata="memberAuthoredSummary">水平线的图案。</span></td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">STYLE_NULL</td>
+			<td class="syntaxTABLE">			多边形没有填充。</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">STYLE_SOLID</td>
+			<td class="syntaxTABLE">			填充<span sdata="memberAuthoredSummary">不透明背景</span>. </td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">STYLE_VERTICAL</td>
+			<td class="syntaxTABLE">			填充<span sdata="memberAuthoredSummary">垂直线的图案。</span></td>
+	</tr>
+
+</table>
+
+<H4 class=dtH4>方法表</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+		<th class="tableheader">方法</th>
+		<th class="tableheader">返回值</th>
+		<th class="tableheader">描述</th>
+		</tr>
+
+<tr>
+<td class="syntaxTABLE"><a href="#setStyle">setStyle(style)</a></td><td class="syntaxTABLE">
+<a href="simplefillsymbol.htm">SimpleFillSymbol</a>
+</td>
+<td class="syntaxTABLE">设置填充符号样式。</td>	</tr></table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="SimpleFillSymbolConst1"></a><H4>esri.symbol.SimpleFillSymbol()</H4>
+		</div>
+
+<div class="detaildesc">创建新的空SimpleFillSymbol对象。</div>
+
+</div><div class="detaildiv"><div class="detailname"><a name="SimpleFillSymbolConst3"></a><H4>esri.symbol.SimpleFillSymbol(json)</H4>
+		</div>
+
+<div class="detaildesc">使用JSON对象创建一个新的SimpleFillSymbol对象</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;Object>
+<B>json</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			JSON对象表示SimpleFillSymbol.
+			</td>
+			</tr>
+</table>
+
+</div><div class="detaildiv"><div class="detailname"><a name="SimpleFillSymbolConst"></a><H4>esri.symbol.SimpleFillSymbol(style, outline, color)</H4>
+		</div>
+
+<div class="detaildesc">通过参数创建新的SimpleFillSymbol对象。</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;String>
+<B>style</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			值见常量表。
+			</td>
+			</tr>
+<tr>
+<td class="detailTABLE">
+&lt;<a href="simplelinesymbol.htm">SimpleLineSymbol</a>>
+<B>outline</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			见 <a href="simplelinesymbol.htm">SimpleLineSymbol</a>.
+			</td>
+			</tr>
+<tr>
+<td class="detailTABLE">
+&lt;dojo.Color>
+<B>color</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			符号颜色,颜色基于<a href="http://redesign.dojotoolkit.org/jsdoc/dojo/HEAD/dojo.Color" target="_blank">dojo.Color</a>.  颜色能够用下列格式表示：<br/><br/>
+
+<ul>
+<li>R, G, B:  <code>new dojo.Color([255,0,0])</code> </li>
+<li>R,G,B,A.  "A"值表示透明度，0.0是全透明的，1.0是不透明的。: <code>new dojo.Color([255,0,0,0.25])</code> </li>
+<li>Hex string: <code>new dojo.Color("#C0C0C0")</code> </li>
+<li>Named string:  <code>new dojo.Color("blue")</code> </li>
+</ul>
+			</td>
+			</tr>
+</table>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="style"></a>
+&lt;String> style</H4></div>
+
+<div class="detaildesc">填充样式。  可用值见常量表。  默认值是STYLE_SOLID.  颜色仅对STYLE_SOLID样式有效。</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> STYLE_SOLID
+			</div>
+
+</div>
+
+<div class=sectionDivider>方法详细信息</div>
+<div class="detaildiv">
+		<div class="detailname"><a name="setStyle"></a><H4>
+setStyle(style)</H4></div>
+
+<div class="detaildesc">设置符号填充样式</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="simplefillsymbol.htm">SimpleFillSymbol</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>style</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+填充样式.  可用值见常量表。</td>
+			</tr>
+</table>
+
+</div>
+
+<br/></div></body></html> 

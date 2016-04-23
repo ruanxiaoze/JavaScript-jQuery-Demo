@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>ArcGIS JavaScript API</title>
+</head>
+
+<body>
+
+<!--***REQUIRED TITLE***-->
+<div id="pageBanner">使用一个导航工具栏</div>
+<!--***END REQUIRED TITLE***-->
+
+  <div id="nstext">
+
+	<H4 class=dtH4><a href="../../demos/toolbars/toolbar_navigation.html" target="_blank">查看在线示例</a></H4>
+  <H4 class=dtH4>描述</H4>
+
+  <!--***START TEXT - DO NOT WRITE ABOVE THIS LINE***-->
+
+  <p>本例展示了如何使用ArcGIS JavaScript API包含的导航工具栏：创建平移，缩放和其他导航按钮。</p>
+		<p>
+        工具栏不是一个可以加到地图上的用户界面组件。而是一个帮助类，保存了绘制缩放框，捕获鼠标单击坐标等的行为。因而本例包含很少的代码。</p>
+		<p>
+        可以使用的按钮请查看<a href="http://dojotoolkit.org/projects/dijit" target="_blank">Dijits</a>。每个按钮激活工具栏不同的方法。可以使用文本或图标作为按钮；在每个按钮上调用正确的方法是很重要的。下面代码是缩小按钮的代码:</p>
+		<pre>&lt;div dojoType="dijit.form.Button" id="zoomout" iconClass="zoomoutIcon" onClick="navToolbar.activate(esri.toolbars.Navigation.ZOOM_OUT);"&gt;Zoom Out&lt;/div&gt;</pre>
+		<p>
+        如果要用上一个范围和下一个范围的按钮，仍需要去确定一些逻辑。这些逻辑被包含在函数<b>extentHistoryChangedHandler</b>里：</p>
+		<pre>dijit.byId("zoomprev").disabled = navToolbar.isFirstExtent();
+dijit.byId("zoomnext").disabled = navToolbar.isLastExtent();</pre>
+		<p>
+        这些代码行确保如果没有上一个范围可用(isFirstExtent = 	true)，Previous按钮是不可用的。如果没有下一个范围(isLastExtent = true)，Next按钮是不可用的。</p>
+
+<!--***END TEXT - DO NOT WRITE BELOW THIS LINE***--> 
+
+  <H4 class=dtH4>代码</H4>
+  <div class="detailSample">
+  <code>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"&gt;<br/>
+&lt;html&gt;<br/>
+&nbsp;&nbsp;&lt;head&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8"/&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;meta http-equiv="X-UA-Compatible" content="IE=7" /&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;title&gt;Navigation toolbar&lt;/title&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;style type="text/css"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@import "http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css";<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.zoominIcon { background-image:url(images/nav_zoomin.png); width:16px; height:16px; }<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.zoomoutIcon { background-image:url(images/nav_zoomout.png); width:16px; height:16px; }<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.zoomfullextIcon { background-image:url(images/nav_fullextent.png); width:16px; height:16px; }<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.zoomprevIcon { background-image:url(images/nav_previous.png); width:16px; height:16px; }<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.zoomnextIcon { background-image:url(images/nav_next.png); width:16px; height:16px; }<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.panIcon { background-image:url(images/nav_pan.png); width:16px; height:16px; }<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.deactivateIcon { background-image:url(images/nav_decline.png); width:16px; height:16px; }<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/style&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;script type="text/javascript"&gt;djConfig = { parseOnLoad:true }&lt;/script&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"&gt;&lt;/script&gt;<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;script type="text/javascript"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dojo.require("esri.map");<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dojo.require("esri.toolbars.navigation");<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dojo.require("dijit.form.Button");<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dojo.require("dijit.Toolbar");<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var map, navToolbar;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function init() {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;esriConfig.defaults.map.sliderLabel = null;<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map = new esri.Map("map");<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map.addLayer(new esri.layers.ArcGISTiledMapServiceLayer("http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer"));<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;navToolbar = new esri.toolbars.Navigation(map);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dojo.connect(navToolbar, "onExtentHistoryChange", extentHistoryChangeHandler);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function extentHistoryChangeHandler() {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dijit.byId("zoomprev").disabled = navToolbar.isFirstExtent();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dijit.byId("zoomnext").disabled = navToolbar.isLastExtent();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dojo.addOnLoad(init);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/script&gt;<br/>
+&nbsp;&nbsp;&lt;/head&gt;<br/>
+&nbsp;&nbsp;&lt;body class="tundra"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;div id="navToolbar" dojoType="dijit.Toolbar"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div dojoType="dijit.form.Button" id="zoomin" iconClass="zoominIcon" onClick="navToolbar.activate(esri.toolbars.Navigation.ZOOM_IN);"&gt;Zoom In&lt;/div&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div dojoType="dijit.form.Button" id="zoomout" iconClass="zoomoutIcon" onClick="navToolbar.activate(esri.toolbars.Navigation.ZOOM_OUT);"&gt;Zoom Out&lt;/div&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div dojoType="dijit.form.Button" id="zoomfullext" iconClass="zoomfullextIcon" onClick="navToolbar.zoomToFullExtent();"&gt;Full Extent&lt;/div&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div dojoType="dijit.form.Button" id="zoomprev" iconClass="zoomprevIcon" onClick="navToolbar.zoomToPrevExtent();"&gt;Prev Extent&lt;/div&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div dojoType="dijit.form.Button" id="zoomnext" iconClass="zoomnextIcon" onClick="navToolbar.zoomToNextExtent();"&gt;Next Extent&lt;/div&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div dojoType="dijit.form.Button" id="pan" iconClass="panIcon" onClick="navToolbar.activate(esri.toolbars.Navigation.PAN);"&gt;Pan&lt;/div&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div dojoType="dijit.form.Button" id="deactivate" iconClass="deactivateIcon" onClick="navToolbar.deactivate()"&gt;Deactivate&lt;/div&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;div id="map" style="width:1024px; height:512px; border:1px solid #000;"&gt;&lt;/div&gt;<br/>
+&nbsp;&nbsp;&lt;/body&gt;<br/>
+&lt;/html&gt;<br/>
+</code>
+  			</div>
+
+
+<br/><br/></div> 
+</body>
+</html>

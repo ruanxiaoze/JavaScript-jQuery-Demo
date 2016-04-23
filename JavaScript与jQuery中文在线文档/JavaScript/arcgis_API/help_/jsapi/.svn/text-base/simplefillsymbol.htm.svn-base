@@ -1,0 +1,238 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>SimpleFillSymbol</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: SimpleFillSymbol</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	Fill symbols are used to draw polygon features on the graphics layer. SimpleFillSymbol can be solid, transparent, or one of several cross hatch patterns.  In addition, the symbol can have an optional outline, which is defined by a line symbol.
+<br/><br/>
+Known limitation:  When using FireFox 2.x, only STYLE_SOLID and STYLE_NULL are valid.  All fill styles work correctly in Internet Explorer 6 and 7 and FireFox 3.x.
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+<a href="symbol.htm">esri.symbol.Symbol</a>
+  |_ <a href="fillsymbol.htm">esri.symbol.FillSymbol</a>
+        |_ esri.symbol.SimpleFillSymbol
+</pre><H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#SimpleFillSymbolConst1">esri.symbol.SimpleFillSymbol()</a></td>
+		<td class="syntaxTABLE">Creates a new empty SimpleFillSymbol object.</td>
+		</tr>
+<tr><td class="syntaxTABLE"><a href="#SimpleFillSymbolConst3">esri.symbol.SimpleFillSymbol(json)</a></td>
+		<td class="syntaxTABLE">Creates a new SimpleFillSymbol object using a JSON object.</td>
+		</tr>
+<tr><td class="syntaxTABLE"><a href="#SimpleFillSymbolConst">esri.symbol.SimpleFillSymbol(style, outline, color)</a></td>
+		<td class="syntaxTABLE">Creates a new SimpleFillSymbol object with parameters.</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#style">style</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+The fill style.  See the Constants table for valid values.  The default value is STYLE_SOLID.  Color is valid only with STYLE_SOLID.</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>常量</H4>
+
+	<table CLASS="syntaxTABLE" cellspacing="0">
+	<tr>
+	<th class="tableheader" width="20%">常量</th>
+		<th class="tableheader">描述</th>
+	</tr>
+
+		<tr>
+		<td class="syntaxTABLE">STYLE_BACKWARD_DIAGONAL</td>
+			<td class="syntaxTABLE">			The fill is backward diagonal lines.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">STYLE_CROSS</td>
+			<td class="syntaxTABLE">			The fill is a cross.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">STYLE_DIAGONAL_CROSS</td>
+			<td class="syntaxTABLE">			The fill is a diagonal cross.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">STYLE_FORWARD_DIAGONAL</td>
+			<td class="syntaxTABLE">			The fill is forward diagonal lines.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">STYLE_HORIZONTAL</td>
+			<td class="syntaxTABLE">			The fill is horizontal lines.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">STYLE_NULL</td>
+			<td class="syntaxTABLE">			The polygon has no fill.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">STYLE_SOLID</td>
+			<td class="syntaxTABLE">			The fill is solid.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">STYLE_VERTICAL</td>
+			<td class="syntaxTABLE">			The fill is vertical lines.		</td>
+	</tr>
+
+</table>
+
+<H4 class=dtH4>方法表</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+		<th class="tableheader">方法</th>
+		<th class="tableheader">返回值</th>
+		<th class="tableheader">描述</th>
+		</tr>
+
+<tr>
+<td class="syntaxTABLE"><a href="#setStyle">setStyle(style)</a></td><td class="syntaxTABLE">
+<a href="simplefillsymbol.htm">SimpleFillSymbol</a>
+</td>
+<td class="syntaxTABLE">Sets the fill symbol style.</td>	</tr></table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="SimpleFillSymbolConst1"></a><H4>esri.symbol.SimpleFillSymbol()</H4>
+		</div>
+
+<div class="detaildesc">Creates a new empty SimpleFillSymbol object.</div>
+
+</div><div class="detaildiv"><div class="detailname"><a name="SimpleFillSymbolConst3"></a><H4>esri.symbol.SimpleFillSymbol(json)</H4>
+		</div>
+
+<div class="detaildesc">Creates a new SimpleFillSymbol object using a JSON object.</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;Object>
+<B>json</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			JSON object representing the SimpleFillSymbol.
+			</td>
+			</tr>
+</table>
+
+</div><div class="detaildiv"><div class="detailname"><a name="SimpleFillSymbolConst"></a><H4>esri.symbol.SimpleFillSymbol(style, outline, color)</H4>
+		</div>
+
+<div class="detaildesc">Creates a new SimpleFillSymbol object with parameters.</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;String>
+<B>style</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			See Constants table for values.
+			</td>
+			</tr>
+<tr>
+<td class="detailTABLE">
+&lt;<a href="simplelinesymbol.htm">SimpleLineSymbol</a>>
+<B>outline</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			See <a href="simplelinesymbol.htm">SimpleLineSymbol</a>.
+			</td>
+			</tr>
+<tr>
+<td class="detailTABLE">
+&lt;dojo.Color>
+<B>color</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			Symbol color, which is based on <a href="http://redesign.dojotoolkit.org/jsdoc/dojo/HEAD/dojo.Color" target="_blank">dojo.Color</a>.  Colors can be denoted in the following formats:<br/><br/>
+
+<ul>
+<li>R, G, B:  <code>new dojo.Color([255,0,0])</code> </li>
+<li>R,G,B,A.  The "A" value represents transparency where 0.0 is fully transparent and 1.0 has no transparency: <code>new dojo.Color([255,0,0,0.25])</code> </li>
+<li>Hex string: <code>new dojo.Color("#C0C0C0")</code> </li>
+<li>Named string:  <code>new dojo.Color("blue")</code> </li>
+</ul>
+			</td>
+			</tr>
+</table>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="style"></a>
+&lt;String> style</H4></div>
+
+<div class="detaildesc">The fill style.  See the Constants table for valid values.  The default value is STYLE_SOLID.  Color is valid only with STYLE_SOLID.</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> STYLE_SOLID
+			</div>
+
+</div>
+
+<div class=sectionDivider>方法详细信息</div>
+<div class="detaildiv">
+		<div class="detailname"><a name="setStyle"></a><H4>
+setStyle(style)</H4></div>
+
+<div class="detaildesc">Sets the fill symbol style.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="simplefillsymbol.htm">SimpleFillSymbol</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>style</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+Fill style.  See the Constants table for valid values.</td>
+			</tr>
+</table>
+
+</div>
+
+<br/></div></body></html> 

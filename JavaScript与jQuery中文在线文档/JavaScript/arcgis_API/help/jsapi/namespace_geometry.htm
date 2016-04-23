@@ -1,0 +1,470 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>namespace_geometry</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">命名空间: geometry</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+    esri.geometry命名空间有数个相关的通用方法。这些方法是与任何类都无关的十分便利的方法。
+	</div>
+
+<H4 class=dtH4>方法表</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+		<th class="tableheader">方法</th>
+		<th class="tableheader">返回值</th>
+		<th class="tableheader">描述</th>
+		</tr>
+
+<tr>
+<td class="syntaxTABLE"><a href="#fromJson">esri.geometry.fromJson(json)</a></td><td class="syntaxTABLE">
+Object
+</td>
+<td class="syntaxTABLE">转换输入JSON对象到合适的esri.geometry.*对象。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#geographicToWebMercator">esri.geometry.geographicToWebMercator()</a></td><td class="syntaxTABLE">
+<a href="geometry.htm">Geometry</a>
+</td>
+<td class="syntaxTABLE">转换几何体从地理图形单位到Web Mercator图形单位。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#getJsonType">esri.geometry.getJsonType(geometry)</a></td><td class="syntaxTABLE">
+String
+</td>
+<td class="syntaxTABLE">请求在ArcGIS REST中的几何体类型名称。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#getLength">esri.geometry.getLength(point1, point2)</a></td><td class="syntaxTABLE">
+Number
+</td>
+<td class="syntaxTABLE">基于输入的两个点计算线的长度。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#getLineIntersection">esri.geometry.getLineIntersection(line1start, line1end, line2start, line2end)</a></td><td class="syntaxTABLE">
+<a href="point.htm">Point</a>
+</td>
+<td class="syntaxTABLE">计算两条线的交叉点。如果线是平行的，返回null值。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#getScale">esri.geometry.getScale(extent, mapWidth, wkid)</a></td><td class="syntaxTABLE">
+Number
+</td>
+<td class="syntaxTABLE">获得地图当前比例尺。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#isClockwise">esri.geometry.isClockwise(ring)</a></td><td class="syntaxTABLE">
+Boolean
+</td>
+<td class="syntaxTABLE">检查<a href="polygon.htm">Polygon</a>环是否是顺时针的。如果是顺时针返回true，如果是逆时针，返回false。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#toMapGeometry">esri.geometry.toMapGeometry(extent, width, height, mapGeometry)</a></td><td class="syntaxTABLE">
+<a href="geometry.htm">Geometry</a>
+</td>
+<td class="syntaxTABLE">转换几何体参数为基于<a href="map.htm">地图</a>的范围，宽和高的地图坐标。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#toMapPoint">esri.geometry.toMapPoint(extent, width, height, screenPoint)</a></td><td class="syntaxTABLE">
+<a href="point.htm">Point</a>
+</td>
+<td class="syntaxTABLE">转换和返回输入屏幕点参数的地图坐标。<b>v1.1时被废弃。使用<a href="#toMapGeometry">toMapGeometry</a>取代。</b></td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#toScreenGeometry">esri.geometry.toScreenGeometry(extent, width, height, screenGeometry)</a></td><td class="syntaxTABLE">
+<a href="geometry.htm">Geometry</a>
+</td>
+<td class="syntaxTABLE">转换几何体参数为基于<a href="map.htm">地图</a>的范围，宽和高的屏幕坐标。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#toScreenPoint">esri.geometry.toScreenPoint(extent, width, height, mapPoint)</a></td><td class="syntaxTABLE">
+<a href="point.htm">Point</a>
+</td>
+<td class="syntaxTABLE">转换和返回输入的地图点参数的屏幕坐标。<b>v1.1废弃。使用<a href="#toScreenGeometry">toScreenGeometry</a>取代。</b></td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#webMercatorToGeographic">esri.geometry.webMercatorToGeographic()</a></td><td class="syntaxTABLE">
+<a href="geometry.htm">Geometry</a>
+</td>
+<td class="syntaxTABLE">转换几何体从Web Mercator单位到地理图形单位。</td>	</tr></table>
+
+<div class=sectionDivider>方法详细信息</div>
+<div class="detaildiv">
+		<div class="detailname"><a name="fromJson"></a><H4>
+esri.geometry.fromJson(json)</H4></div>
+
+<div class="detaildesc">转换输入JSON对象到合适的esri.geometry.*对象。</div>
+
+<div class="detaildesc"><strong>返回值:</strong>对象</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Object> <B>json</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+ JSON对象。</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="geographicToWebMercator"></a><H4>
+esri.geometry.geographicToWebMercator()</H4></div>
+
+<div class="detaildesc">转换几何体从地理图形单位到Web Mercator图形单位。<i> (As of v1.4)</i></div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="geometry.htm">Geometry</a></div>
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="getJsonType"></a><H4>
+esri.geometry.getJsonType(geometry)</H4></div>
+
+<div class="detaildesc">请求在ArcGIS REST中的几何体类型名称。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> String</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Geometry> <B>geometry</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+            ArcGIS JavaScript API几何体类型将被转换。</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="getLength"></a><H4>
+esri.geometry.getLength(point1, point2)</H4></div>
+
+<div class="detaildesc">基于输入的两个点计算线的长度。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> Number</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="point.htm">Point</a>> <B>point1</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+起始点。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="point.htm">Point</a>> <B>point2</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+终止点。</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="getLineIntersection"></a><H4>
+esri.geometry.getLineIntersection(line1start, line1end, line2start, line2end)</H4></div>
+
+<div class="detaildesc">计算两条线的交叉点。如果线是平行的，返回null值。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="point.htm">Point</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="point.htm">Point</a>> <B>line1start</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+第一条线的起始点。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="point.htm">Point</a>> <B>line1end</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+第一条线的终止点。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="point.htm">Point</a>> <B>line2start</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+第二条线的起始点。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="point.htm">Point</a>> <B>line2end</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+第二条线的终止点。</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="getScale"></a><H4>
+esri.geometry.getScale(extent, mapWidth, wkid)</H4></div>
+
+<div class="detaildesc">获得地图当前比例尺。<i> (As of v1.4)</i></div>
+
+<div class="detaildesc"><strong>返回值:</strong> Number</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="extent.htm">Extent</a>> <B>extent</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+            按地图坐标系表示的地图当前范围。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>mapWidth</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+            地图的像数长度。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>wkid</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+            
+地图的WKID。 支持的空间参考列表，见<a href="../jshelp/pcs.htm">投影坐标系统</a>和<a href="../jshelp/gcs.htm">地理坐标系统</a>。</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="isClockwise"></a><H4>
+esri.geometry.isClockwise(ring)</H4></div>
+
+<div class="detaildesc">检查<a href="polygon.htm">Polygon</a>环是否是顺时针的。如果是顺时针返回true，如果是逆时针，返回false。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> Boolean</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Array> <B>ring</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+            代表多边形环的<a href="point.htm">esri.geometry.Point[]</a>数组。</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="toMapGeometry"></a><H4>
+esri.geometry.toMapGeometry(extent, width, height, mapGeometry)</H4></div>
+
+<div class="detaildesc">转换几何体参数为基于<a href="map.htm">地图</a>的范围，宽和高的地图坐标。<i> (As of v1.1)</i></div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="geometry.htm">Geometry</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="extent.htm">Extent</a>> <B>extent</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+			地图坐标表示的地图当前范围。
+</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>width</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">地图的当前宽度（单位：地图单位）。
+</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>height</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">地图的当前宽度
+（单位：地图单位）。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="geometry.htm">Geometry</a>> <B>mapGeometry</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">几何体将从地图单位转换为屏幕单位。</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="toMapPoint"></a><H4>
+esri.geometry.toMapPoint(extent, width, height, screenPoint)</H4></div>
+
+<div class="detaildesc">转换和返回输入屏幕点参数的地图坐标。<b>v1.1时被废弃。使用<a href="#toMapGeometry">toMapGeometry</a>取代。</b></div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="point.htm">Point</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="extent.htm">Extent</a>> <B>extent</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">地图坐标表示的地图当前范围。
+</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>width</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+地图当前宽度（单位：屏幕单位）。
+			</td></tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>height</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+地图当前高度（单位：屏幕单位）。
+			</td></tr>
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="point.htm">Point</a>> <B>screenPoint</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">从屏幕单位转为地图单位的点。</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="toScreenGeometry"></a><H4>
+esri.geometry.toScreenGeometry(extent, width, height, screenGeometry)</H4></div>
+
+<div class="detaildesc">转换几何体参数为基于<a href="map.htm">地图</a>的范围，宽和高的屏幕坐标。<i> (As of v1.1)</i></div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="geometry.htm">Geometry</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="extent.htm">Extent</a>> <B>extent</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+地图坐标表示的地图当前范围。
+			</td></tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>width</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+地图当前宽度（单位：屏幕单位）。
+			</td></tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>height</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+地图当前高度（单位：屏幕单位）。
+			</td></tr>
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="geometry.htm">Geometry</a>> <B>screenGeometry</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">从地图单位转为屏幕单位的几何体。</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="toScreenPoint"></a><H4>
+esri.geometry.toScreenPoint(extent, width, height, mapPoint)</H4></div>
+
+<div class="detaildesc">转换和返回输入的地图点参数的屏幕坐标。<b>v1.1废弃。使用<a href="#toScreenGeometry">toScreenGeometry</a>取代。</b></div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="point.htm">Point</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="extent.htm">Extent</a>> <B>extent</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+地图坐标表示的地图当前范围。
+			</td></tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>width</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+地图当前宽度（单位：屏幕单位）。
+			</td></tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>height</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+地图当前高度（单位：屏幕单位）。
+			</td></tr>
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="point.htm">Point</a>> <B>mapPoint</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">从地图单位转为屏幕单位的点。</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="webMercatorToGeographic"></a><H4>
+esri.geometry.webMercatorToGeographic()</H4></div>
+
+<div class="detaildesc">转换几何体从Web Mercator单位到地理图形单位。<i> (As of v1.4)</i></div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="geometry.htm">Geometry</a></div>
+</div>
+
+<br/></div></body></html> 

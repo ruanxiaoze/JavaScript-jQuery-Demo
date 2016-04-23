@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>Map Slider Labels</title>
+    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css">
+    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"></script>
+    <script type="text/javascript">
+      dojo.require("esri.map");
+
+      function init(){
+        var layer = new esri.layers.ArcGISTiledMapServiceLayer("http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer");
+        if (layer.loaded) {
+          initMap(layer);
+        } else {
+          dojo.connect(layer, "onLoad", initMap);
+        }
+      }
+
+      function initMap(layer) {
+        //custom slider labels
+        //use layer's scales to display as slider labels
+        var labels = [];
+        var lods = layer.tileInfo.lods;
+        for (var i=0, il=lods.length; i<il; i++) {
+          labels[i] = lods[i].scale;
+        }
+
+        esriConfig.defaults.map.sliderLabel = {
+          tick: 0,
+          labels: labels,
+          style: "width:2em; font-family:Verdana; font-size:65%; color:#fff; padding-left:2px;"
+        };
+
+        var map = new esri.Map("map");
+        map.addLayer(layer);
+      }
+
+      dojo.addOnLoad(init);
+    </script>
+  </head>
+  <body class="tundra">
+    <div id="map" style="width:1024px; height:512px; border:1px solid #000;"></div>
+  </body>
+</html>

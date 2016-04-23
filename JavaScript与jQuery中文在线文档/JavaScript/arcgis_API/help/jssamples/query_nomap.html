@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>ArcGIS JavaScript API</title>
+</head>
+
+<body>
+
+<!--***REQUIRED TITLE***-->
+<div id="pageBanner">查询没有地图的数据</div>
+<!--***END REQUIRED TITLE***-->
+
+  <div id="nstext">
+
+	<H4 class=dtH4><a href="../../demos/querytask/query_nomap.html" target="_blank">查看在线示例</a></H4>
+  <H4 class=dtH4>描述</H4>
+
+  <!--***START TEXT - DO NOT WRITE ABOVE THIS LINE***-->
+
+  <p>
+  本例展示了用户能够从没有显示服务的地图服务查询数据。大部分地图服务包含属性信息的数据集，数据集能够被查询并显示在一个简单的列或表格里。
+  本例按提供的州名称查询USA人口普查数据，然后显示关于州的属性信息列表。
+</p>
+		<p>
+        代码创建了一个<A href="../jsapi/querytask.htm">QueryTask</A>和一个用做任务输入的<A href="../jsapi/query.htm">
+				Query</A>。注意QueryTask的构造函数需要地图服务里的图层的URL(<a href="http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Census_USA/MapServer/5"
+				target="_blank">http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Census_USA/MapServer/5</a>)。
+			在URL结尾的数字5是地图目录里的州图层的索引号。要找到你自己的地图服务的URL及它们的图层索引，使用<a href="../jshelp/ags_rest.htm">Services Directory</a>。</p>
+		<p>
+        注意<A href="../jsapi/query.htm#returnGeometry">query.returnGeometry</A>被设置为false因为结果不需要被显示在地图上。<A href="../jsapi/query.htm#outFields">outFields</A>确定州图层中的那些字段被查到。</p>
+		<p>
+        当单击“Get Details”按钮，<b>execute</b>函数被调用。查询任务在被查询的图层的<a href="http://webhelp.esri.com/arcgisdesktop/9.3/index.cfm?topicname=Setting_field_properties,_aliases,_and_table_display_options" target="_blank">主要显示字段</a>里搜索<A href="../jsapi/query.htm#text">query.text</A>，在这个图层里面是STATE_NAME字段。这就是为什么query.text被设置在文本框里输入的州名。如果想要输入任意SQL where子句，可以使用<A href="../jsapi/query.htm#where">query.where</A>代替query.text。
+        </p>
+		<p>
+        查询指定的所有属性能作为参数传递给QueryTask，当查询完成时连同函数一起被调用。
+        </p>
+		<pre>queryTask.execute(query,showResults);</pre>
+		<p>
+        查询结果作为<A href="../jsapi/featureset.htm">FeatureSet</A>被传递给<b>showResults</b>函数。函数循环访问所有结果的属性并使用html为查询结果构建一个列表。然后这个HTML被写到"info" div中。
+		</p>
+
+<!--***END TEXT - DO NOT WRITE BELOW THIS LINE***--> 
+
+  <H4 class=dtH4>代码</H4>
+  <div class="detailSample">
+  <code>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"&gt;<br/>
+&lt;html&gt;<br/>
+&nbsp;&nbsp;&lt;head&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8"/&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;meta http-equiv="X-UA-Compatible" content="IE=7" /&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;title&gt;Query State Info without Map&lt;/title&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"&gt;&lt;/script&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;script type="text/javascript" language="Javascript"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dojo.require("esri.tasks.query");<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var queryTask, query;<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function init() {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//build query<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;queryTask = new esri.tasks.QueryTask("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Census_USA/MapServer/5");<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//dojo.connect(queryTask, "onComplete", showResults);<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//build query filter<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;query = new esri.tasks.Query();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;query.returnGeometry = false;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;query.outFields = ["SQMI","STATE_NAME","STATE_FIPS","SUB_REGION","STATE_ABBR","POP2000","POP2007","POP00_SQMI","POP07_SQMI","HOUSEHOLDS","MALES","FEMALES","WHITE","BLACK","AMERI_ES","ASIAN","OTHER","HISPANIC","AGE_UNDER5","AGE_5_17","AGE_18_21","AGE_22_29","AGE_30_39","AGE_40_49","AGE_50_64","AGE_65_UP"];<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function execute(stateName) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;query.text = stateName;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//execute query<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;queryTask.execute(query,showResults);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function showResults(results) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var s = "";<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (var i=0, il=results.features.length; i&lt;il; i++) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var featureAttributes = results.features[i].attributes;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (att in featureAttributes) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;s = s + "&lt;b&gt;" + att + ":&lt;/b&gt;&nbsp;&nbsp;" + featureAttributes[att] + "&lt;br /&gt;";<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dojo.byId("info").innerHTML = s;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dojo.addOnLoad(init);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/script&gt;<br/>
+&nbsp;&nbsp;&lt;/head&gt;<br/>
+&nbsp;&nbsp;&lt;body&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;US state name : &lt;input type="text" id="stateName" value="California" /&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;input type="button" value="Get Details" onclick="execute(dojo.byId('stateName').value);" /&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;br /&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;br /&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;div id="info" style="padding:5px; margin:5px; background-color:#eee;"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br/>
+&nbsp;&nbsp;&lt;/body&gt;<br/>
+&lt;/html&gt;</code>
+  			</div>
+
+
+<br/><br/></div> 
+</body>
+</html>

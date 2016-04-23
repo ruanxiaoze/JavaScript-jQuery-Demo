@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>Running a geoprocessing task and getting the results</title>
+</head>
+
+<body>
+
+<div id="pageBanner">Running a geoprocessing task and getting the results</div>
+
+<div id="nstext">
+
+<!--***START TEXT - DO NOT WRITE ABOVE THIS LINE***-->
+
+<p>The way that you run a geoprocessing task and get the results varies depending 
+				on the execution type of the geoprocessing task, which can be either 
+				synchronous or asynchronous. Synchronous execution means that the client 
+				executes the task and waits for a response before proceeding. Asynchronous 
+				execution means that the client submits a job and continues to function. The 
+				client is then responsible for checking with the geoprocessing service to 
+				determine if the job was successful, using a unique job id. When the task 
+				finishes successfully, the client can retrieve the results.</p>
+			<p>The <A href="ags_rest.htm">Services Directory</A> page for the task can tell you 
+				the execution type. If the Supported Operation of the task is "Execute task" 
+				then it's a synchronous task. If the Supported Operation is "Submit Job", the 
+				task is asynchronous.</p>
+			<p>The server administrator sets the execution type of a geoprocessing service. If 
+				you are the server administrator, you should choose synchronous for tasks that 
+				can run quickly or tasks that do not have a result map service. You should 
+				choose asynchronous for tasks that have a result map service or tasks that take 
+				longer to run. Asynchronous tasks ensure that browser time-outs will not 
+				interfere with the geoprocessing job.</p>
+			<h3>Running a synchronous task and getting the results</h3>
+			<p>To run a synchronous task, call <A href="../jsapi/Geoprocessor.htm#execute">Geoprocessor.execute()</A>. 
+				You need to supply the input parameters for the task and a callback function 
+				that tells the application how to handle the results.</p>
+			<pre>gp.execute(params, drawViewshed);</pre>
+			<p>The results of the task are returned to the callback function as an array of <A href="../jsapi/ParameterValue.htm">
+					ParameterValue</A>. If the server administrator has enabled messages, you 
+				will also get an array of <A href="../jsapi/GPMessage.htm">GPMessage</A> objects.</p>
+			<p>The number and types of items in the result ParameterValue array will vary 
+				depending on the number of model output parameters and their data types. If you 
+				want to know which JavaScript objects to expect in the array, see the <a href="intro_gp_parameters.htm">
+					parameters table</a>.</p>
+			<p>You can loop through each item in the results array and add it to the map, write 
+				its attributes on the screen, or do whatever is appropriate. The following code 
+				is an example of how you can loop through one FeatureSet returned by a model 
+				and add the features to the map. This code also writes the geoprocessing 
+				messages to the <A href="../jssamples/mapconfig_debug.html">debug console</A> for 
+				informational purposes.</p>
+			<pre>function drawViewshed(results, messages) {
+
+   //Write messages to the debug console
+   var description;
+
+   for (var m=0, ml=messages.length; m&lt;ml; m++) {
+      description = messages[m].description;
+      console.log(description);
+   }
+
+   // Draw results
+   var polySymbol = new esri.symbol.SimpleFillSymbol();
+   var features = results[0].value.features;
+   for (var f=0, fl=features.length; f&lt;fl; f++) {
+      var feature = features[f];
+      feature.setSymbol(polySymbol);
+      map.graphics.add(feature);
+   }
+
+}
+</pre>
+			<h3>Running an asynchronous task and getting the results</h3>
+			<p>To run an asynchronous task, call <A href="../jsapi/Geoprocessor.htm#submitjob">Geoprocessor.submitJob()</A>. 
+				You need to supply the input parameters for the task. You can also specify a 
+				"complete callback" function to be called when the job is successful, and a 
+				"status callback" function to be called every time the geoprocessor checks the 
+				status of the job.</p>
+			<pre>gp.submitJob(params, completeCallback, statusCallback);</pre>
+			<p>By default the status is checked once per second. Each time the status is 
+				checked, the status callback function is called. You can change the status 
+				check interval through the <A href="../jsapi/Geoprocessor.htm#setUpdateDelay">Geoprocessor.setUpdateDelay()</A>
+				method.</p>
+			<p>The status callback receives a <A href="../jsapi/jobinfo.htm">JobInfo</A> object 
+				containing the job ID, the job status, and any <A href="../jsapi/Gpmessage.htm">GPMessages</A>
+				returned by the geoprocessor (if the server administrator has enabled 
+				messages). You may choose to write this information to the <A href="../jssamples/mapconfig_debug.html">
+					debug console</A> or elsewhere to track the status of the job.</p>
+			<pre>function statusCallback(jobInfo) {
+  console.log(jobInfo.jobStatus);
+}</pre>
+			<p>When <A href="../jsapi/jobinfo.htm#jobstatus">JobInfo.jobStatus</A> = 
+				STATUS_SUCCEEDED the complete callback function will be called. In this 
+				callback, you can get the results of the job by calling <A href="../jsapi/Geoprocessor.htm#getresultdata">
+					Geoprocessor.getResultData()</A>. You'll generally supply three parameters 
+				in this method call:</p>
+			<ol>
+				<li>
+				The job ID. You can get this from the JobInfo object received by the callback 
+				function.
+				<li>
+				The output parameter name that you want to retrieve. Check the Services 
+				Directory page for the task if you're unsure of the parameter name.
+				<li>
+					A callback function that does something with the result. The result will be 
+					passed to this function as a <A href="../jsapi/parametervalue.htm">ParameterValue</A>
+					object. The type of data contained in this object will vary depending on the 
+					output parameter type you retrieved. See the <a href="intro_gp_parameters.htm">parameters 
+						table</a> for a list of types to expect.
+				</li>
+			</ol>
+			<p>The code below shows a complete callback that calls getResultData for one 
+				parameter (a FeatureSet) then uses another callback function to draw the 
+				results on the map.</p>
+			<pre>function completeCallback(jobInfo) {
+  console.log("getting data");
+  gp.getResultData(jobInfo.jobId, "Viewshed_Result", displayResult);
+}
+
+function displayResult(result, messages) {
+  var simpleLineSymbol = new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID,
+          new dojo.Color([255,255,0]), 1);
+  var features = result.value.features;
+  for (var f=0, fl=features.length; f&lt;fl; f++) {
+    var feature = features[f];
+    feature.setSymbol(simpleLineSymbol);
+    map.graphics.add(feature);
+  }
+}</pre>
+			<p>You can call getResultData multiple times if you have several output parameters 
+				you want to retrieve.</p>
+			<p>It's possible that the server administrator has configured the task to draw the 
+				results on the server instead of streaming the results to the client. In this 
+				scenario the task is said to have a <a href="http://webhelp.esri.com/arcgisserver/9.3/dotNet/geoprocessing/key_co-1340355772.htm"
+					target="_blank">result map service</a>. Instead of calling 
+				Geoprocessor.getResultData(), you should call <A href="../jsapi/Geoprocessor.htm#getresultimagelayer">
+					Geoprocessor.getResultImageLayer()</A>, which returns an <A href="../jsapi/arcgisdynamicmapservicelayer.htm">
+					ArcGISDynamicMapServiceLayer</A> containing the results. You can add this 
+				layer to the map in a callback function.</p>
+			<pre>function completeCallback(jobInfo) {
+  console.log("getting data");
+  var imageParams = new esri.layers.ImageParameters();
+  gp.getResultImageLayer(jobInfo.jobId, "Viewshed_Result",imageParams, displayResult);
+}
+
+function displayResult(layer) {
+  map.addLayer(layer);
+}</pre>
+			<p>Alternatively, you can call <A href="../jsapi/Geoprocessor.htm#getresultimage">Geoprocessor.getResultImage()</A>. 
+				This gives you a static image instead of a map layer. The image cannot be added 
+				to the map.</p>
+
+<!--***END TEXT - DO NOT WRITE BELOW THIS LINE***-->
+</div>
+
+</body>
+</html>

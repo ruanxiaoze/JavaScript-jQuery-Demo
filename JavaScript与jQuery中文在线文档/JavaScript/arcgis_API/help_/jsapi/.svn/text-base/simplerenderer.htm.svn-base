@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>SimpleRenderer</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: SimpleRenderer</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	<i>Class added v1.4.</i><br/><br/>  A renderer that uses one symbol only.  For more information about renderers, see <a href="../jshelp/inside_renderers.htm">Symbolizing graphics with renderers</a>.
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+<a href="renderer.htm">esri.Renderer</a>
+  |_ esri.renderer.SimpleRenderer
+</pre><H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#SimpleRendererConst">esri.renderer.SimpleRenderer(defaultSymbol)</a></td>
+		<td class="syntaxTABLE">Creates a new SimpleRenderer object with a Symbol parameter.</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#symbol">symbol</a></td>
+<td class="syntaxTABLE">
+<a href="symbol.htm">Symbol</a>
+</td>
+
+<td class="syntaxTABLE">
+The symbol for the renderer.</td>
+		</tr>
+</table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="SimpleRendererConst"></a><H4>esri.renderer.SimpleRenderer(defaultSymbol)</H4>
+		</div>
+
+<div class="detaildesc">Creates a new SimpleRenderer object with a Symbol parameter.</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;<a href="symbol.htm">Symbol</a>>
+<B>defaultSymbol</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			Symbol to use for the renderer.
+			</td>
+			</tr>
+</table>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="symbol"></a>
+&lt;<a href="symbol.htm">Symbol</a>> symbol</H4></div>
+
+<div class="detaildesc">The symbol for the renderer.</div>
+
+</div>
+
+<br/></div></body></html> 

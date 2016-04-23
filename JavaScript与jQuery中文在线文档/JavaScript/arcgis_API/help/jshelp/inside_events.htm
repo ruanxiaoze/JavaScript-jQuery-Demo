@@ -1,0 +1,217 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>Working with events</title>
+</head>
+
+<body>
+
+<div id="pageBanner">Working with events</div>
+
+<div id="nstext">
+
+<!--***START TEXT - DO NOT WRITE ABOVE THIS LINE***-->
+
+<p>The ArcGIS JavaScript API is an event driven API. Events occur frequently when 
+			you interact with a JavaScript application. Loading the page, clicking the 
+			mouse, executing a task, and many other actions all trigger events. You can 
+			make your application interactive by listening for events and writing code that 
+			responds to them, which is known as "handling" the event.</p>
+		<h3>Why the event driven API?</h3>
+		<p>Events are used for two main reasons:</p>
+		<ol>
+			<li>
+			The JavaScript API is asynchronous, and not every operation on an object 
+			returns a result immediately. A trip to a server to get additional information 
+			may be required before the object is ready for use.
+			<li>
+				The event model allows multiple handlers for every event. You can perform 
+				multiple operations based on a single event fired by the dispatching object.</li>
+		</ol>
+		<h3>Adding and removing event listeners</h3>
+		<p>In order to handle an event, you need to add code that listens for it. 
+			Registering a listener for an event puts your application on alert that it 
+			needs to do something when that particular event occurs. Specifically, it will 
+			call the handler function in response to the event.</p>
+		<p>In the ArcGIS JavaScript API, you listen for events using the <a href="http://redesign.dojotoolkit.org/jsdoc/dojo/HEAD/dojo.connect" target="_blank">
+				dojo.connect</a> method. The parameters for this method are the element to 
+			listen on, the event to listen for, and the function to call when the event is 
+			fired. The following line of code listens for the click event on the map, and 
+			handles the event by calling the function myOnClickHandler:</p>
+		<pre>var myOnClick_connect = dojo.connect(map, "onClick", myOnClickHandler);</pre>
+		<p>To avoid memory leaks, you should remove listeners when the application is being 
+			closed. You actually do this by adding another listener, this time for the 
+			map's <A href="../jsapi/map.htm#onUnload">onUnload</A> event:</p>
+		<pre>var myUnload_connect = dojo.connect(map, "onUnload", myUnloadHandler);</pre>
+		<p>Alternatively, you can register your unload handler to be called when the window 
+			unloads:</p>
+		<pre>dojo.addOnUnload(myUnloadHandler);</pre>
+		<p>In your handler function, you disconnect the listeners, including any listener 
+			you added for the onUnload event:</p>
+		<pre>dojo.disconnect(myOnClick_connect);
+dojo.disconnect(myUnload_connect);</pre>
+		<h3>Common events</h3>
+		<p>This section gives tips for working with some of the most common events in the 
+			ArcGIS JavaScript API.</p>
+		<p><b>Map.onLoad</b></p>
+		<p>When you add a map to a page, you cannot use it until the first layer has been 
+			added to it. Adding a layer to the map initializes the graphics and fires the <A href="../jsapi/map.htm#onLoad">
+				onLoad</A> event. At this point, you can interact with the map:</p>
+		<pre>function init() {
+  var map = new esri.Map("mapDiv");
+  mapOnLoad_connect = dojo.connect(map, "onLoad", configNavigation);
+  map.addLayer(...);
+}
+
+function configNavigation(map) {
+  map.disableMapNavigation();
+}</pre>
+		<p>One exception to this rule is the <A href="../jsapi/map.htm#setExtent">setExtent</A>
+			method. You can set the map's initial extent in the map's constructor or by 
+			calling setExtent before adding the first layer:</p>
+		<pre>function init() {
+  //setting initial extent in constructor
+  var map = new esri.Map("mapDiv", { extent: new esri.geometry.Extent(...) });
+
+  //or use set extent method
+  var map = new esri.Map("mapDiv");
+  map.setExtent(new esri.geometry.Extent(...));
+
+  //add first layer
+  map.addLayer(...);
+}
+</pre>
+		<p><b>ArcGISDynamicMapServiceLayer.onLoad and ArcGISTiledMapServiceLayer.onLoad</b></p>
+		<p>The <A href="../jsapi/arcgisdynamicmapservicelayer.htm">esri.layers.ArcGISDynamicMapServiceLayer</A>
+			and <A href="../jsapi/arcgistiledmapservicelayer.htm">esri.layers.ArcGISTiledMapServiceLayer</A>
+			work with ArcGIS Server REST service endpoints. When the layer is first created 
+			it needs to make a request to ArcGIS Server to get the service info. You should 
+			wait until the layer's <A href="../jsapi/layer.htm#onLoad">onLoad</A> event is 
+			fired before you interact with the layer. The code below uses an event handler 
+			to access the <A href="../jsapi/arcgismapservicelayer.htm#initialextent">initialExtent</A>
+			property only after onLoad has fired.</p>
+		<pre>function init() {
+  var layer = new esri.layers.ArcGISDynamicMapServiceLayer(...);
+  dojo.connect(layer, "onLoad", printInitialExtent);
+}
+
+function printInitialExtent(layer) {
+  alert(layer.initialExtent);
+}
+</pre>
+		<p>In Internet Explorer, due to resource caching, the onLoad event is fired as soon 
+			as the layer is constructed. Consequently you should check whether the layer's <A href="../jsapi/layer.htm#loaded">
+				loaded</A> property is true before registering a listener for the onLoad 
+			event:</p>
+		<pre>function init() {
+  var layer = new esri.layers.ArcGISDynamicMapServiceLayer(...);
+  if (layer.loaded) {
+    printInitialExtent(layer);
+  }
+  else {
+    dojo.connect(layer, "onLoad", printInitialExtent);
+  }
+}
+</pre>
+		<p><b>Mouse events on maps and graphics</b></p>
+		<p>The ArcGIS JavaScript API map and graphics layer provide a large set of mouse 
+			events users can use to interact with these objects. To register to listen to a 
+			map's <A href="../jsapi/map.htm#onClick">onClick</A> event:</p>
+		<pre>function init() {
+  var map = new esri.Map(...);
+  dojo.connect(map, "onClick", myClickHandler);
+  map.addLayer(...);
+}
+</pre>
+		<p>
+			When a user clicks the map, a mouse event is generated and all registered click 
+			handlers are called. The mouse event is passed as an argument to each handler. 
+			In addition to all properties populated by the browser, a mapPoint and 
+			screenPoint are included as properties of the event. The mapPoint represents 
+			the coordinates of the click in map coordinates and the screenPoint represents 
+			the coordinates of the click in screen coordinates.</p>
+		<pre>function myClickHandler(event) {
+  alert("User clicked at " + event.screenPoint.x + ", " + event.screenPoint.y + " on the screen. The map coordinate at this point is " + event.mapPoint.x + ", " + event.mapPoint.y);
+}
+</pre>
+		<p>In addition to the mapPoint and screenPoint properties, the event returned 
+			includes a graphic property, which is the <A href="../jsapi/graphic.htm">esri.Graphic</A>
+			object that received the event. The code below shows how you could handle the 
+			map's onClick event to report which graphic the user clicked. Notice that the 
+			listener for the onClick event will only be in effect after the map's onLoad 
+			event has fired. In this situation, a listener is dependent on another 
+			listener.</p>
+		<pre>function init() {
+  var map = new esri.Map(...);
+  dojo.connect(map, "onLoad", function() {
+    dojo.connect(map.graphics, "onClick", myGraphicsClickHandler);
+  });
+}
+
+function myGraphicsClickHandler(evt) {
+  alert("User clicked on " + evt.graphic);
+}
+</pre>
+		<p>Since the <A href="../jsapi/map.htm#graphics">Map.graphics</A> object is only 
+			available to use after the <A href="../jsapi/map.htm#onLoad">Map.onLoad</A> event 
+			is fired, you should wait to register event listeners until the the Map.onLoad 
+			event is fired.
+		</p>
+		<p><b>Map.onMouseWheel</b></p>
+		<p>The mouse wheel event has been standardized for use across all browsers. A value 
+			property is added to the DOMMouseScroll (Firefox) or mouse wheel event 
+			(Internet Explorer/Safari). A positive number indicates mouse wheel scroll up 
+			and negative number indicates mouse wheel scroll down:</p>
+		<pre>function init() {
+  ...
+  dojo.connect(map, "onMouseWheel", myMouseWheelHandler);
+}
+
+function myMouseWheelHandler(event) {
+  alert("Mouse wheel value = " + event.value);
+}
+</pre>
+		<h3>Event propagation (bubbling)</h3>
+		<p>The Internet Explorer event model sometimes causes the same event to occur on 
+			multiple elements in the page. This can happen if the elements overlap. To 
+			prevent the event from propagating (bubbling) from one element to another, you 
+			can stop the event.</p>
+		<p>Suppose you have an application in which a user can click on a map to execute a 
+			query. The user can also click on any graphic to recenter the map at the 
+			location of the click. Assume the graphic has point geometry:</p>
+		<pre>function init() {
+  ...
+  dojo.connect(map, "onClick", executeQuery);
+  dojo.connect(map, "onLoad", function() {
+    dojo.connect(map.graphics, "onClick", recenterMap);
+  }
+}
+
+function executeQuery(event) {
+  query.geometry = event.mapPoint;
+  queryTask.execute(query, ...);
+}
+
+function recenterMap(event) {
+  map.centerAt(event.mapPoint);
+}</pre>
+		<p>In Internet Explorer the above code will potentially execute an unneeded query 
+			when the user clicks to recenter the map. This is because the click event is 
+			fired not only on the graphics container, but on the map div as well. To make 
+			sure that the event does not propagate to the map div, you can stop the event 
+			by adding the line in bold to the recenterMap function:</p>
+		<pre>function recenterMap(event) {
+  <b>dojo.stopEvent(event);</b>
+  map.centerAt(event.mapPoint);
+}
+</pre>
+
+<!--***END TEXT - DO NOT WRITE BELOW THIS LINE***-->
+</div>
+
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>ArcGIS JavaScript API</title>
+</head>
+
+<body>
+
+<!--***REQUIRED TITLE***-->
+<div id="pageBanner">Show map using layer definitions</div>
+<!--***END REQUIRED TITLE***-->
+
+  <div id="nstext">
+
+	<H4 class=dtH4><a href="../../demos/map/map_multiplelayerdef.html" target="_blank">View live sample</a></H4>
+  <H4 class=dtH4>描述</H4>
+
+  <!--***START TEXT - DO NOT WRITE ABOVE THIS LINE***-->
+
+  <p>This sample demonstrates how to use layer definitions to limit the information 
+			from a layer that gets displayed on the map. To appreciate what this sample 
+			does, it's helpful to look at the Services Directory page for the <a href="http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Census_USA/MapServer"
+				target="_blank">ESRI_Census_USA</a> service used in this map. Examine the 
+			list of layers in the map. Now notice that this line of code limits the visible 
+			layers to states and counties.</p>
+		<pre>dynamicMapServiceLayer.setVisibleLayers([5,4,3]);</pre>
+		<p>This data covers the United States, so why does only the state of Kansas appear 
+			when you run the sample? This is due to layer definitions, which are SQL 
+			expressions that limit the data shown on the map. In this sample, the layer 
+			definitions limit the states to Kansas and the counties to those in Kansas with 
+			a population over 25000.</p>
+		<p>The following code adds layer definitions to an array, then applies the 
+			definitions using the <A href="../jsapi/arcgisdynamicmapservicelayer.htm#setlayerdefinitions">
+				ArcGISDynamicMapServiceLayer.setLayerDefinitions()</A> method. Notice that 
+			in the array, the index of a definition matches its corresponding layer index 
+			in the map:</p>
+		<pre>var layerDefs = [];
+layerDefs[5] = "STATE_NAME='Kansas'";
+layerDefs[4] = "STATE_NAME='Kansas' and POP2007>25000";
+layerDefs[3] = "STATE_NAME='Kansas' and POP2007>25000";
+
+dynamicMapServiceLayer.setLayerDefinitions(layerDefs);</pre>
+		<p>If you're new to building SQL expressions, a helpful resource is <A href="http://webhelp.esri.com/arcgisdesktop/9.3/index.cfm?TopicName=About_building_an_SQL_expression"
+				target="_blank">About building an SQL expression</A> in the ArcGIS Desktop 
+			Help.</p>
+		<p>Note that you cannot set layer definitions on <A href="../jsapi/arcgistiledmapservicelayer.htm">
+				ArcGISTiledMapServiceLayers</A>. These layers use caches of pre-rendered 
+			image tiles. Although tiled map services are faster, you are limited to viewing 
+			the map images on the tiles.</p>
+
+<!--***END TEXT - DO NOT WRITE BELOW THIS LINE***--> 
+
+  <H4 class=dtH4>Code</H4>
+  <div class="detailSample">
+  <code>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"&gt;<br/>
+&lt;html&gt;<br/>
+&nbsp;&nbsp;&lt;head&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8"/&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;meta http-equiv="X-UA-Compatible" content="IE=7" /&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;title&gt;Create Map with Custom ArcGISDynamicMapServiceLayer Layer Definitions&lt;/title&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"&gt;&lt;/script&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;script type="text/javascript"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dojo.require("esri.map");<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function init() {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var startExtent = new esri.geometry.Extent(-103, 36.8, -94, 40.2, new esri.SpatialReference({wkid:4326}) );<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var map = new esri.Map("map", {extent:startExtent});<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var tiledMapServiceLayer = new esri.layers.ArcGISTiledMapServiceLayer("http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer");<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map.addLayer(tiledMapServiceLayer);<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//Use the ImageParameters to set map service layer definitions and map service visible layers before adding to the client map.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var imageParameters = new esri.layers.ImageParameters();<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//layer.setLayerDefinitions takes an array.&nbsp;&nbsp;The index of the array corresponds to the layer id.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//In the sample below I add an element in the array at 3,4, and 5.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//Those array elements correspond to the layer id within the remote ArcGISDynamicMapServiceLayer<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var layerDefs = [];<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;layerDefs[5] = "STATE_NAME='Kansas'";<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;layerDefs[4] = "STATE_NAME='Kansas' and POP2007&gt;25000";<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;layerDefs[3] = "STATE_NAME='Kansas' and POP2007&gt;25000";<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;imageParameters.layerDefinitions = layerDefs;<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//I want layers 5,4, and 3 to be visible<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;imageParameters.visibleLayers = [5,4,3];<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;imageParameters.transparent = true;<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//construct ArcGISDynamicMapServiceLayer with imageParameters from above<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var dynamicMapServiceLayer = new esri.layers.ArcGISDynamicMapServiceLayer("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Census_USA/MapServer", {"imageParameters":imageParameters});<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map.addLayer(dynamicMapServiceLayer);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dojo.addOnLoad(init);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/script&gt;<br/>
+&nbsp;&nbsp;&lt;/head&gt;<br/>
+&nbsp;&nbsp;&lt;body class="tundra"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;div id="map" style="width:900px; height:600px; border:1px solid #000;"&gt;&lt;/div&gt;<br/>
+&nbsp;&nbsp;&lt;/body&gt;<br/>
+&lt;/html&gt;</code>
+  			</div>
+
+
+<br/><br/></div> 
+</body>
+</html>

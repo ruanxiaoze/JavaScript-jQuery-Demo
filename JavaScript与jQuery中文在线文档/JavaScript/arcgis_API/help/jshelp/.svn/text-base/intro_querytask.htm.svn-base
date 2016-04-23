@@ -1,0 +1,206 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>Using QueryTask, Query, and FeatureSet</title>
+</head>
+
+<body>
+
+<div id="pageBanner">Using QueryTask, Query, and FeatureSet</div>
+
+<div id="nstext">
+
+<!--***START TEXT - DO NOT WRITE ABOVE THIS LINE***-->
+
+<p><a href="../jsapi/querytask.htm">QueryTask</a>, <a href="../jsapi/query.htm">Query</a>, and <a href="../jsapi/featureset.htm">FeatureSet</a> are used together to query a layer in a map and display the results. </p>
+
+<!-- <p><img src="images/intro_querytask1.gif" alt="Process for querying"></p> -->
+
+<p>The input into the process is <b>Query</b>.  A user provides input to the query.  This input might include selecting features on a map, selecting a value from a list, or typing in a value. The input is used to create a query filter.  In the next step of the process, the <b>QueryTask</b> is executed based on the query filter.  In the final step of the process, the results are returned in a <b>FeatureSet</b>.  These results include the geometry of each feature selected for highlighting the features on the map.  It also includes the tablular data for display in an InfoWindow or an HTML table.</p>
+
+<p>The following example is a QueryTask where the user types in a population.  Based on this input, all cities with a population greater than the value are highlighted on the map.  When a user clicks on a city, an InfoWindow displays information about the city.   [<a href="../../demos/QueryTask/task_query_points.html" target="_blank">Show me]</a></p>
+
+<p>The following discussion assumes you are already familiar with the basic concepts of the JavaScript API and Dojo, and you understand the basic patterns of how the JavaScript API works within an HTML page.  For more information, see <a href="intro_firstmap.htm">Adding a map</a> and <a href="intro_firsttask.htm">Adding a task</a>.</p>
+
+<h3>Create the init() function</h3>
+
+You can use the Init function to initialize the classes you will use in later functions.
+
+<ol>
+	<li>Initialize a <a href="../jsapi/map.htm">Map</a> and add a <a href="../jsapi/layer.htm">Layer</a>.</li>
+	<li>Initialize a <a href="../jsapi/querytask.htm">QueryTask</a> layer. Note that the URL includes the layer ID. 本例中，the layer ID is "0".</li>
+	<li>Initialize the <a href="../jsapi/query.htm">Query</a>.  You should specify everything except the actual filter.  本例中，a list of output fields is included in <a href="../jsapi/query.htm#outFields">outFields</a>.  When you specify the output fields, you should limit the fields only to those you expect to use in the query or the results.  The fewer fields you include, the faster the response will be.  You must use the actual field names rather than the alias names, but you can use the alias names later when you display the results.   	</li>
+	<li>Initialize <a href="../jsapi/infotemplate.htm">InfoTemplate</a>.  If you plan to use an InfoWindow to display the results, this is a good time to construct the InfoTemplate.  The syntax ${fieldName} is substituted at runtime with the actual attribute value.  The first value is the title.  The rest of the values make up the text of the InfoWindow.  You can use any valid HTML.</li>
+	<li>Initialize the <a href="../jsapi/symbol.htm">Symbol</a> you want to use for displaying the highlighted features on the map.  </li>
+</ol>
+
+		<div class="detailSample">
+		<pre>
+  function init() {
+    //create map and add layer
+    map = new esri.Map("mapDiv");
+    var layer = new esri.layers.ArcGISDynamicMapServiceLayer("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StatesCitiesRivers_USA/MapServer");
+    map.addLayer(layer);
+
+    //initialize query task
+    queryTask = new esri.tasks.QueryTask("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StatesCitiesRivers_USA/MapServer/0");
+
+    //initialize query
+    query = new esri.tasks.Query();
+    query.returnGeometry = true;
+    query.outFields = ["CITY_NAME", "STATE_NAME", "POP1990"];
+
+    //initialize InfoTemplate
+    infoTemplate = new esri.InfoTemplate("${CITY_NAME}", "Name : ${CITY_NAME}&lt;br/> State : ${STATE_NAME}&lt;br />Population : ${POP1990}");
+
+    //create symbol for selected features
+    symbol = new esri.symbol.SimpleMarkerSymbol();
+    symbol.setStyle(esri.symbol.SimpleMarkerSymbol.STYLE_SQUARE);
+    symbol.setSize(10);
+    symbol.setColor(new dojo.Color([255,255,0,0.5]));
+
+  }
+		</pre>
+		</div>
+
+<h3>executeQueryTask function - the callback function</h3>
+Create the query filter based on user input and execute the query.  User input might include selecting features on a map, selecting a value from a list, or typing in a value.  本例中，the user is instructed to enter a population value.
+
+<h3>Create the callback function executeQueryTask()</h3>
+
+<p>The callback function is the function referenced from the input in the HTML page. 本例中，a function named "executeQueryTask" is called after a user types in a population value and clicks the "Get Details" button.</p>
+
+<p>The "population" value is plugged into <a href="../jsapi/query.htm#where">Query.where</a>. The <i>where</i> attribute is one of three filters you can use with Query:</p>
+
+		<ul>
+		<li><a href="../jsapi/query.htm#where">Query.where</a>:  any valid SQL where statement.  You need to make sure you have the correct sequence of single and double quotes when writing the where clause in JavaScript.<br/><br/>
+		Sring query:
+		<div class="detailSample">
+		<pre>
+  query.where = "NAME = '" + stateName + "'";
+		</pre>
+		</div>
+
+		Number query:
+		<div class="detailSample">
+		<pre>
+  query.where = "POP04 > " + population;
+		</pre>
+		</div>
+		</li>
+
+		<li><a href="../jsapi/query.htm#text">Query.text</a>:  shorthand for a where clause using "like".  The field used is the display field defined in the map document.  You can determine what the display field is for a layer in Services Directory.
+		<div class="detailSample">
+		<pre>
+  query.text = stateName;
+		</pre>
+		</div>
+		</li>
+
+		<li><a href="../jsapi/query.htm#geometry">Query.geometry</a>:  when a user selects features on a map.
+		<div class="detailSample">
+		<pre>
+  query.geometry = evt.mapPoint;
+		</pre>
+		</div>
+		</li>
+
+		</ul>
+
+
+After you have created the query filter, you execute the query. You do this through the <a href="../jsapi/querytask.htm#execute">QueryTask.execute()</a> method. The inputs to the method are the Query and a reference to a function named "showResults".
+
+
+		<div class="detailSample">
+		<pre>
+  function executeQueryTask(population) {
+    //set query based on what user typed in for population;
+    query.where = "POP04 > " + population;
+
+    //execute query
+    queryTask.execute(query,showResults);
+  }
+		</pre>
+		</div>
+
+<h3>Create a function to show the results</h3>
+The showResults() function has a <a href="../jsapi/featureset.htm">FeatureSet</a> as input.  The FeatureSet is populated when the query is executed.  This function parses the results in the FeatureSet and adds them to the <a href="../jsapi/graphicslayer.htm">GraphicsLayer</a>.  The geometry is used to draw graphic features on the map.  The attribute values are added to graphic using the InfoTemplate.  When a user clicks on a highlighted feature, an InfoWindow pops up with the results.
+
+		<div class="detailSample">
+		<pre>
+  function showResults(featureSet) {
+    //remove all graphics on the maps graphics layer
+    map.graphics.clear();
+
+    //Performance enhancer - assign featureSet array to a single variable.
+    var resultFeatures = featureSet.features;
+
+    //Loop through each feature returned
+    for (var i=0, il=resultFeatures.length; i&lt;il; i++) {
+      //Get the current feature from the featureSet.
+      //Feature is a graphic
+      var graphic = resultFeatures[i];
+      graphic.setSymbol(symbol);
+
+      //Set the infoTemplate.
+      graphic.setInfoTemplate(infoTemplate);
+
+      //Add graphic to the map graphics layer.
+      map.graphics.add(graphic);
+    }
+  }
+		</pre>
+		</div>
+
+<h3>HTML BODY</h3>
+<p>The BODY section contains what the user sees on the HTML page.</p>
+
+<ul>
+<li>The user has a place to type in the population.  When the user clicks the "Get Details" button, the onclick event is invoked and calls the executeQueryTask() function.</li>
+<li>The map displays in the mapDiv.  Once the query is executed, the selected features are highlighted. When a user clicks on a feature, an InfoWindow appears.</li>
+</ul>
+
+		<div class="detailSample">
+		<pre>
+  &lt;body>
+    &lt;br/>
+    US city population greater than : &lt;input type="text" id="population" value="500000" />
+    &lt;input type="button" value="Get Details" onclick="executeQueryTask(dojo.byId('population').value);" />
+
+    &lt;div id="mapDiv" style="width:600px; height:600px; border:1px solid #000;">&lt;/div>
+    Click on a city once it's highlighted to get an InfoWindow.
+
+  &lt;/body>
+		 </pre>
+		 </div>
+
+<a name="performance"></a><h2>Performance Considerations</h2>
+<p>You need to be careful that the query you are constructing is reasonable.  Your audience will not understand the data as well as you.  As a result, users may make queries that are unrealistic or request too much data.  There is a direct correlation between performance and the number of features selected.</p>
+<ul>
+<li>If a large number of features are selected, it can take some time to draw the graphics on the map.  The type of feature also makes a difference.  Points draw much faster than lines and polygons.  Therefore, whenever you can use point graphics, you should.</li>
+<li>If you are retrieving tabular data and do not intend to add graphics to the map, you should not request geometry. </li>
+<li>If queries are too large on a regular basis, you might want to limit the query to a smaller area or refine the query so fewer features are returned at one time. </li>
+</ul>
+
+<p>Queries on cached layers do not have scale dependencies.  This means that features for a layer can be queried even if the layer is not displayed on the map for a given scale.  Thus, your query should not be accessible for a layer if displaying the results does not make sense to the end user.</p>
+
+<p>You should also consider that users can inadvertently or maliciously request unlimited numbers of features.  The maximum number of features returned is the MaxRecordCount set in the <a href="http://webhelp.esri.com/arcgisserver/9.3/dotNet/index.htm#cfg_file_service.htm" target="_blank">map service configuration file</a>.  By default, this maximum is set to 500 features.  Some common ways a user can request the maximum number of records for a layer are:</p>
+
+<ul>
+<li>Request all cities with a population greater than 0.  </li>
+<li>Send an empty where statement (where="") </li>
+<li>Send a statement that is always true (where="1=1").</li>
+<li>Selecting all features in a layer. </li>
+</ul>
+
+<p>You can trap for these types of queries in your application.  If you are hosting services that other users may include in their application, you may want to protect your site from multiple large requests by limiting the number of features that can be returned in a query response by setting a reasonable value in MaxRecordCount.</p>
+
+<!--***END TEXT - DO NOT WRITE BELOW THIS LINE***-->
+</div>
+
+</body>
+</html>

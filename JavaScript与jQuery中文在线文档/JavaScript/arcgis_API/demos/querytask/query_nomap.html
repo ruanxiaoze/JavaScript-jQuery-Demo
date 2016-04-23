@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>Query State Info without Map</title>
+    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css">
+    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"></script>
+    <script type="text/javascript" language="Javascript">
+      dojo.require("esri.tasks.query");
+
+      var queryTask, query;
+
+      function init() {
+        //build query
+        queryTask = new esri.tasks.QueryTask("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Census_USA/MapServer/5");
+        //dojo.connect(queryTask, "onComplete", showResults);
+
+        //build query filter
+        query = new esri.tasks.Query();
+        query.returnGeometry = false;
+        query.outFields = ["SQMI","STATE_NAME","STATE_FIPS","SUB_REGION","STATE_ABBR","POP2000","POP2007","POP00_SQMI","POP07_SQMI","HOUSEHOLDS","MALES","FEMALES","WHITE","BLACK","AMERI_ES","ASIAN","OTHER","HISPANIC","AGE_UNDER5","AGE_5_17","AGE_18_21","AGE_22_29","AGE_30_39","AGE_40_49","AGE_50_64","AGE_65_UP"];
+      }
+
+      function execute(stateName) {
+        query.text = stateName;
+        //execute query
+        queryTask.execute(query,showResults);
+      }
+
+      function showResults(results) {
+        var s = "";
+        for (var i=0, il=results.features.length; i<il; i++) {
+          var featureAttributes = results.features[i].attributes;
+          for (att in featureAttributes) {
+            s = s + "<b>" + att + ":</b>  " + featureAttributes[att] + "<br />";
+          }
+        }
+        dojo.byId("info").innerHTML = s;
+      }
+
+      dojo.addOnLoad(init);
+    </script>
+  </head>
+  <body>
+    US state name : <input type="text" id="stateName" value="California" />
+    <input type="button" value="Get Details" onclick="execute(dojo.byId('stateName').value);" />
+    <br />
+    <br />
+    <div id="info" style="padding:5px; margin:5px; background-color:#eee;">
+    </div>
+  </body>
+</html>

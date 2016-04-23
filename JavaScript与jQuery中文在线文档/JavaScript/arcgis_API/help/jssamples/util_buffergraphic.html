@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>ArcGIS JavaScript API</title>
+</head>
+
+<body>
+
+<!--***REQUIRED TITLE***-->
+<div id="pageBanner">缓冲自定义图形</div>
+<!--***END REQUIRED TITLE***-->
+
+  <div id="nstext">
+
+	<H4 class=dtH4><a href="../../demos/utilities/util_buffergraphic.html" target="_blank">查看在线示例</a></H4>
+  <H4 class=dtH4>描述</H4>
+
+  <!--***START TEXT - DO NOT WRITE ABOVE THIS LINE***-->
+
+  <p>
+  本例使用ArcGIS Server <a href="http://webhelp.esri.com/arcgisserver/9.3/dotNet/geometry_service.htm" target="_blank">几何服务</a>缓冲在地图上画的图形。几何服务在ArcGIS Server 9.3加入，用于在基于浏览器的应用中执行缓冲，投影和测量。一个web浏览器不知道如何缓冲一条线，但是能发送线到一个几何服务，几何服务可以缓冲这条线并返回缓冲几何体。
+ 
+ </p>
+		<p>
+        用几何服务缓冲，首先建立一些<a href="../jsapi/bufferparameters.htm">BufferParameters</a>，如距离，单位和空间参考。然后调用<a href="../jsapi/geometryservice.htm#buffer">GeometryService.buffer()</a>，传入参数，当缓冲完成时执行一个回调函数。</p>
+		<pre>gsvc.buffer(params, function(features) {
+  showBuffer(features);
+});</pre>
+		<p>回调函数能够往地图增加缓冲，或能基于缓冲执行额外的分析。</p>
+		<p>注意:</p>
+		<ul>
+			<li>ArcGIS Online地图的空间参考是地理坐标系统WGS 1984 (WKID 4326)。几何服务执行缓冲前，需要转换输入几何体为缓冲空间参考，在这个应用中设置为UTM Zone 12 North (WKID 32612)。为应用选择一个地图范围合适的投影坐标系统。当缓冲被返回到客户端，它将重新投影为最初的空间参考。</li>
+			<li>
+            
+            本例中线和多边形绘图工具使用ArcGIS JavaScript API包含的<a href="../jsapi/draw.htm">绘图工具栏</a>。
+			通过工具栏捕获的几何体被设置为缓冲的输入几何体。如果几何体是多边形，在缓冲前应用使用几何服务<a href="../jsapi/geometryservice.htm#simplify">简化</a>多边形。则可以发现自身边界相交的非法的拓扑的多边形。简化操作分解边多形分合法的，多部分的要素。
+                
+			</li>
+			<li>本例引用一个代理页面以防几何体的GET请求超过一些web浏览器限制的2000个字符。关于如何建立自己的代理页面的说明见<a href="../jshelp/ags_proxy.htm">使用代理页面</a> 。</li>
+		</ul>
+
+<!--***END TEXT - DO NOT WRITE BELOW THIS LINE***--> 
+
+  <H4 class=dtH4>代码</H4>
+  <div class="detailSample">
+  <code>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"&gt;<br/>
+&lt;html&gt;<br/>
+&nbsp;&nbsp;&lt;head&gt;<br/>
+&nbsp;&nbsp;&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8"/&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;meta http-equiv="X-UA-Compatible" content="IE=7" /&gt;<br/>
+&nbsp;&nbsp;&lt;title&gt;Buffer&lt;/title&gt;<br/>
+&nbsp;&nbsp;&lt;link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css"&gt;<br/>
+&nbsp;&nbsp;&lt;script src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5" type="text/javascript"&gt;&lt;/script&gt;<br/>
+&nbsp;&nbsp;&lt;script type="text/javascript"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;dojo.require("esri.map");<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;dojo.require("esri.tasks.geometry");<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;dojo.require("esri.toolbars.draw");<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;var map, gsvc, tb;<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;function initialize() {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var startExtent = new esri.geometry.Extent(-117.125,36.672,-105.875,42.297, new esri.SpatialReference({wkid:4326}) );<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map = new esri.Map("map", {extent:startExtent});<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dojo.connect(map, "onLoad", initToolbar);<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var layer = new esri.layers.ArcGISTiledMapServiceLayer("http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer");<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map.addLayer(layer);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gsvc = new esri.tasks.GeometryService("http://sampleserver1.arcgisonline.com/arcgis/rest/services/Geometry/GeometryServer");<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;esriConfig.defaults.io.proxyUrl = "/arcgisserver/apis/javascript/proxy/proxy.ashx";<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;esriConfig.defaults.io.alwaysUseProxy = false;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;function initToolbar(map) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tb = new esri.toolbars.Draw(map);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dojo.connect(tb, "onDrawEnd", doBuffer);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;function doBuffer(geometry) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;switch (geometry.type) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; case "point":<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var symbol = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_SQUARE, 10, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([255,0,0]), 1), new dojo.Color([0,255,0,0.25]));<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; break;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; case "polyline":<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var symbol = new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_DASH, new dojo.Color([255,0,0]), 1);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; break;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; case "polygon":<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var symbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_NONE, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_DASHDOT, new dojo.Color([255,0,0]), 2), new dojo.Color([255,255,0,0.25]));<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; break;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var graphic = new esri.Graphic(geometry, symbol);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map.graphics.add(graphic);<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var params = new esri.tasks.BufferParameters();<br/>
+<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;params.distances = [ dojo.byId("distance").value ];<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;params.bufferSpatialReference = new esri.SpatialReference({wkid: dojo.byId("bufferSpatialReference").value});<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;params.outSpatialReference = map.spatialReference;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;params.unit = eval("esri.tasks.BufferParameters."+dojo.byId("unit").value);<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (geometry.type === "polygon") {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//if geometry is a polygon then simplify polygon.&nbsp;&nbsp;This will make the user drawn polygon topologically correct.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gsvc.simplify([graphic], function(graphics) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;params.features = graphics;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gsvc.buffer(params, function(features) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;showBuffer(features);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} else {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;params.features = [graphic];<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gsvc.buffer(params, function(features) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;showBuffer(features);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;function showBuffer(features) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var symbol = new esri.symbol.SimpleFillSymbol(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;esri.symbol.SimpleFillSymbol.STYLE_SOLID,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new esri.symbol.SimpleLineSymbol(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;esri.symbol.SimpleLineSymbol.STYLE_SOLID,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new dojo.Color([255,0,0,0.65]), 2<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new dojo.Color([255,0,0,0.35])<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (var j=0, jl=features.length; j&lt;jl; j++) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;features[j].setSymbol(symbol);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map.graphics.add(features[j]);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tb.deactivate();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map.showZoomSlider();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;dojo.addOnLoad(initialize);<br/>
+&nbsp;&nbsp;&lt;/script&gt;<br/>
+<br/>
+&lt;/head&gt;<br/>
+<br/>
+&lt;body class="tundra"&gt;<br/>
+&nbsp;&nbsp;&lt;b&gt;Pick a tool and draw on the map. The drawn graphic will be buffered based on the parameters specified below.&nbsp;&nbsp;The in and out Spatial Reference is WKID:4326.&lt;/b&gt;&lt;br/&gt;<br/>
+&nbsp;&nbsp;&lt;!--&lt;button onclick="tb.activate(esri.toolbars.Draw.POINT);map.hideZoomSlider();"&gt;Point&lt;/button&gt;--&gt;<br/>
+&nbsp;&nbsp;&lt;button onclick="tb.activate(esri.toolbars.Draw.LINE);map.hideZoomSlider();"&gt;Line&lt;/button&gt;<br/>
+&nbsp;&nbsp;&lt;button onclick="tb.activate(esri.toolbars.Draw.POLYLINE);map.hideZoomSlider();"&gt;Polyline&lt;/button&gt;<br/>
+&nbsp;&nbsp;&lt;button onclick="tb.activate(esri.toolbars.Draw.FREEHAND_POLYLINE);map.hideZoomSlider();"&gt;Freehand Polyline&lt;/button&gt;<br/>
+&nbsp;&nbsp;&lt;button onclick="tb.activate(esri.toolbars.Draw.POLYGON);map.hideZoomSlider();"&gt;Polygon&lt;/button&gt;<br/>
+&nbsp;&nbsp;&lt;button onclick="tb.activate(esri.toolbars.Draw.FREEHAND_POLYGON);map.hideZoomSlider();"&gt;Freehand Polygon&lt;/button&gt;<br/>
+<br/>
+&nbsp;&nbsp;&lt;div id="map" style="width:1024px; height:512px; border:1px solid #000;"&gt;&lt;/div&gt;<br/>
+&nbsp;&nbsp;Buffer Spatial Reference WKID:&amp;nbsp;&lt;input type="text" id="bufferSpatialReference" size="5" value="32612" /&gt;&amp;nbsp;&amp;nbsp;<br/>
+&nbsp;&nbsp;Buffer Distance:&amp;nbsp;&lt;input type="text" id="distance" size="10" value="25" /&gt;&amp;nbsp;&amp;nbsp;<br/>
+&nbsp;&nbsp;&lt;select id="unit"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option value="UNIT_STATUTE_MILE"&gt;Miles&lt;/option&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option value="UNIT_FOOT"&gt;Feet&lt;/option&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option value="UNIT_KILOMETER"&gt;Kilometers&lt;/option&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option value="UNIT_METER"&gt;Meters&lt;/option&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option value="UNIT_NAUTICAL_MILE"&gt;Nautical Miles&lt;/option&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option value="UNIT_US_NAUTICAL_MILE"&gt;US Nautical Miles&lt;/option&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option value="UNIT_DEGREE"&gt;Degrees&lt;/option&gt;<br/>
+&nbsp;&nbsp;&lt;/select&gt;<br/>
+&nbsp;&nbsp;&lt;input type="button" value="Clear Graphics" onclick="map.graphics.clear();" /&gt;<br/>
+&lt;/body&gt;<br/>
+<br/>
+&lt;/html&gt;</code>
+  			</div>
+
+
+<br/><br/></div> 
+</body>
+</html>

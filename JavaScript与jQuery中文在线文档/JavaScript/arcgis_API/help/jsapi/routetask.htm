@@ -1,0 +1,251 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>RouteTask</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: RouteTask</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	<i>类在v1.4增加。</i><br/><br/>
+    ArcGIS Server REST API提供的网络分析服务的路线图层资源上解答一个路线。更多使用RouteTask的信息，见<a href="../jshelp/intro_route_overview.htm">An overview of routing with the ArcGIS JavaScript API</a>和<a href="../jshelp/intro_route_routetask.htm">Working with the RouteTask</a>。
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.tasks.RouteTask
+</pre>
+
+<H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#RouteTaskConst">esri.tasks.RouteTask(url)</a></td>
+		<td class="syntaxTABLE">创建一个新的RouteTask对象。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#url">url</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+ArcGIS Server REST资源表示的网路分析服务的URL。为了获得URL，使用<a href="../jshelp/ags_rest.htm">Services Directory</a>。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>方法表</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+		<th class="tableheader">方法</th>
+		<th class="tableheader">返回值</th>
+		<th class="tableheader">描述</th>
+		</tr>
+
+<tr>
+<td class="syntaxTABLE"><a href="#solve">solve(params, callback?, errback?)</a></td><td class="syntaxTABLE">
+<a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a>
+</td>
+<td class="syntaxTABLE">依赖路线图层及路线参数解答路线。</td>	</tr></table>
+
+<H4 class=dtH4>事件</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">事件</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#onError">onError(error)
+		</a></td>
+
+<td class="syntaxTABLE">当执行任务发生错误时触发该事件。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onSolveComplete">onSolveComplete(routeResults, barriers, message)
+		</a></td>
+
+<td class="syntaxTABLE">RouteTask.solve()结束时触发。如果可选得callback函数被指定，返回和callback函数一样的信号。</td>
+		</tr></table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="RouteTaskConst"></a><H4>esri.tasks.RouteTask(url)</H4>
+		</div>
+
+<div class="detaildesc">创建一个新的RouteTask对象。</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;String>
+<B>url</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			ArcGIS Server REST资源表示的网路分析服务的URL。为了获得URL，使用<a href="../jshelp/ags_rest.htm">Services Directory</a>。
+			</td>
+			</tr>
+</table>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="url"></a>
+&lt;String> url</H4></div>
+
+<div class="detaildesc">ArcGIS Server REST资源表示的网路分析服务的URL。为了获得URL，使用<a href="../jshelp/ags_rest.htm">Services Directory</a>。</div>
+
+</div>
+
+<div class=sectionDivider>方法详细信息</div>
+<div class="detaildiv">
+		<div class="detailname"><a name="solve"></a><H4>
+solve(params, callback?, errback?)</H4></div>
+
+<div class="detaildesc">依赖路线图层及路线参数解答路线。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="routeparameters.htm">RouteParameters</a>> <B>params</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+路线参数被用于作为生成路线的输入项。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>callback</B></td>
+			<td class="detailTABLE">
+Optional</td>
+			<td class="detailTABLE">
+当方法完成时该函数被调用。函数里的参数和<a href="#onSolveComplete">onSolveComplete</a>事件的一样。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>errback</B></td>
+			<td class="detailTABLE">
+Optional</td>
+			<td class="detailTABLE">
+任务执行期间如果发生错误，error对象被返回。</td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onSolveComplete">onSolveComplete</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<H4 class=dtH4>Events Detail</H4>
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onError"></a><H4>
+onError(error)	</H4></div>
+
+
+<div class="detaildesc">当执行任务发生错误时触发该事件。</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;Error> <B>error</B>
+			</td>
+
+<td class="detailTABLE">
+ 			在<a href="http://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/Error" target="_blank">JavaScript error object</a>对象中返回错误信息
+			</td>
+			</tr>
+
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onSolveComplete"></a><H4>
+onSolveComplete(routeResults, barriers, message)	</H4></div>
+
+
+<div class="detaildesc">RouteTask.solve()结束时触发。如果可选得callback函数被指定，返回和callback函数一样的信号。</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="routeresult.htm">RouteResult[]</a>> <B>routeResults</B>
+			</td>
+
+<td class="detailTABLE">
+ 			路线结果的数组。
+			</td>
+			</tr>
+
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="graphic.htm">Graphic[]</a>> <B>barriers</B>
+			</td>
+
+<td class="detailTABLE">
+ 			图形数组表示的障碍物。只有<code>RouteParameters.returnBarriers</code>是true时障碍物才会返回。关于每个障碍物的属性列表，见<a href="http://webhelp.esri.com/arcgisdesktop/9.3/index.cfm?TopicName=Finding_the_best_route" class="external text" title="http://webhelp.esri.com/arcgisdesktop/9.3/index.cfm?TopicName=Finding_the_best_route" target="_blank">Finding the best route</a>得“障碍物属性”章节。
+            
+            
+			</td>
+			</tr>
+
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="gpmessage.htm">GPMessage[]</a>> <B>message</B>
+			</td>
+
+<td class="detailTABLE">、
+			当解答操作完成时收到消息。如果路线没有被解答，返回服务器定义的路线不能被解答的信息。
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#solve">solve</a>&nbsp;&nbsp;
+<a href="RouteParameters.htm#returnBarriers">RouteParameters.returnBarriers</a>
+<a href="RouteParameters.htm#ignoreInvalidLocations">RouteParameters.ignoreInvalidLocations</a>
+</div>
+
+</div>
+
+<br/></div></body></html> 

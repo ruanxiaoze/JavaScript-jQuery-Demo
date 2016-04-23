@@ -1,0 +1,204 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>ArcGISTiledMapServiceLayer</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: ArcGISTiledMapServiceLayer</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	使用ArcGIS Server REST API提供的缓存地图服务资源工作。缓存服务访问的是高速缓存切片，而不是动态渲染图图片。对于动态地图服务，见<a href="dynamicmapservicelayer.htm">DynamicMapServiceLayer</a>。
+
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+<a href="layer.htm">esri.layers.Layer</a>
+  |_ <a href="tiledmapservicelayer.htm">esri.layers.TiledMapServiceLayer</a>
+        |_ esri.layers.ArcGISTiledMapServiceLayer
+</pre><H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#ArcGISTiledMapServiceLayerConst">esri.layers.ArcGISTiledMapServiceLayer(url, options?)</a></td>
+		<td class="syntaxTABLE">创建新的ArcGISTiledMapServiceLayer对象。URL是必需的参数，还接受一些可选参数。这些可选参数可以是任意顺序。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#copyright">copyright</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+地图服务定义的版权字符串。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#description">description</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+地图服务定义的地图描述。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#layerInfos">layerInfos</a></td>
+<td class="syntaxTABLE">
+<a href="layerinfo.htm">LayerInfo[]</a>
+</td>
+
+<td class="syntaxTABLE">
+返回服务里的有效图层和默认可见性。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#units">units</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+由服务定义的图层默认单位。如果图层是地图底图，地图是一样的单位。</td>
+		</tr>
+</table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="ArcGISTiledMapServiceLayerConst"></a><H4>esri.layers.ArcGISTiledMapServiceLayer(url, options?)</H4>
+		</div>
+
+<div class="detaildesc">创建新的ArcGISTiledMapServiceLayer对象。URL是必需的参数，还接受一些可选参数。这些可选参数可以是任意顺序。</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;String>
+<B>url</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			代表一个地图服务的ArcGIS Server REST资源的URL。例如：http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Portland/Portland_ESRI_LandBase_AGO/MapServer。更多构造URL的信息，见<a href="../jshelp/ags_rest.htm">服务目录和REST API</a>。
+			</td>
+			</tr>
+<tr>
+<td class="detailTABLE">
+&lt;Object>
+<B>options</B></td>
+<td class="detailTABLE">
+Optional	</td>
+<td class="detailTABLE">
+			可选参数。见选选项列表。
+			</td>
+			</tr>
+</table>
+
+<div class="detaildesc"><strong>可选项:</strong></div><table CLASS="detailTABLE" cellspacing="0" >
+<tr>
+			<td class="detailTABLE">
+&lt;Number>
+<B>displayLevels</B></td>
+			<td class="detailTABLE">
+			可以画出的级别列表。  <i>(As of v1.2)</i>
+<br/><br/>
+在下例中，假定有两个图层。第一个图层是ArcGIS在线街道地图图层，仅使用级别0到7。第二个图层有要用于级别8到12的更多新的街道数据。
+<pre>
+  var agoServiceURL = "http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer";
+  var agoLayer = new esri.layers.ArcGISTiledMapServiceLayer(agoServiceURL, { displayLevels:[0,1,2,3,4,5,6,7]});
+  map.addLayer(agoLayer);
+
+  var myServiceURL = "http://myserver/ArcGIS/rest/services/myservice/MapServer";
+  var myLayer = new esri.layers.ArcGISTiledMapServiceLayer(myServiceURL, { displayLevels:[8,9,10,11,12]});
+  map.addLayer(myLayer);
+</pre>
+			</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;String>
+<B>id</B></td>
+			<td class="detailTABLE">
+			指定给图层的Id。如果没有指定，esri.Map 指定该值。
+			</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Number>
+<B>opacity</B></td>
+			<td class="detailTABLE">
+			地图最初的透明度或不透明度。值范围从0.0到1.0，0.0是指100%透明，1.0指不透明。默认值是1.0。
+			</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;String[]>
+<B>tileServers</B></td>
+			<td class="detailTABLE">
+			能用于检索切片图像的REST endpoints的数组。 (<i>As of v1.1</i>)
+			</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Boolean>
+<B>visible</B></td>
+			<td class="detailTABLE">
+			图层的初始可见性。默认值是true.
+			</td>
+			</tr>
+</table>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="copyright"></a>
+&lt;String> copyright</H4></div>
+
+<div class="detaildesc">地图服务定义的版权字符串。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="description"></a>
+&lt;String> description</H4></div>
+
+<div class="detaildesc">地图服务定义的地图描述。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="layerInfos"></a>
+&lt;<a href="layerinfo.htm">LayerInfo[]</a>> layerInfos</H4></div>
+
+<div class="detaildesc">返回服务里的有效图层和默认可见性。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="units"></a>
+&lt;String> units</H4></div>
+
+<div class="detaildesc">由服务定义的图层默认单位。如果图层是地图底图，地图是一样的单位。</div>
+
+</div>
+
+<br/></div></body></html> 

@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>ArcGIS JavaScript API Overview</title>
+</head>
+
+<body>
+
+<div id="pageBanner">ArcGIS JavaScript API Overview</div>
+
+<div id="nstext">
+
+<!--***START TEXT - DO NOT WRITE ABOVE THIS LINE***-->
+
+<p>The ArcGIS JavaScript API is a lightweight way to embed your GIS maps and tasks 
+			in Web applications. It's easy to build and deploy applications built with this 
+			API. All you need is an ArcGIS Server available whose maps and tools you can 
+			use in your application.</p>
+		<h3>Why JavaScript?</h3>
+		<p>JavaScript is a language you can use to increase the interactivity of your web 
+			pages. JavaScript runs inside your browser immediately when something happens 
+			on the page, such as when someone clicks a button or pans a map. You don't have 
+			to wait for something to happen on the server, and the whole page does not 
+			blink or refresh. For this reason, JavaScript is an excellent choice for 
+			embedding maps in your applications.</p>
+		<p>You don't have to download or install anything in order to program with 
+			JavaScript. All web browsers know how to interpret it. In many cases, the JavaScript code can be embedded directly into the HTML page.</p>
+		<p>JavaScript is accessible to beginning programmers. Even if you haven't 
+			programmed with JavaScript before, you can learn how to build JavaScript 
+			applications by cutting and pasting example code into your HTML pages. In many 
+			cases, the example may be just what you need with only minor adjustments.</p>
+		<h3>What can you do with the ArcGIS JavaScript API?</h3>
+		<p>You can use the ArcGIS JavaScript API to bring maps and tasks from ArcGIS Server 
+			into your web applications. For example, you can:</p>
+		<ul>
+			<li>
+				Display an interactive map of your own data</li>
+			<li>
+				Execute a GIS model on the server and display the results</li>
+			<li>
+				Display your data on an ArcGIS Online base map</li>
+			<li>
+				Search for features or attributes in your GIS data and display the results</li>
+			<li>
+				Search for addresses and display the results</li>
+		</ul>
+		<p>You can use the ArcGIS JavaScript API to access information from several 
+			different servers in one application. One common reason you might do this is to 
+			display some of your own information on top of a base map from ArcGIS Online or 
+			from other web sources. In another scenario, you might use a model on one 
+			server and display the results on a map from a different server. This 
+			combination of information from multiple web sources is sometimes called a 
+			"mashup".</p>
+		<p>Remember that you don't need to have ArcGIS Server installed on your machine in 
+			order to program with the ArcGIS JavaScript API. You just need to have an 
+			ArcGIS Server available that you can access through a URL. ESRI has provided 
+			several sample servers that you can use as you practice writing JavaScript 
+			applications. The samples in this help system use the sample servers.</p>
+		<h3>What does the ArcGIS JavaScript API include?</h3>
+		<p>The ArcGIS JavaScript API provides the following resources for you to use in 
+			your web applications</p>
+		<ul>
+			<li>
+				<b>Maps</b> - The API supports display of both dynamic and cached (tiled) map 
+				services from ArcGIS Server. With the ArcGIS JavaScript API, you can display 
+				maps in any projection.</li>
+			<li>
+				<b>Graphics</b> - You can enhance your web applications by allowing users to 
+				draw graphics or by providing informational popup windows when the user clicks 
+				or hovers the mouse over a graphics feature on the map.</li>
+			<li>
+				<b>Tasks</b> - The API includes classes and methods for common GIS tasks:
+				<ul>
+					<li>
+						Querying</li>
+					<li>
+						Finding addresses</li>
+					<li>
+						Finding attributes</li>
+					<li>
+						Identifying features</li>
+					<li>
+						Geoprocessing</li>
+				</ul>
+			</li>
+			<li>
+				<b>Access to Dojo and other libraries</b> - The ArcGIS JavaScript API is built 
+				on the <a href="http://dojotoolkit.org/" target="_blank">Dojo JavaScript Toolkit</a>, providing you access to dijits (Dojo widgets) 
+				and other JavaScript tools. You can also integrate other libraries in your 
+				applications, such as the Google Chart API.</li></ul>
+		<h3>Getting Help</h3>
+		<p>This help system includes easy to advanced walkthroughs that explain how to use 
+			the ArcGIS JavaScript API. If you're new to JavaScript programming, start with 
+			the walkthroughs in the Getting Started section. If you already have some 
+			JavaScript experience, you can start by browsing the Examples or the API 
+			Reference.</p>
+
+		<h3>Other JavaScript APIs</h3>
+		<p>ESRI provides two other ways to embed ArcGIS Server functionality in your web 
+			pages with JavaScript:</p>
+		<ul>
+			<li>
+				<a href="http://resources.esri.com/arcgisserver/apis/javascript/gmaps/index.cfm?fa=home" target="_blank">
+					The ArcGIS JavaScript Extension for the Google Maps API</a> gives you a way 
+				to work with your GIS services in the framework of Google Maps and other Google 
+				APIs.</li>
+			<li>
+				<a href="http://resources.esri.com/arcgisserver/apis/javascript/ve/index.cfm?fa=home" target="_blank">
+					The ArcGIS JavaScript Extension for Virtual Earth</a> lets you access your 
+				GIS resources from a Microsoft Virtual Earth control in 2D or 3D.</li>
+		</ul>
+
+<!--***END TEXT - DO NOT WRITE BELOW THIS LINE***-->
+</div>
+
+</body>
+</html>

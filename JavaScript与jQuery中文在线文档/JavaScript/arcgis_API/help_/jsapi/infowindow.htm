@@ -1,0 +1,411 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>InfoWindow</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: InfoWindow</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	InfoWindow是一个HTML弹出消息。信息窗口通常包含<a href="graphic.htm">Graphic</a>的属性。在图形上的默认行为是单击图形后显示信息窗口。为了单击显示信息窗口， <a href="infotemplate.htm">InfoTemplate</a>是必须的。另外，信息窗口能够被用于在地图上显示自定义内容。
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.dijit.InfoWindow
+</pre>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#anchor">anchor</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+关于图形的信息窗口的位置。参数值见常量表。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#coords">coords</a></td>
+<td class="syntaxTABLE">
+<a href="point.htm">Point</a>
+</td>
+
+<td class="syntaxTABLE">
+信息窗口屏幕坐标的参照点。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#fixedAnchor">fixedAnchor</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+信息窗口总是在指定位置显示。参数值见常量表。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#isShowing">isShowing</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+确定当前信息窗口是否被显示在地图上。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>常量</H4>
+
+	<table CLASS="syntaxTABLE" cellspacing="0">
+	<tr>
+	<th class="tableheader" width="20%">常量</th>
+		<th class="tableheader">描述</th>
+	</tr>
+
+		<tr>
+		<td class="syntaxTABLE">ANCHOR_LOWERLEFT</td>
+			<td class="syntaxTABLE">	信息窗口位于点的左下方。	</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">ANCHOR_LOWERRIGHT</td>
+			<td class="syntaxTABLE">	信息窗口位于点的右下方。</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">ANCHOR_UPPERLEFT</td>
+			<td class="syntaxTABLE">	信息窗口位于点的左上方。</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">ANCHOR_UPPERRIGHT</td>
+			<td class="syntaxTABLE">		信息窗口位于点的右上方。</td>
+	</tr>
+
+</table>
+
+<H4 class=dtH4>方法表</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+		<th class="tableheader">方法</th>
+		<th class="tableheader">返回值</th>
+		<th class="tableheader">描述</th>
+		</tr>
+
+<tr>
+<td class="syntaxTABLE"><a href="#hide">hide()</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">隐藏信息窗口</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#move">move(point)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">移动信息窗口到指定屏幕点。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#resize">resize(width, height)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">修改信息窗口大小为指定的像数高和宽。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setContent">setContent(stringOrDOMNode)</a></td><td class="syntaxTABLE">
+<a href="infowindow.htm">InfoWindow</a>
+</td>
+<td class="syntaxTABLE">设置信息窗口中的内容。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setFixedAnchor">setFixedAnchor(anchor)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">设置信息窗口固定位置。有效值在常量表内列出。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setTitle">setTitle(title)</a></td><td class="syntaxTABLE">
+<a href="infowindow.htm">InfoWindow</a>
+</td>
+<td class="syntaxTABLE">设置信息窗口标题。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#show">show(point, anchor)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">在指定的屏幕点和固定点方向显示信息窗口。有效值在常量表中列出。</td>	</tr></table>
+
+<H4 class=dtH4>事件</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">事件</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#onHide">onHide()
+		</a></td>
+
+<td class="syntaxTABLE">当信息窗口被隐藏时触发。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onShow">onShow()
+		</a></td>
+
+<td class="syntaxTABLE">当信息窗口被可见时触发。</td>
+		</tr></table>
+
+<div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="anchor"></a>
+&lt;String> anchor</H4></div>
+
+<div class="detaildesc">关于图形的信息窗口的位置。参数值见常量表。</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> ANCHOR_UPPERRIGHT
+			</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="coords"></a>
+&lt;<a href="point.htm">Point</a>> coords</H4></div>
+
+<div class="detaildesc">信息窗口屏幕坐标的参照点。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="fixedAnchor"></a>
+&lt;String> fixedAnchor</H4></div>
+
+<div class="detaildesc">信息窗口总是在指定位置显示。参数值见常量表。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="isShowing"></a>
+&lt;Boolean> isShowing</H4></div>
+
+<div class="detaildesc">确定当前信息窗口是否被显示在地图上。</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+</div>
+
+<div class=sectionDivider>方法详细信息</div>
+<div class="detaildiv">
+		<div class="detailname"><a name="hide"></a><H4>
+hide()</H4></div>
+
+<div class="detaildesc">隐藏信息窗口</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onHide">onHide</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="move"></a><H4>
+move(point)</H4></div>
+
+<div class="detaildesc">移动信息窗口到指定屏幕点。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="point.htm">Point</a>> <B>point</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+            移动信息窗口时新的参考点。</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="resize"></a><H4>
+resize(width, height)</H4></div>
+
+<div class="detaildesc">修改信息窗口大小为指定的像数高和宽。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>width</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+            信息窗口新的像数宽度。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>height</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+            信息窗口新的像数高度。</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setContent"></a><H4>
+setContent(stringOrDOMNode)</H4></div>
+
+<div class="detaildesc">设置信息窗口中的内容。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="infowindow.htm">InfoWindow</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Object> <B>stringOrDOMNode</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+            信息窗口内容。可以是任何有效的html或DOM元素。</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setFixedAnchor"></a><H4>
+setFixedAnchor(anchor)</H4></div>
+
+<div class="detaildesc">设置信息窗口固定位置。有效值在常量表内列出。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>anchor</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+            不能被InfoWindow.show()覆盖的固定点。有效值见常量表。</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setTitle"></a><H4>
+setTitle(title)</H4></div>
+
+<div class="detaildesc">设置信息窗口标题。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="infowindow.htm">InfoWindow</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>title</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+            信息窗口的标题，可以是任意有效的html。</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="show"></a><H4>
+show(point, anchor)</H4></div>
+
+<div class="detaildesc">在指定的屏幕点和固定点方向显示信息窗口。有效值在常量表中列出。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Point> <B>point</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+            放置位置。
+</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>anchor</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">关于图形的信息窗口的位置。参数值见常量表。</td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onShow">onShow</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<H4 class=dtH4>Events Detail</H4>
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onHide"></a><H4>
+onHide()	</H4></div>
+
+
+<div class="detaildesc">当信息窗口被隐藏时触发。</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#hide">hide</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onShow"></a><H4>
+onShow()	</H4></div>
+
+
+<div class="detaildesc">当信息窗口被可见时触发。</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#show">show</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<br/></div></body></html> 

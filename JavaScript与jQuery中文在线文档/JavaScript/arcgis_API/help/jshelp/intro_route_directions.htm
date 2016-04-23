@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<meta name="keywords" content="ArcGIS JavaScript API" />
+		<link href="jsdoc.css" rel="stylesheet" type="text/css" />
+		<title>Getting driving directions</title>
+	</head>
+	<body>
+		<div id="pageBanner">Getting driving directions</div>
+		<div id="nstext">
+			<!--***START TEXT - DO NOT WRITE ABOVE THIS LINE***-->
+			<p>The <a href="../jsapi/routetask.htm">RouteTask</a> can return turn-by-turn 
+				driving directions between points. To get the directions, set <A href="../jsapi/routeparameters.htm#returndirections">
+					RouteParameters.returnDirections</A> to true.</p>
+			<p>You can retrieve the directions using <a href="../jsapi/routeresult.htm#directions">
+					RouteResult.directions</a>. By iterating through this <a href="../jsapi/directionsfeatureset.htm">
+					DirectionsFeatureSet</a>, you can print the directions and access geometry 
+				segments for each step of the directions. For example, the sample <a href="../jssamples/routetask_directions.html">
+					Get Driving Directions</a> creates hyperlinks for each step of the 
+				directions. The user can click a link and see a zoomed-in map that highlights 
+				the corresponding segment of the route.</p>
+			<p>The ArcGIS JavaScript API also allows you to draw the entire route at once 
+				through <a href="../jsapi/directionsfeatureset.htm#mergedgeometry">DirectionsFeatureSet.mergedGeometry</a>. 
+				The following code shows how you might do this:</p>
+			<pre>function showRoute(routeResults, barriers, gpMessages) {
+  var directions = routeResults[0].directions;
+  map.graphics.add(
+  new esri.Graphic(directions.mergedGeometry, routeSymbol));
+}
+</pre>
+			<p>If you decide to request directions by setting RouteParameters.returnDirections 
+				= true, you should not add the overhead of requesting routes (<a href="../jsapi/routeparameters.htm#returnroutes">RouteParameters.returnRoutes</a>) unless 
+				you need to access an attribute only included on the route. These attributes of 
+				the route could include the wait times and violation times associated with <a href="../jshelp/intro_route_time_windows.htm">
+					time window</a> problems, or walk times.</p>
+			<!--***END TEXT - DO NOT WRITE BELOW THIS LINE***-->
+		</div>
+	</body>
+</html>

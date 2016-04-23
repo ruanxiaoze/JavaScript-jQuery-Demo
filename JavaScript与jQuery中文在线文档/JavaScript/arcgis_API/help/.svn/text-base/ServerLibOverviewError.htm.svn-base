@@ -1,0 +1,25 @@
+﻿<HTML xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+  <HEAD>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <style>
+      code#c {color: green;} /* used for comments */
+      code#k {color: blue;} /* used for keywords */
+    </style>
+    <LINK REL="stylesheet" TYPE="text/css" HREF="\common\style\tabStyle.css">
+    <style type="text/css" media="all"> @import url(common/style/legacy.css);</style><script language="javascript" type="text/javascript" src="\common\scripts\tabBox.js"></script><title>Error: Engine only document</title><xml><MSHelp:Attr Name="Locale" Value="en-us" />
+      <MSHelp:Attr Name="TopicType" Value="kbArticle" />
+      <MSHelp:Attr Name="TargetOS" Value="Windows" />
+      <MSHelp:Attr Name="DocumentType" Value="Conceptual" />
+      <MSHelp:Attr Name="LinkGroup" Value="ArcGISDeveloperHelp" /></xml></HEAD>
+  <BODY topmargin="0" id="bodyID" class="dtBODY">
+    <div id="nsbanner"><br><div id="TitleRow" class="bannertitle">
+        <H1 class="dtH1">Error: Document unavailable</H1>
+      </div>
+    </div><br>
+    <div class="main">
+The document this link directs to is only available in the .NET Engine or Desktop SDK. 
+You can access it through the ESRI Developer Network (EDN) website by going to the 
+<a href="http://edndoc.esri.com/arcobjects/9.2/">documentation library for ArcObjects</a>.
+    </div>        
+  </BODY>
+</HTML>

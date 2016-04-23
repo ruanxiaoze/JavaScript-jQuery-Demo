@@ -1,0 +1,220 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>BufferParameters</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: BufferParameters</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	Sets the distances, units, and other parameters for a buffer operation.
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.tasks.BufferParameters
+</pre>
+
+<H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#BufferParametersConst">esri.tasks.BufferParameters()</a></td>
+		<td class="syntaxTABLE">Creates a new BufferParameters object.  The constructor takes no parameters.</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#bufferSpatialReference">bufferSpatialReference</a></td>
+<td class="syntaxTABLE">
+<a href="spatialreference.htm">SpatialReference</a>
+</td>
+
+<td class="syntaxTABLE">
+The spatial reference in which the geometries are buffered. 支持的空间参考列表，见<a href="../jshelp/pcs.htm">投影坐标系统</a> and <a href="../jshelp/gcs.htm">地理坐标系统</a>。 <br /><br />
+
+If <i>bufferSpatialReference</i> is not specified, the geometries are buffered in the spatial reference specified by <i>outSpatialReference</i>. If <i>outSpatialReference</i> is also not specified, they are buffered in the spatial reference of the <i>features</i>.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#distances">distances</a></td>
+<td class="syntaxTABLE">
+Number[]
+</td>
+
+<td class="syntaxTABLE">
+The distances the input <i>features</i> are buffered. The distance units are specified by <i>unit</i>.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#features">features</a></td>
+<td class="syntaxTABLE">
+<a href="graphic.htm">Graphic[]</a>
+</td>
+
+<td class="syntaxTABLE">
+The input graphic or feature to buffer.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#outSpatialReference">outSpatialReference</a></td>
+<td class="syntaxTABLE">
+<a href="spatialreference.htm">SpatialReference</a>
+</td>
+
+<td class="syntaxTABLE">
+The of the spatial reference for the returned geometries. 支持的空间参考列表，见<a href="../jshelp/pcs.htm">投影坐标系统</a> and <a href="../jshelp/gcs.htm">地理坐标系统</a>。<br /><br />
+
+If <i>outSpatialReference</i> is not specified, the output geometries are in the spatial reference specified by <i>bufferSR</i>. If <i>bufferSpatialReference</i> is also not specified, they are in the spatial reference of the <i>features</i>.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#unionResults">unionResults</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+If true, all geometries buffered at a given distance are unioned into a single (possibly multipart) polygon, and the unioned geometry is placed in the output array.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#unit">unit</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+The units for calculating each buffer distance.  If <i>unit</i> is not specified, the units are derived from <i>bufferSpatialReference</i>. If <i>bufferSpatialReference</i> is not specified, the units are derived from the <i>features</i>.  See the Constants table for values.
+
+<!-- <br /><br />For a list of valid units, see <a href="http://edndoc.esri.com/arcobjects/9.2/ComponentHelp/esriGeometry/esriSRUnitType.htm" target="_blank">esriSRUnitType Constants</a> and <a href="http://edndoc.esri.com/arcobjects/9.2/ComponentHelp/esriGeometry/esriSRUnit2Type.htm" target="_blank">esriSRUnit2Type Constants</a>. --></td>
+		</tr>
+</table>
+
+<H4 class=dtH4>常量</H4>
+
+	<table CLASS="syntaxTABLE" cellspacing="0">
+	<tr>
+	<th class="tableheader" width="20%">常量</th>
+		<th class="tableheader">描述</th>
+	</tr>
+
+		<tr>
+		<td class="syntaxTABLE">UNIT_FOOT</td>
+			<td class="syntaxTABLE">			Feet		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">UNIT_KILOMETER</td>
+			<td class="syntaxTABLE">			Kilometers		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">UNIT_METER</td>
+			<td class="syntaxTABLE">			Meters		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">UNIT_NAUTICAL_MILE</td>
+			<td class="syntaxTABLE">			Nautical Miles		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">UNIT_STATUTE_MILE</td>
+			<td class="syntaxTABLE">			Miles		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">UNIT_US_NAUTICAL_MILE</td>
+			<td class="syntaxTABLE">			US Nautical Miles		</td>
+	</tr>
+
+</table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="BufferParametersConst"></a><H4>esri.tasks.BufferParameters()</H4>
+		</div>
+
+<div class="detaildesc">Creates a new BufferParameters object.  The constructor takes no parameters.</div>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="bufferSpatialReference"></a>
+&lt;<a href="spatialreference.htm">SpatialReference</a>> bufferSpatialReference</H4></div>
+
+<div class="detaildesc">The spatial reference in which the geometries are buffered. 支持的空间参考列表，见<a href="../jshelp/pcs.htm">投影坐标系统</a> and <a href="../jshelp/gcs.htm">地理坐标系统</a>。 <br /><br />
+
+If <i>bufferSpatialReference</i> is not specified, the geometries are buffered in the spatial reference specified by <i>outSpatialReference</i>. If <i>outSpatialReference</i> is also not specified, they are buffered in the spatial reference of the <i>features</i>.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="distances"></a>
+&lt;Number[]> distances</H4></div>
+
+<div class="detaildesc">The distances the input <i>features</i> are buffered. The distance units are specified by <i>unit</i>.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="features"></a>
+&lt;<a href="graphic.htm">Graphic[]</a>> features</H4></div>
+
+<div class="detaildesc">The input graphic or feature to buffer.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="outSpatialReference"></a>
+&lt;<a href="spatialreference.htm">SpatialReference</a>> outSpatialReference</H4></div>
+
+<div class="detaildesc">The of the spatial reference for the returned geometries. 支持的空间参考列表，见<a href="../jshelp/pcs.htm">投影坐标系统</a> and <a href="../jshelp/gcs.htm">地理坐标系统</a>。<br /><br />
+
+If <i>outSpatialReference</i> is not specified, the output geometries are in the spatial reference specified by <i>bufferSR</i>. If <i>bufferSpatialReference</i> is also not specified, they are in the spatial reference of the <i>features</i>.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="unionResults"></a>
+&lt;Boolean> unionResults</H4></div>
+
+<div class="detaildesc">If true, all geometries buffered at a given distance are unioned into a single (possibly multipart) polygon, and the unioned geometry is placed in the output array.</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> false
+			</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="unit"></a>
+&lt;Number> unit</H4></div>
+
+<div class="detaildesc">The units for calculating each buffer distance.  If <i>unit</i> is not specified, the units are derived from <i>bufferSpatialReference</i>. If <i>bufferSpatialReference</i> is not specified, the units are derived from the <i>features</i>.  See the Constants table for values.
+
+<!-- <br /><br />For a list of valid units, see <a href="http://edndoc.esri.com/arcobjects/9.2/ComponentHelp/esriGeometry/esriSRUnitType.htm" target="_blank">esriSRUnitType Constants</a> and <a href="http://edndoc.esri.com/arcobjects/9.2/ComponentHelp/esriGeometry/esriSRUnit2Type.htm" target="_blank">esriSRUnit2Type Constants</a>. --></div>
+
+</div>
+
+<br/></div></body></html> 

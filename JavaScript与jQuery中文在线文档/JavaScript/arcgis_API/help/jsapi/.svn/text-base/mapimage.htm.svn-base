@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>MapImage</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: MapImage</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	Represents the data object for the dynamically generated map. This is returned after a succesful export operation on <a href="arcgisdynamicmapservicelayer.htm">ArcGISDynamicMapServiceLayer</a> and <a href="geoprocessor.htm#getResultImage">Geoprocessor.getResultImage</a> in the callback and in the event result.  MapImage has no constructor.
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.layers.MapImage
+</pre>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#extent">extent</a></td>
+<td class="syntaxTABLE">
+<a href="extent.htm">Extent</a>
+</td>
+
+<td class="syntaxTABLE">
+Extent of exported map.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#height">height</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+Requested image height in pixels.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#href">href</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+URL to returned image.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#scale">scale</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+Scale of requested dynamic map.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#width">width</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+Requested image width in pixels.</td>
+		</tr>
+</table>
+
+<div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="extent"></a>
+&lt;<a href="extent.htm">Extent</a>> extent</H4></div>
+
+<div class="detaildesc">Extent of exported map.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="height"></a>
+&lt;Number> height</H4></div>
+
+<div class="detaildesc">Requested image height in pixels.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="href"></a>
+&lt;String> href</H4></div>
+
+<div class="detaildesc">URL to returned image.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="scale"></a>
+&lt;Number> scale</H4></div>
+
+<div class="detaildesc">Scale of requested dynamic map.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="width"></a>
+&lt;Number> width</H4></div>
+
+<div class="detaildesc">Requested image width in pixels.</div>
+
+</div>
+
+<br/></div></body></html> 

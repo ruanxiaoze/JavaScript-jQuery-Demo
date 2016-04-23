@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>Fused Levels</title>
+
+    <script type="text/javascript">djConfig = { isDebug:true };</script>
+    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css">
+    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"></script>
+
+    <script type="text/javascript">
+      dojo.require("esri.map");
+      dojo.require("esri.layers.agstiled");
+
+      var customLods = [];
+      var loadCount = 0;
+
+      function init() {
+        //ESRI imagery from ArcGIS Online
+        esriImageryLayer = new esri.layers.ArcGISTiledMapServiceLayer
+                ("http://services.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer",
+                {displayLevels:[0,1,2,3,4,5,6,7,8,9,10,11]}); //Levels at which this layer will be visible
+        if (esriImageryLayer.loaded) {
+          addLods(esriImageryLayer);
+        } else {
+          dojo.connect(esriImageryLayer, "onLoad", addLods);
+        }
+
+        //Content Sharing Program imagery from ArcGIS Online
+        cspImageryLayer = new esri.layers.ArcGISTiledMapServiceLayer
+                ("http://services.arcgisonline.com/ArcGIS/rest/services/CSP_Imagery_World_2D/MapServer",
+                {displayLevels:[12,13,14,15,16,17]}); //Levels at which this layer will be visible
+        if (cspImageryLayer.loaded) {
+          addLods(cspImageryLayer);
+        } else {
+          dojo.connect(cspImageryLayer, "onLoad", addLods);
+        }
+      }
+
+      //Fill array with levels of detail
+      function addLods(lyr) {
+        customLods = customLods.concat(lyr.tileInfo.lods);
+        loadCount++;
+
+        if (loadCount === 2) {
+          initMap();
+        }
+      }
+
+      //Create the map and use the custom levels of detail
+      function initMap() {
+        var map = new esri.Map("map", {
+          lods: customLods,
+          extent: new esri.geometry.Extent(-82.05, 34.87, -80.05, 34.99, new esri.SpatialReference({wkid:4326}))
+        });
+        dojo.connect(map,"onExtentChange", changeScale);
+        map.addLayer(esriImageryLayer);
+        map.addLayer(cspImageryLayer);
+      }
+
+      //Report which layer is being shown
+      function changeScale(extent, delta, outLevelChange, outLod) {
+        dojo.byId("scale").innerHTML = "LOD Level: <i>" + outLod.level;
+        if (outLod.level < 12){
+          dojo.byId("visibleLayer").innerHTML = "Layer: <i>ESRI_Imagery_World_2D</i>";
+        }
+        else{
+          dojo.byId("visibleLayer").innerHTML = "Layer: <i>CSP_Imagery_World_2D</i>";
+        }
+      }
+
+      dojo.addOnLoad(init);
+    </script>
+
+  </head>
+  <body>
+    <div id="map" class="tundra" style="position:relative; width:600px; height:400px; border:2px solid #000;">
+    <span id="scale" style="position:absolute; right:10px; bottom:35px; z-index:100; color:Yellow; font-size: 150%;"></span>
+    <span id="visibleLayer" style="position:absolute; right:10px; bottom:10px; z-index:100; color:Yellow; font-size: 150%;"></span></div>
+    <p>Zoom in to the city below to switch to user-contributed imagery from ESRI's content sharing program</p>
+  </body>
+</html>

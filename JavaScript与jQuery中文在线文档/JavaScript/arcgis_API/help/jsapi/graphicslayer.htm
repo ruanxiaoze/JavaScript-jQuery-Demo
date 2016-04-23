@@ -1,0 +1,610 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>GraphicsLayer</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: GraphicsLayer</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	图层包含一个或多个<a href="graphic.htm">Graphic</a>要素。每个地图默认包含一个GraphicsLayer，使用<a href="map.htm#graphics">Map.Graphics</a>进入。v1.4开始，可以创建自己的图形图层并加入地图。图形图层能够在图形图层组中被重新排序。无论如何，<a href="map.htm#graphics">Map.Graphics</a>中图形图层总是在最上面。另外，所有图形图层总是在<a href="tiledmapservicelayer.htm">TiledMapServiceLayers</a>和<a href="dynamicmapservicelayer.htm">DynamicMapServiceLayers</a>之上。
+   
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+<a href="layer.htm">esri.layers.Layer</a>
+  |_ esri.layers.GraphicsLayer
+</pre><H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#GraphicsLayerConst1">esri.layers.GraphicsLayer()</a></td>
+		<td class="syntaxTABLE">新建一个GraphicsLayer对象。</td>
+		</tr>
+<tr><td class="syntaxTABLE"><a href="#GraphicsLayerConst2">esri.layers.GraphicsLayer(options?)</a></td>
+		<td class="syntaxTABLE">通过参数新建一个GraphicsLayer对象。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#graphics">graphics</a></td>
+<td class="syntaxTABLE">
+<a href="graphic.htm">Graphic[]</a>
+</td>
+
+<td class="syntaxTABLE">
+组成图层的图形数组。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#renderer">renderer</a></td>
+<td class="syntaxTABLE">
+<a href="renderer.htm">Renderer</a>
+</td>
+
+<td class="syntaxTABLE">
+GraphicsLayer的渲染器。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>方法表</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+		<th class="tableheader">方法</th>
+		<th class="tableheader">返回值</th>
+		<th class="tableheader">描述</th>
+		</tr>
+
+<tr>
+<td class="syntaxTABLE"><a href="#add">add(graphic)</a></td><td class="syntaxTABLE">
+<a href="graphic.htm">Graphic</a>
+</td>
+<td class="syntaxTABLE">增加图形。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#clear">clear()</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">清除所有图形。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#disableMouseEvents">disableMouseEvents()</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">在图形图层上禁用所有鼠标事件。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#enableMouseEvents">enableMouseEvents()</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">在图形图层上启用所有鼠标事件。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#remove">remove(graphic)</a></td><td class="syntaxTABLE">
+<a href="graphic.htm">Graphic</a>
+</td>
+<td class="syntaxTABLE">删除图形。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setRenderer">setRenderer(renderer)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">为图形图层设置渲染器。</td>	</tr></table>
+
+<H4 class=dtH4>事件</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">事件</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#onClick">onClick(event)
+		</a></td>
+
+<td class="syntaxTABLE">当图形被单击时触发。<!--***--></td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onGraphicAdd">onGraphicAdd(graphic)
+		</a></td>
+
+<td class="syntaxTABLE">图形被增加到图形图层时触发。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onGraphicRemove">onGraphicRemove(graphic)
+		</a></td>
+
+<td class="syntaxTABLE">当图形被从图形图层中删除时触发。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onGraphicsClear">onGraphicsClear()
+		</a></td>
+
+<td class="syntaxTABLE">当清除图形图层中所有图形时触发。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onMouseDown">onMouseDown(event)
+		</a></td>
+
+<td class="syntaxTABLE">当鼠标按钮被按下并且鼠标指针在图形上时触发。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onMouseDrag">onMouseDrag(event)
+		</a></td>
+
+<td class="syntaxTABLE">拖拽鼠标直到鼠标被释放期间触发。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onMouseMove">onMouseMove(event)
+		</a></td>
+
+<td class="syntaxTABLE">鼠标在图形图层上的图形穿过时触发。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onMouseOut">onMouseOut(event)
+		</a></td>
+
+<td class="syntaxTABLE">鼠标从GraphicsLayer上的图形上移出时触发。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onMouseOver">onMouseOver(event)
+		</a></td>
+
+<td class="syntaxTABLE">鼠标第一次进入GraphicsLayer的图形中时触发。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onMouseUp">onMouseUp(event)
+		</a></td>
+
+<td class="syntaxTABLE">当鼠标按钮被释放并且鼠标指针在一个图形上时触发。</td>
+		</tr></table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="GraphicsLayerConst1"></a><H4>esri.layers.GraphicsLayer()</H4>
+		</div>
+
+<div class="detaildesc">新建一个GraphicsLayer对象。<i> (As of v1.4)</i></div>
+
+</div><div class="detaildiv"><div class="detailname"><a name="GraphicsLayerConst2"></a><H4>esri.layers.GraphicsLayer(options?)</H4>
+		</div>
+
+<div class="detaildesc">通过参数新建一个GraphicsLayer对象。<i> (As of v1.4)</i></div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;Object>
+<B>options</B></td>
+<td class="detailTABLE">
+可选项	</td>
+<td class="detailTABLE">
+			为参数设置选项列表
+			</td>
+			</tr>
+</table>
+
+<div class="detaildesc"><strong>可选项:</strong></div><table CLASS="detailTABLE" cellspacing="0" >
+<tr>
+			<td class="detailTABLE">
+&lt;Boolean>
+<B>displayOnPan</B></td>
+			<td class="detailTABLE">
+			当值为true时，图形在移动期间被显示。 当值为false，图形在移动期间被关掉。 设置值为false可以提高Internet Explorer的性能。 默认值是true。
+			</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;String>
+<B>id</B></td>
+			<td class="detailTABLE">
+			指定的图层ID。如果没有指定，<code>esri.Map</code>指定该值。
+			</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Boolean>
+<B>visible</B></td>
+			<td class="detailTABLE">
+			图层的初始可见性。默认值是true。
+			</td>
+			</tr>
+</table>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="graphics"></a>
+&lt;<a href="graphic.htm">Graphic[]</a>> graphics</H4></div>
+
+<div class="detaildesc">组成图层的图形数组。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="renderer"></a>
+&lt;<a href="renderer.htm">Renderer</a>> renderer</H4></div>
+
+<div class="detaildesc">GraphicsLayer的渲染器。<i> (As of v1.4)</i></div>
+
+</div>
+
+<div class=sectionDivider>方法详细信息</div>
+<div class="detaildiv">
+		<div class="detailname"><a name="add"></a><H4>
+add(graphic)</H4></div>
+
+<div class="detaildesc">增加图形。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="graphic.htm">Graphic</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="graphic.htm">Graphic</a>> <B>graphic</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+要增加的图形。</td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onGraphicAdd">onGraphicAdd</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="clear"></a><H4>
+clear()</H4></div>
+
+<div class="detaildesc">清除所有图形。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onGraphicsClear">onGraphicsClear</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="disableMouseEvents"></a><H4>
+disableMouseEvents()</H4></div>
+
+<div class="detaildesc">在图形图层上禁用所有鼠标事件。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="enableMouseEvents"></a><H4>
+enableMouseEvents()</H4></div>
+
+<div class="detaildesc">在图形图层上启用所有鼠标事件。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="remove"></a><H4>
+remove(graphic)</H4></div>
+
+<div class="detaildesc">删除图形。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="graphic.htm">Graphic</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="graphic.htm">Graphic</a>> <B>graphic</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+要删除的图形。</td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onGraphicRemove">onGraphicRemove</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setRenderer"></a><H4>
+setRenderer(renderer)</H4></div>
+
+<div class="detaildesc">为图形图层设置渲染器。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="renderer.htm">Renderer</a>> <B>renderer</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+            用于图形的渲染器。</td>
+			</tr>
+</table>
+
+</div>
+
+<H4 class=dtH4>Events Detail</H4>
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onClick"></a><H4>
+onClick(event)	</H4></div>
+
+
+<div class="detaildesc">当图形被单击时触发。<!--***--></div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;Object> <B>event</B>
+			</td>
+
+<td class="detailTABLE">
+ 			返回对象包含screenPoint, mapPoint, 和<a href="graphic.htm">Graphic</a>
+			</td>
+			</tr>
+
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onGraphicAdd"></a><H4>
+onGraphicAdd(graphic)	</H4></div>
+
+
+<div class="detaildesc">图形被增加到图形图层时触发。</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="graphic.htm">Graphic</a>> <B>graphic</B>
+			</td>
+
+<td class="detailTABLE">
+ 			增加的图形。
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#add">add</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onGraphicRemove"></a><H4>
+onGraphicRemove(graphic)	</H4></div>
+
+
+<div class="detaildesc">当图形被从图形图层中删除时触发。</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="graphic.htm">Graphic</a>> <B>graphic</B>
+			</td>
+
+<td class="detailTABLE">
+ 			删除的图形。</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#remove">remove</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onGraphicsClear"></a><H4>
+onGraphicsClear()	</H4></div>
+
+
+<div class="detaildesc">当清除图形图层中所有图形时触发。</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#clear">clear</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onMouseDown"></a><H4>
+onMouseDown(event)	</H4></div>
+
+
+<div class="detaildesc">当鼠标按钮被按下并且鼠标指针在图形上时触发。</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;Object> <B>event</B>
+			</td>
+
+<td class="detailTABLE">
+ 			返回对象包含screenPoint, mapPoint, 和<a href="graphic.htm">Graphic</a>
+			</td>
+			</tr>
+
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onMouseDrag"></a><H4>
+onMouseDrag(event)	</H4></div>
+
+
+<div class="detaildesc">拖拽鼠标直到鼠标被释放期间触发。</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;Object> <B>event</B>
+			</td>
+
+<td class="detailTABLE">
+ 			结果可以说任何JavaScript MouseEvent或者屏幕点或地图点的x和y坐标。
+			</td>
+			</tr>
+
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onMouseMove"></a><H4>
+onMouseMove(event)	</H4></div>
+
+
+<div class="detaildesc">鼠标在图形图层上的图形穿过时触发。</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;Object> <B>event</B>
+			</td>
+
+<td class="detailTABLE">
+ 			返回对象包含screenPoint, mapPoint, 和<a href="graphic.htm">Graphic</a>
+			</td>
+			</tr>
+
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onMouseOut"></a><H4>
+onMouseOut(event)	</H4></div>
+
+
+<div class="detaildesc">鼠标从GraphicsLayer上的图形上移出时触发。</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;Object> <B>event</B>
+			</td>
+
+<td class="detailTABLE">
+ 			返回对象包含screenPoint, mapPoint, 和<a href="graphic.htm">Graphic</a>
+			</td>
+			</tr>
+
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onMouseOver"></a><H4>
+onMouseOver(event)	</H4></div>
+
+
+<div class="detaildesc">鼠标第一次进入GraphicsLayer的图形中时触发。</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;Object> <B>event</B>
+			</td>
+
+<td class="detailTABLE">
+ 			返回对象包含screenPoint, mapPoint, 和<a href="graphic.htm">Graphic</a>。
+			</td>
+			</tr>
+
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onMouseUp"></a><H4>
+onMouseUp(event)	</H4></div>
+
+
+<div class="detaildesc">当鼠标按钮被释放并且鼠标指针在一个图形上时触发。</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;Object> <B>event</B>
+			</td>
+
+<td class="detailTABLE">
+ 			返回对象包含screenPoint, mapPoint, 和<a href="graphic.htm">Graphic</a>
+			</td>
+			</tr>
+
+</table>
+
+</div>
+
+<br/></div></body></html> 

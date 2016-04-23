@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+  <title>Simplify a polygon</title>
+
+  <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css">
+  <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"></script>
+
+  <script type="text/javascript">
+    dojo.require("esri.map");
+    dojo.require("esri.tasks.geometry");
+    dojo.require("esri.geometry");
+
+    var map = null;
+    var gsvc = null;
+    var qtask = null;
+    var polygonGraphic = null;
+    var queryGraphic = null;
+
+    function initialize() {
+      map = new esri.Map("map");
+      dojo.connect(map, "onLoad", function () {
+        drawPolygon();
+      });
+      var layer = new esri.layers.ArcGISTiledMapServiceLayer("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Portland/ESRI_LandBase_WebMercator/MapServer/");
+      map.addLayer(layer);
+      map.setExtent(new esri.geometry.Extent(-13669046, 5696984, -13666179, 5698895, new esri.SpatialReference({wkid: 102113})));
+
+      gsvc = new esri.tasks.GeometryService("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Geometry/GeometryServer");
+      qtask = new esri.tasks.QueryTask("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Portland/ESRI_LandBase_WebMercator/MapServer/1");
+
+    }
+
+    function drawPolygon() {
+      var latOffset, lonOffset, center, lat, lon, points;
+
+      ///// Get map center
+      center = map.extent.getCenter();
+      lat = center.y;
+      lon = center.x + 500;
+
+      ///// Create a Green Polygon
+      latOffset = 500;
+      lonOffset = 500;
+      points = [
+        new esri.geometry.Point(lon - lonOffset, lat),
+        new esri.geometry.Point(lon, lat + latOffset),
+        new esri.geometry.Point(lon + lonOffset, lat),
+        new esri.geometry.Point(lon, lat - latOffset),
+        new esri.geometry.Point(lon - lonOffset, lat),
+        new esri.geometry.Point(lon - 2 * lonOffset, lat + latOffset),
+        new esri.geometry.Point(lon - 3 * lonOffset, lat),
+        new esri.geometry.Point(lon - 2 * lonOffset, lat - latOffset),
+        new esri.geometry.Point(lon - 1.5 * lonOffset, lat + latOffset),
+        new esri.geometry.Point(lon - lonOffset, lat)
+      ];
+      var polygon = new esri.geometry.Polygon();
+      polygon.addRing(points);
+      polygon.spatialReference = new esri.SpatialReference({ wkid: 102113});
+
+      // Add the polygon to map
+      var symbol = new esri.symbol.SimpleFillSymbol().setStyle(esri.symbol.SimpleFillSymbol.STYLE_SOLID);
+      polygonGraphic = new esri.Graphic(polygon, symbol);
+      map.graphics.add(polygonGraphic);
+    }
+
+    function doSimplify() {
+      gsvc.simplify([ polygonGraphic ], simplifyCallback);
+    }
+
+    function simplifyCallback(features) {
+      alert("Number of Rings returned by Simplify operation = " + features[0].geometry.rings.length);
+      doQuery(features[0]); // select a ring to do query
+    }
+
+    function doQuery(queryGraphic) {
+      var query = new esri.tasks.Query();
+      //query.spatialRelationship = esri.tasks.Query.SPATIAL_REL_INTERSECTS;
+      query.spatialRelationship = esri.tasks.Query.SPATIAL_REL_CONTAINS;
+      query.geometry = queryGraphic.geometry;
+      query.returnGeometry = true;
+      qtask.execute(query, queryCallback);
+    }
+
+    function queryCallback(featureSet) {
+      map.graphics.remove(queryGraphic);
+      var symbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([0,0,255,0.65]), 2), new dojo.Color([0,0,255,0.35]));
+      var features = featureSet.features;
+      var polys = new esri.geometry.Polygon();
+      //For performance, push all featureSet polygons into polys geometry.
+      //Users will not be able to query individual polygons, but the display will be faster
+      for (var j=0, jl=features.length; j<jl; j++) {
+        var featureGeom = features[j].geometry;
+        for (var k=0, kl=featureGeom.rings.length; k<kl; k++) {
+          var featureGeomRing = featureGeom.rings[k];
+          polys.addRing(featureGeomRing);
+        }
+      }
+      queryGraphic = new esri.Graphic(polys,symbol)
+      map.graphics.add(queryGraphic);
+    }
+
+    dojo.addOnLoad(initialize);
+  </script>
+
+</head>
+
+<body class="tundra">
+  Many spatial operations require topologically correct geometry.
+  <br/><input type="button" value="Simplify the polygon and Do a Query with simplified polygon" onclick="doSimplify();" />
+  <br/>If you try to use the self-intersecting geometry above without simplifying it you will get incorrect results.
+  <br/><input type="button" value="Execute query task without simplifying polygon" onclick="doQuery(polygonGraphic);" />
+  <div id="map" style="width:600px; height:400px; border:1px solid #000;"></div>
+</body>
+
+</html>

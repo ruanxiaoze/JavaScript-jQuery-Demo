@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>Directions</title>
+
+    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css">
+    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"></script>
+
+    <style type="text/css" media="screen">
+      .segment { cursor:pointer; padding-top:3px; padding-bottom:3px; }
+    </style>
+
+    <script type="text/javascript">
+      dojo.require("esri.map");
+      dojo.require("esri.tasks.locator");
+      dojo.require("esri.tasks.route");
+      dojo.require("esri.utils");
+
+      var map, locator, routeTask, routeParams, routes = [];
+      var fromSymbol, toSymbol, routeSymbol, segmentSymbol;
+      var from, to, directions, directionFeatures, segmentGraphic;
+
+      function init() {
+        esri.config.defaults.io.proxyUrl = "/proxy/proxy.ashx";
+
+        map = new esri.Map("map", {
+          extent:new esri.geometry.Extent({ xmin:-120, ymin:32, xmax:-112, ymax:37, spatialReference:{ wkid:4326 } })
+        });
+
+        map.addLayer(new esri.layers.ArcGISTiledMapServiceLayer("http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer"));
+
+        locator = new esri.tasks.Locator("http://tasks.arcgisonline.com/ArcGIS/rest/services/Locators/TA_Address_NA/GeocodeServer");
+        dojo.connect(locator, "onError", errorHandler);
+
+        routeTask = new esri.tasks.RouteTask("http://tasks.arcgisonline.com/ArcGIS/rest/services/NetworkAnalysis/ESRI_Route_NA/NAServer/Route");
+        routeParams = new esri.tasks.RouteParameters();
+        routeParams.stops = new esri.tasks.FeatureSet();
+        routeParams.returnRoutes = false;
+        routeParams.returnDirections = true;
+        routeParams.directionsLengthUnits = esri.Units.MILES;
+        routeParams.outSpatialReference = new esri.SpatialReference({ wkid:4326 });
+
+        dojo.connect(routeTask, "onSolveComplete", showRoute);
+        dojo.connect(routeTask, "onError", errorHandler);
+
+        //Configure symbols to be used for destinations and route segments
+        fromSymbol = new esri.symbol.SimpleMarkerSymbol().setColor(new dojo.Color([0,255,0]));
+        toSymbol = new esri.symbol.SimpleMarkerSymbol().setColor(new dojo.Color([255,0,0]));
+
+        routeSymbol = new esri.symbol.SimpleLineSymbol().setColor(new dojo.Color([0,0,255,0.5])).setWidth(4);
+        segmentSymbol = new esri.symbol.SimpleLineSymbol().setColor(new dojo.Color([255,0,0,0.5])).setWidth(8);
+      }
+
+      dojo.addOnLoad(init);
+
+      function getDirections() {
+        routeParams.stops.features = [];
+        map.graphics.clear();
+        segmentGraphic = null;
+
+        //Parse and geocode "from" address
+        var fromArr = dojo.byId("fromTxf").value.split(","),
+            fromAddress = { Address:fromArr[0], City:fromArr[1], State:fromArr[2], Zip:fromArr[3] };
+        locator.addressToLocations(fromAddress, ["Loc_name"], function(addressCandidates) { configureRoute(addressCandidates, "from"); });
+
+        //Parse and geocode "to" address
+        var toArr = dojo.byId("toTxf").value.split(","),
+            toAddress = { Address:toArr[0], City:toArr[1], State:toArr[2], Zip:toArr[3] };
+        locator.addressToLocations(toAddress, ["Loc_name"], function(addressCandidates) { configureRoute(addressCandidates, "to"); });
+      }
+
+
+      function configureRoute(addressCandidates, type) {
+        var stop = null, score = 0;
+
+        //Get the address match with the top score
+        dojo.forEach(addressCandidates, function(candidate) {
+          if (candidate.score > score && candidate.attributes.Loc_name === "US_RoofTop") {
+            stop = candidate;
+            score = candidate.score;
+          }
+        });
+
+        //Set the best address match as a stop on the route
+        if (type === "from") {
+          routeParams.stops.features[0] = map.graphics.add(new esri.Graphic(stop.location, fromSymbol, { address:stop.address, score:stop.score }));
+        }
+        else if (type === "to") {
+          routeParams.stops.features[1] = map.graphics.add(new esri.Graphic(stop.location, toSymbol, { address:stop.address, score:stop.score }));
+        }
+
+        //If both the "to" and the "from" addresses are set, solve the route
+        if (routeParams.stops.features.length === 2) {
+          routeTask.solve(routeParams);
+        }
+      }
+
+      function showRoute(routeResults, barriers, messages) {
+        directions = routeResults[0].directions;
+        directionFeatures = directions.features;
+
+        //Add route to the map
+        map.graphics.add(new esri.Graphic(directions.mergedGeometry, routeSymbol));
+
+        //Display the total time and distance of the route
+        dojo.byId("summary").innerHTML = "<br /> &nbsp; Total distance: " + formatDistance(directions.totalLength, "miles") + "<br /> &nbsp; Total time: " + formatTime(directions.totalTime);
+
+        //List the directions and create hyperlinks for each route segment
+        var dirStrings = ["<ol>"];
+        dojo.forEach(routeResults[0].directions.features, function(feature, i) {
+          dirStrings.push("<li onclick='zoomToSegment(" + i + "); return false;' class=\"segment\"><a href=\"#\">" + feature.attributes.text + " (" + formatDistance(feature.attributes.length ,"miles") + ", " + formatTime(feature.attributes.time) + ")</a></li>");
+        });
+        dirStrings.push("</ol>");
+        dojo.byId("directions").innerHTML = dirStrings.join("");
+
+        zoomToFullRoute();
+      }
+
+      //Display any errors that were caught when attempting to solve the rotue
+      function errorHandler(err) {
+        alert("An error occured\n" + err.message + "\n" + err.details.join("\n"));
+      }
+
+      //Zoom to the appropriate segment when the user clicks a hyperlink in the directions list
+      function zoomToSegment(index) {
+        var segment = directionFeatures[index];
+        map.setExtent(segment.geometry.getExtent(), true);
+        if (! segmentGraphic) {
+          segmentGraphic = map.graphics.add(new esri.Graphic(segment.geometry, segmentSymbol));
+        }
+        else {
+          segmentGraphic.setGeometry(segment.geometry);
+        }
+      }
+
+      function zoomToFullRoute() {
+        map.graphics.remove(segmentGraphic);
+        segmentGraphic = null;
+        map.setExtent(directions.extent, true);
+      }
+
+      //Format the time as hours and minutes
+      function formatTime(time) {
+        var hr = Math.floor(time / 60), //Important to use math.floor with hours
+            min = Math.round(time % 60);
+
+        if (hr < 1 && min < 1) {
+          return "";
+        }
+        else if (hr < 1) {
+          return min + " minute(s)";
+        }
+
+        return hr + " hour(s) " + min + " minute(s)";
+      }
+
+      //Round the distance to the nearest hundredth of a unit
+      function formatDistance(dist, units) {
+        var d = Math.round(dist * 100) / 100;
+        if (d === 0) {
+          return ""
+        }
+
+        return d + " " + units;
+      }
+    </script>
+
+  </head>
+  <body class="tundra">
+    <input type="text" id="fromTxf" value="380 New York St, Redlands, CA, 92373" size="30" />
+    <input type="text" id="toTxf" value="111 W Harbor Dr, San Diego, CA, 92101" size="30" />
+    <button onclick="getDirections();">Get Directions</button>
+    <br /><br />
+    <table>
+      <tbody>
+        <tr>
+          <td>
+            <div id="map" style="width:600px; height:400px; border:1px solid #000;"></div>
+          </td>
+          <td valign="top">
+            <div style="width:400px; height:400px; overflow:auto; border:1px solid #000;">
+              <div id="summary" onclick="zoomToFullRoute();" class="segment"></div>
+              <div id="directions"></div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <ol>
+      <li>Enter from/to address (format: &lt;Street, City, State, Zip&gt;).</li>
+      <li>Click the 'Get Directions' to get directions.</li>
+      <li>Click an item in the directions to zoom to that segment.</li>
+    </ol>
+  </body>
+</html>

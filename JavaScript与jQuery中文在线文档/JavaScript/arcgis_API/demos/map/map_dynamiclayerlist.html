@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>Dynamically Create Map Service Layer List</title>
+    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css">
+    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"></script>
+
+    <script type="text/javascript">
+      dojo.require("esri.map");
+
+      var layer, map, visible = [];
+
+      function init() {
+        map = new esri.Map("map");
+
+        layer = new esri.layers.ArcGISDynamicMapServiceLayer("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StatesCitiesRivers_USA/MapServer");
+
+        if (layer.loaded) {
+          buildLayerList(layer);
+        }
+        else {
+          dojo.connect(layer, "onLoad", buildLayerList);
+        }
+      }
+
+      function buildLayerList(layer) {
+        var infos = layer.layerInfos, info;
+        var items = [];
+        for (var i=0, il=infos.length; i<il; i++) {
+          info = infos[i];
+          if (info.defaultVisibility) {
+            visible.push(info.id);
+          }
+          items[i] = "<input type='checkbox' class='list_item' checked='" + (info.defaultVisibility ? "checked" : "") + "' id='" + info.id + "' onclick='updateLayerVisibility();' /><label for='" + info.id + "'>" + info.name + "</label>";
+        }
+        dojo.byId("layer_list").innerHTML = items.join();
+
+        layer.setVisibleLayers(visible);
+        map.addLayer(layer);
+      }
+
+      function updateLayerVisibility() {
+        var inputs = dojo.query(".list_item"), input;
+        visible = [];
+        for (var i=0, il=inputs.length; i<il; i++) {
+          if (inputs[i].checked) {
+            visible.push(inputs[i].id);
+          }
+        }
+        layer.setVisibleLayers(visible);
+      }
+
+      dojo.addOnLoad(init);
+    </script>
+
+
+  </head>
+  <body>
+    This sample loads an ArcGISDynamicMapServiceLayer.<br />
+    It determines the layers in the map service and presents them as checkboxes that can be used to toggle their visibility.<br />
+    <br />
+    Layer List : <span id="layer_list"></span><br />
+    <br />
+    <div id="map" class="tundra" style="width:600px; height:400px; border:1px solid #000;"></div>
+  </body>
+</html>

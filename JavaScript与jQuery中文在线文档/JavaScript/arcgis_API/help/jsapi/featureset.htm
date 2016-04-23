@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>FeatureSet</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: FeatureSet</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	ArcGIS Server返回的要素集合或用于任务输入的要素集合。  在要素集合中的每个要素可以包含几何体，属性，符号和一个信息模板。如果要素集合不包含几何体，仅仅包含属性，该要素集合能被看作一个表，每个要素是一个行对象。返回要素集合的任务包括<a href="querytask.htm">QueryTask</a>, <a href="geoprocessor.htm">Geoprocessor</a>, 和<a href="routetask.htm">RouteTask</a>。此外，地理处理和路线任务可以请求要素集合做为输入参数。
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.tasks.FeatureSet
+</pre>
+
+<H4 class=dtH4>子类</H4>
+
+<a href="directionsfeatureset.htm">DirectionsFeatureSet</a>&nbsp;&nbsp;<H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#FeatureSetConst">esri.tasks.FeatureSet()</a></td>
+		<td class="syntaxTABLE">创建一个新的FeatureSet对象.  构造函数没有参数。</td>
+		</tr>
+<tr><td class="syntaxTABLE"><a href="#FeatureSetConst2">esri.tasks.FeatureSet(json)</a></td>
+		<td class="syntaxTABLE">使用JSON对象创建一个新的FeatureSet对象。 </td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#displayFieldName">displayFieldName</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+图层的主要的显示字段的名属性值和要素某一字段的名称匹配。仅仅适用于要素是从任务返回的情况。当要是作为地理处理任务的输入参数是则忽略该参数。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#features">features</a></td>
+<td class="syntaxTABLE">
+<a href="graphic.htm">Graphic[]</a>
+</td>
+
+<td class="syntaxTABLE">
+返回的图形数组</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#fieldAliases">fieldAliases</a></td>
+<td class="syntaxTABLE">
+Object
+</td>
+
+<td class="syntaxTABLE">
+为属性字段和别名设置name-value对。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#geometryType">geometryType</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+要素集合的几何体类型。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#spatialReference">spatialReference</a></td>
+<td class="syntaxTABLE">
+<a href="spatialreference.htm">SpatialReference</a>
+</td>
+
+<td class="syntaxTABLE">
+当要素集合被用做<a href="geoprocessor.htm">Geoprocessor</a>的输入参数时，空间参考默认被设置为地图的空间参考。这个值可以被修改。当要素集合从任务被返回，该值是从服务器端返回的结果。支持的空间参考列表，见<a href="../jshelp/pcs.htm">投影坐标系统</a>和<a href="../jshelp/gcs.htm">地理坐标系统</a>。</td>
+		</tr>
+</table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="FeatureSetConst"></a><H4>esri.tasks.FeatureSet()</H4>
+		</div>
+
+<div class="detaildesc">创建一个新的FeatureSet对象.  构造函数没有参数。</div>
+
+</div><div class="detaildiv"><div class="detailname"><a name="FeatureSetConst2"></a><H4>esri.tasks.FeatureSet(json)</H4>
+		</div>
+
+<div class="detaildesc">使用JSON对象创建一个新的FeatureSet对象 .<i> (As of v1.3)</i></div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;Object>
+<B>json</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">包含要素集合的JSON对象。</td>
+			</tr>
+</table>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="displayFieldName"></a>
+&lt;String> displayFieldName</H4></div>
+
+<div class="detaildesc">图层的主要的显示字段的名属性值和要素某一字段的名称匹配。仅仅适用于要素是从任务返回的情况。当要是作为地理处理任务的输入参数是则忽略该参数。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="features"></a>
+&lt;<a href="graphic.htm">Graphic[]</a>> features</H4></div>
+
+<div class="detaildesc">返回的图形数组</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="fieldAliases"></a>
+&lt;Object> fieldAliases</H4></div>
+
+<div class="detaildesc">为属性字段和别名设置name-value对。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="geometryType"></a>
+&lt;String> geometryType</H4></div>
+
+<div class="detaildesc">要素集合的几何体类型。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="spatialReference"></a>
+&lt;<a href="spatialreference.htm">SpatialReference</a>> spatialReference</H4></div>
+
+<div class="detaildesc">当要素集合被用做<a href="geoprocessor.htm">Geoprocessor</a>的输入参数时，空间参考默认被设置为地图的空间参考。这个值可以被修改。当要素集合从任务被返回，该值是从服务器端返回的结果。支持的空间参考列表，见<a href="../jshelp/pcs.htm">投影坐标系统</a>和<a href="../jshelp/gcs.htm">地理坐标系统</a>。</div>
+
+</div>
+
+<br/></div></body></html> 

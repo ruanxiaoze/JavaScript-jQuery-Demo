@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>Creating custom layer types</title>
+</head>
+
+<body>
+
+<div id="pageBanner">Creating custom layer types</div>
+
+<div id="nstext">
+
+<!--***START TEXT - DO NOT WRITE ABOVE THIS LINE***-->
+
+<p>The ArcGIS JavaScript API supports tiled and dynamic services from ArcGIS Server 9.3. This support comes from two base classes: <A href="../jsapi/tiledmapservicelayer.htm">TiledMapServiceLayer</a> and <A href="../jsapi/dynamicmapservicelayer.htm">DynamicMapServiceLayer</a>. You can extend these base classes to support other layer types such as Open Geospatial Consortium Web Map Services (OGC WMS), and any tiled map service including ArcGIS Server 9.2 cached map services.
+</p>
+<p>Before creating custom layer types, you should have some familiarity with the ArcGIS JavaScript API, especially the DynamicMapServiceLayer and TiledMapServiceLayer classes. It's also helpful to be familiar with creating and extending classes using the dojo.declare methodology. To learn about this see <A href="http://dojotoolkit.org/book/dojo-book-0-9/part-3-programmatic-dijit-and-dojo/object-orientation" target="_blank">http://dojotoolkit.org/book/dojo-book-0-9/part-3-programmatic-dijit-and-dojo/object-orientation</A>
+</p>
+<p>To create a custom layer, you must extend either the DynamicMapServiceLayer or TiledMapServiceLayer class. Extending the GraphicsLayer or creating a custom layer from scratch is not supported. No matter which of the two classes you extend, the workflow is the same:
+</p>
+
+<ol>
+<li>Use the constructor URL and optional arguments
+</li><li>If required, request data from the server
+</li><li>Process the server response
+</li><li>Initialize the spatial reference
+</li><li>Initialize the initial and full extents
+</li><li>For tiled layers, additionally initialize the tile info
+</li><li>Set the "loaded" property to true
+</li><li>Call onLoad and pass the layer itself as the argument
+</li><li>For dynamic layers, implement getImageUrl. For tiled layers, implement getTileURL</li>
+</ol>
+
+<p>The following samples demonstrate how to create custom layer types using the above pattern:</p>
+<ul>
+<li><a href="../jssamples/layers_custom_wms.html">Creating a WMS layer type</a></li>
+<li><a href="../jssamples/layers_custom_tiled.html">Creating a custom tiled layer type</a></li> 
+</ul>
+<!--***END TEXT - DO NOT WRITE BELOW THIS LINE***-->
+</div>
+
+</body>
+</html>

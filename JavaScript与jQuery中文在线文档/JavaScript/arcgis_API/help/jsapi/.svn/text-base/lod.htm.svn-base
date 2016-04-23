@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>LOD</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: LOD</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	An <a href="arcgistiledmapservicelayer.htm">ArcGISTiledMapServiceLayer</a> has a number of LODs (Levels of Detail). Each LOD corresponds to a map at a given scale or resolution.<!--***-->  LOD has no constructor.
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.layers.LOD
+</pre>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#level">level</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+ID for each level. The top most level is 0.  The ID is returned in <a href="map.htm#getLevel">Map.getLevel()</a> and set in <a href="map.htm#setLevel">Map.setLevel()</a>.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#resolution">resolution</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+Resolution in map units of each pixel in a tile for each level.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#scale">scale</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+Scale for each level.</td>
+		</tr>
+</table>
+
+<div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="level"></a>
+&lt;Number> level</H4></div>
+
+<div class="detaildesc">ID for each level. The top most level is 0.  The ID is returned in <a href="map.htm#getLevel">Map.getLevel()</a> and set in <a href="map.htm#setLevel">Map.setLevel()</a>.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="resolution"></a>
+&lt;Number> resolution</H4></div>
+
+<div class="detaildesc">Resolution in map units of each pixel in a tile for each level.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="scale"></a>
+&lt;Number> scale</H4></div>
+
+<div class="detaildesc">Scale for each level.</div>
+
+</div>
+
+<br/></div></body></html> 

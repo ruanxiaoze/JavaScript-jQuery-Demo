@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>Symbol</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: Symbol</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	符号用于在图形图层上显示点，线和多边形。 
+<br /><br />
+符号是基本符号类并且没有构造函数。使用下列类:
+<ul>
+<li><b>Points:</b>&nbsp;&nbsp;<a href="simplemarkersymbol.htm">SimpleMarkerSymbol</a>, <a href="picturemarkersymbol.htm">PictureMarkerSymbol</a></li>
+<li><b>Lines:</b>&nbsp;&nbsp;<a href="simplelinesymbol.htm">SimpleLineSymbol</a>, <a href="cartographiclinesymbol.htm">CartographicLineSymbol</a></li>
+<li><b>Polygons:</b>&nbsp;&nbsp;<a href="simplefillsymbol.htm">SimpleFillSymbol</a>, <a href="picturefillsymbol.htm">PictureFillSymbol</a></li>
+<li><b>Text:</b>&nbsp;&nbsp;<a href="textsymbol.htm">TextSymbol</a>, <a href="font.htm">Font</a></li>
+</ul>
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.symbol.Symbol
+</pre>
+
+<H4 class=dtH4>子类</H4>
+
+<a href="fillsymbol.htm">FillSymbol</a>&nbsp;&nbsp;<a href="linesymbol.htm">LineSymbol</a>&nbsp;&nbsp;<a href="markersymbol.htm">MarkerSymbol</a>&nbsp;&nbsp;<a href="textsymbol.htm">TextSymbol</a>&nbsp;&nbsp;<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#color">color</a></td>
+<td class="syntaxTABLE">
+dojo.Color
+</td>
+
+<td class="syntaxTABLE">
+符号颜色，颜色基于<a href="http://redesign.dojotoolkit.org/jsdoc/dojo/HEAD/dojo.Color" target="_blank">dojo.Color</a>。  颜色可以用下列格式表示：<br/><br/>
+
+<ul>
+<li>R, G, B:  <code>new dojo.Color([255,0,0])</code> </li>
+<li>R,G,B,A.  "A"值表示透明度，0.0是全透明的，1.0是不透明的。: <code>new dojo.Color([255,0,0,0.25])</code> </li>
+<li>Hex string: <code>new dojo.Color("#C0C0C0")</code> </li>
+<li>Named string:  <code>new dojo.Color("blue")</code> </li>
+</ul></td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#type">type</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+符号的类型。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>方法表</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+		<th class="tableheader">方法</th>
+		<th class="tableheader">返回值</th>
+		<th class="tableheader">描述</th>
+		</tr>
+
+<tr>
+<td class="syntaxTABLE"><a href="#setColor">setColor(color)</a></td><td class="syntaxTABLE">
+<a href="symbol.htm">Symbol</a>
+</td>
+<td class="syntaxTABLE">设置符号颜色。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#toJson">toJson()</a></td><td class="syntaxTABLE">
+Object
+</td>
+<td class="syntaxTABLE">转换对象为ArcGIS Server JSON表示法。</td>	</tr></table>
+
+<div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="color"></a>
+&lt;dojo.Color> color</H4></div>
+
+<div class="detaildesc">符号颜色，颜色基于<a href="http://redesign.dojotoolkit.org/jsdoc/dojo/HEAD/dojo.Color" target="_blank">dojo.Color</a>。  颜色可以用下列格式表示：<br/><br/>
+
+<ul>
+<li>R, G, B:  <code>new dojo.Color([255,0,0])</code> </li>
+<li>R,G,B,A.  "A"值表示透明度，0.0是全透明的，1.0是不透明的。: <code>new dojo.Color([255,0,0,0.25])</code> </li>
+<li>Hex string: <code>new dojo.Color("#C0C0C0")</code> </li>
+<li>Named string:  <code>new dojo.Color("blue")</code> </li>
+</ul></div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="type"></a>
+&lt;String> type</H4></div>
+
+<div class="detaildesc">符号的类型。</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> simplemarkersymbol | picturemarkersymbol | simplelinesymbol | cartographiclinesymbol | simplefillsymbol | picturefillsymbol | textsymbol
+			</div>
+
+</div>
+
+<div class=sectionDivider>方法详细信息</div>
+<div class="detaildiv">
+		<div class="detailname"><a name="setColor"></a><H4>
+setColor(color)</H4></div>
+
+<div class="detaildesc">设置符号颜色。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="symbol.htm">Symbol</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;dojo.Color> <B>color</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+颜色可以用下列格式表示：<br/><br/>
+
+<ul>
+<li>R, G, B:  <code>new dojo.Color([255,0,0])</code> </li>
+<li>R,G,B,A.  "A"值表示透明度，0.0是全透明的，1.0是不透明的。: <code>new dojo.Color([255,0,0,0.25])</code> </li>
+<li>Hex string: <code>new dojo.Color("#C0C0C0")</code> </li>
+<li>Named string:  <code>new dojo.Color("blue")</code> </li>
+</ul></td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="toJson"></a><H4>
+toJson()</H4></div>
+
+<div class="detaildesc">转换对象为ArcGIS Server JSON表示法。</div>
+
+<div class="detaildesc"><strong>返回值:</strong>对象</div>
+</div>
+
+<br/></div></body></html> 

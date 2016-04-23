@@ -1,0 +1,442 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>PictureFillSymbol</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: PictureFillSymbol</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	Fill symbols are used to draw polygon features on the graphics layer. PictureFillSymbol uses an image in a repeating pattern.  In addition, the symbol can have an optional outline, which is defined by a line symbol.
+<br/><br/>
+Known limitation:  PictureFillSymbol does not work correctly in FireFox 2.x.  It does work correctly in Internet Explorer 6 and 7 and FireFox 3.x.
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+<a href="symbol.htm">esri.symbol.Symbol</a>
+  |_ <a href="fillsymbol.htm">esri.symbol.FillSymbol</a>
+        |_ esri.symbol.PictureFillSymbol
+</pre><H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#PictureFillSymbolConst2">esri.symbol.PictureFillSymbol(json)</a></td>
+		<td class="syntaxTABLE">Creates a new PictureFillSymbol object using a JSON object.</td>
+		</tr>
+<tr><td class="syntaxTABLE"><a href="#PictureFillSymbolConst1">esri.symbol.PictureFillSymbol(url, outline, width, height)</a></td>
+		<td class="syntaxTABLE">Creates a new PictureFillSymbol object.</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#height">height</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+Height of the image in pixels.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#url">url</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+URL of the image.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#width">width</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+Width of the image in pixels.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#xoffset">xoffset</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+The offset on the x-axis in pixels.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#xscale">xscale</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+Scale factor in x direction.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#yoffset">yoffset</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+The offset on the y-axis in pixels.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#yscale">yscale</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+Scale factor in y direction.</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>方法表</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+		<th class="tableheader">方法</th>
+		<th class="tableheader">返回值</th>
+		<th class="tableheader">描述</th>
+		</tr>
+
+<tr>
+<td class="syntaxTABLE"><a href="#setHeight">setHeight(height)</a></td><td class="syntaxTABLE">
+<a href="picturefillsymbol.htm">PictureFillSymbol</a>
+</td>
+<td class="syntaxTABLE">Sets the height of the symbol.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setOffset">setOffset(x, y)</a></td><td class="syntaxTABLE">
+<a href="picturefillsymbol.htm">PictureFillSymbol</a>
+</td>
+<td class="syntaxTABLE">Sets the symbol offset.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setUrl">setUrl(url)</a></td><td class="syntaxTABLE">
+<a href="picturefillsymbol.htm">PictureFillSymbol</a>
+</td>
+<td class="syntaxTABLE">Sets the URL to the location of the symbol.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setWidth">setWidth(width)</a></td><td class="syntaxTABLE">
+<a href="picturefillsymbol.htm">PictureFillSymbol</a>
+</td>
+<td class="syntaxTABLE">Sets the width of the symbol.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setXScale">setXScale(scale)</a></td><td class="syntaxTABLE">
+<a href="picturefillsymbol.htm">PictureFillSymbol</a>
+</td>
+<td class="syntaxTABLE">Sets the scale factor in x direction.
+ of the symbol.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setYScale">setYScale(scale)</a></td><td class="syntaxTABLE">
+<a href="picturefillsymbol.htm">PictureFillSymbol</a>
+</td>
+<td class="syntaxTABLE">Sets the scale factor in y direction.</td>	</tr></table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="PictureFillSymbolConst2"></a><H4>esri.symbol.PictureFillSymbol(json)</H4>
+		</div>
+
+<div class="detaildesc">Creates a new PictureFillSymbol object using a JSON object.</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;Object>
+<B>json</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			JSON object representing the PictureFillSymbol.
+			</td>
+			</tr>
+</table>
+
+</div><div class="detaildiv"><div class="detailname"><a name="PictureFillSymbolConst1"></a><H4>esri.symbol.PictureFillSymbol(url, outline, width, height)</H4>
+		</div>
+
+<div class="detaildesc">Creates a new PictureFillSymbol object.</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;String>
+<B>url</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			URL of the image.
+			</td>
+			</tr>
+<tr>
+<td class="detailTABLE">
+&lt;<a href="simplelinesymbol.htm">SimpleLineSymbol</a>>
+<B>outline</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			Outline of the symbol.
+			</td>
+			</tr>
+<tr>
+<td class="detailTABLE">
+&lt;Number>
+<B>width</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			Width of the image in pixels.
+			</td>
+			</tr>
+<tr>
+<td class="detailTABLE">
+&lt;Number>
+<B>height</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			Height of the image in pixels.
+			</td>
+			</tr>
+</table>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="height"></a>
+&lt;Number> height</H4></div>
+
+<div class="detaildesc">Height of the image in pixels.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="url"></a>
+&lt;String> url</H4></div>
+
+<div class="detaildesc">URL of the image.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="width"></a>
+&lt;Number> width</H4></div>
+
+<div class="detaildesc">Width of the image in pixels.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="xoffset"></a>
+&lt;Number> xoffset</H4></div>
+
+<div class="detaildesc">The offset on the x-axis in pixels.</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> 0
+			</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="xscale"></a>
+&lt;Number> xscale</H4></div>
+
+<div class="detaildesc">Scale factor in x direction.</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> 1
+			</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="yoffset"></a>
+&lt;Number> yoffset</H4></div>
+
+<div class="detaildesc">The offset on the y-axis in pixels.</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> 0
+			</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="yscale"></a>
+&lt;Number> yscale</H4></div>
+
+<div class="detaildesc">Scale factor in y direction.</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> 1
+			</div>
+
+</div>
+
+<div class=sectionDivider>方法详细信息</div>
+<div class="detaildiv">
+		<div class="detailname"><a name="setHeight"></a><H4>
+setHeight(height)</H4></div>
+
+<div class="detaildesc">Sets the height of the symbol.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="picturefillsymbol.htm">PictureFillSymbol</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>height</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+Height in pixels.</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setOffset"></a><H4>
+setOffset(x, y)</H4></div>
+
+<div class="detaildesc">Sets the symbol offset.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="picturefillsymbol.htm">PictureFillSymbol</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>x</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+Offset in x direction in pixels.</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>y</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+Offset in y direction in pixels.</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setUrl"></a><H4>
+setUrl(url)</H4></div>
+
+<div class="detaildesc">Sets the URL to the location of the symbol.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="picturefillsymbol.htm">PictureFillSymbol</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>url</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+URL string.</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setWidth"></a><H4>
+setWidth(width)</H4></div>
+
+<div class="detaildesc">Sets the width of the symbol.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="picturefillsymbol.htm">PictureFillSymbol</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>width</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+Width in pixels.</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setXScale"></a><H4>
+setXScale(scale)</H4></div>
+
+<div class="detaildesc">Sets the scale factor in x direction.
+ of the symbol.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="picturefillsymbol.htm">PictureFillSymbol</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>scale</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+Scale factor in x direction.</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setYScale"></a><H4>
+setYScale(scale)</H4></div>
+
+<div class="detaildesc">Sets the scale factor in y direction.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="picturefillsymbol.htm">PictureFillSymbol</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>scale</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+Scale factor in y direction.</td>
+			</tr>
+</table>
+
+</div>
+
+<br/></div></body></html> 

@@ -1,0 +1,161 @@
+div.menu{
+	display: block;
+	font-size: .7em;
+}
+.nonStds{
+	display: none;
+}
+.headerHolder{
+	position: absolute; top:0px; left:0px; 
+	width: 765px; height: 86px; 
+	background-image: url(/graphicsnav/headerbackground.jpg);
+	background-color: #1577B7;
+	background-repeat: no-repeat;
+}
+
+.searchHolder{
+	position: absolute; 
+	top:30px; 
+	left:640px;
+}
+.utilityNav{
+	position: absolute; top:0px;  left:545px;
+    font-size: .70em;
+    padding: 2px 0px; 
+}
+
+.menuBar a.menuButton,
+div.menu a.mi {
+   color: #FFFFFF;
+}
+
+/*this class here is read only IE5 MAC*/
+.menuHolder{
+  position: absolute; top: 65px; left: 0px;
+  white-space: nowrap;
+}
+
+/*---start hack for IE5 MAC
+this hack is to make the tabs to align nicely on IE 5 on a mac.  Macs will ingnore the following 
+menuholder class and would set the top position of the tabs to 65. 
+}\*/
+
+.menuHolder{
+  position: absolute;
+  top: 79px!important;
+  //position: static; /* to fix IE7 hover bug */
+  //margin-top: 3px; /* to fix IE7 hover bug */
+  left: 0px;
+  white-space: nowrap;
+}
+.menuBar a:visited{
+	color: #FFFFFF;
+}
+/*end of hack for IE5 mac*/
+
+
+
+.menuBar {
+	background:transparent url(../graphics/navbar_lft.gif) no-repeat scroll 0px -2px;
+	height: 22px;
+  	font-size: .78em;
+  	text-align: left;
+  	padding-left: 26px;
+ }
+
+ 
+.menuBar a.menuButton{
+  height: 22px;
+  background-image: url(../graphicsnav/tabBack.gif);
+  background-position: top right;
+  border-left: 1px solid #599FC0;
+  border-right: 1px solid #000000;
+  color: #F1F6FA;
+  cursor: default;
+  text-decoration: none;  
+  margin: 0px;
+  padding: 4px 16px 4px 13px;
+  position: relative;
+  z-index: 100;
+}
+.menuBar a.menuButton:hover{
+  height: 22px;
+  border-left: 1px solid #599FC0;
+  border-right: 1px solid #000000;
+  color:#000000 !important;
+  background-position: 100% 150px;
+  cursor: hand;
+  text-decoration: none;  
+  margin: 0px;
+  padding: 4px 16px 3px 13px;
+  position: relative;
+  z-index: 100;
+  background:#FFFFFF none repeat scroll 0%;
+
+}
+
+
+.menuBar a.menuButtonActive{
+  background: #FFFFFF none repeat scroll 0% 50%;
+  color: #000000 !important;
+  /*height: 22px;
+  background-image: url(/graphicsnav/tabBack.gif);
+  background-position: 100% 150px;
+  border-left:1px solid #599FC0;
+  border-right:1px solid #000000;
+  color: #0B4A80;
+  cursor: hand;
+  text-decoration: none;  
+  margin: 0px 1px;
+  padding: 4px 16px 5px 13px;
+  position: relative;
+  z-index: 100;*/
+
+}
+.menuBar a.menuButtonSelected{
+  height: 22px;
+  border-left: 1px solid #599FC0;
+  border-right: 1px solid #000000;
+  color:#000000 !important;
+  background-position: 100% 150px;
+  cursor: hand;
+  text-decoration: none;  
+  margin: 0px;
+  padding: 4px 16px 4px 13px;
+  position: relative;
+  z-index: 100;
+  background:#FFFFFF none repeat scroll 0%;
+
+}
+
+div.menu {
+  background-color: #FFFFFF;
+  border: 1px solid #023765;
+  padding: 0px 1px;
+  visibility: hidden;  
+  position: absolute;
+  top: -200px; /*netscape 7 briefly displays the hidden menu, so this hides it */
+  left: -200px;
+  z-index: 101;
+}
+
+div.menu a.mi {
+  color: #0B4A80;
+  cursor: hand;
+  display: block;
+  padding: 3px 1.5em;
+  text-decoration: none;
+  white-space: nowrap;
+  border-top: 1px solid #ffffff;
+  border-bottom: 1px solid #7098BC;
+}
+div.menu a.mi:hover, div.menu a.miHighlight {
+  background-color: #DCEAF5;
+  color: #0B4A80;
+  cursor: hand;
+  text-decoration: none;
+}
+
+div.menu a.mi span.miText {
+	cursor: hand;
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>Non graphic info window</title>
+    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css">
+    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"></script>
+    <style type="text/css">
+      /* set title font properties */
+      .infowindow .window .top .right .user .titlebar .title { font-family:Arial, Helvetica, sans-serif; font-weight:bold; font-size:14pt; }
+      /* set content font properties */
+      .infowindow .window .top .right .user .content { font-style:italic; font-size:10pt; }
+    </style>
+    <script type="text/javascript">
+      dojo.require("esri.map");
+
+      var map;
+
+      function init() {
+        map = new esri.Map("map");
+        dojo.connect(map,"onLoad", function(map) {map.infoWindow.resize(250, 100);} );
+        map.addLayer(new esri.layers.ArcGISTiledMapServiceLayer("http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer"));
+        dojo.connect(map, "onClick", addPoint);
+      }
+
+      function addPoint(evt) {
+        map.infoWindow.setTitle("Coordinates");
+        map.infoWindow.setContent("lat/lon : " + evt.mapPoint.y + ", " + evt.mapPoint.x +
+          "<br />screen x/y : " + evt.screenPoint.x + ", " + evt.screenPoint.y);
+        map.infoWindow.show(evt.screenPoint,map.getInfoWindowAnchor(evt.screenPoint));
+      }
+
+      dojo.addOnLoad(init);
+    </script>
+  </head>
+  <body class="tundra">
+    <div id="map" style="width:1024px; height:512px; border:1px solid #000;"></div>
+  </body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>Coding guidelines</title>
+</head>
+
+<body>
+
+<div id="pageBanner">Coding guidelines</div>
+
+<div id="nstext">
+
+<!--***START TEXT - DO NOT WRITE ABOVE THIS LINE***-->
+
+<p>This topic contains coding guidelines to help you improve the effectiveness of 
+			your ArcGIS JavaScript API applications. The topic is divided into the 
+			following sections:</p>
+		<A href="#loading_the_map">Loading layers</A>
+		<br/>
+		<A href="#getting_and_setting_properties">Getting and setting properties</A>
+		<br/>
+		<A href="#initializing_objects">Initializing objects</A>
+		<br/>
+		<A href="#resizing_and_repositioning_the_map">Resizing and repositioning the map</A>
+		<br/>
+		<a name="loading_the_map"></a>
+		<h3>Loading layers</h3>
+		<p>When you create a layer, you cannot access its properties until the layer's <A href="../jsapi/layer.htm#onload">
+				onLoad</A> event has fired. Attempting to create a layer and access its 
+			properties in the next line of code could cause errors. Instead, verify that 
+			the layer's <A href="../jsapi/layer.htm#loaded">loaded</A> property is true, 
+			then register a listener for the onLoad event.</p>
+			<p>No events on a layer will fire until the map's <A href="../jsapi/map.htm#onload">onLoad</a> event fires. See <a href="inside_events.htm">
+				Working with events</a> for code snippets and further tips on working with 
+			the onLoad events for maps and layers.</p>
+		<a name="getting_and_setting_properties"></a>
+		<h3>Getting and setting properties</h3>
+		<p>Working with the ArcGIS JavaScript API requires that you frequently get and set 
+			properties on objects. Sometimes getter and setter methods are available to 
+			help you do this in the correct way. You should use these methods when 
+			available. The following bullet points give more detailed information:</p>
+		<ul>
+			<li>
+				Getter methods for properties are only available if the get call requires a 
+				calculation, for example <A href="../jsapi/polygon.htm#getExtent">Polygon.getExtent()</A>.
+				
+			<li>
+				Setter methods often trigger events and changes to the state of the 
+				application. For example, <A href="../jsapi/map.htm#setExtent">Map.setExtent()</A>
+				zooms and pans the map to the argument extent and fires a set of zoom, pan, and 
+				extent events.
+				
+			<li>
+				Some properties are read only. If an object has some setter methods, and a 
+				property of that object does not have a corresponding setter method, you should 
+				not set that property. For example, the Map object has various setter methods. 
+				The Map has a <A href="../jsapi/map.htm#spatialReference">spatialReference</A> property, 
+				but there is no Map.setSpatialReference() method because the map's spatial 
+				reference is based on the first layer added to the map and it cannot be 
+				overridden.
+				
+			<li>
+				<p>If an object has no setter methods, then you can go ahead and set property values. For example, using <A href="../jsapi/query.htm">esri.tasks.Query</A>, 
+					you can set the where property of the query like this:</p>
+				<pre>var query = new esri.tasks.Query();
+query.where = "STATE_NAME = 'South Carolina'";
+</pre>
+			</li>
+		</ul>
+		<a name="initializing_objects"></a>
+		<h3>Initializing objects</h3>
+		<p>Where appropriate, you should initialize objects outside a loop. This is more 
+			efficient because the object is only initialized once instead of each time the 
+			loop runs. The following example initializes the symbol and infoTemplate 
+			objects outside the for loop</p>
+		<pre>function addResultsToMap(featureSet) {
+  var features = featureSet.features;
+  var symbol = new esri.symbol.SimpleFillSymbol();
+  var infoTemplate = new esri.InfoTemplate(...);
+    
+  for (var i=0, il=features.length; i&lt;il; i++) {
+    map.graphics.add( features[i].setInfoTemplate(infoTemplate).setSymbol(symbol));
+  }
+}
+</pre>
+		<a name="resizing_and_repositioning_the_map"></a>
+		<h3>Resizing and repositioning the map</h3>
+		<p>The ArcGIS JavaScript API does not automatically resize the map based on window 
+			resizes. You must call <A href="../jsapi/map.htm#resize">Map.resize()</A> whenever 
+			the map's container HTML element is resized and the map needs to be adjusted. 
+			Similarly, when the map's HTML container has been repositioned in the browser, 
+			you need to call <A href="../jsapi/map.htm#reposition">Map.reposition()</A>.</p>
+		<p>In Internet Explorer, window.onresize fires a resize event for every pixel that 
+			you resize the window. This behavior can slow down your application, especially 
+			if your map occupies the full width and height of the browser window or is 
+			placed within a container that resizes every time the browser window resizes. 
+			The code below contains a timer so that Map.resize() is only called if there is 
+			a 500 millisecond delay in the window resize.
+		</p>
+		<pre>var timer;
+
+function init() {
+  var map = ...;
+
+  //connect to window's resize event
+  dojo.connect(window, "onresize", function() {
+    //clear any existing resize timer
+    clearTimeout(timer);
+    //create new resize timer with delay of 500 milliseconds
+    timer = setTimeout(function() { map.resize(); }, 500);
+  });
+}
+</pre>
+
+<!--***END TEXT - DO NOT WRITE BELOW THIS LINE***-->
+</div>
+
+</body>
+</html>

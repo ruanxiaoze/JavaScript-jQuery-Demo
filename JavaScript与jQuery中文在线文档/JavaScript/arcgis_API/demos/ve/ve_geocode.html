@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>VE Tile Layer</title>
+
+    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css">
+    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"></script>
+
+    <script type="text/javascript" charset="utf-8">
+      dojo.require("esri.map");
+      dojo.require("esri.virtualearth.VETiledLayer");
+      dojo.require("esri.virtualearth.VEGeocoder");
+
+
+      var veGeocoder;
+
+      function init() {
+        var map = new esri.Map("map");
+
+        var duration = 60; //minimum 15 mins, maximum 480 (8 hrs) mins
+        var environment = "production";
+
+        //TODO: Replace with URL to your own "Get Virtual Earth Token" page
+        var tokenUrl = "/common/vetokenhandler/vetoken.cfm";
+
+        //Add Virtual Earth map for context
+        var veTileLayer = new esri.virtualearth.VETiledLayer({
+          tokenUrl: tokenUrl,
+          tokenDuration: duration,
+          environment: environment,
+          mapStyle: esri.virtualearth.VETiledLayer.MAP_STYLE_AERIAL
+        });
+
+        //Create geocoder
+        veGeocoder = new esri.virtualearth.VEGeocoder({
+          tokenUrl: tokenUrl,
+          environment: environment,
+          tokenDuration: duration
+        });
+
+        //Draw and zoom to the result when the geocoding is complete
+        dojo.connect(veGeocoder, "onAddressToLocationsComplete", function(geocodeResults) {
+          map.graphics.clear();
+          var pointMeters = esri.geometry.geographicToWebMercator(geocodeResults[0].location);
+          var pointSymbol = new esri.symbol.SimpleMarkerSymbol().setSize(15).setColor(new dojo.Color("blue"));
+          var locationGraphic = new esri.Graphic(pointMeters,pointSymbol);
+          var font = new esri.symbol.Font().setSize("17pt");
+          var textSymbol = new esri.symbol.TextSymbol(geocodeResults[0].displayName, font, new dojo.Color("white")).setOffset(0, 8);
+          map.graphics.add(locationGraphic);
+          map.graphics.add(new esri.Graphic(pointMeters, textSymbol));
+          map.setExtent(esri.geometry.geographicToWebMercator(geocodeResults[0].bestView));
+        });
+
+        map.addLayer(veTileLayer);
+      }
+
+      //Perform the geocode. This function runs when the "Locate" button is pushed.
+      function locate() {
+        var query = dojo.byId("address").value;
+        veGeocoder.addressToLocations(query);
+      }
+
+
+      dojo.addOnLoad(init);
+    </script>
+
+  </head>
+  <body class="tundra">
+    Address : <input type="text" id="address" size="60" value="380 New York St, Redlands, CA, 92373" />
+    <input type="button" value="Locate" onclick="locate()" /><br />
+    <div id="map" style="width:1024px; height:512px; border:1px solid #000;"></div>
+  </body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>GPMessage</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: GPMessage</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	Represents a message generated during the execution of a geoprocessing task.  It includes information such as when the processing started, what parameter values are being used, the task progress, warnings of potential problems and errors.  It is composed of a message type and description.  GPMessage has no constructor.
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.tasks.GPMessage
+</pre>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#description">description</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+A description of the geoprocessing message.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#type">type</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+The geoprocessing message type. It can have one of the following values: "esriJobMessageTypeInformative", "esriJobMessageTypeWarning", "esriJobMessageTypeError", "esriJobMessageTypeEmpty" and "esriJobMessageTypeAbort", "esriGPMessageTypeInformative", "esriGPMessageTypeWarning", "esriGPMessageTypeError", "esriGPMessageTypeEmpty" and "esriGPMessageTypeAbort".</td>
+		</tr>
+</table>
+
+<div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="description"></a>
+&lt;String> description</H4></div>
+
+<div class="detaildesc">A description of the geoprocessing message.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="type"></a>
+&lt;String> type</H4></div>
+
+<div class="detaildesc">The geoprocessing message type. It can have one of the following values: "esriJobMessageTypeInformative", "esriJobMessageTypeWarning", "esriJobMessageTypeError", "esriJobMessageTypeEmpty" and "esriJobMessageTypeAbort", "esriGPMessageTypeInformative", "esriGPMessageTypeWarning", "esriGPMessageTypeError", "esriGPMessageTypeEmpty" and "esriGPMessageTypeAbort".</div>
+
+</div>
+
+<br/></div></body></html> 

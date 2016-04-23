@@ -1,0 +1,61 @@
+div.utility a,
+div.utility a:link,
+div.utility a:visited
+{
+	font-size: .8em;
+	color: white; /*#FFD04C;*/
+	text-decoration: none;
+}
+
+
+div.utility a:hover
+{
+	color: white; /*#FFD04C;*/
+        text-decoration: underline;
+}
+	
+	
+div.utility
+{
+	position: absolute;
+	top: 3px;
+	left: 75%;  
+	z-index: 10;
+	text-align: right;
+	color: white;  /*ffffff;*/
+	font-family: verdana, arial, helvetica;
+	font-size: 70%;
+}
+
+	
+div.header
+{
+	width: 100%;
+	padding-bottom: 0px;
+	margin-bottom: 0px;
+	background-color: #FFFFFF;
+	background-repeat: repeat-x;
+	border-bottom: 1px solid #000000;
+	
+}
+
+.title 
+{
+	position: absolute;	
+	bottom: 0px;
+	left: 2px;  
+	z-index: 10;
+	text-align: center;
+	vertical-align: middle;
+	color: white;  /*ffffff;*/
+	font-family: verdana, arial, helvetica;
+	font-size: 110%
+
+}
+
+/*
+table.title
+{
+	width:80%;
+}
+*/

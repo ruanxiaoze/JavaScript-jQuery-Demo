@@ -1,0 +1,314 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>Point</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: Point</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+    通过x坐标和y坐标定义的位置。可以是地图单位或屏幕单位。
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+<a href="geometry.htm">esri.geometry.Geometry</a>
+  |_ esri.geometry.Point
+</pre><H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#PointConst1">esri.geometry.Point(x, y, spatialReference)</a></td>
+		<td class="syntaxTABLE">使用x，y和空间参考创建点对象。</td>
+		</tr>
+<tr><td class="syntaxTABLE"><a href="#PointConst2">esri.geometry.Point([x,y], spatialReference)</a></td>
+		<td class="syntaxTABLE">使用包含x,y坐标值和空间参考的数组创建点对象。</td>
+		</tr>
+<tr><td class="syntaxTABLE"><a href="#PointConst3">esri.geometry.Point(json)</a></td>
+		<td class="syntaxTABLE">使用JSON对象创建点坐标。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#x">x</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+点的地图单位的x坐标。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#y">y</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+点的地图单位的y坐标。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>方法表</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+		<th class="tableheader">方法</th>
+		<th class="tableheader">返回值</th>
+		<th class="tableheader">描述</th>
+		</tr>
+
+<tr>
+<td class="syntaxTABLE"><a href="#offset">offset(dx, dy)</a></td><td class="syntaxTABLE">
+<a href="point.htm">Point</a>
+</td>
+<td class="syntaxTABLE">偏移点到x和y的方向。单位是地图单位。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setX">setX(x)</a></td><td class="syntaxTABLE">
+<a href="point.htm">Point</a>
+</td>
+<td class="syntaxTABLE">设置点的x坐标。<br/><br/><code>Point</code>返回值在v1.4时增加。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setY">setY(y)</a></td><td class="syntaxTABLE">
+<a href="point.htm">Point</a>
+</td>
+<td class="syntaxTABLE">设置点的y坐标。<br/><br/><code>Point</code>返回值在v1.4时增加。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#update">update(x, y)</a></td><td class="syntaxTABLE">
+<a href="point.htm">Point</a>
+</td>
+<td class="syntaxTABLE">更新点。</td>	</tr></table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="PointConst1"></a><H4>esri.geometry.Point(x, y, spatialReference)</H4>
+		</div>
+
+<div class="detaildesc">使用x，y和空间参考创建点对象。</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;Number>
+<B>x</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			点的地图单位的x坐标。
+			</td>
+			</tr>
+<tr>
+<td class="detailTABLE">
+&lt;Number>
+<B>y</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			点的地图单位的y坐标。
+			</td>
+			</tr>
+<tr>
+<td class="detailTABLE">
+&lt;<a href="spatialreference.htm">SpatialReference</a>>
+<B>spatialReference</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			几何体空间参考。
+			</td>
+			</tr>
+</table>
+
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>new esri.geometry.Point(-118.15, 33.80, new esri.SpatialReference({ wkid: 4326 }))</pre></div>
+</div><div class="detaildiv"><div class="detailname"><a name="PointConst2"></a><H4>esri.geometry.Point([x,y], spatialReference)</H4>
+		</div>
+
+<div class="detaildesc">使用包含x,y坐标值和空间参考的数组创建点对象。</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;Array>
+<B>[x,y]</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			包含x，y坐标的数组。
+			</td>
+			</tr>
+<tr>
+<td class="detailTABLE">
+&lt;<a href="spatialreference.htm">SpatialReference</a>>
+<B>spatialReference</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			几何体空间参考。
+			</td>
+			</tr>
+</table>
+
+</div><div class="detaildiv"><div class="detailname"><a name="PointConst3"></a><H4>esri.geometry.Point(json)</H4>
+		</div>
+
+<div class="detaildesc">使用JSON对象创建点坐标。</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;Object>
+<B>json</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			包含x，y坐标的JSON对象。
+			</td>
+			</tr>
+</table>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="x"></a>
+&lt;Number> x</H4></div>
+
+<div class="detaildesc">点的地图单位的x坐标。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="y"></a>
+&lt;Number> y</H4></div>
+
+<div class="detaildesc">点的地图单位的y坐标。</div>
+
+</div>
+
+<div class=sectionDivider>方法详细信息</div>
+<div class="detaildiv">
+		<div class="detailname"><a name="offset"></a><H4>
+offset(dx, dy)</H4></div>
+
+<div class="detaildesc">偏移点到x和y的方向。单位是地图单位。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="point.htm">Point</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>dx</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+点的x坐标的值。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>dy</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+点的y坐标的值。</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setX"></a><H4>
+setX(x)</H4></div>
+
+<div class="detaildesc">设置点的x坐标。<br/><br/><code>Point</code>返回值在v1.4时增加。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="point.htm">Point</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>x</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+点的x坐标的值。</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setY"></a><H4>
+setY(y)</H4></div>
+
+<div class="detaildesc">设置点的y坐标。<br/><br/><code>Point</code>返回值在v1.4时增加。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="point.htm">Point</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>y</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+点的y坐标的值。</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="update"></a><H4>
+update(x, y)</H4></div>
+
+<div class="detaildesc">更新点。<i> (As of v1.4)</i></div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="point.htm">Point</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>x</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+更新的点的x坐标。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>y</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+更新的点的y坐标。</td>
+			</tr>
+</table>
+
+</div>
+
+<br/></div></body></html> 

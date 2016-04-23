@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>Find Address</title>
+    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css">
+    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"></script>
+    <script type="text/javascript">
+      dojo.require("esri.map");
+      dojo.require("esri.tasks.locator");
+
+      var map, locator;
+
+      function init() {
+        map = new esri.Map("map", { extent: new esri.geometry.Extent(-125, 28, -62, 45, new esri.SpatialReference({wkid:4326})) });
+        var tiledMapServiceLayer = new esri.layers.ArcGISTiledMapServiceLayer("http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer");
+        map.addLayer(tiledMapServiceLayer);
+
+        locator = new esri.tasks.Locator("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Locators/ESRI_Geocode_USA/GeocodeServer");
+        dojo.connect(locator, "onAddressToLocationsComplete", showResults);
+      }
+
+      function locate() {
+        map.graphics.clear();
+        var add = dojo.byId("address").value.split(",");
+        var address = {
+          Address : add[0],
+          City: add[1],
+          State: add[2],
+          Zip: add[3]
+        };
+        locator.addressToLocations(address,["Loc_name"]);
+      }
+
+      function showResults(candidates) {
+        var candidate;
+        var symbol = new esri.symbol.SimpleMarkerSymbol();
+        var infoTemplate = new esri.InfoTemplate("Location", "Address: ${address}<br />Score: ${score}<br />Source locator: ${locatorName}");
+
+        symbol.setStyle(esri.symbol.SimpleMarkerSymbol.STYLE_DIAMOND);
+        symbol.setColor(new dojo.Color([255,0,0,0.75]));
+
+        var points =  new esri.geometry.Multipoint(map.spatialReference);
+
+        for (var i=0, il=candidates.length; i<il; i++) {
+          candidate = candidates[i];
+          if (candidate.score > 70) {
+            var attributes = { address: candidate.address, score:candidate.score, locatorName:candidate.attributes.Loc_name };
+            var graphic = new esri.Graphic(candidate.location, symbol, attributes, infoTemplate);
+            map.graphics.add(graphic);
+            map.graphics.add(new esri.Graphic(candidate.location, new esri.symbol.TextSymbol(attributes.address).setOffset(0, 8)));
+            points.addPoint(candidate.location);
+          }
+        }
+        map.setExtent(points.getExtent().expand(3));
+      }
+
+      dojo.addOnLoad(init);
+    </script>
+  </head>
+  <body class="tundra">
+    Address : <input type="text" id="address" size="60" value="380 New York St, Redlands, CA, 92373" /> <i>(Address, City, State, Zip)</i>
+    <input type="button" value="Locate" onclick="locate()" /><br />
+    <br />
+    <div id="map" style="width:1200px; height:600px; border:1px solid #000;"></div>
+  </body>
+</html>

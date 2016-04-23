@@ -1,0 +1,678 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>RouteParameters</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: RouteParameters</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	<i>v1.4增加的类。</i><br/><br/>  	
+	<a href="routetask.htm">RouteTask</a> 的输入参数</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.tasks.RouteParameters
+</pre>
+
+<H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#RouteParametersConst">esri.tasks.RouteParameters()</a></td>
+		<td class="syntaxTABLE">创建一个新的RouteParameters对象。 </td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#accumulateAttributes">accumulateAttributes</a></td>
+<td class="syntaxTABLE">
+String[]
+</td>
+
+<td class="syntaxTABLE">
+网络属性名称的列表将被分析累计，例如，那些应该作为响应的一部分被返回的属性。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#barriers">barriers</a></td>
+<td class="syntaxTABLE">
+Object
+</td>
+
+<td class="syntaxTABLE">
+在分析期间, 加载的一组障碍物。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#directionsLanguage">directionsLanguage</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+计算方向时使用的语言。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#directionsLengthUnits">directionsLengthUnits</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+当计算方向时候使用的长度单位.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#directionsTimeAttribute">directionsTimeAttribute</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+计算方向时，用于驾驶时间的网络属性的名称。默认定义在用于RouteTask指定的路径网络图层中。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#doNotLocateOnRestrictedElements">doNotLocateOnRestrictedElements</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+如果是true，避免通过<code>barriers</code>限制网络元素或因为限制条件被指定在<code>restrictionAttributes</code>中。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#findBestSequence">findBestSequence</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+如果是true考虑preserveFirstStop和preserveLastStop优化路线中站点的顺序。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#ignoreInvalidLocations">ignoreInvalidLocations</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+
+在routes中, stop没有在网络上定位,或者stop不能被得到，结果将会取决于<code>ignoreInvalidLocations</code>的值.<br/><br/>
+
+<ul>
+<li>
+当值为flase的时候, 如果没有一个特定的stop被定为为或者得到, 这个solve 操作会失败.</li>
+<li>
+当值为true时, 至少两个合法的stops 已经通过route被连接, 一个有效的结果被返回. 如果多个routes 在一个单一的请求中被处理, 
+只要一个route被建立, 一个有效的结果被返回.不能被解释的routes列表包含在<code>RouteTask.onSolveComplete</code>的参数消息中</li>
+</ul></td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#impedanceAttribute">impedanceAttribute</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+
+在分析中被用作<span class="trans">阻抗属性的网络属性名. 默认是定义在</span>RouteTask中使用的<span class="trans">特定的</span>routing网络层</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE" height="31"><a href="#outputGeometryPrecision">outputGeometryPrecision</a></td>
+<td class="syntaxTABLE" height="31">
+Number
+</td>
+
+<td class="syntaxTABLE" height="31">
+
+泛化之后输出几何体的精确度。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#outputGeometryPrecisionUnits">outputGeometryPrecisionUnits</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+
+输出几何体精确度的单位.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#outputLines">outputLines</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+
+在结果中生成的输出线的类型. 默认是在RouteTask中的指定的路线网络层中定义的. 可能的值, 查看<a href="naoutputline.htm">NAOutputLine</a>.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#outSpatialReference">outSpatialReference</a></td>
+<td class="syntaxTABLE">
+<a href="spatialreference.htm">SpatialReference</a>
+</td>
+
+<td class="syntaxTABLE">
+
+返回带有分析结果的几何体的空间参考的WKID,几何体在空间参考的地图中被返回.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#preserveFirstStop">preserveFirstStop</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+
+如果是true, 当<code>findBestSequence</code> 设置成true的时候,保持第一端点固定。只有<code>findBestSequence</code>是true是可用的。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#preserveLastStrop">preserveLastStrop</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+
+如果是true，当<code>findBestSequence</code> 是true的时候, 保持最后一个端点在序列中固定不变。只有<code>findBestSequence</code> 
+是true的时候可用。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#restrictionAttributes">restrictionAttributes</a></td>
+<td class="syntaxTABLE">
+String[]
+</td>
+
+<td class="syntaxTABLE">
+用于分析限制的网络属性列表。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#restrictUTurns">restrictUTurns</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+指定如何处理掉头。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#returnBarriers">returnBarriers</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+
+如果是true,障碍物作为<code>RouteTask.onSolveComplete</code>的第二个参数返回.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#returnDirections">returnDirections</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+
+如果是true, 在每一个结果的<code>directions</code> 属性中, 生成方向并返回.更多的信息可以查看<a href="../jshelp/intro_route_directions.htm">Getting driving directions</a>.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#returnRoutes">returnRoutes</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+
+如果是true,在每一个<code>RouteResult</code> 的<code>route</code>属性中,生成并返回路线。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#returnStops">returnStops</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+
+如果是true, 在每一个<code>RouteResult</code>的<code>stops</code>的属性中返回端点。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#startTime">startTime</a></td>
+<td class="syntaxTABLE">
+<a href="date.htm">Date</a>
+</td>
+
+<td class="syntaxTABLE">
+
+路线开始的时间. 如果没有指定,默认是在路线服务中指定的时间.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#stops">stops</a></td>
+<td class="syntaxTABLE">
+Object
+</td>
+
+<td class="syntaxTABLE">
+
+在分析期间,加载的一组端点的网络位置。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#useHierarchy">useHierarchy</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+
+如果是true,网络的层次属性被用于分析.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#useTimeWindows">useTimeWindows</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+
+如果是true,时间窗口会被用于分析.</td>
+		</tr>
+</table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="RouteParametersConst"></a><H4>esri.tasks.RouteParameters()</H4>
+		</div>
+
+<div class="detaildesc">创建一个新的RouteParameters对象。</div>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="accumulateAttributes"></a>
+&lt;String[]> accumulateAttributes</H4></div>
+
+<div class="detaildesc">网络属性名称的列表将被分析累计，例如，那些应该作为响应的一部分被返回的属性。
+默认值在RouteTask指定的路线网路图层中定义。用于可以指定在服务目录下"Network Dataset -> Network Attributes" as "Usage Type: esriNAUTCost"列出的任意属性名称。见<a href="http://webhelp.esri.com/arcgisdesktop/9.3/index.cfm?TopicName=Understanding_the_network_attribute" target="_blank">Understanding the network attribute</a>. </div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="barriers"></a>
+&lt;Object> barriers</H4></div>
+
+<div class="detaildesc">在分析期间, 加载的一组障碍物。 也可以是<a href="datalayer.htm">DataLayer</a> 或者 <a href="featureset.htm">FeatureSet</a> 
+	的一个实例.</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#doNotLocateOnRestrictedElements">doNotLocateOnRestrictedElements</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="directionsLanguage"></a>
+&lt;String> directionsLanguage</H4></div>
+
+<div class="detaildesc">.<br>
+	计算方向时候使用的语言.&nbsp; 默认值在RouteTask指定的路线网路图层中定义。默认只有en_US,&nbsp; 
+	服务器管理员可以增加另外的语言<br>
+&nbsp;</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="directionsLengthUnits"></a>
+&lt;String> directionsLengthUnits</H4></div>
+
+<div class="detaildesc">计算方向时候的长度单位。默认值在RouteTask指定的路线网路图层</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> esriFeet | esriKilometers | esriMeters | esriMiles | esriNauticalMiles | esriYards
+			</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="DirectionsFeatureSet.htm#totalLength">DirectionsFeatureSet.totalLength</a>
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="directionsTimeAttribute"></a>
+&lt;String> directionsTimeAttribute</H4></div>
+
+<div class="detaildesc">计算方向时，用于驾驶时间的网络属性的名称。默认定义在用于RouteTask指定的路径网络图层中。</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="DirectionsFeatureSet.htm#totalTime">DirectionsFeatureSet.totalTime</a>
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="doNotLocateOnRestrictedElements"></a>
+&lt;Boolean> doNotLocateOnRestrictedElements</H4></div>
+
+<div class="detaildesc">如果是true，避免通过<code>barriers</code>限制网络元素或因为限制条件被指定在<code>restrictionAttributes</code>中。</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> false
+			</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#barriers">barriers</a>&nbsp;&nbsp;
+<a href="#restrictionAttributes">restrictionAttributes</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="findBestSequence"></a>
+&lt;Boolean> findBestSequence</H4></div>
+
+<div class="detaildesc">如果是true考虑preserveFirstStop和preserveLastStop优化路线中站点的顺序。 详细信息可参考<a href="../jshelp/intro_route_stop_seq.htm">Finding the best stop sequence</a> 
+	和 <a href="../jshelp/intro_route_time_windows.htm">Routing with time windows</a>.</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="ignoreInvalidLocations"></a>
+&lt;Boolean> ignoreInvalidLocations</H4></div>
+
+<div class="detaildesc">
+在routes中, stop没有在网络上定位,或者stop不能被得到，结果将会取决于<code>ignoreInvalidLocations</code>的值.<br/>
+
+<ul>
+<li>
+当值为flase的时候, 如果没有一个特定的stop被定为为或者得到, 这个solve 操作会失败.</li>
+<li>
+当值为true时, 至少两个合法的stops 已经通过route被连接, 一个有效的结果被返回. 如果多个routes 在一个单一的请求中被处理, 
+只要一个route被建立, 一个有效的结果被返回.不能被解释的routes列表包含在<code>RouteTask.onSolveComplete</code>的参数消息中</li>
+</ul></div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="RouteTask.htm#onSolveComplete">RouteTask.onSolveComplete</a>
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="impedanceAttribute"></a>
+&lt;String> impedanceAttribute</H4></div>
+
+<div class="detaildesc">在分析中被用作阻抗属性的网络属性名。默认值在RouteTask指定的路线网路图层中定义。 用户可以指定在服务目录下"Network Dataset -> Network Attributes" 如同 "Usage Type: esriNAUTCost"列出的任意属性名称。也可以指定'none'值来指出没有网路属性用作阻抗。如果指定一个空的数组，默认为服务的默认值。 <br/><br/>
+例如，为最快路线设置<code>impedanceAttribute="Time"</code>和为最短的驾车时间设置<code>impedanceAttribute="Length"</code>，假设服务有这两个esriNAUTCost属性。<br/><br/>
+
+更多详细信息，见 <a href="http://webhelp.esri.com/arcgisdesktop/9.3/index.cfm?TopicName=Understanding_the_network_attribute" target="_blank">Understanding the network attribute</a>.<br>
+	<br></div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="outputGeometryPrecision"></a>
+&lt;Number> outputGeometryPrecision</H4></div>
+
+<div class="detaildesc">
+泛化之后输出几何体的精确度. 如果是0,没有任何输出几何体的泛化被执行。如果当前可用,表示了MaximumAllowableOffset的参数-根据IPolycurve.Generalize执行泛化</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="outputGeometryPrecisionUnits"></a>
+&lt;String> outputGeometryPrecisionUnits</H4></div>
+
+<div class="detaildesc">
+	输出几何体精确度的单位. 默认值是&quot;esriUnknownUnits".</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="outputLines"></a>
+&lt;String> outputLines</H4></div>
+
+<div class="detaildesc">
+在结果中生成的输出线的类型。默认是在RouteTask中的指定的路线网络层中定义的。 可能的值, 查看<a href="naoutputline.htm">NAOutputLine</a>.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="outSpatialReference"></a>
+&lt;<a href="spatialreference.htm">SpatialReference</a>> outSpatialReference</H4></div>
+
+<div class="detaildesc">
+返回分析结果的几何体的空间参考的WKID,如果没有指定，几何体用地图的空间参考返回。支持的空间参考列表，见<a href="../jshelp/pcs.htm">投影坐标系统</a>和<a href="../jshelp/gcs.htm">地理坐标系统</a>。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="preserveFirstStop"></a>
+&lt;Boolean> preserveFirstStop</H4></div>
+
+<div class="detaildesc">如果是true, 当<code>findBestSequence</code> 设置成true的时候,保持第一个端点在 固定
+	在序列中.&nbsp; 默认是在RouteTask中的指定的路线网络层中定义的.</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="preserveLastStrop"></a>
+&lt;Boolean> preserveLastStrop</H4></div>
+
+<div class="detaildesc">如果是true，当<code>findBestSequence</code> 是true的时候, 
+	保持最后一个stop固定在序列中. 只适用<code>findBestSequence</code> 是true的时候. 默认是在RouteTask中的特定的路线网络层中定义的.</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="restrictionAttributes"></a>
+&lt;String[]> restrictionAttributes</H4></div>
+
+<div class="detaildesc">网络属性名字的列表，被用作带有分析的限制. 默认是使用在RouteTask中,定义在指定的路线网络层. 也可以指定在&quot;Network Dataset -&gt; Network Attributes&quot; as &quot;Usage Type: esriNAUTCost&quot;下的服务目录中列出的任何属性名. 
+	也能指定&#39;none&#39; 值来标识没有网络属性被用作阻抗. 如果指定一个空数组,会默认到服务的默认值。<br>
+&nbsp;</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#doNotLocateOnRestrictedElements">doNotLocateOnRestrictedElements</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="restrictUTurns"></a>
+&lt;String> restrictUTurns</H4></div>
+
+<div class="detaildesc">详述U-Turns应该怎样处理. 默认是在RouteTask中的指定的路线网络层中定义的. 
+	可能的值是 "esriNFSBAllowBacktrack", "esriNFSBAtDeadEndsOnly" 和 "esriNFSBNoBacktrack". 
+	也可以查看 <a href="nauturn.htm">NAUTurn</a>.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="returnBarriers"></a>
+&lt;Boolean> returnBarriers</H4></div>
+
+<div class="detaildesc">如果是true，障碍物作为 <code>RouteTask.onSolveComplete</code>的第二个参数返回.</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> false
+			</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="RouteTask.htm#onSolveComplete">RouteTask.onSolveComplete</a>
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="returnDirections"></a>
+&lt;Boolean> returnDirections</H4></div>
+
+<div class="detaildesc">如果是true, 在每一个结果的<code>directions</code> 属性中, 
+	生成路线并返回. 更多的信息，可以查看<a href="../jshelp/intro_route_directions.htm">Getting driving directions</a>.</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+	</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> false
+	</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="RouteResult.htm#directions">RouteResult.directions</a>
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="returnRoutes"></a>
+&lt;Boolean> returnRoutes</H4></div>
+
+<div class="detaildesc">如果是true，在每一个 <code>RouteResult</code>的<code>route</code> 
+	属性中生成并返回路线 </div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> true
+			</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="RouteResult.htm#route">RouteResult.route</a>
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="returnStops"></a>
+&lt;Boolean> returnStops</H4></div>
+
+<div class="detaildesc">如果是true，每一个 <code>RouteResult</code>的<code>stops</code> 
+	属性中生成并返回端点.</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> false
+			</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="RouteResult.htm#stops">RouteResult.stops</a>
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="startTime"></a>
+&lt;<a href="date.htm">Date</a>> startTime</H4></div>
+
+<div class="detaildesc">Route开始的时间. 如果没有指定,默认是在路线服务中指定的时间.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="stops"></a>
+&lt;Object> stops</H4></div>
+
+<div class="detaildesc">在分析期间, 一组端点作为网络位置被装载. 可以是<a href="datalayer.htm">DataLayer</a> 
+	或者 <a href="featureset.htm">FeatureSet</a> 的一个实例. 当<code>RouteParameters.stops 
+	采用 FeatureSet的时候, 在</code>FeatureSet 中的每一个要素必须有一个定义过的空间参考. 如果这个要素包含 x 和 y属性, 即使这个要素包含几何体,这些值被用作端点.&nbsp; 能够设置在端点上的属性列表, 查看在 
+	<a href="http://webhelp.esri.com/arcgisdesktop/9.3/index.cfm?TopicName=Finding_the_best_route" target="_blank">Finding the best route</a>中的&quot;Stop 
+	properties&quot;节.</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="DirectionsFeatureSet.htm#routeName">DirectionsFeatureSet.routeName</a>
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="useHierarchy"></a>
+&lt;Boolean> useHierarchy</H4></div>
+
+<div class="detaildesc">如果是true,网络的层次属性被用作分析. 默认是在RouteTask中的指定的路线网络层中定义的.<br>
+	<br>
+	<strong>已知值:</strong> true | false
+			</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="useTimeWindows"></a>
+&lt;Boolean> useTimeWindows</H4></div>
+
+<div class="detaildesc">如果是true，时间窗口会被用作分析. 默认是在RouteTask中的指定的路线网络层中定义的.</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+</div>
+
+<br/></div></body></html> 

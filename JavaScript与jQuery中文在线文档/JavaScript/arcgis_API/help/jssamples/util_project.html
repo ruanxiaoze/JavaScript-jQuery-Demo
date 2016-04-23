@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>ArcGIS JavaScript API</title>
+</head>
+
+<body>
+
+<!--***REQUIRED TITLE***-->
+<div id="pageBanner">投影一个点</div>
+<!--***END REQUIRED TITLE***-->
+
+  <div id="nstext">
+
+	<H4 class=dtH4><a href="../../demos/utilities/util_project.html" target="_blank">查看在线示例</a></H4>
+  <H4 class=dtH4>描述</H4>
+
+  <!--***START TEXT - DO NOT WRITE ABOVE THIS LINE***-->
+
+  <p>
+  本例展示了如何用多个坐标系统查找一个点的坐标。在地图上单击一个点查看它的坐标（WGS 
+			1984 Web Mercator投影坐标系统）。看到的这个坐标需要一个投影因为从鼠标单击得到的点的地理坐标（经度和纬度）。能够通过单击<A href="../jsapi/infowindow.htm">信息窗口</A>上的按钮投影这个坐标回到地理坐标。
+  </p>
+		<p>
+        投影使用<a href="http://webhelp.esri.com/arcgisserver/9.3/dotNet/geometry_service.htm" target="_blank">
+				ArcGIS Server几何服务</a>实现。这个服务类型是在ArcGIS	Server 9.3增加的，可以用使用几何服务在JavaScript应用中缓冲，投影和简化几何体。这行代码创建了几何服务:</p>
+		<pre>gsvc = new esri.tasks.GeometryService("http://sampleserver1a.arcgisonline.com/arcgis/rest/services/Geometry/GeometryServer");</pre>
+		<p>能使用<a href="../jshelp/ags_rest.htm">服务目录</a>查出自己的几何服务的URL。由于服务的名称必须是Geometry，因此URL和这个极其相似。</p>
+		<p>
+        当单击点时间到的窗口是一个<A href="../jsapi/infowindow.htm">信息窗口</A>。信息窗口通过<A href="../jsapi/infotemplate.htm">InfoTemplate</A>进行格式化，能够包含HTML，因此可以在信息窗口里面放置按钮。注意空的ID = 'latlong'的DIV被放在信息模板中。如果单击按钮将坐标转回经纬度，这个DIV被填充。</p>
+
+<!--***END TEXT - DO NOT WRITE BELOW THIS LINE***--> 
+
+  <H4 class=dtH4>代码</H4>
+  <div class="detailSample">
+  <code>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"&gt;<br/>
+&lt;html&gt;<br/>
+&nbsp;&nbsp;&lt;head&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8"/&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;meta http-equiv="X-UA-Compatible" content="IE=7" /&gt;<br/>
+&nbsp;&nbsp;&lt;title&gt;Project a point&lt;/title&gt;<br/>
+<br/>
+&nbsp;&nbsp;&lt;link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css"&gt;<br/>
+&nbsp;&nbsp;&lt;script src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5" type="text/javascript"&gt;&lt;/script&gt;<br/>
+<br/>
+&nbsp;&nbsp;&lt;script type="text/javascript"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;dojo.require("esri.map");<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;dojo.require("esri.tasks.geometry");<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;var map = null;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;var gsvc = null;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;var pt = null;<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;function initialize() {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map = new esri.Map("map");<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var layer = new esri.layers.ArcGISTiledMapServiceLayer("http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer");<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map.addLayer(layer);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map.setExtent(new esri.geometry.Extent(-144.13584773952124, 7.981485927970198, -52.76454682003924, 68.8956865409582, new esri.SpatialReference({wkid: 4326})));<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gsvc = new esri.tasks.GeometryService("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Geometry/GeometryServer");<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dojo.connect(map, "onClick", projectToWebMercator);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;function projectToWebMercator(evt) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map.graphics.clear();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var point = evt.mapPoint;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var symbol = new esri.symbol.SimpleMarkerSymbol().setStyle(esri.symbol.SimpleMarkerSymbol.STYLE_DIAMOND);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var graphic = new esri.Graphic(point, symbol);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var outSR = new esri.SpatialReference({ wkid: 102113});<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map.graphics.add(graphic);<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gsvc.project([ graphic ], outSR, function(features) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pt = features[0].geometry;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;graphic.setInfoTemplate(new esri.InfoTemplate("Coordinates",<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"&lt;p&gt;&amp;nbsp;X: " + pt.x +<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"&lt;br/&gt;&amp;nbsp;Y: " + pt.y +<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"&lt;/p&gt;"&nbsp;&nbsp;+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"&lt;input type='button' value='Convert back to LatLong' onclick='projectToLatLong();' /&gt;" +<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"&lt;div id='latlong'&gt;&lt;/div&gt;"));<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map.infoWindow<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.setTitle(graphic.getTitle())<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.setContent(graphic.getContent())<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.show(evt.screenPoint, map.getInfoWindowAnchor(evt.screenPoint));<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;function projectToLatLong() {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var symbol = new esri.symbol.SimpleMarkerSymbol();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var graphic = new esri.Graphic(pt, symbol);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var outSR = new esri.SpatialReference({ wkid: 4326});<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gsvc.project([ graphic ], outSR, function(features) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pt = features[0].geometry;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dojo.byId("latlong").innerHTML = "&amp;nbsp;Latitude = " + pt.y + "&lt;br/&gt;&amp;nbsp;Longitude = " + pt.x;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;dojo.addOnLoad(initialize);<br/>
+&nbsp;&nbsp;&lt;/script&gt;<br/>
+<br/>
+&lt;/head&gt;<br/>
+<br/>
+&lt;body class="tundra"&gt;<br/>
+&nbsp;&nbsp;&lt;b&gt;Click a location on the map to Project from LatLng -&gt; Web Mercator:&lt;/b&gt;<br/>
+&nbsp;&nbsp;&lt;div id="map" style="width:600px; height:400px; border:1px solid #000;"&gt;&lt;/div&gt;<br/>
+&lt;/body&gt;<br/>
+<br/>
+&lt;/html&gt;</code>
+  			</div>
+
+
+<br/><br/></div> 
+</body>
+</html>

@@ -1,0 +1,706 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>TextSymbol</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: TextSymbol</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	文本符号用于在图形图层上增加文本。
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+<a href="symbol.htm">esri.symbol.Symbol</a>
+  |_ esri.symbol.TextSymbol
+</pre><H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#TextSymbolConst1">esri.symbol.TextSymbol(text)</a></td>
+		<td class="syntaxTABLE">创建一个新的仅包含指定文本的TextSymbol对象。</td>
+		</tr>
+<tr><td class="syntaxTABLE"><a href="#TextSymbolConst2">esri.symbol.TextSymbol(text, font, color)</a></td>
+		<td class="syntaxTABLE">创建一个新的TextSymbol对象。 </td>
+		</tr>
+<tr><td class="syntaxTABLE"><a href="#TextSymbolConst3">esri.symbol.TextSymbol(json)</a></td>
+		<td class="syntaxTABLE">使用JSON对象创建一个新的TextSymbol对象。 </td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#align">align</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+文本对齐方式。 可用值见常量表。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#angle">angle</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+文本角度。0是水平的并且角度顺时针移动。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#decoration">decoration</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+文本上的装饰。 可用值见常量表。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#font">font</a></td>
+<td class="syntaxTABLE">
+<a href="font.htm">Font</a>
+</td>
+
+<td class="syntaxTABLE">显示文本的字体。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#kerning">kerning</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+确定是否调整文本字符串中字符间的间距。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#rotated">rotated</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">确定文本字符串中的每个字符是否是旋转的。
+</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#text">text</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+在图形图层中显示的文本字符串。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#xoffset">xoffset</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">x轴的偏移量（单位：像素）。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#yoffset">yoffset</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">y轴的偏移量（单位：像素）。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>常量</H4>
+
+	<table CLASS="syntaxTABLE" cellspacing="0">
+	<tr>
+	<th class="tableheader" width="20%">常量</th>
+		<th class="tableheader">描述</th>
+	</tr>
+
+		<tr>
+		<td class="syntaxTABLE">ALIGN_END</td>
+			<td class="syntaxTABLE">	文本字符的末端是对齐点。	</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">ALIGN_MIDDLE</td>
+			<td class="syntaxTABLE">	文本字符串中间对齐。		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">ALIGN_START</td>
+			<td class="syntaxTABLE">		文本字符串起点对齐。	</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">DECORATION_LINETHROUGH</td>
+			<td class="syntaxTABLE">	文本有中划线。	</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">DECORATION_NONE</td>
+			<td class="syntaxTABLE">		文本没有装饰。	</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">DECORATION_OVERLINE</td>
+			<td class="syntaxTABLE">		文本有上划线.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">DECORATION_UNDERLINE</td>
+			<td class="syntaxTABLE">		文本有下划线。	</td>
+	</tr>
+
+</table>
+
+<H4 class=dtH4>方法表</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+		<th class="tableheader">方法</th>
+		<th class="tableheader">返回值</th>
+		<th class="tableheader">描述</th>
+		</tr>
+
+<tr>
+<td class="syntaxTABLE"><a href="#setAlign">setAlign(align)</a></td><td class="syntaxTABLE">
+<a href="textsymbol.htm">TextSymbol</a>
+</td>
+<td class="syntaxTABLE">设置文本对齐方式。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setAngle">setAngle(angle)</a></td><td class="syntaxTABLE">
+<a href="textsymbol.htm">TextSymbol</a>
+</td>
+<td class="syntaxTABLE">设置文本的角度。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setDecoration">setDecoration(decoration)</a></td><td class="syntaxTABLE">
+<a href="textsymbol.htm">TextSymbol</a>
+</td>
+<td class="syntaxTABLE">设置文本的装饰。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setFont">setFont(font)</a></td><td class="syntaxTABLE">
+<a href="textsymbol.htm">TextSymbol</a>
+</td>
+<td class="syntaxTABLE">设置文本字体。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setKerning">setKerning(kerning)</a></td><td class="syntaxTABLE">
+<a href="textsymbol.htm">TextSymbol</a>
+</td>
+<td class="syntaxTABLE">设置是否调整文本字符串中字符的间距。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setOffset">setOffset(x, y)</a></td><td class="syntaxTABLE">
+<a href="textsymbol.htm">TextSymbol</a>
+</td>
+<td class="syntaxTABLE">设置文本的x和y的偏移量。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setRotated">setRotated(rotated)</a></td><td class="syntaxTABLE">
+<a href="textsymbol.htm">TextSymbol</a>
+</td>
+<td class="syntaxTABLE">设置文本字符串中的每个字符是否是旋转的。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setText">setText(text)</a></td><td class="syntaxTABLE">
+<a href="textsymbol.htm">TextSymbol</a>
+</td>
+<td class="syntaxTABLE">设置文本字符串。</td>	</tr></table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="TextSymbolConst1"></a><H4>esri.symbol.TextSymbol(text)</H4>
+		</div>
+
+<div class="detaildesc">创建一个包含指定文本的新的TextSymbol对象。</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;String>
+<B>text</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			在图形图层中显示的文本字符串。</td>
+			</tr>
+</table>
+
+</div><div class="detaildiv"><div class="detailname"><a name="TextSymbolConst2"></a><H4>esri.symbol.TextSymbol(text, font, color)</H4>
+		</div>
+
+<div class="detaildesc">创建一个新的TextSymbol对象。</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;String>
+<B>text</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			在图形图层中显示的文本字符串。</td>
+			</tr>
+<tr>
+<td class="detailTABLE">
+&lt;<a href="font.htm">Font</a>>
+<B>font</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			显示文本的字体。
+			</td>
+			</tr>
+<tr>
+<td class="detailTABLE">
+&lt;dojo.Color>
+<B>color</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			符号颜色，颜色基于<a href="http://redesign.dojotoolkit.org/jsdoc/dojo/HEAD/dojo.Color" target="_blank">dojo.Color</a>。  颜色可以用下列格式表示：<br/><br/>
+
+<ul>
+<li>R, G, B:  <code>new dojo.Color([255,0,0])</code> </li>
+<li>R,G,B,A.  "A"值表示透明度，0.0是全透明的，1.0是不透明的。: <code>new dojo.Color([255,0,0,0.25])</code> </li>
+<li>Hex string: <code>new dojo.Color("#C0C0C0")</code> </li>
+<li>Named string:  <code>new dojo.Color("blue")</code> </li>
+</ul>
+			</td>
+			</tr>
+</table>
+
+</div><div class="detaildiv"><div class="detailname"><a name="TextSymbolConst3"></a><H4>esri.symbol.TextSymbol(json)</H4>
+		</div>
+
+<div class="detaildesc">使用JSON对象创建一个新的TextSymbol对象。</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;Object>
+<B>json</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			JSON对象表示文本符号。
+			</td>
+			</tr>
+</table>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="align"></a>
+&lt;String> align</H4></div>
+
+<div class="detaildesc">文本对齐方式。 可用值见常量表。</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> ALIGN_MIDDLE
+			</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setAlign">setAlign</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="angle"></a>
+&lt;Number> angle</H4></div>
+
+<div class="detaildesc">文本角度。0是水平的并且角度顺时针移动。</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> 0
+			</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setAngle">setAngle</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="decoration"></a>
+&lt;String> decoration</H4></div>
+
+<div class="detaildesc">文本上的装饰。 可用值见常量表。</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> DECORATION_NONE
+			</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setDecoration">setDecoration</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="font"></a>
+&lt;<a href="font.htm">Font</a>> font</H4></div>
+
+<div class="detaildesc">显示文本的字体。</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setFont">setFont</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="kerning"></a>
+&lt;Boolean> kerning</H4></div>
+
+<div class="detaildesc">确定是否调整文本字符串中字符间的间距。</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> true
+			</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setKerning">setKerning</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="rotated"></a>
+&lt;Boolean> rotated</H4></div>
+
+<div class="detaildesc">确定文本字符串中的每个字符是否是旋转的。 </div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> false
+			</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setRotated">setRotated</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="text"></a>
+&lt;String> text</H4></div>
+
+<div class="detaildesc">在图形图层中显示的文本字符串。</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setText">setText</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="xoffset"></a>
+&lt;Number> xoffset</H4></div>
+
+<div class="detaildesc">x轴的偏移量（单位：像素）。</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> 0
+			</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setOffset">setOffset</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="yoffset"></a>
+&lt;Number> yoffset</H4></div>
+
+<div class="detaildesc">y轴的偏移量（单位：像素）。</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> 0
+			</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setOffset">setOffset</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class=sectionDivider>方法详细信息</div>
+<div class="detaildiv">
+		<div class="detailname"><a name="setAlign"></a><H4>
+setAlign(align)</H4></div>
+
+<div class="detaildesc">设置文本对齐方式。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="textsymbol.htm">TextSymbol</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>align</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+文本对齐方式。 可用值见常量表。</td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#align">align</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setAngle"></a><H4>
+setAngle(angle)</H4></div>
+
+<div class="detaildesc">设置文本的角度。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="textsymbol.htm">TextSymbol</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>angle</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+角度从 0 到359.</td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#angle">angle</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setDecoration"></a><H4>
+setDecoration(decoration)</H4></div>
+
+<div class="detaildesc">设置文本的装饰。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="textsymbol.htm">TextSymbol</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>decoration</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+文本上的装饰。 可用值见常量表。</td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#decoration">decoration</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setFont"></a><H4>
+setFont(font)</H4></div>
+
+<div class="detaildesc">设置文本字体。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="textsymbol.htm">TextSymbol</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="font.htm">Font</a>> <B>font</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+文本字体</td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#font">font</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setKerning"></a><H4>
+setKerning(kerning)</H4></div>
+
+<div class="detaildesc">设置是否调整文本字符串中字符的间距。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="textsymbol.htm">TextSymbol</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Boolean> <B>kerning</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+字距调整设置为true.</td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#kerning">kerning</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setOffset"></a><H4>
+setOffset(x, y)</H4></div>
+
+<div class="detaildesc">设置文本的x和y的偏移量。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="textsymbol.htm">TextSymbol</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>x</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+x偏移量（单位：像素）</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>y</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+y偏移量（单位：像素）</td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#xoffset">xoffset</a>&nbsp;&nbsp;
+<a href="#yoffset">yoffset</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setRotated"></a><H4>
+setRotated(rotated)</H4></div>
+
+<div class="detaildesc">设置文本字符串中的每个字符是否是旋转的。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="textsymbol.htm">TextSymbol</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Boolean> <B>rotated</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+设置为true，旋转字符串里所有字符。</td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#rotated">rotated</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setText"></a><H4>
+setText(text)</H4></div>
+
+<div class="detaildesc">设置文本字符串。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="textsymbol.htm">TextSymbol</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>text</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+文本字符串。</td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#text">text</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<br/></div></body></html> 

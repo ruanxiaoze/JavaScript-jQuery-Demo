@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>Measure Polygon Area and Perimeter</title>
+    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css">
+    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"></script>
+
+    <script type="text/javascript">
+      dojo.require("esri.map");
+      dojo.require("esri.tasks.geometry");
+      dojo.require("esri.toolbars.draw");
+
+      var map, geometryService;
+
+      function init() {
+        //identify proxy page to use if the toJson payload to the geometry service is greater than 2000 characters.
+        //If this null or not available the project and lengths operation will not work.  Otherwise it will do a http post to the proxy.
+        esriConfig.defaults.io.proxyUrl = "/arcgisserver/apis/javascript/proxy/proxy.ashx";
+        esriConfig.defaults.io.alwaysUseProxy = false;
+
+        var customExtent = new esri.geometry.Extent(-13669046, 5696984, -13666179, 5698895, new esri.SpatialReference({wkid: 102113}));
+        map = new esri.Map("map", {extent:customExtent});
+        dojo.connect(map, "onLoad", function() {
+          var tb = new esri.toolbars.Draw(map);
+          dojo.connect(tb, "onDrawEnd", getAreaAndLength);
+          tb.activate(esri.toolbars.Draw.FREEHAND_POLYGON);
+        });
+        map.addLayer(new esri.layers.ArcGISTiledMapServiceLayer("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Portland/ESRI_LandBase_WebMercator/MapServer"));
+
+        geometryService = new esri.tasks.GeometryService("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Geometry/GeometryServer");
+        dojo.connect(geometryService, "onAreasAndLengthsComplete", outputAreaAndLength);
+      }
+
+      function getAreaAndLength(geometry) {
+        map.graphics.clear();
+        var graphic = map.graphics.add(new esri.Graphic(geometry, new esri.symbol.SimpleFillSymbol()));
+        geometryService.simplify([graphic], function(graphics) {
+          geometryService.areasAndLengths(graphics);
+        });
+      }
+
+      function outputAreaAndLength(result) {
+        console.log(dojo.toJson(result));
+        dojo.byId("area").innerHTML = result.areas[0] + " square meters";
+        dojo.byId("length").innerHTML = result.lengths[0] + " meters";
+      }
+
+      dojo.addOnLoad(init);
+    </script>
+  </head>
+  <body>
+    Click and drag your mouse on the map to draw a polygon.  The user defined polygon will be used as input into the geometryService.areasAndLengths() operation.
+    <div id="map" class="tundra" style="width:1024px; height:512px; border:1px solid #000;"></div>
+    Area: <span id="area"></span><br />
+    Length: <span id="length"></span>
+  </body>
+</html>

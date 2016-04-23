@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>QueryTask with query geometry from another task</title>
+    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css">
+    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"></script>
+
+    <script type="text/javascript">
+      dojo.require("esri.map");
+      dojo.require("esri.tasks.query");
+      dojo.require("esri.tasks.geometry");
+
+      var map;
+      /*Initialize map, buffer, & query params*/
+      function init() {
+        var startExtent = new esri.geometry.Extent(-118.276, 33.753, -118.121, 33.856, new esri.SpatialReference({wkid:4326}) );
+        map = new esri.Map("mapDiv", { extent: startExtent });
+        //listen for when map is loaded and then add query functionality
+        dojo.connect(map, "onLoad", initFunctionality);
+
+        var streetMap = new esri.layers.ArcGISTiledMapServiceLayer("http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer");
+        map.addLayer(streetMap);
+      }
+
+      function initFunctionality(map) {
+        var queryTask = new esri.tasks.QueryTask("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Census_USA/MapServer/1");
+        var queryTaskTouches = new esri.tasks.QueryTask("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Census_USA/MapServer/1");
+
+        //identify proxy page to use if the toJson payload to the geometry service is greater than 2000 characters.
+        //If this null or not available the buffer operation will not work.  Otherwise it will do a http post to the proxy.
+        esriConfig.defaults.io.proxyUrl = "/arcgisserver/apis/javascript/proxy/proxy.ashx";
+        esriConfig.defaults.io.alwaysUseProxy = false;
+
+        // Query
+        var query = new esri.tasks.Query();
+        query.returnGeometry = true;
+        query.outFields = ["POP2000","POP2007","MALES", "FEMALES", "FIPS"];
+        var infoTempContent = "POP2007 = ${POP2007}<br/>POP2000 = ${POP2000}<br/>MALES = ${MALES}<br/>FEMALES = ${FEMALES}"
+            + "<br/><A href='#' onclick='map.graphics.clear();map.infoWindow.hide();'>Remove Selected Features</A>";
+        //Create InfoTemplate for styling the result infowindow.
+        var infoTemplate = new esri.InfoTemplate("Block: ${FIPS}", infoTempContent);
+        map.infoWindow.resize(275,190);
+
+        var currentClick = null;
+        // +++++Listen for map onClick event+++++
+        dojo.connect(map, "onClick", function(evt) {
+          map.graphics.clear();
+          map.infoWindow.hide();
+          currentClick = query.geometry = evt.mapPoint;
+          query.spatialRelationship = esri.tasks.Query.SPATIAL_REL_INTERSECTS;
+          queryTask.execute(query);
+          dojo.byId('messages').innerHTML = "<b>Executing Point Intersection Query...</b>";
+        });
+
+        var firstGraphic = null;
+        // +++++Listen for QueryTask onComplete event+++++
+        dojo.connect(queryTask, "onComplete", function(graphics) {
+          firstGraphic = graphics.features[0];
+          var symbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID, new dojo.Color([100,100,100]), 3), new dojo.Color([255,0,0,0.20]));
+          firstGraphic.setSymbol(symbol);
+          firstGraphic.setInfoTemplate(infoTemplate);
+
+          map.graphics.add(firstGraphic);
+          query.geometry = firstGraphic.geometry;
+          query.spatialRelationship = esri.tasks.Query.SPATIAL_REL_TOUCHES;
+          queryTaskTouches.execute(query);
+          dojo.byId('messages').innerHTML = "<b>Executing Polygon Touches Query...</b>";
+        });
+
+        // +++++Listen for QueryTask executecomplete event+++++
+        dojo.connect(queryTaskTouches, "onComplete", function(fset) {
+          var symbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID, new dojo.Color([100,100,100]), 2), new dojo.Color([0,0,255,0.20]));
+
+          var resultFeatures = fset.features;
+          for (var i=0, il=resultFeatures.length; i<il; i++) {
+            var graphic = resultFeatures[i];
+            graphic.setSymbol(symbol);
+            graphic.setInfoTemplate(infoTemplate);
+            map.graphics.add(graphic);
+          }
+          map.infoWindow.setTitle("Comparing " + firstGraphic.attributes.FIPS + " census block group with surrounding block groups");
+          var content = "<table border='1'><th><td>Selected</td><td>Average Surrounding</td></th>"
+              + "<tr><td>Pop 2007</td><td>" + firstGraphic.attributes.POP2007 + "</td><td>" + average(fset,'POP2007') + "</td></tr>"
+              + "<tr><td>Pop 2000</td><td>" + firstGraphic.attributes.POP2000 + "</td><td>" + average(fset,'POP2000') + "</td></tr>"
+              + "<tr><td>Males</td><td>" + firstGraphic.attributes.MALES + "</td><td>" + average(fset,'MALES') + "</td></tr>"
+              + "<tr><td>Females</td><td>" + firstGraphic.attributes.FEMALES + "</td><td>" + average(fset,'FEMALES') + "</td></tr>"
+              + "</table>";
+          map.infoWindow.setContent(content);
+          map.infoWindow.show(map.toScreen(currentClick),map.getInfoWindowAnchor(map.toScreen(currentClick)));
+          dojo.byId('messages').innerHTML = "";
+        });
+      }
+
+      function average(fset, att) {
+        var features = fset.features;
+        var sum = 0;
+        var featuresLength = features.length;
+        for (var x = 0; x < featuresLength; x++) {
+          sum = sum + features[x].attributes[att];
+        }
+        return Math.round(sum/featuresLength);
+      }
+
+      dojo.addOnLoad(init);
+    </script>
+  </head>
+
+  <body class="tundra">
+    Click on map to select census block group that intersects the map click and all block groups that touch selected group.
+    <div id="mapDiv" style="width: 850px; height:500px; position:relative;"></div>
+    <span id="messages"></span>
+  </body>
+</html>

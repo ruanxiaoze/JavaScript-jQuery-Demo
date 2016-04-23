@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>Maps Toolbar</title>
+    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css">
+    <script type="text/javascript">djConfig = { parseOnLoad:true }</script>
+    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"></script>
+    <script type="text/javascript">
+      dojo.require("esri.map");
+      dojo.require("esri.toolbars.draw");
+
+      var map, toolbar, symbol, geomTask;
+
+      function init() {
+        map = new esri.Map("map");
+        dojo.connect(map, "onLoad", createToolbar);
+        var imageryPrime = new esri.layers.ArcGISTiledMapServiceLayer("http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer");
+        map.addLayer(imageryPrime);
+      }
+
+      function createToolbar(map) {
+        toolbar = new esri.toolbars.Draw(map);
+        dojo.connect(toolbar, "onDrawEnd", addToMap);
+      }
+
+      function addToMap(geometry) {
+       switch (geometry.type) {
+          case "point":
+            var symbol = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_SQUARE, 10, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([255,0,0]), 1), new dojo.Color([0,255,0,0.25]));
+            break;
+          case "polyline":
+            var symbol = new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_DASH, new dojo.Color([255,0,0]), 1);
+            break;
+          case "polygon":
+            var symbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_NONE, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_DASHDOT, new dojo.Color([255,0,0]), 2), new dojo.Color([255,255,0,0.25]));
+            break;
+          case "extent":
+            var symbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_NONE, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_DASHDOT, new dojo.Color([255,0,0]), 2), new dojo.Color([255,255,0,0.25]));
+            break;
+          case "multipoint":
+            var symbol = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_DIAMOND, 20, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([0,0,0]), 1), new dojo.Color([255,255,0,0.5]));
+            break;
+        }
+        var graphic = new esri.Graphic(geometry, symbol);
+        map.graphics.add(graphic);
+      }
+
+      dojo.addOnLoad(init);
+    </script>
+  </head>
+  <body class="tundra">
+    Draw :
+    <button dojoType="dijit.form.Button" onClick="toolbar.activate(esri.toolbars.Draw.POINT);map.hideZoomSlider();">Point</button>
+    <button dojoType="dijit.form.Button" onClick="toolbar.activate(esri.toolbars.Draw.MULTI_POINT);map.hideZoomSlider();">Multipoint</button>
+    <button dojoType="dijit.form.Button" onClick="toolbar.activate(esri.toolbars.Draw.LINE);map.hideZoomSlider();">Line</button>
+    <button dojoType="dijit.form.Button" onClick="toolbar.activate(esri.toolbars.Draw.POLYLINE);map.hideZoomSlider();">Polyline</button>
+    <button dojoType="dijit.form.Button" onClick="toolbar.activate(esri.toolbars.Draw.POLYGON);map.hideZoomSlider();">Polygon</button>
+    <button dojoType="dijit.form.Button" onClick="toolbar.activate(esri.toolbars.Draw.FREEHAND_POLYLINE);map.hideZoomSlider();">Freehand Polyline</button>
+    <button dojoType="dijit.form.Button" onClick="toolbar.activate(esri.toolbars.Draw.FREEHAND_POLYGON);map.hideZoomSlider();">Freehand Polygon</button>
+    <button dojoType="dijit.form.Button" onClick="toolbar.deactivate();map.showZoomSlider();">Deactivate</button>
+    <div id="map" style="width:900px; height:600px; border:1px solid #000;"></div>
+  </body>
+</html>

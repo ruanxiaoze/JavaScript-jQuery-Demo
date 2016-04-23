@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>LayerInfo</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: LayerInfo</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	包含关于地图服务里每个图层的信息。LayerInfo没有构造方法。
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.layers.LayerInfo
+</pre>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#defaultVisibility">defaultVisibility</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+地图服务中默认图层的可见性。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#id">id</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+ArcGIS Server为图层分配的图层ID。 顶层图层是0，每个图层ID是连续地递增。 如果图层从原地图文档中被增加或删除，ID值会跟着移动。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#name">name</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+在地图服务里定义的图层名称。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#parentLayerId">parentLayerId</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+如果图层是一组图层的一部分，图层会包含这组图层的父ID。 否则，该属性值是-1。 如果图层从原地图文档中被增加或删除，ID值会跟着移动。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#subLayerIds">subLayerIds</a></td>
+<td class="syntaxTABLE">
+Number[]
+</td>
+
+<td class="syntaxTABLE">
+如果图层是父图层，图层将有包含在数组里的一到多个子图层。 否则，该属性值是null。  如果图层从原地图文档中被增加或删除，ID值会跟着移动。</td>
+		</tr>
+</table>
+
+<div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="defaultVisibility"></a>
+&lt;Boolean> defaultVisibility</H4></div>
+
+<div class="detaildesc">地图服务中默认图层的可见性。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="id"></a>
+&lt;Number> id</H4></div>
+
+<div class="detaildesc">ArcGIS Server为图层分配的图层ID。 顶层图层是0，每个图层ID是连续地递增。 如果图层从原地图文档中被增加或删除，ID值会跟着移动。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="name"></a>
+&lt;String> name</H4></div>
+
+<div class="detaildesc">在地图服务里定义的图层名称。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="parentLayerId"></a>
+&lt;Number> parentLayerId</H4></div>
+
+<div class="detaildesc">如果图层是一组图层的一部分，图层会包含这组图层的父ID。 否则，该属性值是-1。 如果图层从原地图文档中被增加或删除，ID值会跟着移动。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="subLayerIds"></a>
+&lt;Number[]> subLayerIds</H4></div>
+
+<div class="detaildesc">如果图层是父图层，图层将有包含在数组里的一到多个子图层。 否则，该属性值是null。  如果图层从原地图文档中被增加或删除，ID值会跟着移动。</div>
+
+</div>
+
+<br/></div></body></html> 

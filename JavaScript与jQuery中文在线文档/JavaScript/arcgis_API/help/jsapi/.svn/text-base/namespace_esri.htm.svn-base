@@ -1,0 +1,498 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>namespace_esri</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">Namespace: esri</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	The esri namespace has several utility methods associated with it.  These methods are convenience methods that are not associated with any class.
+	</div>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#config">config</a></td>
+<td class="syntaxTABLE">
+Object
+</td>
+
+<td class="syntaxTABLE">
+ArcGIS JavaScript API default configurations that can be overridden programatically.  For details, see <a href="../jshelp/inside_defaults.htm">Default API configurations</a>.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#documentBox">documentBox</a></td>
+<td class="syntaxTABLE">
+Object
+</td>
+
+<td class="syntaxTABLE">
+Represents the size of the client side window or document at first load. The size contains width and height properties, and these do not change on window resize.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#version">version</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+Current version of the JavaScript API.</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>方法表</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+		<th class="tableheader">方法</th>
+		<th class="tableheader">返回值</th>
+		<th class="tableheader">描述</th>
+		</tr>
+
+<tr>
+<td class="syntaxTABLE"><a href="#esri.filter">esri.filter(object, callback, thisObject)</a></td><td class="syntaxTABLE">
+Object
+</td>
+<td class="syntaxTABLE">Creates a new object with all properties that pass the test implemented by the filter provided in the function.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#esri.graphicsExtent">esri.graphicsExtent(graphics)</a></td><td class="syntaxTABLE">
+<a href="extent.htm">Extent</a>
+</td>
+<td class="syntaxTABLE">Utility function that returns the extent of an array of graphics.  If the extent height and width are 0, null is returned.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#hide">esri.hide(element)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">Hides an HTML element such as a DIV or TABLE.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#request">esri.request(request, useProxy?)</a></td><td class="syntaxTABLE">
+Object
+</td>
+<td class="syntaxTABLE">A wrapper around dojo.io.script.get and dojo.xhrPost.  To request data from a server, this method handles sending requests when esriConfig.defaults.io.proxyURL and esriConfig.defaults.io.alwaysUseProxy are set. This method includes a default error handler in cases when the server response is an error.  The returned object is dojo.Deferred.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#show">esri.show(element)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">Shows an HTML element such as a DIV or TABLE.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#substitute">esri.substitute(data, template?, first?)</a></td><td class="syntaxTABLE">
+String
+</td>
+<td class="syntaxTABLE">A wrapper around dojo.string.substitute that can also handle wildcard substitution.  A wildcard uses the format of <code>${*}</code>.  If no template is provided, it is assumed to be a wildcard.  This method is useful if you are not using <a href="graphic.htm">Graphic</a> or an <a href="infotemplate.htm">InfoTemplate</a>, but you want to embed result values in HTML, for example.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#toggle">esri.toggle(element)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">If an HTML element is currently visible, the element is hidden.  If the element is hidden, it becomes visible.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#urlToObject">esri.urlToObject(url)</a></td><td class="syntaxTABLE">
+Object
+</td>
+<td class="syntaxTABLE">Converts the URL arguments to an object representaion.  The object format is 
+
+<pre>{path: &lt;String>, query:{key:&lt;Object>}}</pre></td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#valueOf">esri.valueOf(array, value)</a></td><td class="syntaxTABLE">
+Object
+</td>
+<td class="syntaxTABLE">Iterates through the argument array and searches for the identifier to which the argument value matches.  Returns null if no matching identifier is found.</td>	</tr></table>
+
+<div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="config"></a>
+&lt;Object> config</H4></div>
+
+<div class="detaildesc">ArcGIS JavaScript API default configurations that can be overridden programatically.  For details, see <a href="../jshelp/inside_defaults.htm">Default API configurations</a>.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="documentBox"></a>
+&lt;Object> documentBox</H4></div>
+
+<div class="detaildesc">Represents the size of the client side window or document at first load. The size contains width and height properties, and these do not change on window resize.<i> (As of v1.3)</i></div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="version"></a>
+&lt;Number> version</H4></div>
+
+<div class="detaildesc">Current version of the JavaScript API.<i> (As of v1.2)</i></div>
+
+</div>
+
+<div class=sectionDivider>方法详细信息</div>
+<div class="detaildiv">
+		<div class="detailname"><a name="esri.filter"></a><H4>
+esri.filter(object, callback, thisObject)</H4></div>
+
+<div class="detaildesc">Creates a new object with all properties that pass the test implemented by the filter provided in the function.<i> (As of v1.2)</i></div>
+
+<div class="detaildesc"><strong>返回值:</strong> Object</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Object> <B>object</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+Object  to filter.</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>callback</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+Function or string implementing the filtering.</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Object> <B>thisObject</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+Optional object used to scope the call to the callback.</td>
+			</tr>
+</table>
+
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>
+      function showResults(results) {
+        var filterFunction = function(value) {
+          if ((value !== ' ') & (Number(value) !== 0)) {
+            return true;
+          }
+        };
+
+        var filteredResults = esri.filter(results.features[0].attributes, filterFunction);
+        var s = "";
+        for (att in filteredResults) {
+          s = s + "<b>" + att + ":</b>  " + filteredResults[att] + "<br />";
+        }
+        dojo.byId("info").innerHTML = s;
+      }
+</pre><br/>
+		</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="esri.graphicsExtent"></a><H4>
+esri.graphicsExtent(graphics)</H4></div>
+
+<div class="detaildesc">Utility function that returns the extent of an array of graphics.  If the extent height and width are 0, null is returned.<i> (As of v1.3)</i></div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="extent.htm">Extent</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="graphics.htm">Graphics</a>> <B>graphics</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+The input graphics array.</td>
+			</tr>
+</table>
+
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>
+var myFeatureExtent = esri.graphicsExtent(myFeatureSet.features);
+</pre><br/>
+		</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="hide"></a><H4>
+esri.hide(element)</H4></div>
+
+<div class="detaildesc">Hides an HTML element such as a DIV or TABLE.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Element> <B>element</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+The name of the HTML element.</td>
+			</tr>
+</table>
+
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>esri.hide(myTable);</pre><br/>
+		</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#toggle">toggle</a>&nbsp;&nbsp;
+<a href="#show">show</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="request"></a><H4>
+esri.request(request, useProxy?)</H4></div>
+
+<div class="detaildesc">A wrapper around dojo.io.script.get and dojo.xhrPost.  To request data from a server, this method handles sending requests when esriConfig.defaults.io.proxyURL and esriConfig.defaults.io.alwaysUseProxy are set. This method includes a default error handler in cases when the server response is an error.  The returned object is dojo.Deferred.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> Object</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Object> <B>request</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+The request object.</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Boolean> <B>useProxy</B></td>
+			<td class="detailTABLE">
+Optional</td>
+			<td class="detailTABLE">
+When true, it forces a request to be posted through the proxy even if the content length is less than 2k. <i>(As of v1.3)</i></td>
+			</tr>
+</table>
+
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<p>The following example sends a request and calls back the 'load' function on completion.</p>
+<pre>esri.request({
+  url:"", 
+  content:{},
+  callbackParamName:"callback",
+  load:function(response, io) {...}, 
+  error:esriConfig.defaults.io.errorHandler
+});</pre><br/>
+		</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="show"></a><H4>
+esri.show(element)</H4></div>
+
+<div class="detaildesc">Shows an HTML element such as a DIV or TABLE.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Element> <B>element</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+The name of the HTML element.</td>
+			</tr>
+</table>
+
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>esri.show(myDiv);</pre><br/>
+		</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#hide">hide</a>&nbsp;&nbsp;
+<a href="#toggle">toggle</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="substitute"></a><H4>
+esri.substitute(data, template?, first?)</H4></div>
+
+<div class="detaildesc">A wrapper around dojo.string.substitute that can also handle wildcard substitution.  A wildcard uses the format of <code>${*}</code>.  If no template is provided, it is assumed to be a wildcard.  This method is useful if you are not using <a href="graphic.htm">Graphic</a> or an <a href="infotemplate.htm">InfoTemplate</a>, but you want to embed result values in HTML, for example.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> String</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Object> <B>data</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+The data object used in the substitution.</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>template</B></td>
+			<td class="detailTABLE">
+Optional</td>
+			<td class="detailTABLE">
+The template used for the substitution.  Can be any valid HTML.  If no template is included, the wildcard template is used.</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Boolean> <B>first</B></td>
+			<td class="detailTABLE">
+Optional</td>
+			<td class="detailTABLE">
+When true, returns only the first property found in the data object.  The default is false.</td>
+			</tr>
+</table>
+
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<p><b>Example 1:</b> no wildcard is included but is assumed.</p>
+<pre>esri.substitute({state_name: "Arizona", state_capital: "Phoenix"});</pre>
+
+<p>Returns: state_name = Arizona &lt;br/> state_capital = PHoenix</p>
+
+<p><b>Example 2:</b> no wildcard is included and only the first property is displayed.</p>
+<pre>esri.substitute({state_name: "Arizona", state_capital: "Phoenix"},null,true);</pre>
+
+<p>Returns:  state_name = Arizona &lt;br/></p>
+
+<p><b>Example 3:</b> a template is included for display.</p>
+<pre>esri.substitute({state_name: "Arizona", state_capital: "Phoenix"},"The capital of ${state_name} is ${state_capital}.");</pre>
+
+<p>Returns:  The capital of Arizona is Phoenix.</p><br/>
+		</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="toggle"></a><H4>
+esri.toggle(element)</H4></div>
+
+<div class="detaildesc">If an HTML element is currently visible, the element is hidden.  If the element is hidden, it becomes visible.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Element> <B>element</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+The name of the HTML element.</td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#show">show</a>&nbsp;&nbsp;
+<a href="#hide">hide</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="urlToObject"></a><H4>
+esri.urlToObject(url)</H4></div>
+
+<div class="detaildesc">Converts the URL arguments to an object representaion.  The object format is 
+
+<pre>{path: &lt;String>, query:{key:&lt;Object>}}</pre></div>
+
+<div class="detaildesc"><strong>返回值:</strong> Object</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>url</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+The input URL.</td>
+			</tr>
+</table>
+
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>esri.urlToObject("http://www.myworld.com?state_name=Ohio&city_name=Akron");</pre>
+
+<p>Returns:  { path: "http://www.myworld.com", query: {state_name: "Ohio", city_name: "Akron"} }</p><br/>
+		</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="valueOf"></a><H4>
+esri.valueOf(array, value)</H4></div>
+
+<div class="detaildesc">Iterates through the argument array and searches for the identifier to which the argument value matches.  Returns null if no matching identifier is found.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> Object</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Array> <B>array</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+The argument array for testing.</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Object> <B>value</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+The value used in the search.  If the value is a String, the value is case sensitive.</td>
+			</tr>
+</table>
+
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<p><b>Example 1:</b></p>
+<pre>esri.valueOf([firststring: "Oregon", secondstring: "Washington"], "Washington");</pre>
+
+<p>Returns: secondstring</p>
+
+<p><b>Example 2:</b></p>
+<pre>esri.valueOf([firststring: "Oregon", secondstring: "Washington"], "Virginia");</pre>
+
+<p>Returns:  null</p><br/>
+		</div>
+
+</div>
+
+<br/></div></body></html> 

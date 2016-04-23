@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>Custom map navigation</title>
+    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/soria/soria.css">
+    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"></script>
+    <script type="text/javascript">
+      dojo.require("esri.map");
+
+      var map;
+      function init() {
+        map = new esri.Map("map");
+        map.addLayer(new esri.layers.ArcGISTiledMapServiceLayer("http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer"));
+      }
+
+      dojo.addOnLoad(init);
+    </script>
+  </head>
+  <body>
+    This application shows how to create custom navigation buttons.
+    <table bgcolor="#eee">
+      <tbody>
+        <tr>
+          <td><button onclick="map.panUpperLeft();">NW</button></td>
+          <td align="center"><button onclick="map.panUp();">N</button></td>
+          <td><button onclick="map.panUpperRight();">NE</button></td>
+        </tr>
+        <tr>
+          <td valign="middle"><button onclick="map.panLeft();">W</button></td>
+          <td><div id="map" class="soria" style="width:1024px; height:512px; border:1px solid #000;"></div></td>
+          <td valign="middle"><button onclick="map.panRight();">E</button></td>
+        </tr>
+        <tr>
+          <td><button onclick="map.panLowerLeft();">SW</button></td>
+          <td align="center"><button onclick="map.panDown();">S</button></td>
+          <td><button onclick="map.panLowerRight();">SE</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

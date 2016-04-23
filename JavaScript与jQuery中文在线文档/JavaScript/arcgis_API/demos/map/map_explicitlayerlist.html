@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>Explicitly Create Map Service Layer List</title>
+
+    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css">
+    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"></script>
+
+    <script type="text/javascript">
+      dojo.require("esri.map");
+
+      var layer, map, visible = [];
+
+      function init() {
+        map = new esri.Map("map");
+
+        //Use the ImageParameters to set the visible layers in the map service during ArcGISDynamicMapServiceLayer construction.
+        var imageParameters = new esri.layers.ImageParameters();
+        imageParameters.visibleLayers = [0,1,2];
+
+        layer = new esri.layers.ArcGISDynamicMapServiceLayer("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StatesCitiesRivers_USA/MapServer", {"imageParameters":imageParameters});
+        map.addLayer(layer);
+      }
+
+      function updateLayerVisibility() {
+        var inputs = dojo.query(".list_item"), input;
+        //in this application layer 2 is always on.
+        visible = [2];
+        for (var i=0, il=inputs.length; i<il; i++) {
+          if (inputs[i].checked) {
+            visible.push(inputs[i].id);
+          }
+        }
+        layer.setVisibleLayers(visible);
+      }
+
+      dojo.addOnLoad(init);
+    </script>
+
+
+  </head>
+  <body>
+  This sample loads an ArcGISDynamicMapServiceLayer and presents check boxes for only the layers that should be toggled on and off by users.  <br />
+    <br />
+        Layer List : <span id="layer_list"><input type='checkbox' class='list_item' checked='checked' id='0' value=0 onclick='updateLayerVisibility();'/>Cities&nbsp;&nbsp;
+          <input type='checkbox' class='list_item' checked='checked' id='1' value=1 onclick='updateLayerVisibility();'/>Rivers&nbsp;&nbsp;
+        </span><br />
+        <br />
+    <div id="map" class="tundra" style="width:600px; height:400px; border:1px solid #000;"></div>
+  </body>
+</html>

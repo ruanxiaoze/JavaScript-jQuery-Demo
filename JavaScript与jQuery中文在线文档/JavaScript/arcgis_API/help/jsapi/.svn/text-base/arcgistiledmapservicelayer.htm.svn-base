@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>ArcGISTiledMapServiceLayer</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: ArcGISTiledMapServiceLayer</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	Allows you to work with a cached map service resource exposed by the ArcGIS Server REST API. A cached service accesses tiles from a cache instead of dynamically rendering images. For dynamic map services, see <a href="dynamicmapservicelayer.htm">DynamicMapServiceLayer</a>.
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+<a href="layer.htm">esri.layers.Layer</a>
+  |_ <a href="tiledmapservicelayer.htm">esri.layers.TiledMapServiceLayer</a>
+        |_ esri.layers.ArcGISTiledMapServiceLayer
+</pre><H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#ArcGISTiledMapServiceLayerConst">esri.layers.ArcGISTiledMapServiceLayer(url, options?)</a></td>
+		<td class="syntaxTABLE">Creates a new ArcGISTiledMapServiceLayer object.  A URL is a required parameter.  This layer also takes some optional parameters.  These optional parameters can be included in any order.</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#copyright">copyright</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+Copyright string as defined by the map service.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#description">description</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+Map description as defined by the map service.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#layerInfos">layerInfos</a></td>
+<td class="syntaxTABLE">
+<a href="layerinfo.htm">LayerInfo[]</a>
+</td>
+
+<td class="syntaxTABLE">
+Returns the available layers in service and their default visibility.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#units">units</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+Default units of the layer as defined by the service.  If the layer is the base map, the map is in these units.</td>
+		</tr>
+</table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="ArcGISTiledMapServiceLayerConst"></a><H4>esri.layers.ArcGISTiledMapServiceLayer(url, options?)</H4>
+		</div>
+
+<div class="detaildesc">Creates a new ArcGISTiledMapServiceLayer object.  A URL is a required parameter.  This layer also takes some optional parameters.  These optional parameters can be included in any order.</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;String>
+<B>url</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			URL to the ArcGIS Server REST resource at represents a map service.  An example is 
+http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Portland/Portland_ESRI_LandBase_AGO/MapServer.  For more information on constructing a URL, see <a href="../jshelp/ags_rest.htm">The Services Directory and the REST API</a>.
+			</td>
+			</tr>
+<tr>
+<td class="detailTABLE">
+&lt;Object>
+<B>options</B></td>
+<td class="detailTABLE">
+Optional	</td>
+<td class="detailTABLE">
+			可选参数。见选选项列表。
+			</td>
+			</tr>
+</table>
+
+<div class="detaildesc"><strong>可选项:</strong></div><table CLASS="detailTABLE" cellspacing="0" >
+<tr>
+			<td class="detailTABLE">
+&lt;Number>
+<B>displayLevels</B></td>
+			<td class="detailTABLE">
+			Lists which levels to draw.    <i>(As of v1.2)</i>
+<br/><br/>
+In the following example, assume you have two layers.  The first layer is an ArcGIS Online Street Map layer, and you want to use only levels 0 through 7. You also have a second layer with more recent street data that you want to use for levels 8 through 12.
+
+<pre>
+  var agoServiceURL = "http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer";
+  var agoLayer = new esri.layers.ArcGISTiledMapServiceLayer(agoServiceURL, { displayLevels:[0,1,2,3,4,5,6,7]});
+  map.addLayer(agoLayer);
+
+  var myServiceURL = "http://myserver/ArcGIS/rest/services/myservice/MapServer";
+  var myLayer = new esri.layers.ArcGISTiledMapServiceLayer(myServiceURL, { displayLevels:[8,9,10,11,12]});
+  map.addLayer(myLayer);
+</pre>
+			</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;String>
+<B>id</B></td>
+			<td class="detailTABLE">
+			Id to assign to the layer. If not assigned, esri.Map assigns value.
+			</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Number>
+<B>opacity</B></td>
+			<td class="detailTABLE">
+			Initial opacity or transparency of layer.  Values range from 0.0 to 1.0, where 0.0 is 100% transparent and 1.0 has no transparency.  The default value is 1.0.
+			</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;String[]>
+<B>tileServers</B></td>
+			<td class="detailTABLE">
+			Array of REST endpoints that can be used to retrieve tile images. (<i>As of v1.1</i>)
+			</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Boolean>
+<B>visible</B></td>
+			<td class="detailTABLE">
+			Initial visibility of the layer.  The default value is true.
+			</td>
+			</tr>
+</table>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="copyright"></a>
+&lt;String> copyright</H4></div>
+
+<div class="detaildesc">Copyright string as defined by the map service.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="description"></a>
+&lt;String> description</H4></div>
+
+<div class="detaildesc">Map description as defined by the map service.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="layerInfos"></a>
+&lt;<a href="layerinfo.htm">LayerInfo[]</a>> layerInfos</H4></div>
+
+<div class="detaildesc">Returns the available layers in service and their default visibility.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="units"></a>
+&lt;String> units</H4></div>
+
+<div class="detaildesc">Default units of the layer as defined by the service.  If the layer is the base map, the map is in these units.</div>
+
+</div>
+
+<br/></div></body></html> 

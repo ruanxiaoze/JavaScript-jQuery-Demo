@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>Geometry Service: Label Points</title>
+    <style type="text/css">
+      @import "http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css";
+    </style>
+    <script type="text/javascript">djConfig={parseOnLoad:true}</script>
+
+    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"></script>
+
+    <script type="text/javascript">
+      dojo.require("esri.map");
+      dojo.require("esri.toolbars.draw");
+      dojo.require("esri.tasks.geometry");
+      dojo.require("dojo.number");
+
+      var map, toolbar, geometryService;
+
+      function init() {
+        // create the map control
+        var startExtent = new esri.geometry.Extent(-117.29, 34, -117.14, 34.10, new esri.SpatialReference({ wkid: 4326 }) );
+        map = new esri.Map("map", { extent: startExtent });
+
+        // configure the proxy url for the application
+        esriConfig.defaults.io.proxyUrl = "/arcgisserver/apis/javascript/proxy/proxy.ashx";
+        esriConfig.defaults.io.alwaysUseProxy = false;
+
+        // create a toolbar for the map
+        toolbar = new esri.toolbars.Draw(map);
+        dojo.connect(toolbar, "onDrawEnd", addToMap);
+
+        // create and add a street map layer to the map
+        var streetmap = new esri.layers.ArcGISTiledMapServiceLayer("http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer");
+        map.addLayer(streetmap);
+
+        geometryService = new esri.tasks.GeometryService("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Geometry/GeometryServer");
+      }
+
+      function addToMap(geometry) {
+        map.graphics.clear();
+
+        // add the drawn graphic to the map
+        var symbol = new esri.symbol.SimpleFillSymbol(
+          esri.symbol.SimpleFillSymbol.STYLE_SOLID,
+          new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([0, 0, 0]), 2),
+          new dojo.Color([0, 0, 255, 0.5])
+        );
+        var graphic = new esri.Graphic(geometry, symbol);
+        map.graphics.add(graphic);
+
+        // simplify polygon so it can be used in the get label points request
+        geometryService.simplify([ graphic ], getLabelPoints);
+      }
+
+      function getLabelPoints(graphics) {
+        geometryService.labelPoints(graphics, function(labelPoints) { // callback
+          toolbar.deactivate();
+          map.showZoomSlider();
+
+          var font = new esri.symbol.Font("20px", esri.symbol.Font.STYLE_NORMAL, esri.symbol.Font.VARIANT_NORMAL, esri.symbol.Font.WEIGHT_BOLDER);
+          for (var i = 0, il = labelPoints.length; i < il; i++) {
+            // create a text symbol
+            var textSymbol = new esri.symbol.TextSymbol(
+              "X: " + dojo.number.format(labelPoints[i].geometry.x) + ", Y: " + dojo.number.format(labelPoints[i].geometry.y),
+              font, new dojo.Color([0, 0, 0])
+            );
+
+            // set the text symbol for the label point graphic
+            labelPoints[i].setSymbol(textSymbol);
+
+            // add the label point graphic to the map
+            map.graphics.add(labelPoints[i]);
+          }
+        });
+      }
+
+      dojo.addOnLoad(init);
+    </script>
+
+  </head>
+
+  <body class="tundra">
+    <button dojoType="dijit.form.Button" onClick="toolbar.activate(esri.toolbars.Draw.POLYGON); map.hideZoomSlider();">Polygon</button>
+    <button dojoType="dijit.form.Button" onClick="toolbar.activate(esri.toolbars.Draw.FREEHAND_POLYGON); map.hideZoomSlider();">Freehand Polygon</button>
+    <button dojoType="dijit.form.Button"  onclick="map.graphics.clear();">Clear All</button>
+    <div id="map" style="width:900px; height:600px; border:1px solid #000;"></div>
+  </body>
+
+</html>

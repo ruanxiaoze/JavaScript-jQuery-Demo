@@ -1,0 +1,436 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>Graphic</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: Graphic</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	Graphic类包含<a href="geometry.htm">geometry</a>，<a href="symbol.htm">symbol</a>，属性和<a href="infotemplate.htm">infoTemplate</a>。Graphic类在<a href="graphicslayer.htm">GraphicsLayer</a>类中显示。<a href="graphicslayer.htm">GraphicsLayer</a>类监听Graphic上的事件。
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.Graphic
+</pre>
+
+<H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#GraphicConst1">esri.Graphic(geometry, symbol, attributes, infoTemplate)</a></td>
+		<td class="syntaxTABLE">创建新的Graphic对象。所有参数都是必需的，必需按照给定顺序指定。</td>
+		</tr>
+<tr><td class="syntaxTABLE"><a href="#GraphicConst2">esri.Graphic(json)</a></td>
+		<td class="syntaxTABLE">使用JSON对象来创建Graphic对象。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#attributes">attributes</a></td>
+<td class="syntaxTABLE">
+Object
+</td>
+
+<td class="syntaxTABLE">
+与图像相关的一一对应的字段名称和字段值。
+</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#geometry">geometry</a></td>
+<td class="syntaxTABLE">
+<a href="geometry.htm">Geometry</a>
+</td>
+
+<td class="syntaxTABLE">
+图形的几何体。
+</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#infoTemplate">infoTemplate</a></td>
+<td class="syntaxTABLE">
+<a href="infotemplate.htm">InfoTemplate</a>
+</td>
+
+<td class="syntaxTABLE">
+信息窗口显示内容。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#symbol">symbol</a></td>
+<td class="syntaxTABLE">
+<a href="symbol.htm">Symbol</a>
+</td>
+
+<td class="syntaxTABLE">
+图形的符号。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>方法表</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+		<th class="tableheader">方法</th>
+		<th class="tableheader">返回值</th>
+		<th class="tableheader">描述</th>
+		</tr>
+
+<tr>
+<td class="syntaxTABLE"><a href="#getContent">getContent()</a></td><td class="syntaxTABLE">
+String
+</td>
+<td class="syntaxTABLE">返回基于<i>attributes</i>和<i>infoTemplate</i>值的内容字符串。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#getDojoShape">getDojoShape()</a></td><td class="syntaxTABLE">
+<a href="http://api.dojotoolkit.org/jsdoc/dojox/HEAD/dojox.gfx.Shape" target="_blank">dojox.gfx.Shape</a>
+</td>
+<td class="syntaxTABLE">返回ESRI图形的dojox.gfx.Shape对象。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#getTitle">getTitle()</a></td><td class="syntaxTABLE">
+String
+</td>
+<td class="syntaxTABLE">返回基于<i>attributes</i>和<i>infoTemplate</i>值的标题字符串。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#hide">hide()</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">隐藏图形。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setAttributes">setAttributes(attributes)</a></td><td class="syntaxTABLE">
+<a href="graphic.htm">Graphic</a>
+</td>
+<td class="syntaxTABLE">定义图形属性。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setGeometry">setGeometry(geometry)</a></td><td class="syntaxTABLE">
+<a href="graphic.htm">Graphic</a>
+</td>
+<td class="syntaxTABLE">定义图形几何体。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setInfoTemplate">setInfoTemplate(infoTemplate)</a></td><td class="syntaxTABLE">
+<a href="graphic.htm">Graphic</a>
+</td>
+<td class="syntaxTABLE">定义图形信息窗口的信息模板。当用户单击图形，按模板打开信息窗口。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setSymbol">setSymbol(symbol)</a></td><td class="syntaxTABLE">
+<a href="graphic.htm">Graphic</a>
+</td>
+<td class="syntaxTABLE">设置图形符号。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#show">show()</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">显示图形。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#toJson">toJson()</a></td><td class="syntaxTABLE">
+Object
+</td>
+<td class="syntaxTABLE">
+将图形对象转换为ArcGIS Server JSON表示法。</td>	</tr></table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="GraphicConst1"></a><H4>esri.Graphic(geometry, symbol, attributes, infoTemplate)</H4>
+		</div>
+
+<div class="detaildesc">创建新的Graphic对象。所有参数都是必需的，必需按照给定顺序指定。</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;<a href="geometry.htm">Geometry</a>>
+<B>geometry</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			图形的几何体。
+			</td>
+			</tr>
+<tr>
+<td class="detailTABLE">
+&lt;<a href="symbol.htm">Symbol</a>>
+<B>symbol</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			符号用于绘出图形。.
+			</td>
+			</tr>
+<tr>
+<td class="detailTABLE">
+&lt;Object>
+<B>attributes</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			与图像相关的一一对应的字段名称和字段值。
+			</td>
+			</tr>
+<tr>
+<td class="detailTABLE">
+&lt;<a href="infotemplate.htm">InfoTemplate</a>>
+<B>infoTemplate</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			显示在信息窗口的内容。
+			</td>
+			</tr>
+</table>
+
+</div><div class="detaildiv"><div class="detailname"><a name="GraphicConst2"></a><H4>esri.Graphic(json)</H4>
+		</div>
+
+<div class="detaildesc">使用JSON对象创建新的图形对象。</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;Object>
+<B>json</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			表示图形的JSON对象。
+			</td>
+			</tr>
+</table>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="attributes"></a>
+&lt;Object> attributes</H4></div>
+
+<div class="detaildesc"><span class="detailTABLE">与图像相关的一一对应的字段名称和字段值。</span></div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setAttributes">setAttributes</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="geometry"></a>
+&lt;<a href="geometry.htm">Geometry</a>> geometry</H4></div>
+
+<div class="detaildesc">图形的几何体</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setGeometry">setGeometry</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="infoTemplate"></a>
+&lt;<a href="infotemplate.htm">InfoTemplate</a>> infoTemplate</H4></div>
+
+<div class="detaildesc">信息窗口显示的信息。</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setInfoTemplate">setInfoTemplate</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="symbol"></a>
+&lt;<a href="symbol.htm">Symbol</a>> symbol</H4></div>
+
+<div class="detaildesc">图形的符号。</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setSymbol">setSymbol</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class=sectionDivider>方法详细信息</div>
+<div class="detaildiv">
+		<div class="detailname"><a name="getContent"></a><H4>
+getContent()</H4></div>
+
+<div class="detaildesc">返回基于<i>attributes</i>和<i>infoTemplate</i>值的内容字符串。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> String</div>
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="getDojoShape"></a><H4>
+getDojoShape()</H4></div>
+
+<div class="detaildesc">返回ESRI图形的dojox.gfx.Shape对象。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="http://api.dojotoolkit.org/jsdoc/dojox/HEAD/dojox.gfx.Shape" target="_blank">dojox.gfx.Shape</a></div>
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="getTitle"></a><H4>
+getTitle()</H4></div>
+
+返回基于<i>attributes</i>和<i>infoTemplate</i>值的标题字符串
+
+<div class="detaildesc"><strong>返回值:</strong> String</div>
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="hide"></a><H4>
+hide()</H4></div>
+
+<div class="detaildesc">隐藏图形。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setAttributes"></a><H4>
+setAttributes(attributes)</H4></div>
+
+<div class="detaildesc">定义图形属性。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="graphic.htm">Graphic</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Object> <B>attributes</B></td>
+			<td class="detailTABLE">&nbsp;
+</td>
+			<td class="detailTABLE">与图像相关的一一对应的字段名称和字段值。 </td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#attributes">attributes</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setGeometry"></a><H4>
+setGeometry(geometry)</H4></div>
+
+<div class="detaildesc">定义图形几何体。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="graphic.htm">Graphic</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="geometry.htm">Geometry</a>> <B>geometry</B></td>
+			<td class="detailTABLE">&nbsp;
+</td>
+			<td class="detailTABLE"><span class="detaildesc">定义图形几何体。</span></td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#geometry">geometry</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setInfoTemplate"></a><H4>
+setInfoTemplate(infoTemplate)</H4></div>
+
+<div class="detaildesc">定义图形信息窗口的信息模板。当用户单击图形，按模板打开信息窗口。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="graphic.htm">Graphic</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="infotemplate.htm">InfoTemplate</a>> <B>infoTemplate</B></td>
+			<td class="detailTABLE">&nbsp;
+</td>
+			<td class="detailTABLE">
+信息窗口信息内容。</td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#infoTemplate">infoTemplate</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setSymbol"></a><H4>
+setSymbol(symbol)</H4></div>
+
+<div class="detaildesc">设置图形符号。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="graphic.htm">Graphic</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="symbol.htm">Symbol</a>> <B>symbol</B></td>
+			<td class="detailTABLE">&nbsp;
+</td>
+			<td class="detailTABLE">
+图形的符号。</td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#symbol">symbol</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="show"></a><H4>
+show()</H4></div>
+
+<div class="detaildesc">显示图形。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="toJson"></a><H4>
+toJson()</H4></div>
+
+<div class="detaildesc">将图形对象转换为ArcGIS Server JSON表示法。 </div>
+
+<div class="detaildesc"><strong>返回值:</strong> Object</div>
+</div>
+
+<br/></div></body></html> 

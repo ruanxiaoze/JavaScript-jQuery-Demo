@@ -1,0 +1,3152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>Map</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: Map</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	esri.Map类创建一个容器和为增加<a href="layer.htm">图层</a>，<a href="graphic.htm">图形</a>，<a href="infowindow.htm">信息窗口</a>和其它导航控制所必需的DOM结构。
+<br /><br />
+地图通常使用DIV增加到页面。地图的宽度和高度被初始化为DIV容器的宽度和高度。
+<br /><br />
+第一个图层增加到地图后，Map.onLoad事件被触发。此时地图是全功能的。Map.onLoad处理函数用于增加内容和该白地图行为。
+
+<br /><br />
+对于使用地图类的介绍，见<a href="../jshelp/intro_firstmap.htm">增加地图</a>.
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.Map
+</pre>
+
+<H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#MapConst">esri.Map(divId, options?)</a></td>
+		<td class="syntaxTABLE">
+        在给定的HTML容器中创建地图，HTML容器通常是DIV。地图大小和容器大小一致。地图的构造函数也能包含选项参数。这些选项参数能包容任意顺序。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#extent">extent</a></td>
+<td class="syntaxTABLE">
+<a href="extent.htm">Extent</a>
+</td>
+
+<td class="syntaxTABLE">
+地图的当前范围。该属性是只读的。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#graphics">graphics</a></td>
+<td class="syntaxTABLE">
+<a href="graphicslayer.htm">GraphicsLayer</a>
+</td>
+
+<td class="syntaxTABLE">
+从<a href="graphicslayer.htm">GraphicsLayer</a>中增加删除图形。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#graphicsLayerIds">graphicsLayerIds</a></td>
+<td class="syntaxTABLE">
+String[]
+</td>
+
+<td class="syntaxTABLE">
+地图里当前<a href="graphicslayer.htm">GraphicsLayers</a>的数组。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#height">height</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+地图的当前高度，高度单位是屏幕像数</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#id">id</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+地图位于页面的HTML DIV或其他元素的引用。该属性在地图构造函数里设置。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#infoWindow">infoWindow</a></td>
+<td class="syntaxTABLE">
+<a href="infowindow.htm">InfoWindow</a>
+</td>
+
+<td class="syntaxTABLE">
+在地图上显示信息窗口</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#isClickRecenter">isClickRecenter</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+当属性为true，按shift+click键重定义地图中心点。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#isDoubleClickZoom">isDoubleClickZoom</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+当属性为true，双击放大地图可用，允许用户使用鼠标双击放大和重定义地图中心点。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#isKeyboardNavigation">isKeyboardNavigation</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+当属性为true，键盘导航可用。该属性允许用户用箭头键移动地图，用+和-键缩放地图。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#isPan">isPan</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+当属性为true，可以使用鼠标移动地图。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#isPanArrows">isPanArrows</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+当属性为true，在地图边缘显示移动箭头。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#isRubberBandZoom">isRubberBandZoom</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+当属性为true，伸缩线可用。允许用户使用鼠标画一个边界框缩放区域。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#isScrollWheelZoom">isScrollWheelZoom</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+当属性为true，可用鼠标滚动缩放地图</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#isShiftDoubleClickZoom">isShiftDoubleClickZoom</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+当属性为true，可用shift键+双击鼠标放大地图。这允许用户使用shift + 鼠标双击去放大和重定向地图中心。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#isZoomSlider">isZoomSlider</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+当属性为true，地图上显示缩放滑动条。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#layerIds">layerIds</a></td>
+<td class="syntaxTABLE">
+String[]
+</td>
+
+<td class="syntaxTABLE">
+加到地图里的当前<a href="tiledmapservicelayer.htm">TiledMapServiceLayers</a>和<a href="dynamicmapservicelayer.htm">DynamicMapServiceLayers</a>的数组</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#loaded">loaded</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+第一个图层被加载后，属性值被设置为true</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#position">position</a></td>
+<td class="syntaxTABLE">
+<a href="point.htm">Point</a>
+</td>
+
+<td class="syntaxTABLE">
+该屏幕坐标的点几何体代表地图容器的左上角。这个坐标也担当了<a href="map.htm">地图</a>和<a href="graphicslayer.htm">GraphicsLayer</a>事件返回的所有屏幕坐标的原点。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#spatialReference">spatialReference</a></td>
+<td class="syntaxTABLE">
+<a href="spatialreference.htm">SpatialReference</a>
+</td>
+
+<td class="syntaxTABLE">
+地图的空间参考。支持的空间参考列表，见<a href="../jshelp/pcs.htm">投影坐标系统</a>和<a href="../jshelp/gcs.htm">地理坐标系统</a>。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#width">width</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+地图当前宽度，宽度单位是屏幕像数。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>方法表</H4>
+<H4>地图功能:</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+		<th class="tableheader">方法</th>
+		<th class="tableheader">返回值</th>
+		<th class="tableheader">描述</th>
+		</tr>
+
+<tr>
+<td class="syntaxTABLE"><a href="#addLayer">
+addLayer(layer, index?)</a></td><td class="syntaxTABLE">
+<a href="layer.htm">Layer</a>
+</td>
+<td class="syntaxTABLE">增加ESRI图层到地图。<br/><br/>v1.4增加了返回<code>Layer</code>对象</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#getInfoWindowAnchor">
+getInfoWindowAnchor(screenCoords)</a></td><td class="syntaxTABLE">
+String
+</td>
+<td class="syntaxTABLE">设置调用<a href="infowindow.htm#show">InfoWindow.show</a>方法时信息窗口的定位点。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#getLayer">
+getLayer(id)</a></td><td class="syntaxTABLE">
+<a href="layer.htm">Layer</a>
+</td>
+<td class="syntaxTABLE">返回地图一个单独的图层。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#getLevel">getLevel()</a></td><td class="syntaxTABLE">
+Number
+</td>
+<td class="syntaxTABLE">获得当前地图的级别ID。仅仅<a href="arcgistiledmapservicelayer.htm">ArcGISTiledMapService</a>有效。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#removeAllLayers">removeAllLayers()</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">从地图上删除所有图层。
+<br><br>当图层被删除是，已定义的地图范围，空间参考，切片模式不会修改。当下一个图层被加到地图，图层以相同的范围和空间参考显示。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#removeLayer">
+removeLayer(layer)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">删除地图的指定图层。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#reorderLayer">
+reorderLayer(layer, index)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">修改地图里图层顺序。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#reposition">reposition()</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">在页面上重新放置地图DIV。当地图已经被重新放置后需要使用这个方法。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#resize">resize()</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">调整地图DIV。当重新调整map DIV大小后这个方法要被使用。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setExtent">
+setExtent(extent, fit?)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">设置地图范围。范围必需参照和地图一样的空间参考</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setLevel">
+setLevel(level)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">设置地图到指定级别ID。基于当前地图中心点缩放到新的级别。仅仅对<a href="arcgistiledmapservicelayer.htm">ArcGISTiledMapService</a>图层有效。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setMapCursor">
+setMapCursor(cursor)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">设置地图默认指针。除了拖拽地图进行移动或使用SHIFT+拖拽放大地图时外，鼠标位于地图上时该指针总被显示。如果没有设置，地图使用系统默认指针，通常使用箭头。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#toMap">
+toMap(screenPoint)</a></td><td class="syntaxTABLE">
+<a href="point.htm">Point</a>
+</td>
+<td class="syntaxTABLE">转换单个屏幕点坐标或屏幕点坐标数组为地图坐标。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#toScreen">
+toScreen(mapPoint)</a></td><td class="syntaxTABLE">
+<a href="point.htm">Point</a>
+</td>
+<td class="syntaxTABLE">转换单个地图点坐标或地图点坐标的数组为屏幕坐标。</td>	</tr></table>
+
+<h4>地图导航:</h4><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+		<th class="tableheader">方法</th>
+		<th class="tableheader">返回值</th>
+		<th class="tableheader">描述</th>
+		</tr>
+
+<tr><td class="syntaxTABLE"><a href="#centerAndZoom">
+centerAndZoom(mapPoint, levelOrFactor)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">地图居中并缩放。</td>	</tr><tr><td class="syntaxTABLE"><a href="#centerAt">
+centerAt(mapPoint)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">以指定地图坐标作为中心点坐标重定位地图。</td>	</tr><tr><td class="syntaxTABLE"><a href="#disableClickRecenter">disableClickRecenter()</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">不允许单击地图来重定位地图中心点。</td>	</tr><tr><td class="syntaxTABLE"><a href="#disableDoubleClickZoom">disableDoubleClickZoom()</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">不允许双击地图来放大地图一个级别并重定位地图中心点</td>	</tr><tr><td class="syntaxTABLE"><a href="#disableMapNavigation">disableMapNavigation()</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">除了滑动条和移动箭头，不允许其它所有地图导航。</td>	</tr><tr><td class="syntaxTABLE"><a href="#disablePan">disablePan()</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">不允许用鼠标移动地图。</td>	</tr><tr><td class="syntaxTABLE"><a href="#disableRubberBandZoom">disableRubberBandZoom()</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">不允许使用边界框放大或缩小地图。</td>	</tr><tr><td class="syntaxTABLE"><a href="#disableScrollWheelZoom">disableScrollWheelZoom()</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">不允许使用鼠标滚动滑轮放大或缩小地图。</td>	</tr><tr><td class="syntaxTABLE"><a href="#disableShiftDoubleClickZoom">disableShiftDoubleClickZoom()</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">不允许shift键+鼠标双击放大地图并重定位地图中心点。</td>	</tr><tr><td class="syntaxTABLE"><a href="#disbleKeyboardNavigation">disbleKeyboardNavigation()</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">不允许使用键盘移动和缩放地图。</td>	</tr><tr><td class="syntaxTABLE"><a href="#enableClickRecenter">enableClickRecenter()</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">允许用户单击地图来重定位中心点。</td>	</tr><tr><td class="syntaxTABLE"><a href="#enableDoubleClickZoom">enableDoubleClickZoom()</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">允许用户双击地图放大一个级别并重定位地图中心点。</td>	</tr><tr><td class="syntaxTABLE"><a href="#enableKeyboardNavigation">enableKeyboardNavigation()</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">允许用户使用键盘移动和缩放地图。</td>	</tr><tr><td class="syntaxTABLE"><a href="#enableMapNavigation">enableMapNavigation()</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">允许所有地图导航。</td>	</tr><tr><td class="syntaxTABLE"><a href="#enablePan">enablePan()</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">允许使用鼠标移动地图。</td>	</tr><tr><td class="syntaxTABLE"><a href="#enableRubberBandZoom">enableRubberBandZoom()</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">允许使用划定边界框放大或缩小地图。</td>	</tr><tr><td class="syntaxTABLE"><a href="#enableScrollWheelZoom">enableScrollWheelZoom()</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">允许用户用鼠标滑轮放大或缩小地图。</td>	</tr><tr><td class="syntaxTABLE"><a href="#enableShiftDoubleClickZoom">enableShiftDoubleClickZoom()</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">允许用使用shift+双击鼠标去放大地图一个级别并重定位地图中心点。</td>	</tr><tr><td class="syntaxTABLE"><a href="#hidePanArrows">hidePanArrows()</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">隐藏地图移动指针。</td>	</tr><tr><td class="syntaxTABLE"><a href="#hideZoomSlider">hideZoomSlider()</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">隐藏地图缩放滚动条。</td>	</tr><tr><td class="syntaxTABLE"><a href="#panDown">panDown()</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">向南移动地图。</td>	</tr><tr><td class="syntaxTABLE"><a href="#panLeft">panLeft()</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">向西移动地图。</td>	</tr><tr><td class="syntaxTABLE"><a href="#panLowerLeft">panLowerLeft()</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">向西南移动地图。</td>	</tr><tr><td class="syntaxTABLE"><a href="#panLowerRight">panLowerRight()</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">向东南移动地图。</td>	</tr><tr><td class="syntaxTABLE"><a href="#panRight">panRight()</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">向东移动地图。</td>	</tr><tr><td class="syntaxTABLE"><a href="#panUp">panUp()</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">向北移动地图。</td>	</tr><tr><td class="syntaxTABLE"><a href="#panUpperLeft">panUpperLeft()</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">向西北移动地图。</td>	</tr><tr><td class="syntaxTABLE"><a href="#panUpperRight">panUpperRight()</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">向东北移动地图。</td>	</tr><tr><td class="syntaxTABLE"><a href="#showPanArrows">showPanArrows()</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">显示地图移动指针。</td>	</tr><tr><td class="syntaxTABLE"><a href="#showZoomSlider">showZoomSlider()</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">显示缩放滚动条。</td>	</tr></table>
+
+<H4 class=dtH4>事件</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">事件</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#onClick">onClick(event)
+		</a></td>
+
+<td class="syntaxTABLE">当用户使用鼠标单击地图且鼠标在HTML页面的地图范围内时触发。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onDblClick">onDblClick(event)
+		</a></td>
+
+<td class="syntaxTABLE">当用户在地图上双击鼠标且鼠标在html页面的地图范围内时激发该事件</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onExtentChange">onExtentChange(extent, delta, levelChange, lod)
+		</a></td>
+
+<td class="syntaxTABLE">当地图范围已经修改激发该事件。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onKeyDown">onKeyDown(keyEvent)
+		</a></td>
+
+<td class="syntaxTABLE">当键盘某键被按下时激发该事件</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onKeyUp">onKeyUp(keyEvent)
+		</a></td>
+
+<td class="syntaxTABLE">当键盘某键被释放时激发该事件。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onLayerAdd">onLayerAdd(layer)
+		</a></td>
+
+<td class="syntaxTABLE">图层被增加到地图时激发该事件。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onLayerRemove">onLayerRemove(layer)
+		</a></td>
+
+<td class="syntaxTABLE">图层已经被删除后激发事件</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onLayerReorder">onLayerReorder(layer, index)
+		</a></td>
+
+<td class="syntaxTABLE">当地图图顺序已经被改变时激发事件。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onLayersRemoved">onLayersRemoved()
+		</a></td>
+
+<td class="syntaxTABLE">所有图层被删除后激发事件</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onLayersReordered">onLayersReordered(layerIds)
+		</a></td>
+
+<td class="syntaxTABLE">所有图层被重新排序是激发事件。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onLoad">onLoad(map)
+		</a></td>
+
+<td class="syntaxTABLE">第一个或基础图层被成功增加到地图时激发事件。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onMouseDown">onMouseDown(event)
+		</a></td>
+
+<td class="syntaxTABLE">当鼠标按钮被按下且鼠标指针在HTML页面的地图范围里时激发事件。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onMouseDrag">onMouseDrag(event)
+		</a></td>
+
+<td class="syntaxTABLE">鼠标被拖转直到鼠标按钮被释放时激发事件。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onMouseDragEnd">onMouseDragEnd(event)
+		</a></td>
+
+<td class="syntaxTABLE">当鼠标按钮被释放并且用户停止拖拽鼠标时激发事件。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onMouseDragStart">onMouseDragStart(event)
+		</a></td>
+
+<td class="syntaxTABLE">当鼠标按钮被按下并用户开始拖拽鼠标时激发事件。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onMouseMove">onMouseMove(event)
+		</a></td>
+
+<td class="syntaxTABLE">鼠标指针在地图范围上移动时激发事件。通常该事件用于用户移动鼠标指针时显示当前地图x,y坐标。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onMouseOut">onMouseOut(event)
+		</a></td>
+
+<td class="syntaxTABLE">当鼠标移出HTML页的地图范围时激发事件。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onMouseOver">onMouseOver(event)
+		</a></td>
+
+<td class="syntaxTABLE">鼠标移入HTML页面的地图范围时激发事件。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onMouseUp">onMouseUp(event)
+		</a></td>
+
+<td class="syntaxTABLE">当地图按钮被释放并且鼠标指针在HTML页面的地图范围内时激发事件。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onMouseWheel">onMouseWheel(event)
+		</a></td>
+
+<td class="syntaxTABLE">鼠标滚轮滚动时激发事件。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onPan">onPan(extent, delta)
+		</a></td>
+
+<td class="syntaxTABLE">地图移动过程中激发事件。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onPanEnd">onPanEnd(extent, endPoint)
+		</a></td>
+
+<td class="syntaxTABLE">移动完成时激发事件。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onPanStart">onPanStart(extent, startPoint)
+		</a></td>
+
+<td class="syntaxTABLE">用户开始移动时激发事件。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onReposition">onReposition(x, y)
+		</a></td>
+
+<td class="syntaxTABLE">地图DIV被重新定位时激发事件。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onResize">onResize(extent, height, width)
+		</a></td>
+
+<td class="syntaxTABLE">包含地图的DIV已经被调整大小时激发事件。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onUnload">onUnload(map)
+		</a></td>
+
+<td class="syntaxTABLE">刷新页面时激发事件。 <!--***--></td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onZoom">onZoom(extent, zoomFactor, anchor)
+		</a></td>
+
+<td class="syntaxTABLE">缩放过程中激发事件。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onZoomEnd">onZoomEnd(extent, zoomFactor, anchor, level)
+		</a></td>
+
+<td class="syntaxTABLE">缩放完成时激发事件。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onZoomStart">onZoomStart(extent, zoomFactor, anchor, level)
+		</a></td>
+
+<td class="syntaxTABLE">用户开始缩放时激发事件。</td>
+		</tr></table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="MapConst"></a><H4>esri.Map(divId, options?)</H4>
+		</div>
+
+<div class="detaildesc">
+在给定的HTML容器里创建地图，容器通常是DIV元素。地图大小就是容器的大小。地图构造方法也能包含可选参数。可选参数包容任意顺序。
+</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;String>
+<B>divId</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			引用地图的容器ID。这个值是必需的。
+			</td>
+			</tr>
+<tr>
+<td class="detailTABLE">
+&lt;Object>
+<B>options</B></td>
+<td class="detailTABLE">
+可选项	</td>
+<td class="detailTABLE">
+			可选参数。见选选项列表。
+			</td>
+			</tr>
+</table>
+
+<div class="detaildesc"><strong>可选项:</strong></div><table CLASS="detailTABLE" cellspacing="0" >
+<tr>
+			<td class="detailTABLE">
+&lt;Boolean>
+<B>displayGraphicsOnPan</B></td>
+			<td class="detailTABLE">
+			当属性为true，移动时显示图。当值为false，移动期间图形被关闭。设置为false可以提升IE性能。默认值为true。默认值是true。
+			</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="extent.htm">Extent</a>>
+<B>extent</B></td>
+			<td class="detailTABLE">
+			如果提供，地图的范围和投影被设置为<a href="extent.htm">Extent</a>属性。一旦投影被设置，所有图层必须能过以定义的投影画出。<a href="arcgistiledmapservicelayer.htm">ArcGISTiledMapServiceLayer</a>切片模式必须和地图的投影匹配。<i>范围的投影自v1.2起在地图构造函数里被接受。 </i>
+<br/><br/>
+<pre>
+      function init() {
+
+        var map = new esri.Map("map", {
+          extent: new esri.geometry.Extent({xmin:-20098296,ymin:-2804413,xmax:5920428,ymax:15813776,spatialReference:{wkid:54032}})
+        });
+        var dynamicMSLayer = new esri.layers.ArcGISDynamicMapServiceLayer
+              ("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StatesCitiesRivers_USA/MapServer")
+        map.addLayer(dynamicMSLayer);
+      }
+</pre>
+			</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Object>
+<B>layer</B></td>
+			<td class="detailTABLE">
+			图层被用来初始化地图。这将是基本图层。对象格式是{type, url}。
+
+			</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="lod.htm">LOD[]</a>>
+<B>lods</B></td>
+			<td class="detailTABLE">
+			如果提供，地图按指定的细节等级被初始化。为了被显示，增加到地图的所有<a href="arcgistiledmapservicelayer.htm">ArcGISTiledMapServiceLayers</a>必需有匹配的分辨率。<i>(自v1.2起)</i>
+</i>
+<br/><br/>
+
+<pre>
+        var lods = [
+          {"level" : 0, "resolution" : 0.010986328125, "scale" : 4617149.97766929},
+          {"level" : 1, "resolution" : 0.0054931640625, "scale" : 2308574.98883465},
+          {"level" : 2, "resolution" : 0.00274658203125, "scale" : 1154287.49441732},
+          {"level" : 3, "resolution" : 0.001373291015625, "scale" : 577143.747208662},
+          {"level" : 4, "resolution" : 0.0006866455078125, "scale" : 288571.873604331}
+        ];
+
+        map = new esri.Map("map", {
+          lods: lods
+        });
+</pre>
+			</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Boolean>
+<B>nav</B></td>
+			<td class="detailTABLE">
+			在地图上显示移动按钮。当值为false，移动箭头不会显示。默认值是false。
+			</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Boolean>
+<B>showInfoWindowOnClick</B></td>
+			<td class="detailTABLE">
+			当用户点击图形，如果<a href="graphic.htm">图形</a>定义了<a href="infotemplate.htm">信息模板</a>，默认行为是显示<a href="infowindow.htm">信息窗口</a>。  当属性为true，默认行为被认同。默认值是true。
+			</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Boolean>
+<B>slider</B></td>
+			<td class="detailTABLE">
+			在地图上显示滑动条。当值为false，滑动条不显示。默认值是true。
+			</td>
+			</tr>
+</table>
+
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<ul><li>本例中，一个新的名为"mymap"的地图被创建，并被放置在"mapDiv"容器里面。<br/>
+<pre>
+var myMap;
+function init() {
+  //create map
+  myMap = new esri.Map("mapDiv");
+
+  ...
+}
+</pre>
+接下来的代码中，地图容器用DIV id引用。<br/>
+<pre>
+&lt;div id="mapDiv" style="width:600px; height:600px; border:1px solid #000;">&lt;/div>
+</pre></li>
+
+<li>在这个第二个例子，可选的extent参数也被包含在容器内。 <br/>
+<pre>
+var myMap = new esri.Map("mapDiv", { extent: new esri.geometry.Extent
+(-124.71, 31.89, -113.97, 42.63) });
+</pre></li>
+
+<li>本例创建了一个没有滚动条和移动箭头的的地图。
+<pre>
+var myMap = new esri.Map("mapDiv", { slider:false, nav:false });
+</pre>
+</li>
+
+<li>本例中，地图移动中图形被关闭。
+<pre>
+var myMap = new esri.Map("mapDiv", { displayGraphicsOnPan:false });
+</pre>
+<br/>
+如果仅仅为Internet Explorer在移动时关闭图形显示，使用下面的构造函数：
+<pre>
+var myMap = new esri.Map("mapDiv", { displayGraphicsOnPan:! dojo.isIE });
+</pre>
+</li>
+
+</ul></div>
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="extent"></a>
+&lt;<a href="extent.htm">Extent</a>> extent</H4></div>
+
+<div class="detaildesc">
+以图距单位表示的地图当前范围。关于范围的信息，详见<a href="../jshelp/intro_extents.htm">在地图里设置和使用范围</a>。</div>
+
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>
+function showExtent() {
+  var s = "";
+  s = "XMin: "+ myMap.extent.xmin
+      +" YMin: " + myMap.extent.ymin
+      +" XMax: " + myMap.extent.xmax
+      +" YMax: " + myMap.extent.ymax;
+      dojo.byId("info").innerHTML = s;
+}
+</pre><br/>
+		</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setExtent">setExtent</a>&nbsp;&nbsp;
+<a href="#onExtentChange">onExtentChange</a>&nbsp;&nbsp;
+<a href="#onPan">onPan</a>&nbsp;&nbsp;
+<a href="#onZoom">onZoom</a>&nbsp;&nbsp;
+<a href="#onZoomEnd">onZoomEnd</a>&nbsp;&nbsp;
+<a href="#onZoomStart">onZoomStart</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="graphics"></a>
+&lt;<a href="graphicslayer.htm">GraphicsLayer</a>> graphics</H4></div>
+
+<div class="detaildesc">提供访问地图的图形图层。</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#showInfoWindow">showInfoWindow</a>&nbsp;&nbsp;
+<a href="Graphic.htm">Graphic</a>&nbsp;&nbsp;
+<a href="GraphicsLayer.htm">GraphicsLayer</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="graphicsLayerIds"></a>
+&lt;String[]> graphicsLayerIds</H4></div>
+
+<div class="detaildesc">地图里当前<a href="graphicslayer.htm">GraphicsLayers</a>的数组。<i> (自v1.4起)</i></div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#layerIds">layerIds</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="height"></a>
+&lt;Number> height</H4></div>
+
+<div class="detaildesc">地图的当前高度，高度单位是屏幕像数。这个属性是只读的。地图高和宽通常设置在HTML DIV 或其他包含地图容器的HTML元素里。</div>
+
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>function getMapWidthHeight() {
+  alert("Width = " + myMap.width + "; Height = " + myMap.height);
+}  </pre><br/>
+		</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="id"></a>
+&lt;String> id</H4></div>
+
+<div class="detaildesc">地图位于页面的HTML DIV或其他元素的引用。该属性在地图构造函数里设置。</div>
+
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>myMap = new esri.Map("mapDiv");</pre><br/>
+		</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="infoWindow"></a>
+&lt;<a href="infowindow.htm">InfoWindow</a>> infoWindow</H4></div>
+
+<div class="detaildesc">在地图上显示信息窗口</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="isClickRecenter"></a>
+&lt;Boolean> isClickRecenter</H4></div>
+
+<div class="detaildesc">当属性为true，按shift+click键重定义地图中心点。详见<a href="../jshelp/intro_navigation.htm">Map navigation</a></div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> true
+			</div>
+
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>
+function stopClickRecenter() {
+  myMap.disableClickRecenter();
+  dojo.byId("stopClickRecenter").value = myMap.isClickRecenter;
+}</pre><br/>
+		</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#disableClickRecenter">disableClickRecenter</a>&nbsp;&nbsp;
+<a href="#enableClickRecenter">enableClickRecenter</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="isDoubleClickZoom"></a>
+&lt;Boolean> isDoubleClickZoom</H4></div>
+
+<div class="detaildesc">当属性为true，双击放大地图可用，允许用户使用鼠标双击放大和重定义地图中心点。   详见<a href="../jshelp/intro_navigation.htm">地图导航</a>。</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> true
+			</div>
+
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>
+dojo.byId("theDoubleClickZoom").value = myMap.isDoubleClickZoom;
+</pre><br/>
+		</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#disableDoubleClickZoom">disableDoubleClickZoom</a>&nbsp;&nbsp;
+<a href="#enableDoubleClickZoom">enableDoubleClickZoom</a>&nbsp;&nbsp;
+<a href="#isShiftDoubleClickZoom">isShiftDoubleClickZoom</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="isKeyboardNavigation"></a>
+&lt;Boolean> isKeyboardNavigation</H4></div>
+
+<div class="detaildesc">当属性为true，键盘导航可用。该属性允许用户用箭头键移动地图，用+和-键缩放地图。  详见<a href="../jshelp/intro_navigation.htm">地图导航</a>。</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> true
+			</div>
+
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>dojo.byId("keyboardNavigationStatus").value = myMap.isKeyboardNavigation;</pre><br/>
+		</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#disableKeyboardNavigation">disableKeyboardNavigation</a>&nbsp;&nbsp;
+<a href="#enableKeyboardNavigation">enableKeyboardNavigation</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="isPan"></a>
+&lt;Boolean> isPan</H4></div>
+
+<div class="detaildesc">当属性为true，可以使用鼠标移动地图。  详见<a href="../jshelp/intro_navigation.htm">地图导航</a>。</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> true
+			</div>
+
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>dojo.byId("panStatus").value = myMap.isPan;</pre><br/>
+		</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#disablePan">disablePan</a>&nbsp;&nbsp;
+<a href="#enablePan">enablePan</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="isPanArrows"></a>
+&lt;Boolean> isPanArrows</H4></div>
+
+<div class="detaildesc">当属性为true，在地图边缘显示移动箭头。  详见<a href="../jshelp/intro_navigation.htm">地图导航</a>。</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> false
+			</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#hidePanArrows">hidePanArrows</a>&nbsp;&nbsp;
+<a href="#showPanArrows">showPanArrows</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="isRubberBandZoom"></a>
+&lt;Boolean> isRubberBandZoom</H4></div>
+
+<div class="detaildesc">当属性为true，伸缩线可用。允许用户使用鼠标画一个边界框放大区域。 详见<a href="../jshelp/intro_navigation.htm">地图导航</a>。</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> true
+			</div>
+
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>dojo.byId("checkRubberBandZoom").value = myMap.isRubberBandZoom;</pre><br/>
+		</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#disableRubberBandZoom">disableRubberBandZoom</a>&nbsp;&nbsp;
+<a href="#enableRubberBandZoom">enableRubberBandZoom</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="isScrollWheelZoom"></a>
+&lt;Boolean> isScrollWheelZoom</H4></div>
+
+<div class="detaildesc">当属性为true，可用鼠标滚动缩放地图 详见<a href="../jshelp/intro_navigation.htm">地图导航</a>。</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> true
+			</div>
+
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>
+function stopScrollWheelZoom() {
+  myMap.disableScrollWheelZoom();
+  dojo.byId("stopScrollWheelZoom").value = myMap.isScrollWheelZoom;
+}
+</pre><br/>
+		</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#disableScrollWheelZoom">disableScrollWheelZoom</a>&nbsp;&nbsp;
+<a href="#enableScrollWheelZoom">enableScrollWheelZoom</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="isShiftDoubleClickZoom"></a>
+&lt;Boolean> isShiftDoubleClickZoom</H4></div>
+
+<div class="detaildesc">当属性为true，可用shift键+双击鼠标放大地图。这允许用户使用shift + 鼠标双击去放大和重定向地图中心。   详见<a href="../jshelp/intro_navigation.htm">地图导航</a>。<i> (As of v1.2)</i></div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> true
+			</div>
+
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>
+dojo.byId("theShiftDoubleClickZoom").value = myMap.isShiftDoubleClickZoom;
+</pre><br/>
+		</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#disableShiftDoubleClickZoom">disableShiftDoubleClickZoom</a>&nbsp;&nbsp;
+<a href="#enableShiftDoubleClickZoom">enableShiftDoubleClickZoom</a>&nbsp;&nbsp;
+<a href="#isDoubleClickZoom">isDoubleClickZoom</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="isZoomSlider"></a>
+&lt;Boolean> isZoomSlider</H4></div>
+
+<div class="detaildesc">当属性为true，地图上显示缩放滑动条。  详见 <a href="../jshelp/intro_navigation.htm">Map navigation</a> 。</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> true
+			</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#hideZoomSlider">hideZoomSlider</a>&nbsp;&nbsp;
+<a href="#showZoomSlider">showZoomSlider</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="layerIds"></a>
+&lt;String[]> layerIds</H4></div>
+
+<div class="detaildesc">加到地图里的当前<a href="tiledmapservicelayer.htm">TiledMapServiceLayers</a>和<a href="dynamicmapservicelayer.htm">DynamicMapServiceLayers</a>的数组</div>
+
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>function getLayerProperties() {
+  for(var j = 0; j &lt; map.layerIds.length; j++) {
+    var layer = map.getLayer(map.layerIds[j]);
+    alert(layer.id + ' ' + layer.opacity + ' ' + layer.visibility);
+  }
+}</pre><br/>
+		</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#graphicsLayerIds">graphicsLayerIds</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="loaded"></a>
+&lt;Boolean> loaded</H4></div>
+
+<div class="detaildesc">第一个图层被加载后，属性值被设置为true</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onLoad">onLoad</a>&nbsp;&nbsp;
+<a href="#onUnload">onUnload</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="position"></a>
+&lt;<a href="point.htm">Point</a>> position</H4></div>
+
+<div class="detaildesc">该屏幕坐标的点几何体代表地图容器的左上角。这个坐标也担当了<a href="map.htm">地图</a>和<a href="graphicslayer.htm">GraphicsLayer</a>事件返回的所有屏幕坐标的原点。<i> (As of v1.3)</i></div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="spatialReference"></a>
+&lt;<a href="spatialreference.htm">SpatialReference</a>> spatialReference</H4></div>
+
+<div class="detaildesc">地图的空间参考。支持的空间参考列表，见<a href="../jshelp/pcs.htm">投影坐标系统</a>和<a href="../jshelp/gcs.htm">地理坐标系统</a>。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="width"></a>
+&lt;Number> width</H4></div>
+
+<div class="detaildesc">地图当前宽度，宽度单位是屏幕像数。  这个属性是只读的。地图高和宽通常设置在HTML DIV 或其他包含地图容器的HTML元素里。</div>
+
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>function getMapWidthHeight() {
+  alert("Width = " + myMap.width + "; Height = " + myMap.height);
+}  </pre><br/>
+		</div>
+
+</div>
+
+<div class=sectionDivider>方法详细信息</div>
+<div class="detaildiv">
+		<div class="detailname"><a name="addLayer"></a><H4>
+addLayer(layer, index?)</H4></div>
+
+<div class="detaildesc">增加ESRI图层到地图。<br/><br/>v1.4增加了返回<code>Layer</code>对象</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="layer.htm">Layer</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="layer.htm">Layer</a>> <B>layer</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+被加到地图的图层。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>index</B></td>
+			<td class="detailTABLE">
+可选项	</td>
+			<td class="detailTABLE">
+            增加图层的指定的索引。如果没有索引被指定或指定索引大于当前图层数量，图层自动应用到地图里的图层列表并且索引是标准化的。<i>(自v1.3起) </i>
+</td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onLayerAdd">onLayerAdd</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="centerAndZoom"></a><H4>
+centerAndZoom(mapPoint, levelOrFactor)</H4></div>
+
+<div class="detaildesc">地图居中并缩放。<i> (As of v1.2)</i></div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="point.htm">Point</a>> <B>mapPoint</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+            地图在指定的X,Y位置居中。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>levelOrFactor</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+            当使用<a href="arcgistiledmapservicelayer.htm">ArcGISTiledMapServiceLayer</a>，地图缩放到指定的级别。当使用时，地图按指定的系数放大或缩小。例如，用0.5放大2倍，用2.0缩小两倍。</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="centerAt"></a><H4>
+centerAt(mapPoint)</H4></div>
+
+<div class="detaildesc">以指定地图坐标作为中心点坐标重定位地图。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="point.htm">Point</a>> <B>mapPoint</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+地图在指定x,y位置居中。</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="disableClickRecenter"></a><H4>
+disableClickRecenter()</H4></div>
+
+<div class="detaildesc">不允许单击地图来重定位地图中心点。   详见<a href="../jshelp/intro_navigation.htm">地图导航</a>。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>
+function init() {
+  myMap = new esri.Map("mapDiv");
+  myMap.disableClickRecenter();
+}
+</pre><br/>
+		</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#enableClickRecenter">enableClickRecenter</a>&nbsp;&nbsp;
+<a href="#isClickRecenter">isClickRecenter</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="disableDoubleClickZoom"></a><H4>
+disableDoubleClickZoom()</H4></div>
+
+<div class="detaildesc">不允许双击地图来放大地图一个级别并重定位地图中心点   详见<a href="../jshelp/intro_navigation.htm">地图导航</a>。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>
+function init() {
+  myMap = new esri.Map("mapDiv");
+  myMap.disableDoubleClickZoom();
+}
+</pre><br/>
+		</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#enableDoubleClickZoom">enableDoubleClickZoom</a>&nbsp;&nbsp;
+<a href="#isDoubleClickZoom">isDoubleClickZoom</a>&nbsp;&nbsp;
+<a href="#disableShiftDoubleClickZoom">disableShiftDoubleClickZoom</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="disableMapNavigation"></a><H4>
+disableMapNavigation()</H4></div>
+
+<div class="detaildesc">除了滑动条和移动箭头，不允许其它所有地图导航。  详见<a href="../jshelp/intro_navigation.htm">地图导航</a>。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="disablePan"></a><H4>
+disablePan()</H4></div>
+
+<div class="detaildesc">不允许用鼠标移动地图。 详见<a href="../jshelp/intro_navigation.htm">地图导航</a>。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>
+function noPan() {
+  myMap.disablePan();
+}
+</pre><br/>
+		</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#enablePan">enablePan</a>&nbsp;&nbsp;
+<a href="#isPan">isPan</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="disableRubberBandZoom"></a><H4>
+disableRubberBandZoom()</H4></div>
+
+<div class="detaildesc">不允许使用边界框放大或缩小地图。 详见<a href="../jshelp/intro_navigation.htm">地图导航</a>。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>
+function noRubberBand() {
+  myMap.disableRubberBandZoom();
+}
+</pre><br/>
+		</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#enableRubberBandZoom">enableRubberBandZoom</a>&nbsp;&nbsp;
+<a href="#isRubberBandZoom">isRubberBandZoom</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="disableScrollWheelZoom"></a><H4>
+disableScrollWheelZoom()</H4></div>
+
+<div class="detaildesc">不允许使用鼠标滚动滑轮放大或缩小地图。  详见<a href="../jshelp/intro_navigation.htm">地图导航</a>。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>
+function stopScrollWheelZoom() {
+  myMap.disableScrollWheelZoom();
+  dojo.byId("stopScrollWheelZoom").value = myMap.isScrollWheelZoom;
+}
+</pre><br/>
+		</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#enableScrollWheelZoom">enableScrollWheelZoom</a>&nbsp;&nbsp;
+<a href="#isScrollWheelZoom">isScrollWheelZoom</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="disableShiftDoubleClickZoom"></a><H4>
+disableShiftDoubleClickZoom()</H4></div>
+
+<div class="detaildesc">不允许shift+鼠标双击放大地图并重定位地图中心点。   详见<a href="../jshelp/intro_navigation.htm">地图导航</a>。<i> (As of v1.2)</i></div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>
+function init() {
+  myMap = new esri.Map("mapDiv");
+  myMap.disableShiftDoubleClickZoom();
+}
+</pre><br/>
+		</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#enableShiftDoubleClickZoom">enableShiftDoubleClickZoom</a>&nbsp;&nbsp;
+<a href="#disableDoubleClickZoom">disableDoubleClickZoom</a>&nbsp;&nbsp;
+<a href="#isShiftDoubleClickZoom">isShiftDoubleClickZoom</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="disbleKeyboardNavigation"></a><H4>
+disbleKeyboardNavigation()</H4></div>
+
+<div class="detaildesc">不允许使用键盘移动和缩放地图。 详见<a href="../jshelp/intro_navigation.htm">地图导航</a>。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>
+function init() {
+  myMap = new esri.Map("mapDiv");
+  myMap.disableKeyboardNavigation();
+}
+</pre><br/>
+		</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="enableClickRecenter"></a><H4>
+enableClickRecenter()</H4></div>
+
+<div class="detaildesc">允许用户单击地图来重定位中心点。   详见<a href="../jshelp/intro_navigation.htm">地图导航</a>。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>
+function okClickRecenter() {
+  myMap.enableClickRecenter();
+}
+</pre><br/>
+		</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#isClickRecenter">isClickRecenter</a>&nbsp;&nbsp;
+<a href="#disableClickRecenter">disableClickRecenter</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="enableDoubleClickZoom"></a><H4>
+enableDoubleClickZoom()</H4></div>
+
+<div class="detaildesc">允许用户双击地图放大一个级别并重定位地图中心点。 详见<a href="../jshelp/intro_navigation.htm">地图导航</a>。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>
+function okDoubleClickZoom() {
+  myMap.enableDoubleClickZoom();
+}
+</pre><br/>
+		</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#isDoubleClickZoom">isDoubleClickZoom</a>&nbsp;&nbsp;
+<a href="#disableDoubleClickZoom">disableDoubleClickZoom</a>&nbsp;&nbsp;
+<a href="#enableShiftDoubleClickZoom">enableShiftDoubleClickZoom</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="enableKeyboardNavigation"></a><H4>
+enableKeyboardNavigation()</H4></div>
+
+<div class="detaildesc">允许用户使用键盘移动和缩放地图。 详见<a href="../jshelp/intro_navigation.htm">地图导航</a>。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>
+function init() {
+  myMap = new esri.Map("mapDiv");
+  myMap.enableKeyboardNavigation();
+}
+</pre><br/>
+		</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#isKeyboardNavigation">isKeyboardNavigation</a>&nbsp;&nbsp;
+<a href="#disableKeyboardNavigation">disableKeyboardNavigation</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="enableMapNavigation"></a><H4>
+enableMapNavigation()</H4></div>
+
+<div class="detaildesc">允许所有地图导航。  详见<a href="../jshelp/intro_navigation.htm">地图导航</a>。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="enablePan"></a><H4>
+enablePan()</H4></div>
+
+<div class="detaildesc">允许使用鼠标移动地图。 详见<a href="../jshelp/intro_navigation.htm">地图导航</a>。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>
+function panAgain() {
+  myMap.enablePan();
+}
+</pre><br/>
+		</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#isPan">isPan</a>&nbsp;&nbsp;
+<a href="#disablePan">disablePan</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="enableRubberBandZoom"></a><H4>
+enableRubberBandZoom()</H4></div>
+
+<div class="detaildesc">允许使用划定边界框放大或缩小地图。 详见<a href="../jshelp/intro_navigation.htm">地图导航</a>。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>
+function allowRubberBand() {
+  myMap.enableRubberBandZoom();
+}
+</pre><br/>
+		</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#isRubberBandZoom">isRubberBandZoom</a>&nbsp;&nbsp;
+<a href="#disableRubberBandZoom">disableRubberBandZoom</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="enableScrollWheelZoom"></a><H4>
+enableScrollWheelZoom()</H4></div>
+
+<div class="detaildesc">允许用户用鼠标滑轮放大或缩小地图。  详见<a href="../jshelp/intro_navigation.htm">地图导航</a>。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>
+function allowScrollWheelZoom() {
+  myMap.enableScrollWheelZoom();
+}
+</pre><br/>
+		</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#isScrollWheelZoom">isScrollWheelZoom</a>&nbsp;&nbsp;
+<a href="#disableScrollWheelZoom">disableScrollWheelZoom</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="enableShiftDoubleClickZoom"></a><H4>
+enableShiftDoubleClickZoom()</H4></div>
+
+<div class="detaildesc">允许用使用shift+双击鼠标去放大地图一个级别并重定位地图中心点。 详见<a href="../jshelp/intro_navigation.htm">地图导航</a>。<i> (As of v1.2)</i></div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>
+function okShiftDoubleClickZoom() {
+  myMap.enableShiftDoubleClickZoom();
+}
+</pre><br/>
+		</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#enableDoubleClickZoom">enableDoubleClickZoom</a>&nbsp;&nbsp;
+<a href="#isShiftDoubleClickZoom">isShiftDoubleClickZoom</a>&nbsp;&nbsp;
+<a href="#disableShiftDoubleClickZoom">disableShiftDoubleClickZoom</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="getInfoWindowAnchor"></a><H4>
+getInfoWindowAnchor(screenCoords)</H4></div>
+
+<div class="detaildesc">设置调用<a href="infowindow.htm#show">InfoWindow.show</a>方法时信息窗口的定位点。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> String</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="point.htm">Point</a>> <B>screenCoords</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+以屏幕单位表示的定位点。</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="getLayer"></a><H4>
+getLayer(id)</H4></div>
+
+<div class="detaildesc">返回地图一个单独的图层。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="layer.htm">Layer</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>id</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+被分配给图层的ID。</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="getLevel"></a><H4>
+getLevel()</H4></div>
+
+<div class="detaildesc">获得当前地图的级别ID。仅仅<a href="arcgistiledmapservicelayer.htm">ArcGISTiledMapService</a>有效。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> Number</div>
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setLevel">setLevel</a>&nbsp;&nbsp;
+<a href="#onLevelChanged">onLevelChanged</a>&nbsp;&nbsp;
+<a href="#onLevelChanging">onLevelChanging</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="hidePanArrows"></a><H4>
+hidePanArrows()</H4></div>
+
+<div class="detaildesc">隐藏地图移动指针。 详见<a href="../jshelp/intro_navigation.htm">地图导航</a>。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#showPanArrows">showPanArrows</a>&nbsp;&nbsp;
+<a href="#isPanArrows">isPanArrows</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="hideZoomSlider"></a><H4>
+hideZoomSlider()</H4></div>
+
+<div class="detaildesc">隐藏地图缩放滚动条。 详见<a href="../jshelp/intro_navigation.htm">地图导航</a>。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#showZoomSlider">showZoomSlider</a>&nbsp;&nbsp;
+<a href="#isZoomSlider">isZoomSlider</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="panDown"></a><H4>
+panDown()</H4></div>
+
+<div class="detaildesc">向南移动地图。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>
+function south() {
+  myMap.panDown();
+}
+</pre><br/>
+		</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="panLeft"></a><H4>
+panLeft()</H4></div>
+
+<div class="detaildesc">向西移动地图。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>
+function west() {
+  myMap.panLeft();
+}
+</pre><br/>
+		</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="panLowerLeft"></a><H4>
+panLowerLeft()</H4></div>
+
+<div class="detaildesc">向西南移动地图。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>
+function southWest() {
+  myMap.panLowerLeft();
+}
+</pre><br/>
+		</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="panLowerRight"></a><H4>
+panLowerRight()</H4></div>
+
+<div class="detaildesc">向东南移动地图。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>
+function southEast() {
+  myMap.panLowerRight();
+}
+</pre><br/>
+		</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="panRight"></a><H4>
+panRight()</H4></div>
+
+<div class="detaildesc">向东移动地图。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>
+function east() {
+  myMap.panRight();
+}
+</pre><br/>
+		</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="panUp"></a><H4>
+panUp()</H4></div>
+
+<div class="detaildesc">向北移动地图。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>
+function north() {
+  myMap.panUp();
+}
+</pre><br/>
+		</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="panUpperLeft"></a><H4>
+panUpperLeft()</H4></div>
+
+<div class="detaildesc">向西北移动地图。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>
+function northWest() {
+  myMap.panUpperLeft();
+}
+</pre><br/>
+		</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="panUpperRight"></a><H4>
+panUpperRight()</H4></div>
+
+<div class="detaildesc">向东北移动地图。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>
+function northEast() {
+  myMap.panUpperRight();
+}
+</pre><br/>
+		</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="removeAllLayers"></a><H4>
+removeAllLayers()</H4></div>
+
+<div class="detaildesc">从地图上删除所有图层。
+<br><br>当图层被删除是，已定义的地图范围，空间参考，切片模式不会修改。当下一个图层被加到地图，图层以相同的范围和空间参考显示。<i> (As of v1.3)</i></div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onLayersRemoved">onLayersRemoved</a>&nbsp;&nbsp;
+<a href="#onLayerRemove">onLayerRemove</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="removeLayer"></a><H4>
+removeLayer(layer)</H4></div>
+
+<div class="detaildesc">删除地图的指定图层。<i> (As of v1.3)</i></div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="layer.htm">Layer</a>> <B>layer</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+            需要被删除的图层。
+<br><br>
+当图层被删除是，已定义的地图范围，空间参考，切片模式不会修改。当下一个图层被加到地图，图层以相同的范围和空间参考显示。</td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onLayerRemove">onLayerRemove</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="reorderLayer"></a><H4>
+reorderLayer(layer, index)</H4></div>
+
+<div class="detaildesc">修改地图里图层顺序。注意第一个增加的图层总是基础图层，即使顺序被修改了。<!--***--></div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="layer.htm">Layer</a>> <B>layer</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+            
+            参数指定图层将被移动。 <i>(As of v1.4)</i>版本1.4以后，使用该参数代替“layerId”参数。
+
+<br/><br/>
+在v1.4以前，使用"<b>layerID</b>"代替"layer"
+ <br/>
+类型:  &lt;String><br/>
+定义:  被移动的图层的ID。该ID被指定在<a href="layer.htm#id">Layer.id</a>里面。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>index</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+           引用放置图层的位置。最底部的图层的index是0。
+</td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onLayerReorder">onLayerReorder</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="reposition"></a><H4>
+reposition()</H4></div>
+
+<div class="detaildesc">在页面上重新放置地图DIV。当地图已经被重新放置后需要使用这个方法。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="resize"></a><H4>
+resize()</H4></div>
+
+<div class="detaildesc">调整地图DIV。当重新调整map DIV大小后这个方法要被使用。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onResize">onResize</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setExtent"></a><H4>
+setExtent(extent, fit?)</H4></div>
+
+<div class="detaildesc">设置地图范围。范围必需参照和地图一样的空间参考</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="extent.htm">Extent</a>> <B>extent</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+            为地图设置minx, miny, maxx和 maxy 。
+</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Boolean> <B>fit</B></td>
+			<td class="detailTABLE">
+可选项	</td>
+			<td class="detailTABLE">
+当属性为true，对于包含切片地图服务图层，会保证你有一个在地图上完整地显示输入范围。  <i>(As of v1.3) </i></td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onExtentChange">onExtentChange</a>&nbsp;&nbsp;
+<a href="#onPan">onPan</a>&nbsp;&nbsp;
+<a href="#onZoom">onZoom</a>&nbsp;&nbsp;
+<a href="#onZoomEnd">onZoomEnd</a>&nbsp;&nbsp;
+<a href="#onZoomStart">onZoomStart</a>&nbsp;&nbsp;
+<a href="#extent">extent</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setLevel"></a><H4>
+setLevel(level)</H4></div>
+
+<div class="detaildesc">设置地图到指定级别ID。基于当前地图中心点缩放到新的级别。仅仅对<a href="arcgistiledmapservicelayer.htm">ArcGISTiledMapService</a>图层有效。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>level</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+The level ID.</td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onLevelChanged">onLevelChanged</a>&nbsp;&nbsp;
+<a href="#onLevelChanging">onLevelChanging</a>&nbsp;&nbsp;
+<a href="#getLevel">getLevel</a>&nbsp;&nbsp;
+<a href="LOD.htm">LOD</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setMapCursor"></a><H4>
+setMapCursor(cursor)</H4></div>
+
+<div class="detaildesc">设置地图默认指针。除了拖拽地图进行移动或使用SHIFT+拖拽放大地图时外，鼠标位于地图上时该指针总被显示。如果没有设置，地图使用系统默认指针，通常使用箭头。<i> (As of v1.5)</i></div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>cursor</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+            标准CSS <a href="http://www.javascriptkit.com/dhtmltutors/csscursors.shtml" target="_blank">cursor value</a>。一些常用值包括 "default", "pointer", "crosshair", "text", "help", 和 "wait".</td>
+			</tr>
+</table>
+
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>Map.setMapCursor("wait");</pre><br/>
+		</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="showPanArrows"></a><H4>
+showPanArrows()</H4></div>
+
+<div class="detaildesc">显示地图移动指针。 详见<a href="../jshelp/intro_navigation.htm">地图导航</a>。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#isPanArrows">isPanArrows</a>&nbsp;&nbsp;
+<a href="#hidePanArrows">hidePanArrows</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="showZoomSlider"></a><H4>
+showZoomSlider()</H4></div>
+
+<div class="detaildesc">显示缩放滚动条。 详见<a href="../jshelp/intro_navigation.htm">地图导航</a>。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#isZoomSlider">isZoomSlider</a>&nbsp;&nbsp;
+<a href="#hideZoomSlider">hideZoomSlider</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="toMap"></a><H4>
+toMap(screenPoint)</H4></div>
+
+<div class="detaildesc">转换单个屏幕点坐标或屏幕点坐标数组为地图坐标。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="point.htm">Point</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="point.htm">Point</a>> <B>screenPoint</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+            转换屏幕坐标到地图坐标。</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="toScreen"></a><H4>
+toScreen(mapPoint)</H4></div>
+
+<div class="detaildesc">转换单个地图点坐标或地图点坐标的数组为屏幕坐标。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="point.htm">Point</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="point.htm">Point</a>> <B>mapPoint</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+            转换地图坐标到屏幕坐标。</td>
+			</tr>
+</table>
+
+</div>
+
+<H4 class=dtH4>Events Detail</H4>
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onClick"></a><H4>
+onClick(event)	</H4></div>
+
+
+<div class="detaildesc">当用户使用鼠标单击地图且鼠标在HTML页面的地图范围内时触发。</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;Object> <B>event</B>
+			</td>
+
+<td class="detailTABLE">
+		结果可以是任何JavaScript MouseEvent，或screenPoint或mapPoint的X,Y坐标。
+			</td>
+			</tr>
+
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onDblClick"></a><H4>
+onDblClick(event)	</H4></div>
+
+
+<div class="detaildesc">当用户在地图上双击鼠标且鼠标在html页面的地图范围内时激发该事件</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;Object> <B>event</B>
+			</td>
+
+<td class="detailTABLE">
+ 			结果可以是任何JavaScript MouseEvent，或screenPoint或mapPoint的X,Y坐标。
+			</td>
+			</tr>
+
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onExtentChange"></a><H4>
+onExtentChange(extent, delta, levelChange, lod)	</H4></div>
+
+
+<div class="detaildesc">当地图范围已经修改激发该事件。</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="extent.htm">Extent</a>> <B>extent</B>
+			</td>
+
+<td class="detailTABLE">
+		地图范围修改以后，获得地图范围。
+
+			</td>
+			</tr>
+
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="point.htm">Point</a>> <B>delta</B>
+			</td>
+
+<td class="detailTABLE">
+			变化在来自以前范围的x和y的值。这个点的x和y值是用屏幕单位表示。该点担当参照点，在缩放处理期间，这部分地图保持在地图区域内。
+			</td>
+			</tr>
+
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;Boolean> <B>levelChange</B>
+			</td>
+
+<td class="detailTABLE">
+当使用ArcGIS Server切片地图服务时，当用户缩放地图到新的等级是参数值为"true"，移动操作时参数值是"false"。
+
+			</td>
+			</tr>
+
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="lod.htm">LOD</a>> <B>lod</B>
+			</td>
+
+<td class="detailTABLE">
+ 			当使用ArcGIS Server切片地图服务时，参数返回关于细节等级的特征。
+
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setExtent">setExtent</a>&nbsp;&nbsp;
+<a href="#extent">extent</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onKeyDown"></a><H4>
+onKeyDown(keyEvent)	</H4></div>
+
+
+<div class="detaildesc">当键盘某键被按下时激发该事件</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;Object> <B>keyEvent</B>
+			</td>
+
+<td class="detailTABLE">
+			keyCode是Unicode数字表示的按键。见http://msdn2.microsoft.com/en-us/library/ms536938.aspx.
+			</td>
+			</tr>
+
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onKeyUp"></a><H4>
+onKeyUp(keyEvent)	</H4></div>
+
+
+<div class="detaildesc">当键盘某键被释放时激发该事件。</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;Object> <B>keyEvent</B>
+			</td>
+
+<td class="detailTABLE">
+ 			keyCode是Unicode数字表示按键。
+			</td>
+			</tr>
+
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onLayerAdd"></a><H4>
+onLayerAdd(layer)	</H4></div>
+
+
+<div class="detaildesc">图层被增加到地图时激发该事件。</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="layer.htm">Layer</a>> <B>layer</B>
+			</td>
+
+<td class="detailTABLE">
+ 			被加到地图里的图层。
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#addLayer">addLayer</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onLayerRemove"></a><H4>
+onLayerRemove(layer)	</H4></div>
+
+
+<div class="detaildesc">图层已经被删除后激发事件<i> (As of v1.3)</i></div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="layer.htm">Layer</a>> <B>layer</B>
+			</td>
+
+<td class="detailTABLE">
+ 			删除的图层。
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#removeLayer">removeLayer</a>&nbsp;&nbsp;
+<a href="#removeAllLayers">removeAllLayers</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onLayerReorder"></a><H4>
+onLayerReorder(layer, index)	</H4></div>
+
+
+<div class="detaildesc">当地图图顺序已经被改变时激发事件。</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="layer.htm">Layer</a>> <B>layer</B>
+			</td>
+
+<td class="detailTABLE">
+			重新排序的图层。			</td>
+			</tr>
+
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;Number> <B>index</B>
+			</td>
+
+<td class="detailTABLE">
+			重新排序的图层的指针。
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#reorderLayer">reorderLayer</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onLayersRemoved"></a><H4>
+onLayersRemoved()	</H4></div>
+
+
+<div class="detaildesc">所有图层被删除后激发事件<i> (As of v1.3)</i></div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#removeAllLayers">removeAllLayers</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onLayersReordered"></a><H4>
+onLayersReordered(layerIds)	</H4></div>
+
+
+<div class="detaildesc">所有图层被重新排序是激发事件。<i> (As of v1.1)</i></div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;String[]> <B>layerIds</B>
+			</td>
+
+<td class="detailTABLE">
+		缩放时间期间获得范围。</td>
+			</tr>
+
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onLoad"></a><H4>
+onLoad(map)	</H4></div>
+
+
+<div class="detaildesc">第一个或基础图层被成功增加到地图时激发事件。</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="map.htm">Map</a>> <B>map</B>
+			</td>
+
+<td class="detailTABLE">
+ 			指定加载地图。
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onUnload">onUnload</a>&nbsp;&nbsp;
+<a href="#loaded">loaded</a>&nbsp;&nbsp;
+<a href="Layer.htm#onLoad">Layer.onLoad</a>
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onMouseDown"></a><H4>
+onMouseDown(event)	</H4></div>
+
+
+<div class="detaildesc">当鼠标按钮被按下且鼠标指针在HTML页面的地图范围里时激发事件。</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;Object> <B>event</B>
+			</td>
+
+<td class="detailTABLE">结果可以是任何JavaScript MouseEvent，或screenPoint或mapPoint的X,Y坐标。 </td>
+			</tr>
+
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onMouseDrag"></a><H4>
+onMouseDrag(event)	</H4></div>
+
+
+<div class="detaildesc">鼠标被拖转直到鼠标按钮被释放时激发事件。</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;Object> <B>event</B>
+			</td>
+
+<td class="detailTABLE">结果可以是任何JavaScript MouseEvent，或screenPoint或mapPoint的X,Y坐标。 </td>
+			</tr>
+
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onMouseDragEnd"></a><H4>
+onMouseDragEnd(event)	</H4></div>
+
+
+<div class="detaildesc">当鼠标按钮被释放并且用户停止拖拽鼠标时激发事件。</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;Object> <B>event</B>
+			</td>
+
+<td class="detailTABLE">结果可以是任何JavaScript MouseEvent，或screenPoint或mapPoint的X,Y坐标。 </td>
+			</tr>
+
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onMouseDragStart"></a><H4>
+onMouseDragStart(event)	</H4></div>
+
+
+<div class="detaildesc">当鼠标按钮被按下并用户开始拖拽鼠标时激发事件。</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;Object> <B>event</B>
+			</td>
+
+<td class="detailTABLE">结果可以是任何JavaScript MouseEvent，或screenPoint或mapPoint的X,Y坐标。 </td>
+			</tr>
+
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onMouseMove"></a><H4>
+onMouseMove(event)	</H4></div>
+
+
+<div class="detaildesc">鼠标指针在地图范围上移动时激发事件。通常该事件用于用户移动鼠标指针时显示当前地图x,y坐标。</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;Object> <B>event</B>
+			</td>
+
+<td class="detailTABLE">结果可以是任何JavaScript MouseEvent，或screenPoint或mapPoint的X,Y坐标。 </td>
+			</tr>
+
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onMouseOut"></a><H4>
+onMouseOut(event)	</H4></div>
+
+
+<div class="detaildesc">当鼠标移出HTML页的地图范围时激发事件。</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;Object> <B>event</B>
+			</td>
+
+<td class="detailTABLE">结果可以是任何JavaScript MouseEvent，或screenPoint或mapPoint的X,Y坐标。 </td>
+			</tr>
+
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onMouseOver"></a><H4>
+onMouseOver(event)	</H4></div>
+
+
+<div class="detaildesc">鼠标移入HTML页面的地图范围时激发事件。</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;Object> <B>event</B>
+			</td>
+
+<td class="detailTABLE">结果可以是任何JavaScript MouseEvent，或screenPoint或mapPoint的X,Y坐标。 </td>
+			</tr>
+
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onMouseUp"></a><H4>
+onMouseUp(event)	</H4></div>
+
+
+<div class="detaildesc">当地图按钮被释放并且鼠标指针在HTML页面的地图范围内时激发事件。</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;Object> <B>event</B>
+			</td>
+
+<td class="detailTABLE">结果可以是任何JavaScript MouseEvent，或screenPoint或mapPoint的X,Y坐标。 </td>
+			</tr>
+
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onMouseWheel"></a><H4>
+onMouseWheel(event)	</H4></div>
+
+
+<div class="detaildesc">鼠标滚轮滚动时激发事件。</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;Object> <B>event</B>
+			</td>
+
+<td class="detailTABLE">
+ 			返回对象包含screenPoint, mapPoint,和 <a href="graphic.htm">Graphic</a>。
+			</td>
+			</tr>
+
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onPan"></a><H4>
+onPan(extent, delta)	</H4></div>
+
+
+<div class="detaildesc">地图移动过程中激发事件。</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="extent.htm">Extent</a>> <B>extent</B>
+			</td>
+
+<td class="detailTABLE">
+ 			随着地图移动的地图当前范围。
+			</td>
+			</tr>
+
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="point.htm">Point</a>> <B>delta</B>
+			</td>
+
+<td class="detailTABLE">
+			随着地图移动改变的屏幕单位的x,y值。
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setExtent">setExtent</a>&nbsp;&nbsp;
+<a href="#extent">extent</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onPanEnd"></a><H4>
+onPanEnd(extent, endPoint)	</H4></div>
+
+
+<div class="detaildesc">移动完成时激发事件。</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="extent.htm">Extent</a>> <B>extent</B>
+			</td>
+
+<td class="detailTABLE">
+			随地图移动的地图当前范围。
+			</td>
+			</tr>
+
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="point.htm">Point</a>> <B>endPoint</B>
+			</td>
+
+<td class="detailTABLE">
+ 			当移动结束时屏幕单位的最终点。
+
+			</td>
+			</tr>
+
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onPanStart"></a><H4>
+onPanStart(extent, startPoint)	</H4></div>
+
+
+<div class="detaildesc">用户开始移动时激发事件。</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="extent.htm">Extent</a>> <B>extent</B>
+			</td>
+
+<td class="detailTABLE">
+			地图移动的地图当前范围。
+ 			
+			</td>
+			</tr>
+
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="point.htm">Point</a>> <B>startPoint</B>
+			</td>
+
+<td class="detailTABLE">
+			当使用鼠标时，鼠标单击的屏幕单位的开始点。如果键盘被使用，开始点是0,0。
+			</td>
+			</tr>
+
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onReposition"></a><H4>
+onReposition(x, y)	</H4></div>
+
+
+<div class="detaildesc">地图DIV被重新定位时激发事件。</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;Number> <B>x</B>
+			</td>
+
+<td class="detailTABLE">
+ 			屏幕单位的X-坐标。
+			</td>
+			</tr>
+
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;Number> <B>y</B>
+			</td>
+
+<td class="detailTABLE">
+ 			屏幕单位的Y-坐标。
+			</td>
+			</tr>
+
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onResize"></a><H4>
+onResize(extent, height, width)	</H4></div>
+
+
+<div class="detaildesc">包含地图的DIV已经被调整大小时激发事件。</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="extent.htm">Extent</a>> <B>extent</B>
+			</td>
+
+<td class="detailTABLE">
+ 			地图范围。
+			</td>
+			</tr>
+
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;Number> <B>height</B>
+			</td>
+
+<td class="detailTABLE">
+			地图的像数高。
+			</td>
+			</tr>
+
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;Number> <B>width</B>
+			</td>
+
+<td class="detailTABLE">
+ 			地图的像数宽。
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#resize">resize</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onUnload"></a><H4>
+onUnload(map)	</H4></div>
+
+
+<div class="detaildesc">刷新页面时激发事件。 <!--***--></div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="map.htm">Map</a>> <B>map</B>
+			</td>
+
+<td class="detailTABLE">
+ 			指定将卸载地图。
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#loaded">loaded</a>&nbsp;&nbsp;
+<a href="#onLoad">onLoad</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onZoom"></a><H4>
+onZoom(extent, zoomFactor, anchor)	</H4></div>
+
+
+<div class="detaildesc">缩放过程中激发事件。</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="extent.htm">Extent</a>> <B>extent</B>
+			</td>
+
+<td class="detailTABLE">
+ 			缩放事件期间获得地图范围。
+			</td>
+			</tr>
+
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;Number> <B>zoomFactor</B>
+			</td>
+
+<td class="detailTABLE">
+			表示地图从以前的范围放大或缩小的百分比的比例系数。值为2代表地图比以前的地图范围放大2倍，值为0.5表示地图比以前缩小2倍。
+
+			</td>
+			</tr>
+
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="point.htm">Point</a>> <B>anchor</B>
+			</td>
+
+<td class="detailTABLE">
+ 			鼠标点的位置。点x和y的值的单位是屏幕单位。该点担当参考点，在缩放处理期间，地图的这一部分保持在地图区域内。
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setExtent">setExtent</a>&nbsp;&nbsp;
+<a href="#extent">extent</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onZoomEnd"></a><H4>
+onZoomEnd(extent, zoomFactor, anchor, level)	</H4></div>
+
+
+<div class="detaildesc">缩放完成时激发事件。</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="extent.htm">Extent</a>> <B>extent</B>
+			</td>
+
+<td class="detailTABLE">
+ 			缩放事件结束获得地图范围。
+			</td>
+			</tr>
+
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;Number> <B>zoomFactor</B>
+			</td>
+
+<td class="detailTABLE">
+ 			表示地图从以前的范围放大或缩小的百分比的比例系数。值为2代表地图比以前的地图范围放大2倍，值为0.5表示地图比以前缩小2倍。 
+			</td>
+			</tr>
+
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="point.htm">Point</a>> <B>anchor</B>
+			</td>
+
+<td class="detailTABLE">
+ 			 			鼠标点的位置。点x和y的值的单位是屏幕单位。该点担当参考点，在缩放处理期间，地图的这一部分保持在地图区域内。
+			</td>
+			</tr>
+
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;Number> <B>level</B>
+			</td>
+
+<td class="detailTABLE">
+			地图缩放完成后<a href="arcgistiledmapservicelayer.htm">ArcGISTiledMapServiceLayer</a>的等级。
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setExtent">setExtent</a>&nbsp;&nbsp;
+<a href="#extent">extent</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onZoomStart"></a><H4>
+onZoomStart(extent, zoomFactor, anchor, level)	</H4></div>
+
+
+<div class="detaildesc">用户开始缩放时激发事件。</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="extent.htm">Extent</a>> <B>extent</B>
+			</td>
+
+<td class="detailTABLE">
+ 			缩放事件开始时获得地图范围。
+			</td>
+			</tr>
+
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;Number> <B>zoomFactor</B>
+			</td>
+
+<td class="detailTABLE">
+ 			表示地图从以前的范围放大或缩小的百分比的比例系数。值为2代表地图比以前的地图范围放大2倍，值为0.5表示地图比以前缩小2倍。 
+			</td>
+			</tr>
+
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="point.htm">Point</a>> <B>anchor</B>
+			</td>
+
+<td class="detailTABLE">鼠标点的位置。点x和y的值的单位是屏幕单位。该点担当参考点，在缩放处理期间，地图的这一部分保持在地图区域内。 </td>
+			</tr>
+
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;Number> <B>level</B>
+			</td>
+
+<td class="detailTABLE">
+ 			地图缩放开始前<a href="arcgistiledmapservicelayer.htm">ArcGISTiledMapServiceLayer</a>的等级。
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setExtent">setExtent</a>&nbsp;&nbsp;
+<a href="#extent">extent</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<br/></div></body></html> 

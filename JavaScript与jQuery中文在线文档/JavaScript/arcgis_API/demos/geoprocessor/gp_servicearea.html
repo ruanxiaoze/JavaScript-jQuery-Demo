@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>Service Area Task</title>
+    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css">
+    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"></script>
+    <script type="text/javascript">
+      dojo.require("esri.map");
+      dojo.require("esri.tasks.gp");
+
+      var map, gp;
+      var driveTimes = "1 2 3";
+
+      /*Initialize map, GP and image params*/
+      function init() {
+        var startExtent = new esri.geometry.Extent(-95.41, 38.86, -95.1, 39.06, new esri.SpatialReference({wkid:4326}) );
+        map = new esri.Map("mapDiv", { extent: startExtent });
+        var streetMap = new esri.layers.ArcGISTiledMapServiceLayer("http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer");
+        map.addLayer(streetMap);
+
+        gp = new esri.tasks.Geoprocessor("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Network/ESRI_DriveTime_US/GPServer/CreateDriveTimePolygons");
+
+        dojo.connect(map, "onClick", computeServiceArea);
+      }
+
+      function computeServiceArea(evt) {
+        map.graphics.clear();
+        var pointSymbol = new esri.symbol.SimpleMarkerSymbol();
+        pointSymbol.setOutline = new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([255,0,0]), 1);
+        pointSymbol.setSize(5);
+        pointSymbol.setColor(new dojo.Color([0,255,0,0.25]));
+
+        var graphic = new esri.Graphic(evt.mapPoint,pointSymbol);
+        map.graphics.add(graphic);
+
+        var features= [];
+        features.push(graphic);
+        var featureSet = new esri.tasks.FeatureSet();
+        featureSet.features = features;
+        var params = { "Input_Location":featureSet, "Drive_Times":driveTimes };
+        gp.execute(params, getDriveTimePolys);
+      }
+
+      function getDriveTimePolys(results, messages) {
+        var features = results[0].value.features;
+        for (var f=0, fl=features.length; f<fl; f++) {
+          var feature = features[f];
+          if(f == 0) {
+            var polySymbolRed = new esri.symbol.SimpleFillSymbol();
+            polySymbolRed.setOutline(new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([0,0,0,0.5]), 1));
+            polySymbolRed.setColor(new dojo.Color([255,0,0,0.7]));
+            feature.setSymbol(polySymbolRed);
+            }
+          else if(f == 1) {
+            var polySymbolGreen = new esri.symbol.SimpleFillSymbol();
+            polySymbolGreen.setOutline(new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([0,0,0,0.5]), 1));
+            polySymbolGreen.setColor(new dojo.Color([0,255,0,0.7]));
+            feature.setSymbol(polySymbolGreen);
+            }
+          else if(f == 2) {
+            var polySymbolBlue = new esri.symbol.SimpleFillSymbol();
+            polySymbolBlue.setOutline(new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([0,0,0,0.5]), 1));
+            polySymbolBlue.setColor(new dojo.Color([0,0,255,0.7]));
+            feature.setSymbol(polySymbolBlue);
+          }
+          map.graphics.add(feature);
+        }
+      }
+
+      dojo.addOnLoad(init);
+    </script>
+
+  </head>
+  <body class="tundra">
+    <div id="mapDiv" style="width:800px; height:600px; border:1px solid #000;"></div>
+    Zoom in to a US city and single click the map.  A service area GP task will be executed synchronously and on
+    completion the results will be drawn as graphic features to the map.  The drive time polygons are 1, 2,
+    and 3 minutes.
+  </body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>GP Task Population Zonal Stats</title>
+    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css">
+    <script type="text/javascript">djConfig = { parseOnLoad:true }</script>
+    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"></script>
+    <script type="text/javascript">
+      dojo.require("esri.map");
+      dojo.require("esri.tasks.gp");
+      dojo.require("esri.toolbars.draw");
+      dojo.require("dijit.form.Button");
+      dojo.require("dijit.Dialog");
+      dojo.require("dojo.number");
+
+      var map, gp, toolbar;
+
+      /*Initialize map, GP & image params*/
+      function init() {
+        map = new esri.Map("mapDiv");
+        dojo.connect(map, "onLoad", initTools);
+
+        var streetMap = new esri.layers.ArcGISTiledMapServiceLayer("http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer");
+        map.addLayer(streetMap);
+
+        var populationMap = new esri.layers.ArcGISDynamicMapServiceLayer("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Population_World/MapServer");
+        populationMap.setOpacity(0.5);
+        map.addLayer(populationMap);
+
+        //identify proxy page to use if the toJson payload to the geoprocessing service is greater than 2000 characters.
+        //If this null or not available the gp.execute operation will not work.  Otherwise it will do a http post to the proxy.
+        esriConfig.defaults.io.proxyUrl = "/arcgisserver/apis/javascript/proxy/proxy.ashx";
+        esriConfig.defaults.io.alwaysUseProxy = false;
+      }
+
+      function initTools(map) {
+        gp = new esri.tasks.Geoprocessor("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Population_World/GPServer/PopulationSummary");
+        dojo.connect(gp, "onExecuteComplete", displayResults);
+
+        toolbar = new esri.toolbars.Draw(map);
+        dojo.connect(toolbar, "onDrawEnd", computeZonalStats);
+      }
+
+      function computeZonalStats(geometry) {
+        map.showZoomSlider();
+        map.graphics.clear();
+        var symbol = new esri.symbol.SimpleFillSymbol("none", new esri.symbol.SimpleLineSymbol("dashdot", new dojo.Color([255,0,0]), 2), new dojo.Color([255,255,0,0.25]));
+
+        var graphic = new esri.Graphic(geometry,symbol);
+
+        map.graphics.add(graphic);
+        toolbar.deactivate();
+
+        var features= [];
+        features.push(graphic);
+
+        var featureSet = new esri.tasks.FeatureSet();
+        featureSet.features = features;
+        var params = { "inputPoly":featureSet };
+        gp.execute(params);
+      }
+
+      function displayResults(results, messages) {
+        //alert("Sum: " + results[0].value.features[0].attributes.SUM);
+        var content = dojo.string.substitute('<h1>The population in the user defined polygon is ${number:dojo.number.format}.</h1>',{number:results[0].value.features[0].attributes.SUM});
+
+        dijit.byId('dialog1').setContent(content);
+        dijit.byId('dialog1').show();
+      }
+
+      dojo.addOnLoad(init);
+    </script>
+
+  </head>
+  <body class="tundra">
+    <table>
+      <tbody>
+        <tr>
+          <td><div dojoType="dijit.form.Button" id="drawPoly" onclick="toolbar.activate(esri.toolbars.Draw.FREEHAND_POLYGON);map.hideZoomSlider();">Summarize Population</div></td>
+        </tr>
+        <tr>
+          <td id="mapDiv" style="width:800px; height:600px; border:1px solid #000;"></td>
+        </tr>
+      </tbody>
+    </table>
+    Click the Summarize Population tool and draw a polygon on the map.  When finished a GP task will be called to summarize the population within the polygon.
+      <div dojoType="dijit.Dialog" id="dialog1" title="Population Summary"></div>
+  </body>
+</html>

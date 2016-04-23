@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>FindResult</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: FindResult</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	Represents a result of a find operation. FindResult has no constructor.
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.tasks.FindResult
+</pre>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#displayFieldName">displayFieldName</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+The name of the layer's primary display field. The value of this property matches the name of one of the fields of the <i>feature</i>.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#feature">feature</a></td>
+<td class="syntaxTABLE">
+<a href="graphic.htm">Graphic</a>
+</td>
+
+<td class="syntaxTABLE">
+The found feature.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#foundFieldName">foundFieldName</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+The name of the field that contains the search text.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#layerId">layerId</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+Unique ID of the layer that contains the <i>feature</i>.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#layerName">layerName</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+The layer name that contains the <i>feature</i>.</td>
+		</tr>
+</table>
+
+<div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="displayFieldName"></a>
+&lt;String> displayFieldName</H4></div>
+
+<div class="detaildesc">The name of the layer's primary display field. The value of this property matches the name of one of the fields of the <i>feature</i>.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="feature"></a>
+&lt;<a href="graphic.htm">Graphic</a>> feature</H4></div>
+
+<div class="detaildesc">The found feature.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="foundFieldName"></a>
+&lt;String> foundFieldName</H4></div>
+
+<div class="detaildesc">The name of the field that contains the search text.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="layerId"></a>
+&lt;Number> layerId</H4></div>
+
+<div class="detaildesc">Unique ID of the layer that contains the <i>feature</i>.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="layerName"></a>
+&lt;String> layerName</H4></div>
+
+<div class="detaildesc">The layer name that contains the <i>feature</i>.</div>
+
+</div>
+
+<br/></div></body></html> 

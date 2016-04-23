@@ -1,0 +1,711 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>TextSymbol</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: TextSymbol</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	Text symbols are used to add text on the graphics layer.
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+<a href="symbol.htm">esri.symbol.Symbol</a>
+  |_ esri.symbol.TextSymbol
+</pre><H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#TextSymbolConst1">esri.symbol.TextSymbol(text)</a></td>
+		<td class="syntaxTABLE">Creates a new TextSymbol object that includes only the text.</td>
+		</tr>
+<tr><td class="syntaxTABLE"><a href="#TextSymbolConst2">esri.symbol.TextSymbol(text, font, color)</a></td>
+		<td class="syntaxTABLE">Creates a new TextSymbol object.</td>
+		</tr>
+<tr><td class="syntaxTABLE"><a href="#TextSymbolConst3">esri.symbol.TextSymbol(json)</a></td>
+		<td class="syntaxTABLE">Creates a new TextSymbol object using a JSON object.</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#align">align</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+The text alignment in relation to the point. See the Constants table for valid values.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#angle">angle</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+Text angle. 0 is horizontal and the angle moves clockwise.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#decoration">decoration</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+The decoration on the text. See the Constants table for valid values.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#font">font</a></td>
+<td class="syntaxTABLE">
+<a href="font.htm">Font</a>
+</td>
+
+<td class="syntaxTABLE">
+Font for displaying text.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#kerning">kerning</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+Determines whether to adjust the spacing between characters in the text string.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#rotated">rotated</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+Determines whether every character in the text string is rotated.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#text">text</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+Text string for display in the graphics layer.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#xoffset">xoffset</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+The offset on the x-axis in pixels from the point.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#yoffset">yoffset</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+The offset on the y-axis in pixels from the point.</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>常量</H4>
+
+	<table CLASS="syntaxTABLE" cellspacing="0">
+	<tr>
+	<th class="tableheader" width="20%">常量</th>
+		<th class="tableheader">描述</th>
+	</tr>
+
+		<tr>
+		<td class="syntaxTABLE">ALIGN_END</td>
+			<td class="syntaxTABLE">			The end of the text string is aligned with the point.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">ALIGN_MIDDLE</td>
+			<td class="syntaxTABLE">			The center of the text string is aligned with the point.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">ALIGN_START</td>
+			<td class="syntaxTABLE">			The beginning of the text string is aligned with the point.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">DECORATION_LINETHROUGH</td>
+			<td class="syntaxTABLE">			Text has a lined striked through it.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">DECORATION_NONE</td>
+			<td class="syntaxTABLE">			Text has no decoration.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">DECORATION_OVERLINE</td>
+			<td class="syntaxTABLE">			Text has a line along the top.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">DECORATION_UNDERLINE</td>
+			<td class="syntaxTABLE">			Text is underlined.		</td>
+	</tr>
+
+</table>
+
+<H4 class=dtH4>方法表</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+		<th class="tableheader">方法</th>
+		<th class="tableheader">返回值</th>
+		<th class="tableheader">描述</th>
+		</tr>
+
+<tr>
+<td class="syntaxTABLE"><a href="#setAlign">setAlign(align)</a></td><td class="syntaxTABLE">
+<a href="textsymbol.htm">TextSymbol</a>
+</td>
+<td class="syntaxTABLE">Sets the alignment of the text.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setAngle">setAngle(angle)</a></td><td class="syntaxTABLE">
+<a href="textsymbol.htm">TextSymbol</a>
+</td>
+<td class="syntaxTABLE">Sets the angle of the text.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setDecoration">setDecoration(decoration)</a></td><td class="syntaxTABLE">
+<a href="textsymbol.htm">TextSymbol</a>
+</td>
+<td class="syntaxTABLE">Sets the decoration for the text.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setFont">setFont(font)</a></td><td class="syntaxTABLE">
+<a href="textsymbol.htm">TextSymbol</a>
+</td>
+<td class="syntaxTABLE">Sets the text font.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setKerning">setKerning(kerning)</a></td><td class="syntaxTABLE">
+<a href="textsymbol.htm">TextSymbol</a>
+</td>
+<td class="syntaxTABLE">Sets whether to adjust the spacing between characters in the text string.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setOffset">setOffset(x, y)</a></td><td class="syntaxTABLE">
+<a href="textsymbol.htm">TextSymbol</a>
+</td>
+<td class="syntaxTABLE">Sets the x and y offset of the text.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setRotated">setRotated(rotated)</a></td><td class="syntaxTABLE">
+<a href="textsymbol.htm">TextSymbol</a>
+</td>
+<td class="syntaxTABLE">Sets whether every character in the text string is rotated.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setText">setText(text)</a></td><td class="syntaxTABLE">
+<a href="textsymbol.htm">TextSymbol</a>
+</td>
+<td class="syntaxTABLE">Sets the text string.</td>	</tr></table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="TextSymbolConst1"></a><H4>esri.symbol.TextSymbol(text)</H4>
+		</div>
+
+<div class="detaildesc">Creates a new TextSymbol object that includes only the text.</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;String>
+<B>text</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			Text string for display in the graphics layer.
+			</td>
+			</tr>
+</table>
+
+</div><div class="detaildiv"><div class="detailname"><a name="TextSymbolConst2"></a><H4>esri.symbol.TextSymbol(text, font, color)</H4>
+		</div>
+
+<div class="detaildesc">Creates a new TextSymbol object.</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;String>
+<B>text</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			Text string for display in the graphics layer.
+			</td>
+			</tr>
+<tr>
+<td class="detailTABLE">
+&lt;<a href="font.htm">Font</a>>
+<B>font</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			Font for displaying text.
+			</td>
+			</tr>
+<tr>
+<td class="detailTABLE">
+&lt;dojo.Color>
+<B>color</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			Symbol color, which is based on <a href="http://redesign.dojotoolkit.org/jsdoc/dojo/HEAD/dojo.Color" target="_blank">dojo.Color</a>.  Colors can be denoted in the following formats:<br/><br/>
+
+<ul>
+<li>R, G, B:  <code>new dojo.Color([255,0,0])</code> </li>
+<li>R,G,B,A.  The "A" value represents transparency where 0.0 is fully transparent and 1.0 has no transparency: <code>new dojo.Color([255,0,0,0.25])</code> </li>
+<li>Hex string: <code>new dojo.Color("#C0C0C0")</code> </li>
+<li>Named string:  <code>new dojo.Color("blue")</code> </li>
+</ul>
+			</td>
+			</tr>
+</table>
+
+</div><div class="detaildiv"><div class="detailname"><a name="TextSymbolConst3"></a><H4>esri.symbol.TextSymbol(json)</H4>
+		</div>
+
+<div class="detaildesc">Creates a new TextSymbol object using a JSON object.</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;Object>
+<B>json</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			JSON object representing the text symbol.
+			</td>
+			</tr>
+</table>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="align"></a>
+&lt;String> align</H4></div>
+
+<div class="detaildesc">The text alignment in relation to the point. See the Constants table for valid values.</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> ALIGN_MIDDLE
+			</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setAlign">setAlign</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="angle"></a>
+&lt;Number> angle</H4></div>
+
+<div class="detaildesc">Text angle. 0 is horizontal and the angle moves clockwise.</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> 0
+			</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setAngle">setAngle</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="decoration"></a>
+&lt;String> decoration</H4></div>
+
+<div class="detaildesc">The decoration on the text. See the Constants table for valid values.</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> DECORATION_NONE
+			</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setDecoration">setDecoration</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="font"></a>
+&lt;<a href="font.htm">Font</a>> font</H4></div>
+
+<div class="detaildesc">Font for displaying text.</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setFont">setFont</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="kerning"></a>
+&lt;Boolean> kerning</H4></div>
+
+<div class="detaildesc">Determines whether to adjust the spacing between characters in the text string.</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> true
+			</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setKerning">setKerning</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="rotated"></a>
+&lt;Boolean> rotated</H4></div>
+
+<div class="detaildesc">Determines whether every character in the text string is rotated.</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> false
+			</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setRotated">setRotated</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="text"></a>
+&lt;String> text</H4></div>
+
+<div class="detaildesc">Text string for display in the graphics layer.</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setText">setText</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="xoffset"></a>
+&lt;Number> xoffset</H4></div>
+
+<div class="detaildesc">The offset on the x-axis in pixels from the point.</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> 0
+			</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setOffset">setOffset</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="yoffset"></a>
+&lt;Number> yoffset</H4></div>
+
+<div class="detaildesc">The offset on the y-axis in pixels from the point.</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> 0
+			</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setOffset">setOffset</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class=sectionDivider>方法详细信息</div>
+<div class="detaildiv">
+		<div class="detailname"><a name="setAlign"></a><H4>
+setAlign(align)</H4></div>
+
+<div class="detaildesc">Sets the alignment of the text.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="textsymbol.htm">TextSymbol</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>align</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+The text alignment. See the Constants table for valid values.</td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#align">align</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setAngle"></a><H4>
+setAngle(angle)</H4></div>
+
+<div class="detaildesc">Sets the angle of the text.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="textsymbol.htm">TextSymbol</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>angle</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+Angle value between 0 and 359.</td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#angle">angle</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setDecoration"></a><H4>
+setDecoration(decoration)</H4></div>
+
+<div class="detaildesc">Sets the decoration for the text.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="textsymbol.htm">TextSymbol</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>decoration</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+The decoration on the text. See the Constants table for valid values.</td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#decoration">decoration</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setFont"></a><H4>
+setFont(font)</H4></div>
+
+<div class="detaildesc">Sets the text font.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="textsymbol.htm">TextSymbol</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="font.htm">Font</a>> <B>font</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+Text font.</td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#font">font</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setKerning"></a><H4>
+setKerning(kerning)</H4></div>
+
+<div class="detaildesc">Sets whether to adjust the spacing between characters in the text string.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="textsymbol.htm">TextSymbol</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Boolean> <B>kerning</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+Set to true for kerning.</td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#kerning">kerning</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setOffset"></a><H4>
+setOffset(x, y)</H4></div>
+
+<div class="detaildesc">Sets the x and y offset of the text.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="textsymbol.htm">TextSymbol</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>x</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+X offset value in pixels.</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>y</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+Y offset value in pixels.</td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#xoffset">xoffset</a>&nbsp;&nbsp;
+<a href="#yoffset">yoffset</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setRotated"></a><H4>
+setRotated(rotated)</H4></div>
+
+<div class="detaildesc">Sets whether every character in the text string is rotated.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="textsymbol.htm">TextSymbol</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Boolean> <B>rotated</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+Set to true to rotate all characters in the string.</td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#rotated">rotated</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setText"></a><H4>
+setText(text)</H4></div>
+
+<div class="detaildesc">Sets the text string.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="textsymbol.htm">TextSymbol</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>text</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+The text string.</td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#text">text</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<br/></div></body></html> 

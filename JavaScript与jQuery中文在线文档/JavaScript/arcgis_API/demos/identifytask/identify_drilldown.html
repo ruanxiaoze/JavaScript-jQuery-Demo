@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>Identify Sample</title>
+    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css">
+    <script type="text/javascript">djConfig = { parseOnLoad:true }</script>
+    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"></script>
+    <script type="text/javascript">
+      dojo.require("esri.map");
+      dojo.require("esri.tasks.identify");
+      dojo.require("dijit.layout.ContentPane");
+      dojo.require("dijit.layout.TabContainer");
+      dojo.require("dijit.form.Button");
+
+      var map, identifyTask, identifyParams, symbol;
+      var layer2results, layer3results, layer4results;
+
+      function init() {
+        map = new esri.Map("mapDiv", { extent: new esri.geometry.Extent(-122.580,45.482,-122.571,45.488, new esri.SpatialReference({wkid:4326})) });
+        dojo.connect(map, "onLoad", initFunctionality);
+        var imageryPrime = new esri.layers.ArcGISTiledMapServiceLayer("http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer");
+        map.addLayer(imageryPrime);
+
+        var portlandLandBase = new esri.layers.ArcGISTiledMapServiceLayer("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Portland/Portland_ESRI_LandBase_AGO/MapServer");
+        portlandLandBase.setOpacity(0.65);
+        map.addLayer(portlandLandBase);
+
+        dojo.connect(map.infoWindow, "onShow", function() {
+          dijit.byId("tabs").resize();
+        });
+
+      }
+
+      function initFunctionality(map) {
+        dojo.connect(map, "onClick", doIdentify);
+
+        identifyTask = new esri.tasks.IdentifyTask("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Portland/Portland_ESRI_LandBase_AGO/MapServer");
+
+        identifyParams = new esri.tasks.IdentifyParameters();
+        identifyParams.tolerance = 3;
+        identifyParams.returnGeometry = true;
+        identifyParams.layerIds = [2,3,4];
+        identifyParams.layerOption = esri.tasks.IdentifyParameters.LAYER_OPTION_ALL;
+
+        map.infoWindow.resize(415, 200);
+        map.infoWindow.setContent(dijit.byId("tabs").domNode);
+        map.infoWindow.setTitle("Identify Results");
+
+        symbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([255,0,0]), 2), new dojo.Color([255,255,0,0.5]));
+      }
+
+      function doIdentify(evt) {
+        map.graphics.clear();
+        identifyParams.geometry = evt.mapPoint;
+        identifyParams.mapExtent = map.extent;
+        identifyTask.execute(identifyParams, function(idResults) { addToMap(idResults, evt); });
+      }
+
+      function addToMap(idResults, evt) {
+        layer2results = {displayFieldName:null,features:[]};
+        layer3results = {displayFieldName:null,features:[]};
+        layer4results = {displayFieldName:null,features:[]};
+
+        for (var i=0, il=idResults.length; i<il; i++) {
+          var idResult = idResults[i];
+          if (idResult.layerId === 2) {
+            if (!layer2results.displayFieldName) {layer2results.displayFieldName = idResult.displayFieldName};
+            layer2results.features.push(idResult.feature);
+          } else if (idResult.layerId === 3) {
+            if (!layer3results.displayFieldName) {layer3results.displayFieldName = idResult.displayFieldName};
+            layer3results.features.push(idResult.feature);
+          } else if (idResult.layerId === 4) {
+            if (!layer4results.displayFieldName) {layer4results.displayFieldName = idResult.displayFieldName};
+            layer4results.features.push(idResult.feature);
+          }
+        }
+        dijit.byId("layer2Tab").setContent(layerTabContent(layer2results,"layer2results"));
+        dijit.byId("layer3Tab").setContent(layerTabContent(layer3results,"layer3results"));
+        dijit.byId("layer4Tab").setContent(layerTabContent(layer4results,"layer4results"));
+
+        map.infoWindow.show(evt.screenPoint, map.getInfoWindowAnchor(evt.screenPoint));
+      }
+
+      function layerTabContent(layerResults, layerName) {
+        var content = "";
+        switch (layerName) {
+          case "layer2results":
+            content = "<i>Total features returned: " + layerResults.features.length + "</i>";
+            content += "<table border='1'><tr><th>TLID</th><th>Owner</th><th>Value</th></tr>";
+            for (var i=0, il=layerResults.features.length; i<il; i++) {
+              content+="<tr><td>"+layerResults.features[i].attributes['TLID']+" <a href='#' onclick='showFeature(" + layerName + ".features[" + i + "]); return false;'>(show)</a></td>";
+              content+="<td>"+layerResults.features[i].attributes['OWNER1']+"</td>";
+              content+="<td>"+layerResults.features[i].attributes['TOTALVAL']+"</td>";
+            }
+            content+="</tr></table>";
+            break;
+          case "layer3results":
+            content = "<i>Total features returned: " + layerResults.features.length + "</i>";
+            content += "<table border='1'><tr><th>Building ID</th><th>Area</th></tr>";
+            for (var i=0, il=layerResults.features.length; i<il; i++) {
+              content+="<tr><td>"+layerResults.features[i].attributes['OBJECTID_1']+" <a href='#' onclick='showFeature(" + layerName + ".features[" + i + "]); return false;'>(show)</a></td>";
+              content+="<td>"+layerResults.features[i].attributes['Shape_Area']+"</td>";
+            }
+            content+="</tr></table>";
+            break;
+          case "layer4results":
+            content = "<i>Total features returned: " + layerResults.features.length + "</i>";
+            content += "<table border='1'><tr><th>ID</th><th>Zone</th><th>Zone Class</th><th>General Class</th></tr>";
+            for (var i=0, il=layerResults.features.length; i<il; i++) {
+              content+="<tr><td>"+layerResults.features[i].attributes['OBJECTID']+" <a href='#' onclick='showFeature(" + layerName + ".features[" + i + "]); return false;'>(show)</a></td>";
+              content+="<td>"+layerResults.features[i].attributes['ZONE']+"</td>";
+              content+="<td>"+layerResults.features[i].attributes['ZONE_CLASS']+"</td>";
+              content+="<td>"+layerResults.features[i].attributes['ZONEGEN_CL']+"</td>";
+            }
+            content+="</tr></table>";
+            break;
+        }
+        return content;
+      }
+
+      function showFeature(feature) {
+        map.graphics.clear();
+        feature.setSymbol(symbol);
+        map.graphics.add(feature);
+      }
+
+      dojo.addOnLoad(init);
+    </script>
+
+  </head>
+  <body class="tundra">
+    Click the map to identify buildings, parcels, and zoning information.
+    <div id="mapDiv" style="width:800px; height:600px; border:1px solid #000;"></div>
+    <!-- info window tabs -->
+    <div id="tabs" dojoType="dijit.layout.TabContainer" style="width:385px;height:150px;">
+      <div id="layer2Tab" dojoType="dijit.layout.ContentPane" title="Tax Lots"></div>
+      <div id="layer3Tab" dojoType="dijit.layout.ContentPane" title="Buildings"></div>
+      <div id="layer4Tab" dojoType="dijit.layout.ContentPane" title="Zoning"></div>
+    </div>
+  </body>
+</html>

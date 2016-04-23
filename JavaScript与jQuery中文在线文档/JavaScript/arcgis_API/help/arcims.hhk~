@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<meta name="GENERATOR" content="Microsoft&reg; HTML Help Workshop 4.1">
+<!-- Sitemap 1.0 -->
+</HEAD>
+<BODY>
+<OBJECT type="text/site properties">
+	<param name="FrameName" value="right">
+</OBJECT>
+<UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Adding a copyright to your map">
+		<param name="Local" value="topics\net_copyright.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Adding a north arrow to your map">
+		<param name="Local" value="topics\net_northarrow.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Adding and removing tools from the toolbar">
+		<param name="Local" value="topics\net_toolbar.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Changing scale bar properties">
+		<param name="Local" value="topics\net_scalebar.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Changing navigation properties">
+		<param name="Local" value="topics\net_navigation.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Changing table of content properties">
+		<param name="Local" value="topics\net_toc.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="File structure of a Web Mapping Application">
+		<param name="Local" value="topics\net_contents.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Introduction">
+		<param name="Local" value="topics\overview_start.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Layout of a Web Mapping Application">
+		<param name="Local" value="topics\overview_wma.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Opening an application in an IDE">
+		<param name="Local" value="topics\net_open_ide.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Overview of customizing a Web Mapping Application">
+		<param name="Local" value="topics\java_start.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Overview of customizing a Web Mapping Application">
+		<param name="Local" value="topics\net_start.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Selecting a different overview map">
+		<param name="Local" value="topics\net_ovmap.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Understanding Web Manager functionality">
+		<param name="Local" value="topics\overview_manager.htm">
+		</OBJECT>
+</UL>
+</BODY>
+</HTML>

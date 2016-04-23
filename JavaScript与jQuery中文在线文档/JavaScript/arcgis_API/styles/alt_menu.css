@@ -1,0 +1,60 @@
+/*
+	Defines default styles for menuBar that should work on all browsers
+	12.16.02 bg
+*/
+
+a {
+  text-decoration: underline;
+}
+.menuBar{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: small;
+	height: 22px;
+}
+
+.menuButton {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #0060A7;
+}
+
+.menuButtonSelected{
+	color: #0060A7;
+	
+}
+.menu{
+	display: none;
+}
+.nonStds{
+	display: inline;
+	color: #ffffff;
+	white-space: nowrap;
+}
+.utilityNav{
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: x-small;
+  color: #78B2E1;
+  vertical-align: middle;
+  
+}
+.utilityNav a:link,
+.utilityNav a:visited{
+	color: #0060A7;
+	text-decoration: none;
+}
+.utilityNav a:hover{
+	color: #FF6600;
+}
+.searchForm{
+	display: inline;
+	font-family: courier new, courier, monospace;
+	background-color: transparent;
+}
+.banner{
+	background-image: url(/graphicsnav/searchback.jpg);
+	text-align: left;
+}
+#headerSearch{
+	position: absolute;
+	top: 30px;
+	left: 480px;
+}

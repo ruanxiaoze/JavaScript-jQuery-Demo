@@ -1,0 +1,873 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>GeometryService</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: GeometryService</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	表示ArcGIS Server REST API提供的一个几何服务资源。用于在几何体上执行各种的操作，例如投影，简化，缓存和空间关系。关于常量值的更多信息，见<a href="http://resources.esri.com/help/9.3/arcgisserver/apis/soap/SOAP_esriGeometryRelationEnum.htm" target="_blank">esriGeometryRelationEnum</a>.
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.tasks.GeometryService
+</pre>
+
+<H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#GeometryServiceConst">esri.tasks.GeometryService(url)</a></td>
+		<td class="syntaxTABLE">创建一个新的GeometryService对象.  URL是一个必需的参数。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#url">url</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+表示ArcGIS Server REST资源的定位器服务的URL。 使用<a href="../jshelp/ags_rest.htm">Services Directory</a>获得URL。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>常量</H4>
+
+	<table CLASS="syntaxTABLE" cellspacing="0">
+	<tr>
+	<th class="tableheader" width="20%">常量</th>
+		<th class="tableheader">描述</th>
+	</tr>
+
+		<tr>
+		<td class="syntaxTABLE">SPATIAL_REL_COINCIDENCE</td>
+			<td class="syntaxTABLE">			几何体的边框必须有一个交叉点，但是不考虑内部的关系（两者可以覆盖，一个包含在另一个里面，或者内部可能是不相交的）。这个关系应用于多段线和多边形。		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">SPATIAL_REL_CROSS</td>
+			<td class="syntaxTABLE">	如果两个多段线有唯一的共同点，并且至少其中一个不是终端，则多段线交叉。如果一个多线段和一个多边形在多边形内部共有一个多线段，并且共有的多线段不等于全部多线段，则多线段和多边形交叉。如果其中一个几何体是空的，则几何体不交叉。</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">SPATIAL_REL_DISJOINT</td>
+			<td class="syntaxTABLE">	
+            如果两个几何体的交集是空，则是不相交的。如果disjoint是false，则两个几何体相交。	</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">SPATIAL_REL_IN</td>
+			<td class="syntaxTABLE">		
+            如果基本的几何体是两个几何体的交集并且两个几何体内部的交集不是空的，那么这个基本几何体在另一个几何体的内部。除非另一个集合体是空的，一个空的几何体才会在另一个几何体的内部。
+		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">SPATIAL_REL_INTERIORINTERSECTION</td>
+			<td class="syntaxTABLE">几何体相交不包括边界线接触。</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">SPATIAL_REL_INTERSECTION</td>
+			<td class="syntaxTABLE">			几何体内部相交或边界接触，等同于“不是不相交的”。</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">SPATIAL_REL_LINETOUCH</td>
+			<td class="syntaxTABLE">			两个几何体是接触的，几何体的交集是非空的，但是几何体内部的交集为空。这估计接触是否沿着边界线发生（不是点）。多边形有效。		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">SPATIAL_REL_OVERLAP</td>
+			<td class="syntaxTABLE">			两个多段线共享相同的支线，或两个多线段共享相同的子区。两个空的几何体不会重叠。</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">SPATIAL_REL_POINTTOUCH</td>
+			<td class="syntaxTABLE">			当两个几何体交集是非空时两个几何体被称之为接触，但是几何体的内部交集是空的。这估计接触是否发生在点上（不是边界线上）。</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">SPATIAL_REL_RELATION</td>
+			<td class="syntaxTABLE">			允许任何使用<a href="http://resources.esri.com/help/9.3/arcgisengine/dotnet/concepts_start.htm#40de6491-9b2d-440d-848b-2609efcd46b1.htm" target="_blank">Shape Comparison Language</a>的关系定义规范。 </td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">SPATIAL_REL_TOUCH</td>
+			<td class="syntaxTABLE">	esriGeometryRelationPointTouch和esriGeometryRelationLineTouch的联合。当几何体交集是非空的但是他们的内部的交集是空的，两个几何体被称之为接触。例如，点接触是一个多段线只有唯一一个点和多线段端点之一一样。如果两个几何体中的一个是空的，几何体不会是接触的。		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">SPATIAL_REL_WITHIN</td>
+			<td class="syntaxTABLE">	与esriGeometryRelationIn一致，但是也认可完全在多边形边界线上的多段线被视为在多边形内。</td>
+	</tr>
+
+</table>
+
+<H4 class=dtH4>方法表</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+		<th class="tableheader">方法</th>
+		<th class="tableheader">返回值</th>
+		<th class="tableheader">描述</th>
+		</tr>
+
+<tr>
+<td class="syntaxTABLE"><a href="#areasAndLengths">areasAndLengths(graphics, callback?, errback?)</a></td><td class="syntaxTABLE">
+<a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a>
+</td>
+<td class="syntaxTABLE">当几何体类型是<a href="polygon.htm">Polygon</a>时获得<a href="graphic.htm">Graphic[]</a>的面积和长度。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#buffer">buffer(bufferParameters, callback?, errback?)</a></td><td class="syntaxTABLE">
+<a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a>
+</td>
+<td class="syntaxTABLE">在给定的几何体周边指定距离创建缓冲区多边形。完成时，onBufferComplete事件被触发并且可选的callback函数被调用。callback函数和事件处理器接收包含缓冲区几何体的<a href="graphic.htm">Graphic</a>数组。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#labelPoints">labelPoints(polygons, callback?, errback?)</a></td><td class="syntaxTABLE">
+<a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a>
+</td>
+<td class="syntaxTABLE">为每个多边形计算内部点。这些内部点能用于在客户端标识多边形。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#lengths">lengths(graphics, callback?, errback?)</a></td><td class="syntaxTABLE">
+<a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a>
+</td>
+<td class="syntaxTABLE">当几何体类型是<a href="polyline.htm">Polyline</a>时获得<a href="graphic.htm">Graphic[]</a>长度。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#project">project(graphics, outSpatialReference, callback?, errback?)</a></td><td class="syntaxTABLE">
+<a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a>
+</td>
+<td class="syntaxTABLE">投影几何体集合到一个新的空间参考。完成时，onProjectComplete事件被触发并且可选的callback函数被调用。callback函数和事件处理器收到包含头投影几何体的<a href="graphic.htm">Graphic</a>数组。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#relation">relation(graphics1, graphics2, spatialRelationship, comparisonString?, callback?, errback?)</a></td><td class="syntaxTABLE">
+<a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a>
+</td>
+<td class="syntaxTABLE">计算<code>graphics1</code>和<code>graphics2</code>所属的空间关系。连个数组被认为用同一个空间参考。关系是2D的。Z坐标没有使用。数组内的几何体不能是混合的。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#simplify">simplify(graphics, callback?, errback?)</a></td><td class="syntaxTABLE">
+<a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a>
+</td>
+<td class="syntaxTABLE">改变给定几何体使他们拓扑定义和几何类型相符。完成时，onSimplifyComplete事件被触发并且可选的callback函数被调用。callback函数和事件处理器收到包含简化几何体的<a href="graphic.htm">Graphic</a>数组。</td>	</tr></table>
+
+<H4 class=dtH4>事件</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">事件</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#onAreasAndLengthsComplete">onAreasAndLengthsComplete(areasAndLengths)
+		</a></td>
+
+<td class="syntaxTABLE">当areasAndLengths操作完成时触发该事件。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onBufferComplete">onBufferComplete(graphics)
+		</a></td>
+
+<td class="syntaxTABLE">当缓冲操作完成时触发该事件。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onError">onError(error)
+		</a></td>
+
+<td class="syntaxTABLE">当执行任务发生错误时触发该事件。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onLabelPointsComplete">onLabelPointsComplete(labelPoints)
+		</a></td>
+
+<td class="syntaxTABLE">当labelPoints操作完成时触发该事件。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onLengthsComplete">onLengthsComplete(lengths)
+		</a></td>
+
+<td class="syntaxTABLE">当长度操作完成时触发该事件。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onProjectComplete">onProjectComplete(graphics)
+		</a></td>
+
+<td class="syntaxTABLE">当投影操作完成时触发该事件。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onRelationComplete">onRelationComplete(relationships)
+		</a></td>
+
+<td class="syntaxTABLE">当关系操作完成时触发该事件。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onSimplifyComplete">onSimplifyComplete(graphics)
+		</a></td>
+
+<td class="syntaxTABLE">当简化操作完成时触发该事件。</td>
+		</tr></table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="GeometryServiceConst"></a><H4>esri.tasks.GeometryService(url)</H4>
+		</div>
+
+<div class="detaildesc">创建一个新的GeometryService对象.  URL是一个必需的参数。</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;String>
+<B>url</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			表示几何体服务的ArcGIS Server REST资源的URL。  一个示例是 
+http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Locators/ESRI_Geocode_USA/GeocodeServer.  关于构造URL的更多信息，见 <a href="../jshelp/ags_rest.htm">服务目录和REST API</a>.
+			</td>
+			</tr>
+</table>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="url"></a>
+&lt;String> url</H4></div>
+
+<div class="detaildesc">表示ArcGIS Server REST资源的定位器服务的URL。 使用<a href="../jshelp/ags_rest.htm">Services Directory</a>获得URL。</div>
+
+</div>
+
+<div class=sectionDivider>方法详细信息</div>
+<div class="detaildiv">
+		<div class="detailname"><a name="areasAndLengths"></a><H4>
+areasAndLengths(graphics, callback?, errback?)</H4></div>
+
+<div class="detaildesc">当几何体类型是<a href="polygon.htm">Polygon</a>时获得<a href="graphic.htm">Graphic[]</a>的面积和长度。<br/><br/><code>dojo.Deferred</code>返回对象是在v1.4增加的。<i> (As of v1.1)</i></div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="graphic.htm">Graphic[]</a>> <B>graphics</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+用于计算面积和长度的图形对象。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>callback</B></td>
+			<td class="detailTABLE">
+可选项</td>
+			<td class="detailTABLE">
+方法完成后调用的函数。函数中的参数和<a href="#onAreasAndLengthsComplete">onAreasAndLengthsComplete</a>事件一致。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>errback</B></td>
+			<td class="detailTABLE">
+可选项</td>
+			<td class="detailTABLE">
+如果在任务执行期间，如果服务器端发生错误，error对象被返回。 <i>(As of v1.3) </i></td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onAreaAndLengthsComplete">onAreaAndLengthsComplete</a>&nbsp;&nbsp;
+<a href="#onError">onError</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="buffer"></a><H4>
+buffer(bufferParameters, callback?, errback?)</H4></div>
+
+<div class="detaildesc">在给定的几何体周边指定距离创建缓冲区多边形。完成时，onBufferComplete事件被触发并且可选的callback函数被调用。callback函数和事件处理器接收包含缓冲区几何体的<a href="graphic.htm">Graphic</a>数组。<br/><br/> 
+  <code>dojo.Deferred</code>返回对象在v1.4增加。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="bufferparameters.htm">BufferParameters</a>> <B>bufferParameters</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">指定输入几何体，缓冲距离和其他选项。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>callback</B></td>
+			<td class="detailTABLE">
+可选项</td>
+			<td class="detailTABLE">
+方法完成后调用的函数。函数中的参数和<a href="#onBufferComplete">onBufferComplete</a>事件一致。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>errback</B></td>
+			<td class="detailTABLE">
+可选项</td>
+			<td class="detailTABLE">
+如果在任务执行期间，如果服务器端发生错误，error对象被返回。 <i>(As of v1.3) </i></td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onBufferComplete">onBufferComplete</a>&nbsp;&nbsp;
+<a href="#onError">onError</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="labelPoints"></a><H4>
+labelPoints(polygons, callback?, errback?)</H4></div>
+
+<div class="detaildesc">为每个多边形计算内部点。这些内部点能用于在客户端标识多边形。<br/><br/><code>dojo.Deferred</code>返回对象是在v1.4增加的。<i> (As of v1.2)</i></div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="graphic.htm">Graphic[]</a>> <B>polygons</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">要处理的几何体。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>callback</B></td>
+			<td class="detailTABLE">
+可选项</td>
+			<td class="detailTABLE">
+方法完成后调用的函数。函数中的参数和<a href="#onLabelPointsComplete">onLabelPointsComplete</a>事件一致。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>errback</B></td>
+			<td class="detailTABLE">
+可选项</td>
+			<td class="detailTABLE">
+如果在任务执行期间，如果服务器端发生错误，error对象被返回。 <i>(As of v1.3) </i></td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onLabelPointsComplete">onLabelPointsComplete</a>&nbsp;&nbsp;
+<a href="#onError">onError</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="lengths"></a><H4>
+lengths(graphics, callback?, errback?)</H4></div>
+
+<div class="detaildesc">当几何体类型是<a href="polyline.htm">Polyline</a>时获得<a href="graphic.htm">Graphic[]</a>长度。<br/><br/><code>dojo.Deferred</code>返回对象是在v1.4增加的。<i> (As of v1.1)</i></div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="graphic.htm">Graphic[]</a>> <B>graphics</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+图形用来计算长度。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>callback</B></td>
+			<td class="detailTABLE">
+可选项</td>
+			<td class="detailTABLE">
+方法完成后调用的函数。函数中的参数和<a href="#onLengthsComplete">onLengthsComplete</a>事件一致。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>errback</B></td>
+			<td class="detailTABLE">
+可选项</td>
+			<td class="detailTABLE">
+如果在任务执行期间，如果服务器端发生错误，error对象被返回。 <i>(As of v1.3) </i></td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onLengthsComplete">onLengthsComplete</a>&nbsp;&nbsp;
+<a href="#onError">onError</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="project"></a><H4>
+project(graphics, outSpatialReference, callback?, errback?)</H4></div>
+
+<div class="detaildesc">投影几何体集合到一个新的空间参考。完成时，onProjectComplete事件被触发并且可选的callback函数被调用。callback函数和事件处理器收到包含头投影几何体的<a href="graphic.htm">Graphic</a>数组。<br/><br/><code>dojo.Deferred</code>返回对象是在v1.4增加的。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="graphic.htm">Graphic[]</a>> <B>graphics</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+图形用来投影。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="spatialreference.htm">SpatialReference</a>> <B>outSpatialReference</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">空间参考的WKID。<br />
+<pre>
+{"wkid" : 4326} 
+</pre></td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>callback</B></td>
+			<td class="detailTABLE">
+可选项</td>
+			<td class="detailTABLE">
+方法完成后调用的函数。函数中的参数和<a href="#onProjectComplete">onProjectComplete</a>事件一致。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>errback</B></td>
+			<td class="detailTABLE">
+可选项</td>
+			<td class="detailTABLE">
+如果在任务执行期间，如果服务器端发生错误，error对象被返回。 <i>(As of v1.3) </i></td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onProjectComplete">onProjectComplete</a>&nbsp;&nbsp;
+<a href="#onError">onError</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="relation"></a><H4>
+relation(graphics1, graphics2, spatialRelationship, comparisonString?, callback?, errback?)</H4></div>
+
+<div class="detaildesc">计算<code>graphics1</code>和<code>graphics2</code>所属的空间关系。连个数组被认为用同一个空间参考。关系是2D的。Z坐标没有使用。数组内的几何体不能是混合的。<br/><br/><code>dojo.Deferred</code>返回对象是在v1.4增加的。<i> (As of v1.2)</i></div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="graphic.htm">Graphic[]</a>> <B>graphics1</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+比较用的第一个图形集合。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="graphic.htm">Graphic[]</a>> <B>graphics2</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+比较用的第二个图形集合。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>spatialRelationship</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+可用值见常量表。空间关系的详细描述，见<a href="http://resources.esri.com/help/9.3/arcgisserver/apis/soap/SOAP_esriGeometryRelationEnum.htm" target="_blank">esriGeometryRelationEnum </a>.</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>comparisonString</B></td>
+			<td class="detailTABLE">
+可选项</td>
+			<td class="detailTABLE">
+用于评估的 <a target="_blank" href="http://resources.esri.com/help/9.3/arcgisengine/dotnet/concepts_start.htm#40de6491-9b2d-440d-848b-2609efcd46b1.htm">Shape Comparison Language</a>字符串。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>callback</B></td>
+			<td class="detailTABLE">
+可选项</td>
+			<td class="detailTABLE">
+方法完成后调用的函数。函数中的参数和<a href="#onRelationComplete">onRelationComplete</a>事件一致。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>errback</B></td>
+			<td class="detailTABLE">
+可选项</td>
+			<td class="detailTABLE">
+如果在任务执行期间，如果服务器端发生错误，error对象被返回。 <i>(As of v1.3) </i></td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onRelationComplete">onRelationComplete</a>&nbsp;&nbsp;
+<a href="#onError">onError</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="simplify"></a><H4>
+simplify(graphics, callback?, errback?)</H4></div>
+
+<div class="detaildesc">改变给定几何体使他们拓扑定义和几何类型相符。完成时，onSimplifyComplete事件被触发并且可选的callback函数被调用。callback函数和事件处理器收到包含简化几何体的<a href="graphic.htm">Graphic</a>数组。<br/><br/><code>dojo.Deferred</code>返回对象是在v1.4增加的。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="graphic.htm">Graphic[]</a>> <B>graphics</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+用于简化的图形。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>callback</B></td>
+			<td class="detailTABLE">
+可选项</td>
+			<td class="detailTABLE">
+方法完成后调用的函数。函数中的参数和<a href="#onSimplifyComplete">onSimplifyComplete</a>事件一致。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>errback</B></td>
+			<td class="detailTABLE">
+可选项</td>
+			<td class="detailTABLE">
+如果在任务执行期间，如果服务器端发生错误，error对象被返回。 <i>(As of v1.3) </i></td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onSimplifyComplete">onSimplifyComplete</a>&nbsp;&nbsp;
+<a href="#onError">onError</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<H4 class=dtH4>Events Detail</H4>
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onAreasAndLengthsComplete"></a><H4>
+onAreasAndLengthsComplete(areasAndLengths)	</H4></div>
+
+
+<div class="detaildesc">当areasAndLengths操作完成时触发该事件。<i> (As of v1.1)</i></div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;Object> <B>areasAndLengths</B>
+			</td>
+
+<td class="detailTABLE">
+ 			面积和长度的对象。格式是{ areas : Number[], lengths : Number[] }.
+			</td>
+			</tr>
+
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onBufferComplete"></a><H4>
+onBufferComplete(graphics)	</H4></div>
+
+
+<div class="detaildesc">当缓冲操作完成时触发该事件。</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="graphic.htm">Graphic[]</a>> <B>graphics</B>
+			</td>
+
+<td class="detailTABLE">
+		缓存区图形。</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#buffer">buffer</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onError"></a><H4>
+onError(error)	</H4></div>
+
+
+<div class="detaildesc">当执行任务发生错误时触发该事件。<i> (As of v1.3)</i></div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;Error> <B>error</B>
+			</td>
+
+<td class="detailTABLE">
+ 			用<a href="http://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/Error" target="_blank">JavaScript error对象</a>返回的ArcGIS Server错误信息。
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#project">project</a>&nbsp;&nbsp;
+<a href="#simplify">simplify</a>&nbsp;&nbsp;
+<a href="#areasAndLengths">areasAndLengths</a>&nbsp;&nbsp;
+<a href="#lengths">lengths</a>&nbsp;&nbsp;
+<a href="#buffer">buffer</a>&nbsp;&nbsp;
+<a href="#labelPoints">labelPoints</a>&nbsp;&nbsp;
+<a href="#relation">relation</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onLabelPointsComplete"></a><H4>
+onLabelPointsComplete(labelPoints)	</H4></div>
+
+
+<div class="detaildesc">当labelPoints操作完成时触发该事件。<i> (As of v1.2)</i></div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="graphic.htm">Graphic[]</a>> <B>labelPoints</B>
+			</td>
+
+<td class="detailTABLE">
+ 			多边形内部计算的点的图形。
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#labelPoints">labelPoints</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onLengthsComplete"></a><H4>
+onLengthsComplete(lengths)	</H4></div>
+
+
+<div class="detaildesc">当长度操作完成时触发该事件。<i> (As of v1.1)</i></div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;Object> <B>lengths</B>
+			</td>
+
+<td class="detailTABLE">
+&nbsp;长度对象。格式是{ lengths : Number[] }. </td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#lengths">lengths</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onProjectComplete"></a><H4>
+onProjectComplete(graphics)	</H4></div>
+
+
+<div class="detaildesc">当投影操作完成时触发该事件。</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="graphic.htm">Graphic[]</a>> <B>graphics</B>
+			</td>
+
+<td class="detailTABLE">
+ 			投影的图形。</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#project">project</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onRelationComplete"></a><H4>
+onRelationComplete(relationships)	</H4></div>
+
+
+<div class="detaildesc">当关系操作完成时触发该事件。<i> (As of v1.2)</i></div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;Object[]> <B>relationships</B>
+			</td>
+
+<td class="detailTABLE">
+ 			两个输入几何体间的空间关系。数组包含下列属性：  graphic1Index, graphic2index, graphic1, graphic2	<br /><br />
+
+<pre>
+      function relateGeometries() {
+        geometryService.relation(graphics1, graphics2, esri.tasks.GeometryService.SPATIAL_REL_WITHIN, null, processRelations);
+      }
+      function processRelations(relations) {
+        var symbol = new esri.symbol.SimpleMarkerSymbol().setColor(new dojo.Color([0, 255, 0]));
+
+        // highlight all graphic1 graphics that met the spatial relation against the second geometry
+        for (var i = 0; i < relations.length; i++) {
+          var relatedGraphic = relations[i].graphic1;
+          relatedGraphic.setSymbol(symbol);
+        }
+      }
+
+</pre>
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#relation">relation</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onSimplifyComplete"></a><H4>
+onSimplifyComplete(graphics)	</H4></div>
+
+
+<div class="detaildesc">当简化操作完成时触发该事件。</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="graphic.htm">Graphic[]</a>> <B>graphics</B>
+			</td>
+
+<td class="detailTABLE">简化的图形</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#simplify">simplify</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<br/></div></body></html> 

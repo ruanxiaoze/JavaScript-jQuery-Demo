@@ -1,0 +1,233 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>IdentifyTask</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: IdentifyTask</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	通过ArcGIS Server REST API提供的地图服务资源的图层执行一个identity操作。
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.tasks.IdentifyTask
+</pre>
+
+<H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#IdentifyTaskConst">esri.tasks.IdentifyTask(url)</a></td>
+		<td class="syntaxTABLE">创建一个新的IdentifyTask对象.   URL是一个必需的参数。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#url">url</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+指向ArcGIS Server REST地图服务资源的URL。使用<a href="../jshelp/ags_rest.htm">Services Directory</a>获得URL。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>方法表</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+		<th class="tableheader">方法</th>
+		<th class="tableheader">返回值</th>
+		<th class="tableheader">描述</th>
+		</tr>
+
+<tr>
+<td class="syntaxTABLE"><a href="#execute">execute(identifyParameters, callback?, errback?)</a></td><td class="syntaxTABLE">
+<a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a>
+</td>
+<td class="syntaxTABLE">发送一个请求到ArcGIS REST地图服务资源来基于<a href="identifyparameters.htm">IdentifyParameters</a>指定的参数执行identify要素的操作。完成时，onComplete时间被触发并且可选的callback函数被调用。</td>	</tr></table>
+
+<H4 class=dtH4>事件</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">事件</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#onComplete">onComplete(identifyResults)
+		</a></td>
+
+<td class="syntaxTABLE">identify操作完成时触发该事件。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onError">onError(error)
+		</a></td>
+
+<td class="syntaxTABLE">当执行任务发生错误时触发该事件。</td>
+		</tr></table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="IdentifyTaskConst"></a><H4>esri.tasks.IdentifyTask(url)</H4>
+		</div>
+
+<div class="detaildesc">创建一个新的IdentifyTask对象.   URL是一个必需的参数。</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;String>
+<B>url</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			指向ArcGIS Server REST地图服务资源的URL。 一个示例是 
+http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Portland/Portland_ESRI_LandBase_AGO/MapServer.  关于构造URL的更多信息，见 <a href="../jshelp/ags_rest.htm">服务目录和REST API</a>.
+			</td>
+			</tr>
+</table>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="url"></a>
+&lt;String> url</H4></div>
+
+<div class="detaildesc">指向ArcGIS Server REST地图服务资源的URL。使用<a href="../jshelp/ags_rest.htm">Services Directory</a>获得URL。</div>
+
+</div>
+
+<div class=sectionDivider>方法详细信息</div>
+<div class="detaildiv">
+		<div class="detailname"><a name="execute"></a><H4>
+execute(identifyParameters, callback?, errback?)</H4></div>
+
+<div class="detaildesc">发送一个请求到ArcGIS REST地图服务资源来基于<a href="identifyparameters.htm">IdentifyParameters</a>指定的参数执行identify要素的操作。完成时，onComplete时间被触发并且可选的callback函数被调用。<br/><br/><code>dojo.Deferred</code>返回结果在v1.4增加。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="identifyparameters.htm">IdentifyParameters</a>> <B>identifyParameters</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+指定用于identify要素的条件。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>callback</B></td>
+			<td class="detailTABLE">
+可选项</td>
+			<td class="detailTABLE">
+方法完成后调用的函数。  函数里的参数和<a href="#onComplete">onComplete</a>事件里的参数一致。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>errback</B></td>
+			<td class="detailTABLE">
+可选项</td>
+			<td class="detailTABLE">
+如果在任务执行期间，如果服务器端发生错误，error对象被返回。 <i>(As of v1.3) </i></td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onComplete">onComplete</a>&nbsp;&nbsp;
+<a href="#onError">onError</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<H4 class=dtH4>Events Detail</H4>
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onComplete"></a><H4>
+onComplete(identifyResults)	</H4></div>
+
+
+<div class="detaildesc">identify操作完成时触发该事件。</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="identifyresult.htm">IdentifyResult[]</a>> <B>identifyResults</B>
+			</td>
+
+<td class="detailTABLE">
+ 			identify操作的结果。</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#execute">execute</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onError"></a><H4>
+onError(error)	</H4></div>
+
+
+<div class="detaildesc">当执行任务发生错误时触发该事件。<i> (As of v1.3)</i></div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;Error> <B>error</B>
+			</td>
+
+<td class="detailTABLE">
+ 			用<a href="http://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/Error" target="_blank">JavaScript error对象</a>返回的ArcGIS Server错误信息。
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#execute">execute</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<br/></div></body></html> 

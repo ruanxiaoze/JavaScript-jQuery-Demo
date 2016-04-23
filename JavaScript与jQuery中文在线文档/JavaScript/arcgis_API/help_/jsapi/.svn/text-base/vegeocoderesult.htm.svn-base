@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>VEGeocodeResult</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: VEGeocodeResult</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	<i>Class added v1.4.</i><br/><br/>  Represents a Bing Maps address and its location. Many of the property definitions are taken from the Bing Maps documentation <a href="http://msdn.microsoft.com/en-us/library/cc980950.aspx" target="_blank">GeocodeResult Class</a>.  VEGeocodeResult has no constructor.
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.virtualearth.VEGeocodeResult
+</pre>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#address">address</a></td>
+<td class="syntaxTABLE">
+<a href="veaddress.htm">VEAddress</a>
+</td>
+
+<td class="syntaxTABLE">
+Specifies address properties for the result.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#bestView">bestView</a></td>
+<td class="syntaxTABLE">
+<a href="extent.htm">Extent</a>
+</td>
+
+<td class="syntaxTABLE">
+Best extent for displaying the result.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#calculationMethod">calculationMethod</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+Contains values that indicate the geocode method used to match the location to the map. The values are "Interpolation", "Parcel", and "Rooftop".  For more information see <a href="http://msdn.microsoft.com/en-us/library/cc980868.aspx" target="_blank">http://msdn.microsoft.com/en-us/library/cc980868.aspx</a> under "Match Methods".</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#confidence">confidence</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+Value indicating how confident the service is about the result.  Values are Low, Medium, and High.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#displayName">displayName</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+Contains a display name for the result.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#entityType">entityType</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+Further refines the geocode results that have been returned. For more details on entities and a list of entities that are returned see, <a href="http://msdn.microsoft.com/en-us/library/cc981001.aspx" target="_blank">http://msdn.microsoft.com/en-us/library/cc981001.aspx</a>.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#location">location</a></td>
+<td class="syntaxTABLE">
+<a href="point.htm">Point</a>
+</td>
+
+<td class="syntaxTABLE">
+The X and Y coordinates of the result in decimal degrees.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#matchCodes">matchCodes</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+An array of values that indicate the geocoding level of the location match. For more information and a list of values, see <a href="http://msdn.microsoft.com/en-us/library/cc980868.aspx" target="_blank">http://msdn.microsoft.com/en-us/library/cc980868.aspx</a>.</td>
+		</tr>
+</table>
+
+<div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="address"></a>
+&lt;<a href="veaddress.htm">VEAddress</a>> address</H4></div>
+
+<div class="detaildesc">Specifies address properties for the result.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="bestView"></a>
+&lt;<a href="extent.htm">Extent</a>> bestView</H4></div>
+
+<div class="detaildesc">Best extent for displaying the result.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="calculationMethod"></a>
+&lt;String> calculationMethod</H4></div>
+
+<div class="detaildesc">Contains values that indicate the geocode method used to match the location to the map. The values are "Interpolation", "Parcel", and "Rooftop".  For more information see <a href="http://msdn.microsoft.com/en-us/library/cc980868.aspx" target="_blank">http://msdn.microsoft.com/en-us/library/cc980868.aspx</a> under "Match Methods".</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="confidence"></a>
+&lt;String> confidence</H4></div>
+
+<div class="detaildesc">Value indicating how confident the service is about the result.  Values are Low, Medium, and High.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="displayName"></a>
+&lt;String> displayName</H4></div>
+
+<div class="detaildesc">Contains a display name for the result.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="entityType"></a>
+&lt;String> entityType</H4></div>
+
+<div class="detaildesc">Further refines the geocode results that have been returned. For more details on entities and a list of entities that are returned see, <a href="http://msdn.microsoft.com/en-us/library/cc981001.aspx" target="_blank">http://msdn.microsoft.com/en-us/library/cc981001.aspx</a>.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="location"></a>
+&lt;<a href="point.htm">Point</a>> location</H4></div>
+
+<div class="detaildesc">The X and Y coordinates of the result in decimal degrees.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="matchCodes"></a>
+&lt;String> matchCodes</H4></div>
+
+<div class="detaildesc">An array of values that indicate the geocoding level of the location match. For more information and a list of values, see <a href="http://msdn.microsoft.com/en-us/library/cc980868.aspx" target="_blank">http://msdn.microsoft.com/en-us/library/cc980868.aspx</a>.</div>
+
+</div>
+
+<br/></div></body></html> 

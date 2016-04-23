@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>Map loading image</title>
+
+    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css">
+    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"></script>
+
+    <script type="text/javascript">
+      dojo.require("esri.map");
+
+      function init() {
+        var layersLoaded = 0;  //varible to keep track of when all layers have been loaded.
+        var loading = dojo.byId("loadingImg");  //loading image. id
+
+        var map = new esri.Map("map");
+        dojo.connect(map, "onLoad", showLoading);
+        dojo.connect(map, "onZoomStart", showLoading);
+        dojo.connect(map, "onPanStart", showLoading);
+
+        //Takes a URL to a map in a map service.
+        var tiledMapServiceLayer = new esri.layers.ArcGISTiledMapServiceLayer("http://server.arcgisonline.com/ArcGIS/rest/services/NGS_Topo_US_2D/MapServer");
+        map.addLayer(tiledMapServiceLayer);
+        dojo.connect(tiledMapServiceLayer, "onUpdate", hideLoading);
+
+        //Takes a URL to a non cached map service.
+        var dynamicMapServiceLayer = new esri.layers.ArcGISDynamicMapServiceLayer("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Population_World/MapServer");
+        dynamicMapServiceLayer.setOpacity(0.5);
+        map.addLayer(dynamicMapServiceLayer);
+        dojo.connect(dynamicMapServiceLayer, "onUpdate", hideLoading);
+
+        function showLoading() {
+          esri.show(loading);
+          map.disableMapNavigation();
+          map.hideZoomSlider();
+        }
+
+        function hideLoading() {
+          layersLoaded++;
+          if (layersLoaded === map.layerIds.length) {
+            esri.hide(loading);
+            map.enableMapNavigation();
+            map.showZoomSlider();
+            layersLoaded = 0;
+          }
+        }
+      }
+
+      dojo.addOnLoad(init);
+    </script>
+
+  </head>
+  <body class="tundra">
+    <div id="map" style="position:relative; width:1024px; height:512px; border:1px solid #000;">
+      <img id="loadingImg" src="images/loading.gif" style="position:absolute; right:512px; top:256px; z-index:100;" />
+    </div>
+  </body>
+</html>

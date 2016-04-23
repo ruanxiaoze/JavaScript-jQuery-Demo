@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>RouteResult</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: RouteResult</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	<i>类在v1.4增加。</i><br/><br/>  
+    路线任务的结果。RouteResult属性依赖<a href="routeparameters.htm">RouteParameter</a> 输入。例如，方向仅仅在RouteParameters.returnDirections设置为true时返回。RouteResult没有构造函输。
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.tasks.RouteResult
+</pre>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#directions">directions</a></td>
+<td class="syntaxTABLE">
+<a href="directionsfeatureset.htm">DirectionsFeatureSet</a>
+</td>
+
+<td class="syntaxTABLE">
+如果<code>RouteParameters.returnDirections</code>设置为true，路线方向被返回。更多信息，见<a href="../jshelp/intro_route_directions.htm">Getting driving directions</a>。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#route">route</a></td>
+<td class="syntaxTABLE">
+<a href="graphic.htm">Graphic</a>
+</td>
+
+<td class="syntaxTABLE">
+如果<code>RouteParameters.returnRoutes</code>设置为true，路线图形被返回。路线相关的属性列表，见<a href="http://webhelp.esri.com/arcgisdesktop/9.3/index.cfm?TopicName=Finding_the_best_route" class="external text" title="http://webhelp.esri.com/arcgisdesktop/9.3/index.cfm?TopicName=Finding_the_best_route" target="_blank">Finding the best route</a>的"路线属性"部分。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#routeName">routeName</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+路线名称。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#stops">stops</a></td>
+<td class="syntaxTABLE">
+<a href="graphic.htm">Graphic[]</a>
+</td>
+
+<td class="syntaxTABLE">
+端点数组。仅在<code>RouteParameters.returnStops</code>设置为true时被返回。关于每个端点的属性列表，见<a href="http://webhelp.esri.com/arcgisdesktop/9.3/index.cfm?TopicName=Finding_the_best_route" class="external text" title="http://webhelp.esri.com/arcgisdesktop/9.3/index.cfm?TopicName=Finding_the_best_route" target="_blank">Finding the best route</a>中的“端点属性”部分。</td>
+		</tr>
+</table>
+
+<div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="directions"></a>
+&lt;<a href="directionsfeatureset.htm">DirectionsFeatureSet</a>> directions</H4></div>
+
+<div class="detaildesc">如果<code>RouteParameters.returnDirections</code>设置为true，路线方向被返回。更多信息，见<a href="../jshelp/intro_route_directions.htm">Getting driving directions</a>。</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="RouteParameters.htm#returnDirections">RouteParameters.returnDirections</a>
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="route"></a>
+&lt;<a href="graphic.htm">Graphic</a>> route</H4></div>
+
+<div class="detaildesc">如果<code>RouteParameters.returnRoutes</code>设置为true，路线图形被返回。路线相关的属性列表，见<a href="http://webhelp.esri.com/arcgisdesktop/9.3/index.cfm?TopicName=Finding_the_best_route" class="external text" title="http://webhelp.esri.com/arcgisdesktop/9.3/index.cfm?TopicName=Finding_the_best_route" target="_blank">Finding the best route</a>的"路线属性"部分。</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="RouteParameters.htm#returnRoutes">RouteParameters.returnRoutes</a>
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="routeName"></a>
+&lt;String> routeName</H4></div>
+
+<div class="detaildesc">路线名称。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="stops"></a>
+&lt;<a href="graphic.htm">Graphic[]</a>> stops</H4></div>
+
+<div class="detaildesc">端点数组。仅在<code>RouteParameters.returnStops</code>设置为true时被返回。关于每个端点的属性列表，见<a href="http://webhelp.esri.com/arcgisdesktop/9.3/index.cfm?TopicName=Finding_the_best_route" class="external text" title="http://webhelp.esri.com/arcgisdesktop/9.3/index.cfm?TopicName=Finding_the_best_route" target="_blank">Finding the best route</a>中的“端点属性”部分。</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="RouteParameters.htm#returnStops">RouteParameters.returnStops</a>
+</div>
+
+</div>
+
+<br/></div></body></html> 

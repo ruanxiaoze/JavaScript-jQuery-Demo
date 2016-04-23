@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>Adding a map</title>
+</head>
+
+<body>
+
+<div id="pageBanner">Adding a map</div>
+
+<div id="nstext">
+
+<!--***START TEXT - DO NOT WRITE ABOVE THIS LINE***-->
+
+<p>This example provides details on how the ArcGIS Server JavaScript API is used in an HTML page.  It adds a layer to a map and then displays the map. [<a href="../../demos/map/map_create.html" target="_blank">Show me</a>]<!-- [<a href="../../demos/map/map_create.html" target="_blank">Show me</a>] -->  </p>
+
+<p>The following is the HTML page in its entirety: </p>
+
+<div class="detailSample">
+<pre>
+&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Create a Map&lt;/title&gt;
+    &lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8"/&gt;
+    &lt;link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css"&gt
+    &lt;script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"&gt&lt;/script&gt
+
+    &lt;script type="text/javascript"&gt;
+      dojo.require("esri.map");
+
+      var myMap, myTiledMapServiceLayer;
+      function init() {
+        myMap = new esri.Map("mapDiv");
+
+        myTiledMapServiceLayer = new
+esri.layers.ArcGISTiledMapServiceLayer
+("http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer");
+        myMap.addLayer(myTiledMapServiceLayer);
+      }
+
+      dojo.addOnLoad(init);
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div id="mapDiv" class="tundra" style="width:900px; height:600px; border:1px solid #000;"&gt;&lt;/div&gt;
+    &lt;h4&gt;Work flow:&lt;/h4&gt;
+	&lt;ul&gt;
+	&lt;li&gt;Create a map.&lt;/li&gt;
+	&lt;li&gt;Add an ArcGISTiledMapServiceLayer.&lt;/li&gt;
+	&lt;/ul&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+</div>
+
+<h3>Styles and scripts inside HTML HEAD</h3>
+<p>When using the ArcGIS JavaScript API, you will normally see at least one style sheet and two scripts referenced inside the HTML HEAD.  </p>
+
+<p>The referenced style sheet is a <a href="http://docs.dojocampus.org/dijit-themes" target="_blank">Dojo theme</a> and is used primarily for the graphic elements in the map DIV, but it can be used anywhere throughout the HTML page.  In addition to the "tundra" style, you can also use the "soria" style.  In this case, you substitue "tundra" with "soria".  </p>
+
+<div class="detailSample">
+<pre>
+    &lt;link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css"&gt
+</pre>
+</div>
+
+<p>The first script references the location of the ArcGIS Server JavaScript API files. Note that the version number needs to be updated to the current version of the JavaScript API.</p>
+
+<div class="detailSample">
+<pre>
+    &lt;script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"&gt&lt;/script&gt
+</pre>
+</div>
+
+<p>The second script is where you put your JavaScript code for working with maps and tasks.  本例中，the map is initialized, and a layer is added.  Regardless of how much code you write, this script should always contain the same three sections in sequence.  In the first section, you reference packages.  In the second section, you include an initialization function and any supporting functions.  In the third section, you specify what happens during the addOnLoad event. </p>
+
+<div class="detailSample">
+<pre>
+    &lt;script type="text/javascript">
+      dojo.require("esri.map");
+
+      var myMap, myTiledMapServiceLayer;
+      function init() {
+        myMap = new esri.Map("mapDiv");
+
+        myTiledMapServiceLayer = new
+esri.layers.ArcGISTiledMapServiceLayer
+("http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer");
+        myMap.addLayer(myTiledMapServiceLayer);
+      }
+
+      dojo.addOnLoad(init);
+    &lt;/script>
+</pre>
+</div>
+<div class="indent">
+<p><b>Section 1: Reference the packages.</b></p>
+<p>本例中，the "map" package is referenced using dojo.require().  <a href="http://dojotoolkit.org/about" target="_blank">Dojo</a> is an open source DHTML toolkit written in JavaScript.  The JavaScript API is built on top of Dojo and relies on Dojo for handling core functionality and browser differences.  For more information on the relationship between Dojo and the JavaScript API, see <a href="inside_dojo.htm">About Dojo</a>.   </p>
+
+<p>"Dojo.require()" is equivalent to "&lt;script> include" and imports resources into your JavaScript page.  The package you need when displaying a map is "esri.map".  Package names are always lower case.  For more information on packages and a list of packages commonly used with the JavaScript API, see <a href="inside_dojo.htm">About Dojo</a>.   </p>
+
+<div class="detailSample">
+<pre>
+      dojo.require("esri.map");
+</pre>
+</div>
+
+<p><b>Section 2: Create the initialization function.</b></p>
+<p>本例中，the initialization function, named init(), is where a layer is added to a map.  When using the JavaScript API, a "layer" in this context is a service, and the service used is the <a href="http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer" target="_blank">Street Map service</a> from ArcGIS Online.  </p>
+
+<p>本例中，the variables "myMap" and "myTiledMapServiceLayer" are initialized.  This is followed by opening the init() function.</p>
+
+<div class="detailSample">
+<pre>
+      var myMap, myTiledMapServiceLayer;
+      function init() {
+</pre>
+</div>
+
+
+<p>Next, a new map is created using the Map class and its constructor.  </p>
+<ul>
+<li>The value "esri.Map" is the full reference to the Map class.  Class names are always capitalized.  </li>
+<li>The value "mapDiv" is the name referenced in the DIV that contains the map in the HTML page.  </li>
+</ul>
+
+<div class="detailSample">
+<pre>
+        myMap = new esri.Map("mapDiv");
+</pre>
+</div>
+
+<p>Next, the Street Map service, a tiled MapService layer, is initialized using the <a href="../jsapi/arcgistiledmapservicelayer.htm">ArcGISTiledMapServiceLayer</a> constructor.  The URL you see is the endpoint for this service.  This endpoint is a unique reference to a service that you can generate using <a href="ags_rest.htm">Services Directory</a>.   </p>
+
+<div class="detailSample">
+<pre>
+        myTiledMapServiceLayer = new
+esri.layers.ArcGISTiledMapServiceLayer
+("http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer");
+</pre>
+</div>
+
+<p>After the layer is initialized, it is added to the map using the <a href="../jsapi/map.htm#addlayer">addlayer</a> method. </p>
+<div class="detailSample">
+<pre>
+        myMap.addLayer(myTiledMapServiceLayer);
+      }
+</pre>
+</div>
+
+<p>While this example includes only one function named init(), other HTML pages may have several functions in addition to the init() function.</p>
+
+<p><b>Section 3: Specify the addOnLoad event.</b></p>
+
+	<p>In this section, you specify the <a href="../jsapi/map.htm#addOnLoad">addOnLoad</a> event.  The parameter it takes is the name of the initialization function.  In this case the function is named "init".  Note that another Dojo function has been used, which is similar to "&lt;body onload="">".</p>
+
+<p>This function defers the script execution until the HTML is loaded. This is an important concept because the map must be retrieved before any actions such as retrieving map properties or firing an event can be successfully completed. </p>
+
+	<div class="detailSample">
+	<pre>
+	      dojo.addOnLoad(init);
+	    &lt;/script&gt;
+	</pre>
+	</div>
+</div>
+
+<h3>HTML BODY</h3>
+<p>The next section is the BODY section of the HTML page.  本例中，only the map is displayed.  The DIV id "mapDiv" references the same variable set in the Map constructor. Note also that a reference to class="tundra" is included in the DIV.  This references the tundra style sheet from the HEAD section.  If you use the soria style, you need to replace "tundra" with "soria".</p>
+
+<div class="detailSample">
+<pre>
+  &lt;body>
+    &lt;div id="mapDiv" class="tundra" style="width:900px; height:600px; border:1px solid #000;">&lt;/div>
+    &lt;h4>Work flow:&lt;/h4>
+	&lt;ul>
+	&lt;li>Create a map.&lt;/li>
+	&lt;li>Add an ArcGISTiledMapServiceLayer.&lt;/li>
+	&lt;/ul>
+  &lt;/body>
+&lt;/html>
+</pre>
+</div>
+
+<!--***END TEXT - DO NOT WRITE BELOW THIS LINE***-->
+</div>
+
+</body>
+</html>

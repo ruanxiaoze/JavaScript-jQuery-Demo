@@ -1,0 +1,278 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>ImageParameters</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: ImageParameters</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	Represents the image parameter options used when calling <a href="arcgisdynamicmapservicelayer.htm#exportMapImage">ArcGISDynamicMapServiceLayer.exportMapImage</a>, <a href="geoprocessor.htm#getresultimage">Geoprocessor.getResultImage</a>, and <a href="geoprocessor.htm#getresultimagelayer">Geoprocessor.getResultImageLayer</a>.
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.layers.ImageParameters
+</pre>
+
+<H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#ImageParametersConst">esri.layers.ImageParameters()</a></td>
+		<td class="syntaxTABLE">Creates a new ImageParameters object.  The constructor takes no parameters.</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#bbox">bbox</a></td>
+<td class="syntaxTABLE">
+<a href="extent.htm">Extent</a>
+</td>
+
+<td class="syntaxTABLE">
+Extent of map to be exported.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#dpi">dpi</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+Dots per inch setting for an <a href="arcgisdynamicmapservicelayer.htm">ArcGISDynamicMapServiceLayer</a>.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#format">format</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+Map image format.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#height">height</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+Requested image height in pixels.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#imageSpatialReference">imageSpatialReference</a></td>
+<td class="syntaxTABLE">
+<a href="spatialreference.htm">SpatialReference</a>
+</td>
+
+<td class="syntaxTABLE">
+Spatial reference of exported map.  支持的空间参考列表，见<a href="../jshelp/pcs.htm">投影坐标系统</a> and <a href="../jshelp/gcs.htm">地理坐标系统</a>。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#layerDefinitions">layerDefinitions</a></td>
+<td class="syntaxTABLE">
+String[]
+</td>
+
+<td class="syntaxTABLE">
+Array of layer definition expressions that allows you to filter the features of individual layers in the exported map image.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#layerIds">layerIds</a></td>
+<td class="syntaxTABLE">
+Number[]
+</td>
+
+<td class="syntaxTABLE">
+A list of layer ID's, which represents which layers to include in the exported map.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#layerOption">layerOption</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+The option for displaying or hiding the layer.  See the Constants table for valid values.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#transparent">transparent</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+Whether or not background of dynamic image is transparent.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#width">width</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+Requested image width in pixels.</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>常量</H4>
+
+	<table CLASS="syntaxTABLE" cellspacing="0">
+	<tr>
+	<th class="tableheader" width="20%">常量</th>
+		<th class="tableheader">描述</th>
+	</tr>
+
+		<tr>
+		<td class="syntaxTABLE">LAYER_OPTION_EXCLUDE</td>
+			<td class="syntaxTABLE">			Shows all layers visible by default except the specified layer ID's.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">LAYER_OPTION_HIDE</td>
+			<td class="syntaxTABLE">			Shows all layers except the specified layer ID's.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">LAYER_OPTION_INCLUDE</td>
+			<td class="syntaxTABLE">			Shows specified layer ID's in addition to layers visible by default.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">LAYER_OPTION_SHOW</td>
+			<td class="syntaxTABLE">			Shows only the specified layer ID's.		</td>
+	</tr>
+
+</table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="ImageParametersConst"></a><H4>esri.layers.ImageParameters()</H4>
+		</div>
+
+<div class="detaildesc">Creates a new ImageParameters object.  The constructor takes no parameters.</div>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="bbox"></a>
+&lt;<a href="extent.htm">Extent</a>> bbox</H4></div>
+
+<div class="detaildesc">Extent of map to be exported.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="dpi"></a>
+&lt;Number> dpi</H4></div>
+
+<div class="detaildesc">Dots per inch setting for an <a href="arcgisdynamicmapservicelayer.htm">ArcGISDynamicMapServiceLayer</a>.</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> 96
+			</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="format"></a>
+&lt;String> format</H4></div>
+
+<div class="detaildesc">Map image format.</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> png | png8 | png24 | jpg | pdf | bmp | gif | svg
+			</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> png8
+			</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="height"></a>
+&lt;Number> height</H4></div>
+
+<div class="detaildesc">Requested image height in pixels.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="imageSpatialReference"></a>
+&lt;<a href="spatialreference.htm">SpatialReference</a>> imageSpatialReference</H4></div>
+
+<div class="detaildesc">Spatial reference of exported map.  支持的空间参考列表，见<a href="../jshelp/pcs.htm">投影坐标系统</a> and <a href="../jshelp/gcs.htm">地理坐标系统</a>。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="layerDefinitions"></a>
+&lt;String[]> layerDefinitions</H4></div>
+
+<div class="detaildesc">Array of layer definition expressions that allows you to filter the features of individual layers in the exported map image.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="layerIds"></a>
+&lt;Number[]> layerIds</H4></div>
+
+<div class="detaildesc">A list of layer ID's, which represents which layers to include in the exported map.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="layerOption"></a>
+&lt;String> layerOption</H4></div>
+
+<div class="detaildesc">The option for displaying or hiding the layer.  See the Constants table for valid values.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="transparent"></a>
+&lt;Boolean> transparent</H4></div>
+
+<div class="detaildesc">Whether or not background of dynamic image is transparent.</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> true
+			</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="width"></a>
+&lt;Number> width</H4></div>
+
+<div class="detaildesc">Requested image width in pixels.</div>
+
+</div>
+
+<br/></div></body></html> 

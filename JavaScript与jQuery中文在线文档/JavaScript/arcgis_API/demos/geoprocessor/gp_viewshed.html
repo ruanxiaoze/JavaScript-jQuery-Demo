@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>GP Viewshed Task</title>
+    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css">
+    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"></script>
+    <script type="text/javascript">
+      dojo.require("esri.map");
+      dojo.require("esri.tasks.gp");
+
+      var map, gp;
+
+      /*Initialize map, GP*/
+      function init() {
+        var startExtent = new esri.geometry.Extent(-122.7268, 37.4557, -122.1775, 37.8649, new esri.SpatialReference({wkid:4326}) );
+
+        map = new esri.Map("mapDiv", { extent: startExtent });
+        var streetMap = new esri.layers.ArcGISTiledMapServiceLayer("http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer");
+        map.addLayer(streetMap);
+
+        gp = new esri.tasks.Geoprocessor("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Elevation/ESRI_Elevation_World/GPServer/Viewshed");
+
+        gp.setOutputSpatialReference({wkid:4326});
+        dojo.connect(map, "onClick", computeViewShed);
+      }
+
+      function computeViewShed(evt) {
+        map.graphics.clear();
+        var pointSymbol = new esri.symbol.SimpleMarkerSymbol();
+        pointSymbol.setSize(5);
+        pointSymbol.setOutline(new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([255,0,0]), 1));
+        pointSymbol.setColor(new dojo.Color([0,255,0,0.25]));
+
+        var graphic = new esri.Graphic(evt.mapPoint,pointSymbol);
+        map.graphics.add(graphic);
+
+        var features= [];
+        features.push(graphic);
+        var featureSet = new esri.tasks.FeatureSet();
+        featureSet.features = features;
+        var vsDistance = new esri.tasks.LinearUnit();
+        vsDistance.distance = 5;
+        vsDistance.units = "esriMiles";
+        var params = { "Input_Observation_Point":featureSet, "Viewshed_Distance":vsDistance };
+        gp.execute(params, drawViewshed);
+      }
+
+      function drawViewshed(results, messages) {
+        var polySymbol = new esri.symbol.SimpleFillSymbol();
+        polySymbol.setOutline(new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([0,0,0,0.5]), 1));
+        polySymbol.setColor(new dojo.Color([255,127,0,0.7]));
+        var features = results[0].value.features;
+        for (var f=0, fl=features.length; f<fl; f++) {
+          var feature = features[f];
+          feature.setSymbol(polySymbol);
+          map.graphics.add(feature);
+        }
+      }
+
+      dojo.addOnLoad(init);
+    </script>
+
+  </head>
+  <body class="tundra">
+    <div id="mapDiv" style="width:800px; height:600px; border:1px solid #000;"></div>
+      Click on map to execute ViewShed GP Task.
+  </body>
+</html>

@@ -1,0 +1,385 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>Locator</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: Locator</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc"> 
+    表示ArcGIS Server REST API提供的地理编码服务资源。用于生成地址的候选位置。也被用来查找指定位置的地址。</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.tasks.Locator
+</pre>
+
+<H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#LocatorConst">esri.tasks.Locator(url)</a></td>
+		<td class="syntaxTABLE">创建一个新的Locator对象。 </td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#url">url</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+表示一个定位器服务的ArcGIS Server REST资源的URL。 使用<a href="../jshelp/ags_rest.htm">Services Directory</a>获得URL。
+</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>方法表</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+		<th class="tableheader">方法</th>
+		<th class="tableheader">返回值</th>
+		<th class="tableheader">描述</th>
+		</tr>
+
+<tr>
+<td class="syntaxTABLE"><a href="#addressToLocations">addressToLocations(address, outFields?, callback?, errback?)</a></td><td class="syntaxTABLE">
+<a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a>
+</td>
+<td class="syntaxTABLE">发送请求到ArcGIS REST地理编码资源，去查找指定在<span class="code">address</span> 
+参数中的一个单独的地址的候选位置。完成时，onAddressToLocationsComplete 事件被触发，可选的callback 
+函数被调用。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#locationToAddress">locationToAddress(location, distance, callback?, errback?)</a></td><td class="syntaxTABLE">
+<a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a>
+</td>
+<td class="syntaxTABLE">
+基于给定的点定位一个地址。</td>	</tr></table>
+
+<H4 class=dtH4>事件</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">事件</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#onAddressToLocationsComplete">onAddressToLocationsComplete(addressCandidates)
+		</a></td>
+
+<td class="syntaxTABLE"> 当Locator.addressToLocation() 完成的时候触发，结果是一个<a href="addresscandidate.htm">AddressCandidate</a>数组。如果指定可选的callback 
+</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onError">onError(error)
+		</a></td>
+
+<td class="syntaxTABLE"> 执行任务遇到错误的时候触发。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onLocationToAddressComplete">onLocationToAddressComplete(addressCandidate)
+		</a></td>
+
+<td class="syntaxTABLE">
+当Locator.locationToAddress()完成的时候触发。结果是一个<a href="addresscandidate.htm">AddressCandidate</a>。如果指定可选的callback 
+，返回同样的签名。</td>
+		</tr></table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="LocatorConst"></a><H4>esri.tasks.Locator(url)</H4>
+		</div>
+
+<div class="detaildesc">创建一个新的Locator对象。</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;String>
+<B>url</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			定位一个展现locator服务的ArcGIS Server REST资源。西面的Url是一个例子。关于构建URL的更多的信息，参见<a href="../jshelp/ags_rest.htm">The Services Directory and the REST API</a>.</td>
+			</tr>
+</table>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="url"></a>
+&lt;String> url</H4></div>
+
+<div class="detaildesc">表示一个定位器服务的ArcGIS Server REST资源的URL。 使用<a href="../jshelp/ags_rest.htm">Services Directory</a>获得URL。</div>
+
+</div>
+
+<div class=sectionDivider>方法详细信息</div>
+<div class="detaildiv">
+		<div class="detailname"><a name="addressToLocations"></a><H4>
+addressToLocations(address, outFields?, callback?, errback?)</H4></div>
+
+<div class="detaildesc">发送请求到ArcGIS REST地理编码资源，去查找指定在<span class="code">address</span> 
+参数中的一个单独的地址的候选位置。完成时，onAddressToLocationsComplete 事件被触发，可选的callback 
+函数被调用。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Object> <B>address</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE"> 地址参数是包含被相关的地理编码服务接受各种各样的地址字段属性的数据对象。这些字段被列出在和地理编码服务资源相关的addressFields 
+属性中。一个例子，地理编码服务资源的addressFields 包含带有下面名字的字段：Street, City, State and 
+<br>
+                            <br/>
+                            <pre>{
+  Street: "&lt;street&gt;",
+  City: "&lt;city&gt;",
+  State: "&lt;state&gt;",
+  Zone: "&lt;zone&gt;"
+}
+</pre>
+
+<a href="../jshelp/ags_rest.htm">Services Directory</a> 被用作查找必须的和可选的地址字段。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;String[]> <B>outFields</B></td>
+			<td class="detailTABLE">
+可选项</td>
+			<td class="detailTABLE">
+
+包含在返回结果集中的字段的列表。这个列表是用逗号分隔的字段名列表。如果在返回字段列表中指定形状字段 
+，会被忽略。对于non-intersection地址，能够指定地理编码服务中的候选字段。对于交叉的地址，能够指定交叉候选字段。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>callback</B></td>
+			<td class="detailTABLE">
+可选项</td>
+			<td class="detailTABLE">
+方法完成后调用的函数。在功能中的参数是和<a href="#onAddressToLocationsComplete">onAddressToLocationsComplete</a>事件相同。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>errback</B></td>
+			<td class="detailTABLE">
+可选项</td>
+			<td class="detailTABLE">
+在任务执行期间发生错误，返回一个错误对象。 <i>(As of v1.3) <br>
+&nbsp;</i></td>
+			</tr>
+</table>
+
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>
+function locate() {
+  var address = {
+    street: "380 New York",
+    city: "Redlands",
+    state: "CA",
+    zip: "92373"
+  };
+  locator.addressToLocations(address);
+}
+</pre><br/>
+		</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onAddressToLocationsComplete">onAddressToLocationsComplete</a>&nbsp;&nbsp;
+<a href="#onError">onError</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="locationToAddress"></a><H4>
+locationToAddress(location, distance, callback?, errback?)</H4></div>
+
+<div class="detaildesc">基于给定的点定位一个地址。<br/><br/><code>dojo.Deferred</code> 
+	返回对象增加在v1.4中。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="point.htm">Point</a>> <B>location</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+
+搜索最靠近的地址的点。位置应该使用地理编码服务的空间引用。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>distance</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+
+从给定的位置距离内的匹配地址将被搜索，距离单位是米。如果没有提供这个参数，或者提供了一个无效的值，默认值为0米。<br>
+&nbsp;</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>callback</B></td>
+			<td class="detailTABLE">
+可选项</td>
+			<td class="detailTABLE">
+方法完成后调用的函数。  函数参数和<a href="#onLocationToAddressComplete">onLocationToAddressComplete</a> 事件一致
+。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>errback</B></td>
+			<td class="detailTABLE">
+可选项</td>
+			<td class="detailTABLE">
+如果任务执行期间遇到错误，会返回一个错误对象。<i>(As of v1.3) <br>
+&nbsp;</i></td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onLocationToAddressComplete">onLocationToAddressComplete</a>&nbsp;&nbsp;
+<a href="#onError">onError</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<H4 class=dtH4>Events Detail</H4>
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onAddressToLocationsComplete"></a><H4>
+onAddressToLocationsComplete(addressCandidates)	</H4></div>
+
+
+<div class="detaildesc">
+	当Locator.addressToLocation()完成时触发。结果是一个<a href="addresscandidate.htm">AddressCandidate</a>数组。如果指定可选的callback 
+	，返回同样的签名。</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="addresscandidate.htm">AddressCandidate[]</a>> <B>addressCandidates</B>
+			</td>
+
+<td class="detailTABLE">
+ 			
+			包含一个匹配给定地址的候选数组。</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#addressToLocations">addressToLocations</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onError"></a><H4>
+onError(error)	</H4></div>
+
+
+<div class="detaildesc">当执行任务遇到错误的时候触发<i> (As of v1.3)<br>
+&nbsp;</i></div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;Error> <B>error</B>
+			</td>
+
+<td class="detailTABLE">
+ 			ArcGIS Server的错误信息在 <a href="http://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/Error" target="_blank">JavaScript </a>
+			<a href="http://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/Error">
+			错误对象</a> 中返回.
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#addressToLocations">addressToLocations</a>&nbsp;&nbsp;
+<a href="#locationToAddress">locationToAddress</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onLocationToAddressComplete"></a><H4>
+onLocationToAddressComplete(addressCandidate)	</H4></div>
+
+
+<div class="detaildesc">当Locator.locationToAddress()完成的时候触发。结果是一个<a href="addresscandidate.htm">AddressCandidate</a>。如果指定可选的callback 
+	，返回同样的签名。</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="addresscandidate.htm">AddressCandidate</a>> <B>addressCandidate</B>
+			</td>
+
+<td class="detailTABLE">
+
+包含一个最匹配输入条件的候选和他的得分。</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#locationToAddress">locationToAddress</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<br/></div></body></html> 

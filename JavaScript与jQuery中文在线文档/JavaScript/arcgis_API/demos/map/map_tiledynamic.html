@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>Create Map</title>
+    <style type="text/css">
+      @import "http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css";
+    </style>
+    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"></script>
+    <script type="text/javascript">
+      dojo.require("esri.map");
+
+      function init() {
+        var map = new esri.Map("map");
+
+        //Takes a URL to a map in a map service.
+        var tiledMapServiceLayer = new esri.layers.ArcGISTiledMapServiceLayer("http://server.arcgisonline.com/ArcGIS/rest/services/NGS_Topo_US_2D/MapServer");
+        map.addLayer(tiledMapServiceLayer);
+
+        //Takes a URL to a non cached map service.
+        var dynamicMapServiceLayer = new esri.layers.ArcGISDynamicMapServiceLayer("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Population_World/MapServer", {"opacity":0.5});
+        map.addLayer(dynamicMapServiceLayer);
+      }
+
+      dojo.addOnLoad(init);
+    </script>
+  </head>
+  <body class="tundra">
+    <div id="map" style="width:900px; height:600px; border:1px solid #000;"></div>
+    Creates a map and adds an ArcGISTiledMapServiceLayer and an ArcGISDynamicMapServiceLayer.<br />
+    Map navigation using mouse:
+    <ul>
+      <li>Drag to pan</li>
+      <li>SHIFT + Click to recenter</li>
+      <li>SHIFT + Drag to zoom in</li>
+      <li>SHIFT + CTRL + Drag to zoom out</li>
+      <li>Mouse Scroll Forward to zoom in</li>
+      <li>Mouse Scroll Backward to zoom out</li>
+      <li>Use Arrow keys to pan</li>
+      <li>+ key to zoom in a level</li>
+      <li>- key to zoom out a level</li>
+      <li>Double Click to Center and Zoom in</li>
+    </ul>
+  </body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>Routing with time windows</title>
+</head>
+
+<body>
+
+<div id="pageBanner">Routing with time windows</div>
+
+<div id="nstext">
+
+<!--***START TEXT - DO NOT WRITE ABOVE THIS LINE***-->
+
+<p>A useful feature of the <a href="../jsapi/routetask.htm">RouteTask</a> is the ability to constrain stop visits to certain times of day, or "time windows". If you were required to deliver orders to four homes and each customer was available during a limited time period during the day, the route task could help you find the most efficient path for making all the deliveries.</p>
+
+<p>Time windows are treated as a "soft" constraint. This means that although the solver attempts to honor time windows, if necessary, it will violate the time windows of some stops in order to reach them. Remember also that the stops will be visited in the order they were added unless you set <a href="../jsapi/routeparameters.htm#findbestsequence">RouteParameters.findBestSequence</a> to true.</p>
+
+<p>You set time windows as attributes on the stops. Here's an example of three stops with time windows:</p>
+
+<pre>routeParams.useTimeWindows = true;
+
+var stop1 = new esri.Graphic(new esri.geometry.Point(-117.21,  34.065), stopSymbol);
+stop1.attributes = new Object();
+stop1.attributes.Name = "A";
+stop1.attributes.TimeWindowStart = "8:00 AM";
+stop1.attributes.TimeWindowEnd = "8:05 AM";
+
+var stop2 = new esri.Graphic(new esri.geometry.Point(-117.185, 34.05 ), stopSymbol);
+stop2.attributes = new Object();
+stop2.attributes.Name = "B";
+stop2.attributes.TimeWindowStart = "8:10 AM";
+stop2.attributes.TimeWindowEnd = "8:15 AM";
+
+var stop3 = new esri.Graphic(new esri.geometry.Point(-117.19,  34.062), stopSymbol);
+stop3.attributes = new Object();
+stop3.attributes.Name = "C";
+stop3.attributes.TimeWindowStart = "8:20 AM";
+stop3.attributes.TimeWindowEnd = "8:25 AM";
+</pre>
+
+
+<p>If by necessity the route arrives at a stop after the time window has expired, the violation time is noted. Similarly, if a route arrives at a stop before the time window begins, the wait time is noted. You can retrieve violation and wait times as attributes of a stop or route. Here's how you might report these values:</p>
+
+<pre>dojo.byId("itCumul_Time").value = stop.attributes["Cumul_Time"];
+dojo.byId("itWait_Time").value = stop.attributes["Wait_Time"];
+dojo.byId("itCumulWait_Time").value = stop.attributes["CumulWait_Time"];
+dojo.byId("itViolation_Time").value = stop.attributes["Violation_Time"];
+dojo.byId("itCumulViolation_Time").value = stop.attributes["CumulViolation_Time"];
+</pre>
+
+<p>For a more detailed example of how time windows work, see <a href="http://webhelp.esri.com/arcgisdesktop/9.3/index.cfm?TopicName=Routing_with_time_windows" target="_blank">Routing with time windows</a> in the ArcGIS Desktop Help.</p>
+
+
+<!--***END TEXT - DO NOT WRITE BELOW THIS LINE***-->
+</div>
+
+</body>
+</html>

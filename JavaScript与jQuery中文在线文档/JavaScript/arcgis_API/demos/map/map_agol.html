@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>Display Multiple ArcGIS Online Services</title>
+    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css">
+    <script type="text/javascript">djConfig = { parseOnLoad:true }</script>
+    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"></script>
+    <script type="text/javascript">
+      dojo.require("esri.map");
+      dojo.require("dijit.form.Button");
+
+      var map;
+      var streetMap, imageryPrime, shadedRelief, ngsTopoUS, boundariesWorld;
+
+      function init() {
+        map = new esri.Map("map");
+
+        imageryPrime = new esri.layers.ArcGISTiledMapServiceLayer("http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer", {id:"imageryPrime"});
+        map.addLayer(imageryPrime);
+
+        streetMap = initLayer("http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer", "streetMap");
+        shadedRelief = initLayer("http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_ShadedRelief_World_2D/MapServer", "shadedRelief");
+        ngsTopoUS = initLayer("http://server.arcgisonline.com/ArcGIS/rest/services/NGS_Topo_US_2D/MapServer", "ngsTopoUS");
+        boundariesWorld = initLayer("http://server.arcgisonline.com/ArcGIS/rest/services/Reference/ESRI_BoundariesPlaces_World_2D/MapServer", "boundariesWorld");
+
+      }
+
+      function initLayer(url, id) {
+        var layer = new esri.layers.ArcGISTiledMapServiceLayer(url, {id:id, visible:false});
+        map.addLayer(layer);
+        return layer;
+      }
+
+      function changeMap(layers) {
+        hideImageTiledLayers(layers);
+        for (var i=0; i<layers.length; i++) {
+          layers[i].show();
+        }
+      }
+
+      function hideImageTiledLayers(layers) {
+        for (var j=0, jl=map.layerIds.length; j<jl; j++) {
+          var layer = map.getLayer(map.layerIds[j]);
+          if (dojo.indexOf(layers, layer) == -1) {
+            layer.hide();
+          }
+        }
+      }
+
+      dojo.addOnLoad(init);
+    </script>
+
+  </head>
+  <body class="tundra">
+    <div style="position:relative;">
+      <div id="map" style="width:1100px; height:600px; border:1px solid #000;"></div>
+      <div style="position:absolute; right:175px; top:10px; z-Index:999;">
+        <button dojoType="dijit.form.Button" onClick="changeMap([imageryPrime]);">Imagery</button>
+        <button dojoType="dijit.form.Button" onClick="changeMap([imageryPrime,boundariesWorld]);">Imagery/Places</button>
+        <button dojoType="dijit.form.Button" onClick="changeMap([streetMap]);">Street Map</button>
+        <button dojoType="dijit.form.Button" onClick="changeMap([ngsTopoUS]);">Topographic Map</button>
+        <button dojoType="dijit.form.Button" onClick="changeMap([shadedRelief]);">Relief</button>
+      </div>
+    </div>
+  </body>
+</html>

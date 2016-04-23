@@ -1,0 +1,187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>UniqueValueRenderer</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: UniqueValueRenderer</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	<i>Class added v1.4.</i><br/><br/>  A unique value renderer symbolizes groups of graphics that have matching attributes.  For more information about renderers, see <a href="../jshelp/inside_renderers.htm">Symbolizing graphics with renderers</a>.
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+<a href="renderer.htm">esri.Renderer</a>
+  |_ esri.renderer.UniqueValueRenderer
+</pre><H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#UniqueValueRendererConst">esri.renderer.UniqueValueRenderer(defaultSymbol, attributeField)</a></td>
+		<td class="syntaxTABLE">Creates a new UniqueValueRenderer object.</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#attributeField">attributeField</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+The name of the attribute field the renderer uses to match values against.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#values">values</a></td>
+<td class="syntaxTABLE">
+String[]
+</td>
+
+<td class="syntaxTABLE">
+An array of values defined for the renderer.</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>方法表</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+		<th class="tableheader">方法</th>
+		<th class="tableheader">返回值</th>
+		<th class="tableheader">描述</th>
+		</tr>
+
+<tr>
+<td class="syntaxTABLE"><a href="#addValue">addValue(value, symbol)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">Adds a unique value.  After making changes, you must refresh the graphic.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#removeValue">removeValue(value)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">Removes a unique value.  After making changes, you must refresh the graphic.</td>	</tr></table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="UniqueValueRendererConst"></a><H4>esri.renderer.UniqueValueRenderer(defaultSymbol, attributeField)</H4>
+		</div>
+
+<div class="detaildesc">Creates a new UniqueValueRenderer object.</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;<a href="symbol.htm">Symbol</a>>
+<B>defaultSymbol</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			Default symbol for the renderer.  This symbol is used for unmatched values.
+			</td>
+			</tr>
+<tr>
+<td class="detailTABLE">
+&lt;String>
+<B>attributeField</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			Attribute field renderer uses to match values.
+			</td>
+			</tr>
+</table>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="attributeField"></a>
+&lt;String> attributeField</H4></div>
+
+<div class="detaildesc">The name of the attribute field the renderer uses to match values against.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="values"></a>
+&lt;String[]> values</H4></div>
+
+<div class="detaildesc">An array of values defined for the renderer.</div>
+
+</div>
+
+<div class=sectionDivider>方法详细信息</div>
+<div class="detaildiv">
+		<div class="detailname"><a name="addValue"></a><H4>
+addValue(value, symbol)</H4></div>
+
+<div class="detaildesc">Adds a unique value.  After making changes, you must refresh the graphic.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>value</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+Value to match with.</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="symbol.htm">Symbol</a>> <B>symbol</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+Symbol used for the value.</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="removeValue"></a><H4>
+removeValue(value)</H4></div>
+
+<div class="detaildesc">Removes a unique value.  After making changes, you must refresh the graphic.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>value</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+Value to remove.</td>
+			</tr>
+</table>
+
+</div>
+
+<br/></div></body></html> 

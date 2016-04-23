@@ -1,0 +1,403 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>Draw</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: Draw</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	Toolbar that supports functionality to draw geometries.
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.toolbars.Draw
+</pre>
+
+<H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#DrawConst">esri.toolbars.Draw(map)</a></td>
+		<td class="syntaxTABLE">Creates a new Draw object.  A Map is a required parameter.</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#fillSymbol">fillSymbol</a></td>
+<td class="syntaxTABLE">
+<a href="simplefillsymbol.htm">SimpleFillSymbol</a>
+</td>
+
+<td class="syntaxTABLE">
+Symbol to be used when drawing a <a href="polygon.htm">Polygon</a> or <a href="extent.htm">Extent</a>.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#lineSymbol">lineSymbol</a></td>
+<td class="syntaxTABLE">
+<a href="simplelinesymbol.htm">SimpleLineSymbol</a>
+</td>
+
+<td class="syntaxTABLE">
+Symbol to be used when drawing a <a href="polyline.htm">Polyline</a>.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#markerSymbol">markerSymbol</a></td>
+<td class="syntaxTABLE">
+<a href="simplemarkersymbol.htm">SimpleMarkerSymbol</a>
+</td>
+
+<td class="syntaxTABLE">
+Symbol to be used when drawing a <a href="point.htm">Point</a> or <a href="multipoint.htm">Multipoint</a>.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#respectDrawingVertexOrder">respectDrawingVertexOrder</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+When set to false, the geometry is modified to be topologically correct. When set to true, the input geometry is not modified.</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>常量</H4>
+
+	<table CLASS="syntaxTABLE" cellspacing="0">
+	<tr>
+	<th class="tableheader" width="20%">常量</th>
+		<th class="tableheader">描述</th>
+	</tr>
+
+		<tr>
+		<td class="syntaxTABLE">EXTENT</td>
+			<td class="syntaxTABLE">			Draws an extent box.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">FREEHAND_POLYGON</td>
+			<td class="syntaxTABLE">			Draws a freehand polygon.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">FREEHAND_POLYLINE</td>
+			<td class="syntaxTABLE">			Draws a freehand polyline.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">LINE</td>
+			<td class="syntaxTABLE">			Draws a line.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">MULTI_POINT</td>
+			<td class="syntaxTABLE">			Draws a Multipoint.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">POINT</td>
+			<td class="syntaxTABLE">			Draws a point.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">POLYGON</td>
+			<td class="syntaxTABLE">			Draws a polygon.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">POLYLINE</td>
+			<td class="syntaxTABLE">			Draws a polyline.		</td>
+	</tr>
+
+</table>
+
+<H4 class=dtH4>方法表</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+		<th class="tableheader">方法</th>
+		<th class="tableheader">返回值</th>
+		<th class="tableheader">描述</th>
+		</tr>
+
+<tr>
+<td class="syntaxTABLE"><a href="#activate">activate(geometryType)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">Activates the toolbar for drawing geometries.  Activating the toolbar disables map navigation.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#deactivate">deactivate()</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">Deactivates the toolbar and reactivates map navigation.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setFillSymbol">setFillSymbol(fillSymbol)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">Sets the fill symbol.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setLineSymbol">setLineSymbol(lineSymbol)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">Sets the line symbol.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setMarkerSymbol">setMarkerSymbol(markerSymbol)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">Sets the marker symbol.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setRespectDrawingVertexOrder">setRespectDrawingVertexOrder(set)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">Sets whether the polygon geometry should be modified to be topologically correct.</td>	</tr></table>
+
+<H4 class=dtH4>事件</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">事件</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#onDrawEnd">onDrawEnd(geometry)
+		</a></td>
+
+<td class="syntaxTABLE">Fires when drawing is complete.</td>
+		</tr></table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="DrawConst"></a><H4>esri.toolbars.Draw(map)</H4>
+		</div>
+
+<div class="detaildesc">Creates a new Draw object.  A Map is a required parameter.</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;<a href="map.htm">Map</a>>
+<B>map</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			Map the toolbar is associated with.
+			</td>
+			</tr>
+</table>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="fillSymbol"></a>
+&lt;<a href="simplefillsymbol.htm">SimpleFillSymbol</a>> fillSymbol</H4></div>
+
+<div class="detaildesc">Symbol to be used when drawing a <a href="polygon.htm">Polygon</a> or <a href="extent.htm">Extent</a>.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="lineSymbol"></a>
+&lt;<a href="simplelinesymbol.htm">SimpleLineSymbol</a>> lineSymbol</H4></div>
+
+<div class="detaildesc">Symbol to be used when drawing a <a href="polyline.htm">Polyline</a>.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="markerSymbol"></a>
+&lt;<a href="simplemarkersymbol.htm">SimpleMarkerSymbol</a>> markerSymbol</H4></div>
+
+<div class="detaildesc">Symbol to be used when drawing a <a href="point.htm">Point</a> or <a href="multipoint.htm">Multipoint</a>.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="respectDrawingVertexOrder"></a>
+&lt;Boolean> respectDrawingVertexOrder</H4></div>
+
+<div class="detaildesc">When set to false, the geometry is modified to be topologically correct. When set to true, the input geometry is not modified.</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> false
+			</div>
+
+</div>
+
+<div class=sectionDivider>方法详细信息</div>
+<div class="detaildiv">
+		<div class="detailname"><a name="activate"></a><H4>
+activate(geometryType)</H4></div>
+
+<div class="detaildesc">Activates the toolbar for drawing geometries.  Activating the toolbar disables map navigation.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>geometryType</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+The type of geometry drawn.  See the Constants table for valid values.</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="deactivate"></a><H4>
+deactivate()</H4></div>
+
+<div class="detaildesc">Deactivates the toolbar and reactivates map navigation.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setFillSymbol"></a><H4>
+setFillSymbol(fillSymbol)</H4></div>
+
+<div class="detaildesc">Sets the fill symbol.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="fillsymbol.htm">FillSymbol</a>> <B>fillSymbol</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+The fill symbol.</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setLineSymbol"></a><H4>
+setLineSymbol(lineSymbol)</H4></div>
+
+<div class="detaildesc">Sets the line symbol.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="linesymbol.htm">LineSymbol</a>> <B>lineSymbol</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+The line symbol.</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setMarkerSymbol"></a><H4>
+setMarkerSymbol(markerSymbol)</H4></div>
+
+<div class="detaildesc">Sets the marker symbol.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="markersymbol.htm">MarkerSymbol</a>> <B>markerSymbol</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+The marker symbol.</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setRespectDrawingVertexOrder"></a><H4>
+setRespectDrawingVertexOrder(set)</H4></div>
+
+<div class="detaildesc">Sets whether the polygon geometry should be modified to be topologically correct.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Boolean> <B>set</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+When set to false, the geometry is modified to be topologically correct.  When set to true, the input geometry is not modified.</td>
+			</tr>
+</table>
+
+</div>
+
+<H4 class=dtH4>Events Detail</H4>
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onDrawEnd"></a><H4>
+onDrawEnd(geometry)	</H4></div>
+
+
+<div class="detaildesc">Fires when drawing is complete.</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="geometry.htm">Geometry</a>> <B>geometry</B>
+			</td>
+
+<td class="detailTABLE">
+ 			Geometry drawn on the client.
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setDrawAntiClockwisePolygons">setDrawAntiClockwisePolygons</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<br/></div></body></html> 

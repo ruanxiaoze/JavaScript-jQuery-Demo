@@ -1,0 +1,491 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>Extent</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: Extent</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	边界框的最大和最小的x坐标和y坐标。
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+<a href="geometry.htm">esri.geometry.Geometry</a>
+  |_ esri.geometry.Extent
+</pre><H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#ExtentConst1">esri.geometry.Extent(xmin, ymin, xmax, ymax, spatialReference)</a></td>
+		<td class="syntaxTABLE">创建一个范围对象。坐标表示边界框左下角和右上角的坐标。空间参考也是必需的。
+		</td></tr>
+<tr><td class="syntaxTABLE"><a href="#ExtentConst2">esri.geometry.Extent(json)</a></td>
+		<td class="syntaxTABLE">使用JSON对象创建一个范围对象。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#xmax">xmax</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+范围框右上角x坐标值</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#xmin">xmin</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+范围框左下角x坐标。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#ymax">ymax</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+范围框右上角y坐标。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#ymin">ymin</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+范围框左下角y坐标。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>方法表</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+		<th class="tableheader">方法</th>
+		<th class="tableheader">返回值</th>
+		<th class="tableheader">描述</th>
+		</tr>
+
+<tr>
+<td class="syntaxTABLE"><a href="#centerAt">centerAt(point)</a></td><td class="syntaxTABLE">
+<a href="extent.htm">Extent</a>
+</td>
+<td class="syntaxTABLE">一个以参数点为中心的同样宽度和高度的范围被返回。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#contains">contains(point)</a></td><td class="syntaxTABLE">
+Boolean
+</td>
+<td class="syntaxTABLE">当返回值为true，参数点包含在当前范围内。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#expand">expand(factor)</a></td><td class="syntaxTABLE">
+<a href="extent.htm">Extent</a>
+</td>
+<td class="syntaxTABLE">通过给定因素扩张范围。例如，1.5表示将增大50%。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#getCenter">getCenter()</a></td><td class="syntaxTABLE">
+<a href="point.htm">Point</a>
+</td>
+<td class="syntaxTABLE">返回范围的地图单位的中心点。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#getHeight">getHeight()</a></td><td class="syntaxTABLE">
+Number
+</td>
+<td class="syntaxTABLE">最大y坐标和最小y坐标的距离。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#getWidth">getWidth()</a></td><td class="syntaxTABLE">
+Number
+</td>
+<td class="syntaxTABLE">最大x坐标和最小x坐标的距离。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#intersects">intersects(extent)</a></td><td class="syntaxTABLE">
+<a href="extent.htm">Extent</a>
+</td>
+<td class="syntaxTABLE">当返回值是true,参数中的范围与当前范围相交。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#offset">offset(dx, dy)</a></td><td class="syntaxTABLE">
+<a href="extent.htm">Extent</a>
+</td>
+<td class="syntaxTABLE">偏移当前范围。单位是地图单位。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#union">union(extent)</a></td><td class="syntaxTABLE">
+<a href="extent.htm">Extent</a>
+</td>
+<td class="syntaxTABLE">扩张当前范围来包含参数的范围。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#update">update(xmin, xmin, xmax, ymax, spatialReference)</a></td><td class="syntaxTABLE">
+<a href="extent.htm">Extent</a>
+</td>
+<td class="syntaxTABLE">通过制定参数修改当前范围。<br/><br/>
+
+<code>Extent</code>返回值是在v1.4增加的。</td>	</tr></table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="ExtentConst1"></a><H4>esri.geometry.Extent(xmin, ymin, xmax, ymax, spatialReference)</H4>
+		</div>
+
+<div class="detaildesc">创建一个范围对象。坐标表示边界框左下角和右上角的坐标。空间参考也是必需的。
+
+</div><div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;Number>
+<B>xmin</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			范围框左下角x坐标。
+			</td>
+			</tr>
+<tr>
+<td class="detailTABLE">
+&lt;Number>
+<B>ymin</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			范围框左下角y坐标。
+			</td>
+			</tr>
+<tr>
+<td class="detailTABLE">
+&lt;Number>
+<B>xmax</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			范围框右上角x坐标值
+			</td>
+			</tr>
+<tr>
+<td class="detailTABLE">
+&lt;Number>
+<B>ymax</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			范围框右上角y坐标。
+			</td>
+			</tr>
+<tr>
+<td class="detailTABLE">
+&lt;<a href="spatialreference.htm">SpatialReference</a>>
+<B>spatialReference</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			几何体的空间参考。
+			</td>
+			</tr>
+</table>
+
+</div><div class="detaildiv"><div class="detailname"><a name="ExtentConst2"></a><H4>esri.geometry.Extent(json)</H4>
+		</div>
+
+<div class="detaildesc">使用JSON对象创建一个范围对象。</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;Object>
+<B>json</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			JSON对象代表几何体。
+			</td>
+			</tr>
+</table>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="xmax"></a>
+&lt;Number> xmax</H4></div>
+
+<div class="detaildesc">范围框右上角x坐标值</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="xmin"></a>
+&lt;Number> xmin</H4></div>
+
+<div class="detaildesc">范围框左下角x坐标。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="ymax"></a>
+&lt;Number> ymax</H4></div>
+
+<div class="detaildesc">范围框右上角y坐标。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="ymin"></a>
+&lt;Number> ymin</H4></div>
+
+<div class="detaildesc">范围框左下角y坐标。</div>
+
+</div>
+
+<div class=sectionDivider>方法详细信息</div>
+<div class="detaildiv">
+		<div class="detailname"><a name="centerAt"></a><H4>
+centerAt(point)</H4></div>
+
+<div class="detaildesc">一个以参数点为中心的同样宽度和高度的范围被返回。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="extent.htm">Extent</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="point.htm">Point</a>> <B>point</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">使范围在指定的x，y位置居中。</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="contains"></a><H4>
+contains(point)</H4></div>
+
+<div class="detaildesc">当返回值为true，参数点包含在当前范围内。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> Boolean</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="point.htm">Point</a>> <B>point</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+通过地图单位的x坐标和y坐标定义的位置。
+			</td></tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="expand"></a><H4>
+expand(factor)</H4></div>
+
+<div class="detaildesc">通过给定因素扩张范围。例如，1.5表示将增大50%。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="extent.htm">Extent</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>factor</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+The mulitplier value.</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="getCenter"></a><H4>
+getCenter()</H4></div>
+
+<div class="detaildesc">返回范围的地图单位的中心点。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="point.htm">Point</a></div>
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="getHeight"></a><H4>
+getHeight()</H4></div>
+
+<div class="detaildesc">最大y坐标和最小y坐标的距离。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> Number</div>
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="getWidth"></a><H4>
+getWidth()</H4></div>
+
+<div class="detaildesc">最大x坐标和最小x坐标的距离。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> Number</div>
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="intersects"></a><H4>
+intersects(extent)</H4></div>
+
+<div class="detaildesc">当返回值是true,参数中的范围与当前范围相交。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="extent.htm">Extent</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="extent.htm">Extent</a>> <B>extent</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+ minx, miny, maxx, 和maxy边界框。</td>
+			</tr>
+</table>
+
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>
+var polygonExtent = polygon.getExtent();
+if (polygonExtent.intersects(map.extent)) {
+  alert("Polygon intersects current map extent");
+}
+</pre><br/>
+		</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="offset"></a><H4>
+offset(dx, dy)</H4></div>
+
+<div class="detaildesc">偏移当前范围。单位是地图单位。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="extent.htm">Extent</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>dx</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+为y坐标（地图单位）偏移距离。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>dy</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+为x坐标（地图单位）偏移距离。</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="union"></a><H4>
+union(extent)</H4></div>
+
+<div class="detaildesc">扩张当前范围来包含参数的范围。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="extent.htm">Extent</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="extent.htm">Extent</a>> <B>extent</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+ minx, miny, maxx, 和maxy边界框。</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="update"></a><H4>
+update(xmin, xmin, xmax, ymax, spatialReference)</H4></div>
+
+<div class="detaildesc">通过制定参数修改当前范围。<br/><br/>
+
+<code>Extent</code>返回值是在v1.4增加的。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="extent.htm">Extent</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>xmin</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+范围框左下角x坐标。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>xmin</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+范围框左下角y坐标。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>xmax</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+范围框右上角x坐标值</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>ymax</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+范围框右上角y坐标。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="spatialreference.htm">SpatialReference</a>> <B>spatialReference</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+几何体的空间参考。</td>
+			</tr>
+</table>
+
+</div>
+
+<br/></div></body></html> 

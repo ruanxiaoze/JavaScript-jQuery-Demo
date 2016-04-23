@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>Get Virtual Earth Token page - PHP</title>
+</head>
+
+<body>
+
+<div id="pageBanner">Get Virtual Earth Token page - PHP</div>
+
+<div id="nstext">
+
+<!--***START TEXT - DO NOT WRITE ABOVE THIS LINE***-->
+
+<p>This page contains a download and instructions for configuring the "Get Virtual Earth Token" page for PHP applications.</p>
+<ol>
+<li>Download <a href="vetokenphp.zip">vetokenPHP.zip</a>.</li>
+<li>Extract the contents of vetokenPHP.zip to a Web-accessible folder.</li>
+<li>Open the file vetoken.php in a text editor and edit the $username and $password variables at the top of the file to contain your credentials for accessing Bing Maps.</li>
+<li>Edit the $refererUrls to include the URL of the server that hosts your Web site. For example, if your application is running at http://myserver.com/myApp.html, set your allowed refererUrls to include http://myserver.com. Only applications hosted on http://myserver.com can use your Get Virtual Earth Token page.</li>
+</ol>
+
+<!--***END TEXT - DO NOT WRITE BELOW THIS LINE***-->
+</div>
+
+</body>
+</html>

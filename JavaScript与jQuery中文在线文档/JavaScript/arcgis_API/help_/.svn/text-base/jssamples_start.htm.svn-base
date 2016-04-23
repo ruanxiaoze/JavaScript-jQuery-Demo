@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+  <title>JavaScript API Samples</title>
+  <meta name="Robots" content="noindex">
+</head>
+
+<script type="text/javascript" language="JavaScript">
+<!--
+
+// ensure page is not loaded inside another frame
+if (top.location != self.location) {top.location = self.location;} 
+
+
+//-- eg. hh_start.htm#index2.htm                -- sets the content frame only
+//-- eg. hh_start.htm#index2.htm+hh_search.htm  -- sets the content and nav frame
+//-- eg. hh_start.htm#+hh_search.htm            -- sets the nav frame only
+var LFile="jssamples_toc.htm";
+var RFile="jshelp/overview_samples.htm";
+var Param=window.location.hash.substring(1);
+var Params=Param.split("+");
+if (Param != "") {
+  if ((Params.length == 2) && (Params[1] != "")) LFile=Params[1];
+  if (Params[0] != "") RFile=Params[0];
+}
+
+//debug line
+//alert('LFile='+ LFile + ', RFile='+RFile);
+
+document.write('<frameset rows="100,*" FRAMESPACING="1" FRAMEBORDER="1" bordercolor="#d9e6f4">');
+document.write('<frame  SCROLLING="no" noresize MARGINHEIGHT="0" MARGINWIDTH="0" src="jsdoc_banner.htm" />');
+
+document.write('<frameset cols="263,100%" framespacing="1" bordercolor="#d9e6f4">');
+document.write('  <frame src="'+LFile+'" name="left" scrolling="no" frameborder="1" />');
+document.write('  <frame src="'+RFile+'" name="right" scrolling="auto" frameborder="1" />');
+document.write('    <noframes>');
+document.write('      <body>');
+document.write('      <p>This page uses frames, but your browser does not support frames.</p>');
+document.write('      </body>');
+document.write('    </noframes>');
+document.write('</frameset>');
+
+document.write('</frameset>');
+
+//-->
+</script>
+</html>

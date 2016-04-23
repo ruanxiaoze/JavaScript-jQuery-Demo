@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>The Services Directory and the REST API</title>
+</head>
+
+<body>
+
+<div id="pageBanner">The Services Directory and the REST API</div>
+
+<div id="nstext">
+
+<!--***START TEXT - DO NOT WRITE ABOVE THIS LINE***-->
+
+<p>The Services Directory can help you discover information about services 
+			available on a particular server. A service represents a local GIS resource 
+			whose functionality has been made available on the server to a wider audience. 
+			For example, an ArcGIS Server administrator can publish an ArcMap document 
+			(.mxd) as a map service. Developers and clients can display the map service and 
+			query its contents.</p>
+		<p>
+			The Services Directory is available as part of the REST services infrastructure 
+			available with ArcGIS Server 9.3 installations. It enables you to list the 
+			services available, including <a href="ags_security.htm">secured services</a> when 
+			you provide a proper login. For each service, a set of general properties are 
+			displayed. For map services, these properties include the spatial extent, 
+			spatial reference (coordinate system) and supported operations. Layers are also 
+			listed, with links to details about layers, which includes layer fields and 
+			extent. The Services Directory can execute simple queries on layers.</p>
+		<p>The Services Directory is also useful for finding information about non-map 
+			service types. For example, you can use the Services Directory to determine the 
+			required address format for a geocode service, or the necessary model inputs 
+			for a geoprocessing service.</p>
+		<h4>Opening the Services Directory
+		</h4>
+		<p>
+			To open the Services Directory for an ArcGIS Server, you must know the URL of 
+			the server instance. In a typical installation of ArcGIS Server, the instance 
+			is installed in the web server's root directory as "arcgis". The Services 
+			Directory is in the "rest" folder inside the instance. For example, if the 
+			server is at www.example.com, the Services Directory would typically be at <em>http://www.example.com/arcgis/rest/services</em>. 
+			Contact the administrator of the ArcGIS Server system if you are uncertain 
+			about the server URL or ArcGIS instance.</p>
+		<h4>
+			Getting information about a service in Services Directory</h4>
+		<p>
+			You may use the Services Directory to obtain information you need to use a 
+			service with the ArcGIS JavaScript API. You can copy a service's URL from your 
+			browser's address bar and paste it in the appropriate place in your code. For 
+			example, a service in the example server cited above might have a URL of <em>http://www.example.com/arcgis/rest/services/ExampleService/MapServer</em>. 
+			This URL is required in the constructor for a map service. Notice the server 
+			type (MapServer) at the end of the URL, which ensures that the service will 
+			have a unique URL if there is a service of a different type with the same name.</p>
+		<p>
+			You can get other useful information from the Services Directory beyond the 
+			service's URL. For example, to identify features within particular layers, you 
+			need to supply the IDs of the layers (see the walk-through <a href="intro_querytask.htm">
+				Using QueryTask, Query, and FeatureSet</a>). These IDs are listed with the 
+			Layers list in a map service's properties page in the Services Directory. If 
+			you need names of attribute fields to specify the information to return in a 
+			query, you can navigate to the layer's properties to find a list of fields.</p>
+		<p>
+			Services and folders may be secured so that only authorized users may access 
+			them. If a service or folder does not appear as expected, it may require a 
+			login. If the server administrator has provided a username and password to you, 
+			click the Login link in the Services Directory and log in to see services 
+			permitted to you. For more information, see <a href="ags_security.htm">Working with 
+				secure ArcGIS services</a>.</p>
+		<h4>
+			About the REST API</h4>
+		<p>
+			The <a href="http://resources.esri.com/help/9.3/arcgisserver/apis/rest/index.html" target="_blank">
+				ArcGIS Server REST API</a> provides a relatively simple way to use services 
+			provided by ArcGIS Server. <a href="http://en.wikipedia.org/wiki/Representational_State_Transfer" target="_blank">
+				REST</a> enables use of web resources by encapsulating information in the 
+			URL and query string of the request. It has become popular when combined with 
+			the technology known as <a href="http://en.wikipedia.org/wiki/Ajax_%28programming%29" target="_blank">
+				AJAX</a> for creating dynamic client-side web applications.</p>
+		<p>
+			ArcGIS Server includes a REST API for accessing services. The REST API supports 
+			most of the functionality available in the ArcGIS Server SOAP API, which is 
+			used in the server-side Web Application Developer Framework (ADF) packages for 
+			ASP.NET and Java. The difference is that the REST API enables creation of 
+			applications that are strictly client-side. Most REST API-based applications 
+			are focused, simple applications of ArcGIS Server technology. The ArcGIS 
+			JavaScript API uses the REST API to communicate with services in ArcGIS Server. 
+			The REST API is used in other APIs available with ArcGIS Server, including the <a href="http://resources.esri.com/arcgisserver/apis/javascript/ve/index.cfm?fa=home"
+				target="_blank">ArcGIS Server JavaScript Extension for Virtual Earth</a> and 
+			the <a href="http://resources.esri.com/arcgisserver/apis/javascript/gmaps/index.cfm?fa=home"
+				target="_blank">ArcGIS JavaScript Extension for the Google Maps API</a>.</p>
+
+<!--***END TEXT - DO NOT WRITE BELOW THIS LINE***-->
+</div>
+
+</body>
+</html>

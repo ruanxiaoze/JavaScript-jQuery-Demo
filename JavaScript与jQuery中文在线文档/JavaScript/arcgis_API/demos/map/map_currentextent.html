@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>Create Map</title>
+    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css">
+    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"></script>
+    <script type="text/javascript">
+      dojo.require("esri.map");
+
+      function init() {
+        var map = new esri.Map("map");
+        var tiledMapServiceLayer = new esri.layers.ArcGISTiledMapServiceLayer("http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer");
+        map.addLayer(tiledMapServiceLayer);
+        dojo.connect(map, "onExtentChange", showExtent);
+      }
+
+      function showExtent(extent) {
+        var s = "";
+        s = "XMin: "+ extent.xmin + "&nbsp;"
+           +"YMin: " + extent.ymin + "&nbsp;"
+           +"XMax: " + extent.xmax + "&nbsp;"
+           +"YMax: " + extent.ymax;
+        dojo.byId("info").innerHTML = s;
+      }
+
+      dojo.addOnLoad(init);
+    </script>
+  </head>
+  <body class="tundra">
+    <div id="map" style="width:900px; height:600px; border:1px solid #000;"></div>
+    <div id="info" style="padding:5px; margin:5px; background-color:#eee;"></div>
+    Creates a map and adds an ArcGISTiledMapServiceLayer.  On map onExtentChanged event you should see the extent printed below the map.<br />
+    Map navigation using mouse:
+    <ul>
+      <li>Drag to pan</li>
+      <li>SHIFT + Click to recenter</li>
+      <li>SHIFT + Drag to zoom in</li>
+      <li>SHIFT + CTRL + Drag to zoom out</li>
+      <li>Mouse Scroll Forward to zoom in</li>
+      <li>Mouse Scroll Backward to zoom out</li>
+      <li>Use Arrow keys to pan</li>
+      <li>+ key to zoom in a level</li>
+      <li>- key to zoom out a level</li>
+      <li>Double Click to Center and Zoom in</li>
+    </ul>
+  </body>
+</html>

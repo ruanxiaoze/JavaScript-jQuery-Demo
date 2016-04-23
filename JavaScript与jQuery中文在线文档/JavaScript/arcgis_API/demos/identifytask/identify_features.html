@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>Identify Features on a Map</title>
+    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css">
+    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"></script>
+    <script type="text/javascript">
+      dojo.require("esri.map");
+      dojo.require("esri.tasks.identify");
+      dojo.require("esri.toolbars.draw");
+
+      var map, mapLayer;
+      var drawTb;
+      var identify, identifyParams;
+      var layerIdPrefix = "layerId";
+      var numLayers = 0;
+
+      function init() {
+        map = new esri.Map("map");
+
+        mapLayer = new esri.layers.ArcGISDynamicMapServiceLayer("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StatesCitiesRivers_USA/MapServer");
+        if (mapLayer.loaded) {
+          populateToc(mapLayer);
+        } else {
+          dojo.connect(mapLayer, "onLoad", populateToc);
+        }
+
+        identify = new esri.tasks.IdentifyTask("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StatesCitiesRivers_USA/MapServer");
+        dojo.connect(identify, "onComplete", addToMap);
+
+        identifyParams = new esri.tasks.IdentifyParameters();
+        identifyParams.tolerance = 3;
+        identifyParams.returnGeometry = true;
+
+      }
+
+      function populateToc(serviceLayer) {
+        map.addLayer(serviceLayer);
+
+        drawTb = new esri.toolbars.Draw(map);
+        dojo.connect(drawTb, "onDrawEnd", doIdentify);
+
+        var layers = serviceLayer.layerInfos;
+        var layer, id;
+        numLayers = layers.length;
+        var s = [];
+        for (var i=0; i<numLayers; i++) {
+          layer = layers[i];
+          id = layer.id;
+          s.push("<input type=\"checkbox\" id=\"" + layerIdPrefix + id + "\" name=\"" + layerIdPrefix + id + "\" /><label for=\"" + layerIdPrefix + id + "\">" + layer.name + "</label>")
+        }
+        dojo.byId("toc").innerHTML = s.join("<br />");
+      }
+
+      function doIdentify(geometry) {
+        map.graphics.clear();
+        switch (geometry.type) {
+          case "point":
+            var symbol = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_SQUARE, 10, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([255,0,0]), 1), new dojo.Color([0,255,0,0.25]));
+            break;
+          case "polyline":
+            var symbol = new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_DASH, new dojo.Color([255,0,0]), 1);
+            break;
+          case "polygon":
+            var symbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_NONE, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_DASHDOT, new dojo.Color([255,0,0]), 2), new dojo.Color([255,255,0,0.25]));
+            break;
+          case "multipoint":
+            var symbol = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_DIAMOND, 20, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([0,0,0]), 1), new dojo.Color([255,255,0,0.5]));
+            break;
+        }
+        var graphic = new esri.Graphic(geometry, symbol);
+        map.graphics.add(graphic);
+
+        identifyParams.geometry = geometry;
+        identifyParams.layerOption = dojo.byId("layerOption").value;
+        identifyParams.mapExtent = map.extent;
+
+        var layerIds = identifyParams.layerIds = [];
+        for (var i = 0; i<numLayers; i++) {
+          if (dojo.byId(layerIdPrefix + i).checked) {
+            layerIds.push(i);
+          }
+        }
+
+        identify.execute(identifyParams);
+      }
+
+      function addToMap(results) {
+        for (var i=0, il=results.length; i<il; i++) {
+          var graphic = results[i].feature;
+          switch (graphic.geometry.type) {
+            case "point":
+              var symbol = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_SQUARE, 10, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([0,255,0]), 1), new dojo.Color([0,255,0,0.25]));
+              break;
+            case "polyline":
+              var symbol = new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_DASH, new dojo.Color([0,255,0]), 1);
+              break;
+            case "polygon":
+              var symbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_NONE, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_DASHDOT, new dojo.Color([0,255,0]), 2), new dojo.Color([0,255,0,0.25]));
+              break;
+            case "multipoint":
+              var symbol = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_DIAMOND, 20, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([0,0,0]), 1), new dojo.Color([0,255,0,0.5]));
+              break;
+          }
+          graphic.setSymbol(symbol);
+          var infoTemplate = new esri.InfoTemplate("Layer Name: " + results[i].layerName,"${*}");
+          graphic.setInfoTemplate(infoTemplate);
+
+          map.graphics.add(graphic);
+        }
+      }
+
+      dojo.addOnLoad(init);
+    </script>
+
+  </head>
+  <body class="tundra">
+    <table>
+      <tbody>
+        <tr>
+          <td colspan="2">
+            <button onclick="drawTb.activate(esri.toolbars.Draw.POINT)">Point</button>
+            <button onclick="drawTb.activate(esri.toolbars.Draw.POLYLINE)">Polyline</button>
+
+            <button onclick="drawTb.activate(esri.toolbars.Draw.POLYGON)">Polygon</button>
+            <button onclick="drawTb.deactivate()">Deactivate</button>
+            <button onclick="map.graphics.clear()">Clear All Graphics</button>
+          </td>
+        </tr>
+        <tr>
+          <td id="map" style="width:600px; height:400px; border:1px solid #000;"></td>
+
+          <td valign="top">
+            Option:<br />
+            <select id="layerOption">
+              <option value="top">Top</option>
+              <option value="visible">Visible</option>
+              <option value="all">All</option>
+            </select>
+
+            <br /><br />
+            Layer Ids:<br />
+            <span id="toc"></span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+
+</html>

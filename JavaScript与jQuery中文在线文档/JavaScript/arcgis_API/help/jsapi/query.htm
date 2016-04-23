@@ -1,0 +1,296 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>Query</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: Query</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+    Query类是<a href="querytask.htm">QueryTask</a>的输入。不是所有的查询属性都是执行查询任务必需的。查询定义需要下列属性之一：queryGeometry, text, 或 where。可选的属性包括 <i>outFields</i>, <i>outSpatialReference</i> 和 <i>returnGeometry</i>。
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.tasks.Query
+</pre>
+
+<H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#QueryConst">esri.tasks.Query()</a></td>
+		<td class="syntaxTABLE">创建新的QueryTask对象用于通过URL在图层资源上执行一个查询。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#geometry">geometry</a></td>
+<td class="syntaxTABLE">
+<a href="geometry.htm">Geometry</a>
+</td>
+
+<td class="syntaxTABLE">
+几何体应用于空间过滤。执行查询期间，<I>spatialRelationship</I>指定的空间关系被应用到这个几何体。有效的几何体类型是<a href="extent.htm">Extent</a>, <a href="point.htm">Point</a>,  <a href="multipoint.htm">Multipoint</a>, <a href="polyline.htm">Polyline</a>或<a href="polygon.htm">Polygon</a>. <br/><br/></td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#outFields">outFields</a></td>
+<td class="syntaxTABLE">
+String[]
+</td>
+
+<td class="syntaxTABLE">
+属性字段包含在<a href="featureset.htm">FeatureSet</a>里。字段必须在地图图层中存在。必须列出实际字段而不是别名。返回的字段也是实际字段名称。然而，当显示结果时可以使用字段别名。用户能够在地图文档和管理器中设置字段别名。<br/><br/>
+
+当指定了输出字段，指定的字段应该是在查询或者结果中用到的字段，包含越少的字段响应速度会越快。 <br/><br/>
+
+每个查询必须访问图层的Shape和Objectid字段，但是字段列表不必包含这些字段。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#outSpatialReference">outSpatialReference</a></td>
+<td class="syntaxTABLE">
+<a href="spatialreference.htm">SpatialReference</a>
+</td>
+
+<td class="syntaxTABLE">
+返回几何体的空间参考。如果没有指定，返回几何体用地图的空间参考。支持的空间参考列表，见<a href="../jshelp/pcs.htm">投影坐标系统</a> and <a href="../jshelp/gcs.htm">地理坐标系统</a>。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#returnGeometry">returnGeometry</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+如果是"true"，每个<a href="featureset.htm">FeatureSet</a>的要素包含几何体。如果不计划在地图上包含高亮要素设置为"false"(默认值)。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#spatialRelationship">spatialRelationship</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+执行查询期间，空间关系将被用于输入几何体。有效值在常量表中列出。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#text">text</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+使用"like" where子句缩写。使用的字段是定义在地图文档中的显示字段。能在服务目录中确定一个图层的显示字段是什么。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#where">where</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+查询的where子句。允许任何合法的操作层中字段的SQLwhere子句。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>常量</H4>
+
+	<table CLASS="syntaxTABLE" cellspacing="0">
+	<tr>
+	<th class="tableheader" width="20%">常量</th>
+		<th class="tableheader">描述</th>
+	</tr>
+
+		<tr>
+		<td class="syntaxTABLE">SPATIAL_REL_CONTAINS</td>
+			<td class="syntaxTABLE">	要素类1的部分或全部要素包含在要素类2的要素中。		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">SPATIAL_REL_CROSSES</td>
+			<td class="syntaxTABLE">		要素类1的要素跨越要素类2中的要素。</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">SPATIAL_REL_ENVELOPEINTERSECTS</td>
+			<td class="syntaxTABLE">	要素类1中的envelope与要素类2中的envelope相交。	</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">SPATIAL_REL_INDEXINTERSECTS</td>
+			<td class="syntaxTABLE">		查询要素类的envelope和目标要素类的索引目录相交。		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">SPATIAL_REL_INTERSECTS</td>
+			<td class="syntaxTABLE">	要素1中的部分要素被包含在要素2的要素中。
+            		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">SPATIAL_REL_OVERLAPS</td>
+			<td class="syntaxTABLE">		要素类1中的要素和要素类2中的要素重合。		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">SPATIAL_REL_TOUCHES</td>
+			<td class="syntaxTABLE">		要素类1中的要素接触要素类2中的一个要素的边框。
+            	</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">SPATIAL_REL_WITHIN</td>
+			<td class="syntaxTABLE">		要素类1中的要素完全被要素类2中的要素包含。	</td>
+	</tr>
+
+</table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="QueryConst"></a><H4>esri.tasks.Query()</H4>
+		</div>
+
+<div class="detaildesc">创建新的QueryTask对象用于通过URL在图层资源上执行一个查询。</div>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="geometry"></a>
+&lt;<a href="geometry.htm">Geometry</a>> geometry</H4></div>
+
+<div class="detaildesc">几何体应用于空间过滤。执行查询期间，<I>spatialRelationship</I>指定的空间关系被应用到这个几何体。有效的几何体类型是<a href="extent.htm">Extent</a>, <a href="point.htm">Point</a>,  <a href="multipoint.htm">Multipoint</a>, <a href="polyline.htm">Polyline</a>或<a href="polygon.htm">Polygon</a>. <br/><br/></div>
+
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>
+      function executeQueryTask(event) {
+        //When the user clicks on a map, the onClick event returns the event point 
+		where the user clicked. The event contains mapPoint (esri.geometry.Point)
+
+        query.geometry = event.mapPoint;
+
+        //Execute task
+        queryTask.execute(query, showResults);
+      }
+</pre><br/>
+		</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="outFields"></a>
+&lt;String[]> outFields</H4></div>
+
+<div class="detaildesc">属性字段包含在<a href="featureset.htm">FeatureSet</a>里。字段必须在地图图层中存在。必须列出实际字段而不是别名。返回的字段也是实际字段名称。然而，当显示结果时可以使用字段别名。用户能够在地图文档和管理器中设置字段别名。<br/><br/>
+
+当指定了输出字段，指定的字段应该是在查询或者结果中用到的字段，包含越少的字段响应速度会越快。 <br/><br/>
+
+每个查询必须访问图层的Shape和Objectid字段，但是字段列表不必包含这些字段。</div>
+
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>query.outFields = ["NAME", "STATE_ABBR", "POP04"];</pre><br/>
+		</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="outSpatialReference"></a>
+&lt;<a href="spatialreference.htm">SpatialReference</a>> outSpatialReference</H4></div>
+
+<div class="detaildesc">返回几何体的空间参考。如果没有指定，返回几何体用地图的空间参考。支持的空间参考列表，见<a href="../jshelp/pcs.htm">投影坐标系统</a> and <a href="../jshelp/gcs.htm">地理坐标系统</a>。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="returnGeometry"></a>
+&lt;Boolean> returnGeometry</H4></div>
+
+<div class="detaildesc">如果是"true"，每个<a href="featureset.htm">FeatureSet</a>的要素包含几何体。如果不计划在地图上包含高亮要素设置为"false"(默认值)。</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> false
+			</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="spatialRelationship"></a>
+&lt;String> spatialRelationship</H4></div>
+
+<div class="detaildesc">执行查询期间，空间关系将被用于输入几何体。有效值在常量表中列出。</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> SPATIAL_REL_INTERSECTS
+			</div>
+
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>
+var myQuery = new esri.tasks.Query();
+myQuery.spatialRelationship = esri.tasks.Query.SPATIAL_REL_CONTAINS;
+</pre><br/>
+		</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="text"></a>
+&lt;String> text</H4></div>
+
+<div class="detaildesc">使用"like" where子句缩写。使用的字段是定义在地图文档中的显示字段。能在服务目录中确定一个图层的显示字段是什么。</div>
+
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>query.text = stateName;</pre><br/>
+		</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="where"></a>
+&lt;String> where</H4></div>
+
+<div class="detaildesc">查询的where子句。允许任何合法的操作层中字段的SQLwhere子句。</div>
+
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		字符串查询示例。在JavaScript中写where子句时要确保正确的单引号和双引号顺序。
+
+		<pre>
+  query.where = "NAME = '" + stateName + "'"; 
+		</pre>
+		
+		Number query example.
+		<pre>
+  query.where = "POP04 > " + population;
+		</pre><br/>
+		</div>
+
+</div>
+
+<br/></div></body></html> 

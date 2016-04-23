@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="keywords" content="ArcGIS JavaScript API" />
+		<link href="jsdoc.css" rel="stylesheet" type="text/css" />
+		<title>Symbolizing graphics with renderers</title>
+	</head>
+	<body>
+		<div id="pageBanner">Symbolizing graphics with renderers</div>
+		<div id="nstext">
+			<!--***START TEXT - DO NOT WRITE ABOVE THIS LINE***-->
+			<p>A renderer defines a set of symbols that will be used for graphics in a graphics 
+				layer. You can use renderers to symbolize features with different colors or 
+				sizes based on a particular attribute. To use a renderer, you create it, define 
+				the symbology you want, then apply the renderer to a graphics layer like this:</p>
+			<pre>map.graphics.setRenderer(renderer);</pre>
+			<p>There are three renderers in the ArcGIS JavaScript API: simple renderer, class 
+				breaks renderer, and unique value renderer. Corresponding classes are found in 
+				esri.renderer as <A href="../jsapi/simplerenderer.htm">SimpleRenderer</A>, <A href="../jsapi/classbreaksrenderer.htm">
+					ClassBreaksRenderer</A>, and <A href="../jsapi/uniquevaluerenderer.htm">UniqueValueRenderer</A>
+				respectively. These three renderers are described in subsequent sections of 
+				this document.</p>
+			<p>If you don't want all the graphics on your map to be drawn with the same 
+				renderer, you can use multiple graphics layers to organize the graphics. For 
+				example, you might have one graphics layer with counties symbolized by a unique 
+				value renderer, and another graphics layer with cities symbolized by a simple 
+				renderer.</p>
+			<p>You're not required to use a renderer if you just want to explicitly apply a 
+				symbol to each graphic. This is the pattern used with the ArcGIS JavaScript API 
+				prior to version 1.4 when there was no esri.renderer namespace.</p>
+			<h3>Simple renderer</h3>
+			<p>A simple renderer uses the same symbol for every graphic. All you have to do is 
+				specify the symbol to be used by the renderer, then apply the renderer to the 
+				graphics layer.</p>
+			<h3>Class breaks renderer</h3>
+			<p>A class breaks renderer symbolizes each graphic based on the value of some 
+				numeric attribute. Graphics with similar values for the attribute get the same 
+				symbol. The "breaks" define the values at which the symbology changes.</p>
+			<p>For example, suppose you have a "buildings" layer with an attribute that defines 
+				the building age. You want to symbolize buildings constructed since the year 
+				2000 in green, buildings constructed between 1980 and 2000 in yellow, and 
+				buildings built before 1980 with red. This would be a good scenario for a class 
+				breaks renderer.</p>
+			<p>To define a class breaks renderer, you have to add breaks. Each break specifies 
+				the symbol to use and the minimum and maximum values that will be used for that 
+				symbol. The example below shows how you can explicitly define breaks:</p>
+			<pre>var renderer = new esri.renderer.ClassBreaksRenderer(symbol, "BUILD_DATE");
+renderer.addBreak(-Infinity,1980,new esri.symbol.SimpleFillSymbol().setColor(new dojo.Color([255, 0, 0,0.5])));
+renderer.addBreak(1980,2000,new esri.symbol.SimpleFillSymbol().setColor(new dojo.Color([255, 255, 0,0.5])));
+renderer.addBreak(2000,Infinity,new esri.symbol.SimpleFillSymbol().setColor(new dojo.Color([0,255,0,0.5])));
+</pre>
+			<p>Notice that if there is no maximum limit on a break, you can use "Infinity" for 
+				the maximum value. Similarly, you can use "-Infinity" when there is no minimum.</p>
+			<p>Any value that is greater than or equal to the minimum will be included in the 
+				break. Any value that is less than the maximum will be included in the break. 
+				Thus, if you have two breaks 0 - 10 and 10 - 20, the value 10 would fall in the 
+				second break (10 - 20). Avoid creating overlapping breaks or gaps between 
+				breaks.</p>
+			<p>You can also define breaks mathematically. For example, you can do some basic 
+				arithmetic to ensure that each break falls an equal distance apart given the 
+				input data (sometimes known as an "equal interval" classification):</p>
+			<pre>
+var numRanges = 10;
+var breaks = (max - min) / numRanges;
+. . .
+for (var i=0; i&lt;numRanges; i++) {
+  renderer.addBreak(parseFloat(min + (i*breaks)),
+          parseFloat(min + ((i+1)*breaks)),
+          new esri.symbol.SimpleMarkerSymbol().setSize((i+1)*5).setColor(colors[i]).setOutline(outline));
+}
+</pre>
+			<p>Although the ArcGIS JavaScript API cannot natively calculate classification 
+				schemes (such as quantile and natural breaks) you can find the break values by 
+				classifying the data in ESRI's ArcMap and manually entering the values in the 
+				addBreak method. Classifying your data in ArcMap can also help you extract 
+				useful RGB color values to use for your classes.</p>
+			<h3>Unique value renderer</h3>
+			<p>A unique value renderer symbolizes groups of graphics that have matching 
+				attributes. This is most common with nominal, or string data. For example, you 
+				could use a unique value renderer to symbolize zoning designations: yellow for 
+				"Residential", purple for "Industrial", red for "Commercial", and so on. You 
+				can also use unique value renderers on numeric fields that are coded values, or 
+				on ordinal attributes such as "First", "Second", "Third", and so on.</p>
+			<p>Defining a unique value renderer requires you to specify a default symbol and 
+				the attribute on which to base the symbology. Then you add values individually 
+				to the renderer and specify how each will be symbolized:</p>
+			<pre>var renderer = new esri.renderer.UniqueValueRenderer(defaultSymbol, "ZONING");
+
+renderer.addValue("Residential", new esri.symbol.SimpleFillSymbol().setColor(new dojo.Color([255,255,0,0.5])));
+renderer.addValue("Industrial", new esri.symbol.SimpleFillSymbol().setColor(new dojo.Color([128,0,128,0.5])));
+renderer.addValue("Commercial", new esri.symbol.SimpleFillSymbol().setColor(new dojo.Color([255,0,0,0.5])));
+</pre>
+			<p>Values that you don't add to the list are drawn with the default symbol.</p>
+			<!--***END TEXT - DO NOT WRITE BELOW THIS LINE***-->
+		</div>
+	</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>Creating the geoprocessor</title>
+</head>
+
+<body>
+
+<div id="pageBanner">Creating the geoprocessor</div>
+
+<div id="nstext">
+
+<!--***START TEXT - DO NOT WRITE ABOVE THIS LINE***-->
+
+<p>To do geoprocessing in the ArcGIS JavaScript API, you'll use the <A href="../jsapi/geoprocessor.htm">esri.tasks.Geoprocessor</A> class. The constructor for this class requires the URL of the geoprocessing task you are going to run. You can use the <A href="ags_rest.htm">Services Directory</A> to discover the URL.</p>
+<p>The Services Directory contains links for all the available services. The
+			image below shows an example of what you see when you click a link for a
+			geoprocessing service.</p>
+		<IMG alt="The ESRI_Elevation_World page in the Services Directory" src="images/gp_sd_1.png"/>
+		<p>The breadcrumbs below the title bar show that this is the geoprocessing service <a href="http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Elevation/ESRI_Elevation_World/GPServer"
+				target="_blank">ESRI_Elevation_World</a> in the folder Elevation. The
+			address bar shows that this service is running on the ESRI sample server
+			sampleserver1.arcgisonline.com. In the service there is one task, Viewshed,
+			which is a geoprocessing model available on the server. A geoprocessing service
+			can have multiple tasks available, because the server administrator publishes
+			the service from a toolbox that can hold many models.</p>
+		<p>Here's what you see if you follow the link to the <a href="http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Elevation/ESRI_Elevation_World/GPServer/Viewshed"
+				target="_blank">Viewshed</a> task:</p>
+		<IMG alt="The Viewshed task in the Services Directory" src="images/gp_sd_2.png"/>
+		<p>The URL from this page is what you should copy and paste in your code when you create
+			the Geoprocessor:</p>
+		<pre>gp = new esri.tasks.Geoprocessor("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/
+        Elevation/ESRI_Elevation_World/GPServer/Viewshed");</pre>
+
+<!--***END TEXT - DO NOT WRITE BELOW THIS LINE***-->
+</div>
+
+</body>
+</html>

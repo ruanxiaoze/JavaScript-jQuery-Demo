@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>QueryTask with geometry, results as an InfoWindow onHover</title>
+    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css">
+    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"></script>
+    <script type="text/javascript" language="Javascript">
+      dojo.require("esri.map");
+      dojo.require("esri.tasks.query");
+
+      function init() {
+        var startExtent = new esri.geometry.Extent(-83.41, 31.98, -78.47, 35.28, new esri.SpatialReference({wkid:4326}));
+        //create map
+        var map = new esri.Map("mapDiv",{extent:startExtent});
+        //listen for when map is loaded and then add query functionality
+        dojo.connect(map, "onLoad", initFunctionality);
+
+        //create and add new layer
+        var layer = new esri.layers.ArcGISTiledMapServiceLayer("http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer");
+        map.addLayer(layer);
+      }
+
+      function initFunctionality(map) {
+        //build query task
+        var queryTask = new esri.tasks.QueryTask("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Census_USA/MapServer/3");
+
+        //build query filter
+        var query = new esri.tasks.Query();
+        query.returnGeometry = true;
+        query.outFields = ["NAME", "POP2000", "POP2007", "POP00_SQMI", "POP07_SQMI"];
+        query.where = "STATE_NAME = 'South Carolina'";
+
+        var infoTemplate = new esri.InfoTemplate();
+        infoTemplate.setTitle("${NAME}");
+        infoTemplate.setContent("<b>2000 Population: </b>${POP2000}<br/>"
+                             + "<b>2000 Population per Sq. Mi.: </b>${POP00_SQMI}<br/>"
+                             + "<b>2007 Population: </b>${POP2007}<br/>"
+                             + "<b>2007 Population per Sq. Mi.: </b>${POP07_SQMI}");
+
+        map.infoWindow.resize(245,125);
+
+        //Can listen for onComplete event to process results or can use the callback option in the queryTask.execute method.
+        dojo.connect(queryTask, "onComplete", function(featureSet) {
+          map.graphics.clear();
+          var highlightSymbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([255,0,0]), 3), new dojo.Color([125,125,125,0.35]));
+          //var highlightSymbol = new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([255,0,0]), 3);
+          var symbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([255,255,255,0.35]), 1),new dojo.Color([125,125,125,0.35]));
+
+          var countiesGraphicsLayer = new esri.layers.GraphicsLayer();
+          //QueryTask returns a featureSet.  Loop through features in the featureSet and add them to the map.
+          for (var i=0, il=featureSet.features.length; i<il; i++) {
+            //Get the current feature from the featureSet.
+            //Feature is a graphic
+            var graphic = featureSet.features[i];
+            graphic.setSymbol(symbol);
+            graphic.setInfoTemplate(infoTemplate);
+
+            //Add graphic to the counties graphics layer.
+            countiesGraphicsLayer.add(graphic);
+          }
+          map.addLayer(countiesGraphicsLayer);
+          map.graphics.enableMouseEvents();
+          //listen for when the onMouseOver event fires on the countiesGraphicsLayer
+          //when fired, create a new graphic with the geometry from the event.graphic and add it to the maps graphics layer
+          dojo.connect(countiesGraphicsLayer, "onMouseOver", function(evt) {
+            map.graphics.clear();  //use the maps graphics layer as the highlight layer
+            var content = evt.graphic.getContent();
+            map.infoWindow.setContent(content);
+            var title = evt.graphic.getTitle();
+            map.infoWindow.setTitle(title);
+            var highlightGraphic = new esri.Graphic(evt.graphic.geometry,highlightSymbol);
+            map.graphics.add(highlightGraphic);
+            map.infoWindow.show(evt.screenPoint,map.getInfoWindowAnchor(evt.screenPoint));
+          });
+
+          //listen for when map.graphics onMouseOut event is fired and then clear the highlight graphic
+          //and hide the info window
+          dojo.connect(map.graphics, "onMouseOut", function(evt) {
+            map.graphics.clear();
+            map.infoWindow.hide();
+          });
+        });
+
+        queryTask.execute(query);
+      }
+      dojo.addOnLoad(init);
+    </script>
+  </head>
+  <body class="tundra">
+    Hover over a county in South Carolina to get more information.
+    <div id="mapDiv" style="width:900px; height:600px; border:1px solid #000;"></div>
+  </body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>Dynamic Map Service Layer with Custom Projection and Extent</title>
+
+    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css">
+    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"></script>
+
+    <script type="text/javascript">
+      dojo.require("esri.map");
+
+      function init() {
+        var customExtentAndSR = new esri.geometry.Extent(-20037506,-9823074,20037506,10214431,new esri.SpatialReference({"wkid":54052}));
+        //create map with new custom spatial reference and extent.  The map will be in the Goode Homolosine Land projection
+        var map = new esri.Map("map", {extent:customExtentAndSR});
+        //map service layer has a default spatial reference of 4326.
+        var mapServiceLayer = new esri.layers.ArcGISDynamicMapServiceLayer("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Population_World/MapServer");
+        map.addLayer(mapServiceLayer);
+      }
+
+      dojo.addOnLoad(init);
+    </script>
+
+  </head>
+  <body>
+    <div id="map" class="tundra" style="position:relative; width:1024px; height:512px; border:2px solid #000;background-color:#99CCFF;"></div>
+  </body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>Geometry Service: Relation</title>
+    <style type="text/css">
+      @import "http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css";
+    </style>
+    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"></script>
+
+    <script type="text/javascript">
+      dojo.require("esri.map");
+      dojo.require("esri.tasks.geometry");
+      dojo.require("esri.tasks.gp");
+
+      var map, geoprocessor, geometryService, geometries;
+
+      function init() {
+        // create the map control
+        var startExtent = new esri.geometry.Extent(-117.29, 34, -117.14, 34.10, new esri.SpatialReference({ wkid: 4326 }) );
+        map = new esri.Map("map", { extent: startExtent });
+        dojo.connect(map, "onClick", mapClicked);
+
+        // configure the proxy url for the application
+        esriConfig.defaults.io.proxyUrl = "/arcgisserver/apis/javascript/proxy/proxy.ashx";
+        esriConfig.defaults.io.alwaysUseProxy = false;
+
+        // create and add a street map layer to the map
+        var streetmap = new esri.layers.ArcGISTiledMapServiceLayer("http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer");
+        map.addLayer(streetmap);
+
+        geometryService = new esri.tasks.GeometryService("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Geometry/GeometryServer");
+        geoprocessor = new esri.tasks.Geoprocessor("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Network/ESRI_DriveTime_US/GPServer/CreateDriveTimePolygons");
+      }
+
+      function mapClicked(evt) {
+        geometries = [];
+        map.graphics.clear();
+
+        // add a simple marker graphic at the location where the user clicked on the map.
+        var pointSymbol = new esri.symbol.SimpleMarkerSymbol(
+          esri.symbol.SimpleMarkerSymbol.STYLE_CROSS, 10,
+          new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([0, 0, 0]), 2)
+        );
+        var clickPointGraphic = new esri.Graphic(evt.mapPoint, pointSymbol);
+        map.graphics.add(clickPointGraphic);
+
+        // get Yahoo! Local search resutls and the ArcGIS Drive Time polygon
+        executeYahooLocalSearch(clickPointGraphic);
+        getDriveTimePolygon(clickPointGraphic);
+      }
+
+      function executeYahooLocalSearch(graphic) {
+        // find 20 pizza restaurants within a 4 mile radius of the selected location
+        var params = {
+          query: "pizza",
+          latitude: graphic.geometry.y,
+          longitude: graphic.geometry.x,
+          radius: 4,
+          results: 20,
+          output: "json",
+          appid: "7XxH60zV34FxiHah8D.ri33zlPCRS3aUZdpzEFtA8YxyJxZMbmsfDsec4oCtV5HxjO4L"
+        };
+
+        dojo.io.script.get({
+          url: "http://local.yahooapis.com/LocalSearchService/V2/localSearch",
+          content: params,
+          callbackParamName: "callback",
+          load: buildYahooLocalLocations,
+          error: esriConfig.defaults.io.errorHandler
+        });
+      }
+
+      function buildYahooLocalLocations(response) {
+        // create a symbol (Red Square) for pizza restaurants
+        var yahooPointSymbol = new esri.symbol.SimpleMarkerSymbol(
+          esri.symbol.SimpleMarkerSymbol.STYLE_SQUARE, 6,
+          new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([0, 0, 0]), 1),
+          new dojo.Color([255, 0, 0])
+        );
+
+        // add the pizza restaurants to the map
+        var results = response.ResultSet.Result;
+        var baseGraphics = [];
+        for (var i=0, il=results.length; i<il; i++) {
+          var point = new esri.geometry.Point(results[i].Longitude, results[i].Latitude, map.spatialReference);
+          var graphic = new esri.Graphic(point, yahooPointSymbol);
+          map.graphics.add(graphic);
+          baseGraphics.push(graphic);
+        }
+
+        geometries[0] = baseGraphics; // save the base geometries
+
+        // execute relation operation if the drive time polygon is available too
+        if (geometries.length === 2) {
+          relateGeometries();
+        }
+      }
+
+      function getDriveTimePolygon(graphic) {
+        // the graphic representing the selected location is passed onto the GP Task
+        var featureSet = new esri.tasks.FeatureSet();
+        featureSet.features = [ graphic ];
+
+        var params = {
+          "Input_Location": featureSet,
+          "Drive_Times": 3
+        };
+        geoprocessor.execute(params, parseDriveTimeResponse);
+      }
+
+      function parseDriveTimeResponse(results, messages) {
+        var feature = results[0].value.features[0];
+
+        // add the drive time polygon to the map
+        var polySymbolRed = new esri.symbol.SimpleFillSymbol(
+          esri.symbol.SimpleLineSymbol.STYLE_SOLID,
+          new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([0, 0, 0, 1]), 1),
+          new dojo.Color([255, 0, 0, 0.2])
+        );
+        feature.setSymbol(polySymbolRed);
+        map.graphics.add(feature);
+
+        geometries[1] = [ feature ]; // save the comparison geometries
+
+        // execute relation operation if the Yahoo! Local Search result is available too
+        if (geometries.length === 2) {
+          relateGeometries();
+        }
+      }
+
+      function relateGeometries() {
+        geometryService.relation(geometries[0], geometries[1], esri.tasks.GeometryService.SPATIAL_REL_WITHIN, null, addRelateResultsToMap);
+      }
+
+      function addRelateResultsToMap(relations) {
+        // create a Green Square symbol
+        var symbol = new esri.symbol.SimpleMarkerSymbol(
+          esri.symbol.SimpleMarkerSymbol.STYLE_SQUARE, 8,
+          new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([0, 0, 0]), 1),
+          new dojo.Color([0, 255, 0])
+        );
+
+        // highlight the pizza places that satisfy the spatial relation (WITHIN) against the 3-minute drive time polygon
+        for (var i = 0; i < relations.length; i++) {
+          var relatedGraphic = relations[i].graphic1;
+          relatedGraphic.setSymbol(symbol);
+        }
+      }
+
+      dojo.addOnLoad(init);
+    </script>
+
+  </head>
+
+  <body class="tundra">
+    <p>Click on the map to show Pizza restaurants (from Yahoo! Local Search) that are within 3 minute drive time.</p>
+    <div id="map" style="width:900px; height:600px; border:1px solid #000;"></div>
+  </body>
+</html>

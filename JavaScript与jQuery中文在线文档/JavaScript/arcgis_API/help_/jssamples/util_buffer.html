@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>ArcGIS JavaScript API</title>
+</head>
+
+<body>
+
+<!--***REQUIRED TITLE***-->
+<div id="pageBanner">缓冲点</div>
+<!--***END REQUIRED TITLE***-->
+
+  <div id="nstext">
+
+	<H4 class=dtH4><a href="../../demos/utilities/util_buffer.html" target="_blank">查看在线示例</a></H4>
+  <H4 class=dtH4>描述</H4>
+
+  <!--***START TEXT - DO NOT WRITE ABOVE THIS LINE***-->
+
+  <p>
+  本例创建一个地图上的点击点周围的缓冲区。本例仅仅画了一个缓冲区，但是缓冲区也可以用于执行类似返回生活在缓冲区内的人员地址的列表的任务。</p>
+		<p>
+        使用<a href="http://webhelp.esri.com/arcgisserver/9.3/dotNet/geometry_service.htm" target="_blank">
+				ArcGIS Server几何服务</a>创建缓冲。这个服务类型是ArcGIS 
+			Server 9.3新增的，可以用于JavaScript应用里的缓冲，投影和几何体简化。这行代码创建了一个几何服务:</p>
+		<pre>gsvc = new esri.tasks.GeometryService("http://sampleserver1a.arcgisonline.com/arcgis/rest/services/Geometry/GeometryServer");</pre>
+		<p>
+        能使用<a href="../jshelp/ags_rest.htm">服务目录</a>查出自己的几何服务的URL。由于服务的名称必须是Geometry，因此URL和这个极其相似。</p>
+		<p>
+			注意能够使用距离的数组创建多个环形的缓冲区。本例创建5公里和10公里的缓冲区。因为缓冲距离使用一个长度单位指定，因此用来创建缓冲区的空间参考不许是投影坐标系统。如果缓冲距离使用角度单位指定（例如，度），可以使用一个地理坐标系统。理想情况可以选择匹配源数据的坐标系统创建缓冲区。既然本例使用ArcGIS Online，源数据使用 WGS 1984地理坐标系统，示例必须使用一个不同的坐标系统来创建缓冲区(WGS 1984 Plate 
+			Caree&nbsp;[well-known ID 32662])。
+            
+            </p>
+		<pre>params.distances = [ 5, 10 ];
+params.unit = esri.tasks.BufferParameters.UNIT_KILOMETER;
+params.bufferSpatialReference = new esri.SpatialReference({wkid: 32662});
+
+gsvc.buffer(params, showBuffer);</pre>
+		<p>回调函数<b>showBuffer</b>创建一个符号并在地图上增加缓冲区图形。本例两个缓冲区使用相同的半透明符号，因此内部的缓冲区比外部的缓冲区暗。</p>
+
+<!--***END TEXT - DO NOT WRITE BELOW THIS LINE***--> 
+
+  <H4 class=dtH4>代码</H4>
+  <div class="detailSample">
+  <code>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"&gt;<br/>
+&lt;html&gt;<br/>
+&nbsp;&nbsp;&lt;head&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8"/&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;meta http-equiv="X-UA-Compatible" content="IE=7" /&gt;<br/>
+&nbsp;&nbsp;&lt;title&gt;Buffer&lt;/title&gt;<br/>
+&nbsp;&nbsp;&lt;link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css"&gt;<br/>
+&nbsp;&nbsp;&lt;script src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5" type="text/javascript"&gt;&lt;/script&gt;<br/>
+<br/>
+&nbsp;&nbsp;&lt;script type="text/javascript"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;dojo.require("esri.map");<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;dojo.require("esri.tasks.geometry");<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;var map = null;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;var gsvc = null;<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;function initialize() {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map = new esri.Map("map");<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var layer = new esri.layers.ArcGISTiledMapServiceLayer("http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer");<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map.addLayer(layer);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map.setExtent(new esri.geometry.Extent(-97.76, 32.32, -96.11, 33.42, new esri.SpatialReference({wkid: 4326})));<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gsvc = new esri.tasks.GeometryService("http://sampleserver1.arcgisonline.com/arcgis/rest/services/Geometry/GeometryServer");<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dojo.connect(map, "onClick", doBuffer);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;function doBuffer(evt) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map.graphics.clear();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var symbol = new esri.symbol.SimpleMarkerSymbol();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var graphic = new esri.Graphic(evt.mapPoint, symbol);<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var params = new esri.tasks.BufferParameters();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;params.features = [ graphic ];<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// CASE [1]: if you want to buffer in angular units.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//params.distances = [ 5, 10 ];<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//params.unit = esri.tasks.BufferParameters.UNIT_DEGREE;<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// CASE [2]: if you want to buffer in linear units such as meters, km, miles etc.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;params.distances = [ 5, 10 ];<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;params.unit = esri.tasks.BufferParameters.UNIT_KILOMETER;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;params.bufferSpatialReference = new esri.SpatialReference({wkid: 32662});<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;params.outSpatialReference = map.spatialReference;<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gsvc.buffer(params, showBuffer);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;function showBuffer(features) {<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var symbol = new esri.symbol.SimpleFillSymbol(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;esri.symbol.SimpleFillSymbol.STYLE_SOLID,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new esri.symbol.SimpleLineSymbol(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;esri.symbol.SimpleLineSymbol.STYLE_SOLID,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new dojo.Color([0,0,255,0.65]), 2<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new dojo.Color([0,0,255,0.35])<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (var j=0, jl=features.length; j&lt;jl; j++) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;features[j].setSymbol(symbol);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map.graphics.add(features[j]);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;dojo.addOnLoad(initialize);<br/>
+&nbsp;&nbsp;&lt;/script&gt;<br/>
+<br/>
+&lt;/head&gt;<br/>
+<br/>
+&lt;body class="tundra"&gt;<br/>
+&nbsp;&nbsp;&lt;b&gt;Click a location on the map to buffer. Click again on another location to buffer again.&lt;/b&gt;<br/>
+&nbsp;&nbsp;&lt;div id="map" style="width:600px; height:400px; border:1px solid #000;"&gt;&lt;/div&gt;<br/>
+&lt;/body&gt;<br/>
+<br/>
+&lt;/html&gt;</code>
+  			</div>
+
+
+<br/><br/></div> 
+</body>
+</html>

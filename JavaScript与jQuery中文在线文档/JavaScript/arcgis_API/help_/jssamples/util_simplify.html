@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>ArcGIS JavaScript API</title>
+</head>
+
+<body>
+
+<!--***REQUIRED TITLE***-->
+<div id="pageBanner">简化一个几何体</div>
+<!--***END REQUIRED TITLE***-->
+
+  <div id="nstext">
+
+	<H4 class=dtH4><a href="../../demos/utilities/util_simplify.html" target="_blank">查看在线示例</a></H4>
+  <H4 class=dtH4>描述</H4>
+
+  <!--***START TEXT - DO NOT WRITE ABOVE THIS LINE***-->
+
+  <p>
+  本例展示了如何简化一个拓扑非法的要素以便它能用于一个应用。本例展示了一个轮廓线自己交叉的多边形。简化操作分解多边形为三个部分的要素。本例通过执行基于简化的多边形的查询检验要素是合法的。</p>
+		<p>本例中，非法的多边形是被编程创建，但是更有可能的情况是用户在屏幕上画了一个非法的多边形并且试图使用它。本例允许用户探索执行非法几何体查询时发生了什么。
+</p>
+		<p>
+        简化几何体需要一个<a href="http://webhelp.esri.com/arcgisserver/9.3/dotNet/geometry_service.htm" target="_blank">ArcGIS Server几何服务</a>。这个服务类型是ArcGIS 
+			Server 9.3新增的，可以用于JavaScript应用里的缓冲，投影和几何体简化。这行代码创建了一个几何服务:</p>
+		<pre>gsvc = new esri.tasks.GeometryService("http://sampleserver1a.arcgisonline.com/arcgis/rest/services/Geometry/GeometryServer");</pre>
+		<p> 能使用<a href="../jshelp/ags_rest.htm">服务目录</a>查出自己的几何服务的URL。由于服务的名称必须是Geometry，因此URL和这个极其相似。</p>
+		<p>大量的函数在本例中一起工作:</p>
+		<ul>
+			<li>
+				<b>initialize</b>- 创建地图并增加必要的图层和任务。
+			<li>
+				<b>drawPolygon</b>- 在地图上画一个自交的多边形。
+			<li>
+				<b>doSimplify</b>- 调用<A href="../jsapi/geometryservice.htm#simplify">GeometryService.simplify()</A>分解多边形为三个分离的环形。
+			<li>
+				<b>simplifyCallback</b>- 报告简化操作返回的环的数量。
+			<li>
+				<b>doQuery</b>- 查询所有被多边形相交或包含的部分。
+			<li>
+				<b>queryCallback</b>- 在地图上画出查询结果。为了性能，结果被显示为一个大的多个部分的多边形。更多技巧见<a href="../jshelp/inside_guidelines.htm">Coding Guidelines</a>。</li>
+		</ul>
+
+<!--***END TEXT - DO NOT WRITE BELOW THIS LINE***--> 
+
+  <H4 class=dtH4>代码</H4>
+  <div class="detailSample">
+  <code>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"&gt;<br/>
+&lt;html&gt;<br/>
+&nbsp;&nbsp;&lt;head&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8"/&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;meta http-equiv="X-UA-Compatible" content="IE=7" /&gt;<br/>
+&nbsp;&nbsp;&lt;title&gt;Simplify a polygon&lt;/title&gt;<br/>
+<br/>
+&nbsp;&nbsp;&lt;link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css"&gt;<br/>
+&nbsp;&nbsp;&lt;script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"&gt;&lt;/script&gt;<br/>
+<br/>
+&nbsp;&nbsp;&lt;script type="text/javascript"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;dojo.require("esri.map");<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;dojo.require("esri.tasks.geometry");<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;dojo.require("esri.geometry");<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;var map = null;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;var gsvc = null;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;var qtask = null;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;var polygonGraphic = null;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;var queryGraphic = null;<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;function initialize() {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map = new esri.Map("map");<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dojo.connect(map, "onLoad", function () {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;drawPolygon();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var layer = new esri.layers.ArcGISTiledMapServiceLayer("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Portland/ESRI_LandBase_WebMercator/MapServer/");<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map.addLayer(layer);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map.setExtent(new esri.geometry.Extent(-13669046, 5696984, -13666179, 5698895, new esri.SpatialReference({wkid: 102113})));<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gsvc = new esri.tasks.GeometryService("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Geometry/GeometryServer");<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;qtask = new esri.tasks.QueryTask("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Portland/ESRI_LandBase_WebMercator/MapServer/1");<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;function drawPolygon() {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var latOffset, lonOffset, center, lat, lon, points;<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;///// Get map center<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;center = map.extent.getCenter();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lat = center.y;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lon = center.x + 500;<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;///// Create a Green Polygon<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;latOffset = 500;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lonOffset = 500;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;points = [<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new esri.geometry.Point(lon - lonOffset, lat),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new esri.geometry.Point(lon, lat + latOffset),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new esri.geometry.Point(lon + lonOffset, lat),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new esri.geometry.Point(lon, lat - latOffset),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new esri.geometry.Point(lon - lonOffset, lat),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new esri.geometry.Point(lon - 2 * lonOffset, lat + latOffset),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new esri.geometry.Point(lon - 3 * lonOffset, lat),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new esri.geometry.Point(lon - 2 * lonOffset, lat - latOffset),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new esri.geometry.Point(lon - 1.5 * lonOffset, lat + latOffset),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new esri.geometry.Point(lon - lonOffset, lat)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;];<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var polygon = new esri.geometry.Polygon();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;polygon.addRing(points);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;polygon.spatialReference = new esri.SpatialReference({ wkid: 102113});<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Add the polygon to map<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var symbol = new esri.symbol.SimpleFillSymbol().setStyle(esri.symbol.SimpleFillSymbol.STYLE_SOLID);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;polygonGraphic = new esri.Graphic(polygon, symbol);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map.graphics.add(polygonGraphic);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;function doSimplify() {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gsvc.simplify([ polygonGraphic ], simplifyCallback);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;function simplifyCallback(features) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert("Number of Rings returned by Simplify operation = " + features[0].geometry.rings.length);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;doQuery(features[0]); // select a ring to do query<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;function doQuery(queryGraphic) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var query = new esri.tasks.Query();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//query.spatialRelationship = esri.tasks.Query.SPATIAL_REL_INTERSECTS;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;query.spatialRelationship = esri.tasks.Query.SPATIAL_REL_CONTAINS;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;query.geometry = queryGraphic.geometry;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;query.returnGeometry = true;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;qtask.execute(query, queryCallback);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;function queryCallback(featureSet) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map.graphics.remove(queryGraphic);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var symbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([0,0,255,0.65]), 2), new dojo.Color([0,0,255,0.35]));<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var features = featureSet.features;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var polys = new esri.geometry.Polygon();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//For performance, push all featureSet polygons into polys geometry.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//Users will not be able to query individual polygons, but the display will be faster<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (var j=0, jl=features.length; j&lt;jl; j++) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var featureGeom = features[j].geometry;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (var k=0, kl=featureGeom.rings.length; k&lt;kl; k++) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var featureGeomRing = featureGeom.rings[k];<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;polys.addRing(featureGeomRing);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;queryGraphic = new esri.Graphic(polys,symbol)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map.graphics.add(queryGraphic);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;dojo.addOnLoad(initialize);<br/>
+&nbsp;&nbsp;&lt;/script&gt;<br/>
+<br/>
+&lt;/head&gt;<br/>
+<br/>
+&lt;body class="tundra"&gt;<br/>
+&nbsp;&nbsp;Many spatial operations require topologically correct geometry.<br/>
+&nbsp;&nbsp;&lt;br/&gt;&lt;input type="button" value="Simplify the polygon and Do a Query with simplified polygon" onclick="doSimplify();" /&gt;<br/>
+&nbsp;&nbsp;&lt;br/&gt;If you try to use the self-intersecting geometry above without simplifying it you will get incorrect results.<br/>
+&nbsp;&nbsp;&lt;br/&gt;&lt;input type="button" value="Execute query task without simplifying polygon" onclick="doQuery(polygonGraphic);" /&gt;<br/>
+&nbsp;&nbsp;&lt;div id="map" style="width:600px; height:400px; border:1px solid #000;"&gt;&lt;/div&gt;<br/>
+&lt;/body&gt;<br/>
+<br/>
+&lt;/html&gt;</code>
+  			</div>
+
+
+<br/><br/></div> 
+</body>
+</html>

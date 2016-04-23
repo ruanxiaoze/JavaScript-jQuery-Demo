@@ -1,0 +1,467 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>VETiledLayer</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: VETiledLayer</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	<i>v1.4增加的类。</i><br/><br/> Bing Maps tiled layer.
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+<a href="layer.htm">esri.layers.Layer</a>
+  |_ <a href="tiledmapservicelayer.htm">esri.layers.TiledMapServiceLayer</a>
+        |_ esri.virtualearth.VETiledLayer
+</pre><H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#VETiledLayerConst">esri.virtualearth.VETiledLayer(options)</a></td>
+		<td class="syntaxTABLE">创建一个新的VETiledLayer对象.  The parameters can be included in any order.  Either <code>tokenURL</code> or <code>serverToken and clientToken</code> are required in the constructor.  All other parameters are optional.</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#clientToken">clientToken</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+The Bing Maps Web services token used by the browser to make Bing Maps tile requests.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#culture">culture</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+Specifies the culture in which to return results. 默认值是"en-US". For a list of supported cultures, see <a href="http://msdn.microsoft.com/en-us/library/cc981048.aspx" target="_blank">http://msdn.microsoft.com/en-us/library/cc981048.aspx</a>.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#environment">environment</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+The Bing Maps server environment, use either "staging" or "production".</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#mapStyle">mapStyle</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+Bing Maps style.  See Constants table for valid values.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#serverToken">serverToken</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+The Bing Maps Web services token used by the ArcGIS VEAdapter to make Bing Maps imagery service metadata requests.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#tokenDuration">tokenDuration</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+Duration of the Bing Maps token in minutes.  The minimum is 15, and the maximum is 480 (8 hours).</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#tokenUrl">tokenUrl</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+The root URL of the "Get Virtual Earth Token" page.  关于更多信息，见 <a href="../jshelp/ve_getting_started.htm">Getting started with Bing Maps in the ArcGIS JavaScript API</a>.</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>常量</H4>
+
+	<table CLASS="syntaxTABLE" cellspacing="0">
+	<tr>
+	<th class="tableheader" width="20%">常量</th>
+		<th class="tableheader">描述</th>
+	</tr>
+
+		<tr>
+		<td class="syntaxTABLE">MAP_STYLE_AERIAL</td>
+			<td class="syntaxTABLE">			<a href="http://resources.esri.com/arcgisonlineservices/index.cfm?fa=content_detail&contentID=F7F1C178-1422-2413-19F80FF24949EA3C" target="_blank">Bing Maps Aerial</a> layer.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">MAP_STYLE_AERIAL_WITH_LABELS</td>
+			<td class="syntaxTABLE">			<a href="http://resources.esri.com/arcgisonlineservices/index.cfm?fa=content_detail&contentID=F7F67396-1422-2413-19AC5CB0F4B4C16D" target="_blank">Bing Maps Aerial with Labels</a> layer.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">MAP_STYLE_ROAD</td>
+			<td class="syntaxTABLE">			<a href="http://resources.esri.com/arcgisonlineservices/index.cfm?fa=content_detail&contentID=F7F808BA-1422-2413-19DD79962C752E7F" target="_blank">Bing Maps Roads</a> layer.		</td>
+	</tr>
+
+</table>
+
+<H4 class=dtH4>方法表</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+		<th class="tableheader">方法</th>
+		<th class="tableheader">返回值</th>
+		<th class="tableheader">描述</th>
+		</tr>
+
+<tr>
+<td class="syntaxTABLE"><a href="#setClientToken">setClientToken(clientToken)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">Updates client token.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setCulture">setCulture(culture)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">Sets the culture in which to return results.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setMapStyle">setMapStyle(style)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">Sets the Bing Maps style.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setServerToken">setServerToken(serverToken)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">Updates server token.</td>	</tr></table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="VETiledLayerConst"></a><H4>esri.virtualearth.VETiledLayer(options)</H4>
+		</div>
+
+<div class="detaildesc">创建一个新的VETiledLayer对象.  The parameters can be included in any order.  Either <code>tokenURL</code> or <code>serverToken and clientToken</code> are required in the constructor.  All other parameters are optional.</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;Object>
+<B>options</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			为参数设置选项列表
+			</td>
+			</tr>
+</table>
+
+<div class="detaildesc"><strong>可选项:</strong></div><table CLASS="detailTABLE" cellspacing="0" >
+<tr>
+			<td class="detailTABLE">
+&lt;String>
+<B>clientToken</B></td>
+			<td class="detailTABLE">
+			Note:  Either <code>tokenURL</code> or <code>serverToken and clientToken</code> are required in the constructor.<br/><br/>
+
+The Bing Maps Web services token used by the browser to make Bing Maps tile requests.
+			</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;String>
+<B>culture</B></td>
+			<td class="detailTABLE">
+			Specifies the culture in which to return results. 默认值是"en-US". For a list of supported cultures, see <a href="http://msdn.microsoft.com/en-us/library/cc981048.aspx" target="_blank">http://msdn.microsoft.com/en-us/library/cc981048.aspx</a>.
+			</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;String>
+<B>environment</B></td>
+			<td class="detailTABLE">
+			The Bing Maps server environment, use either "staging" or "production".
+			</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;String>
+<B>mapStyle</B></td>
+			<td class="detailTABLE">
+			Bing Maps style.  See Constants table for valid values.
+			</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;String>
+<B>serverToken</B></td>
+			<td class="detailTABLE">
+			Note:  Either <code>tokenURL</code> or <code>serverToken and clientToken</code> are required in the constructor.<br/><br/>
+
+The Bing Maps Web services token used by the ArcGIS VEAdapter to make Bing Maps imagery service metadata requests.
+			</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;String>
+<B>tokenDuration</B></td>
+			<td class="detailTABLE">
+			The duration of the token in minutes.  The minimum value is 15 and the maximum value is 480 (8 hours).
+			</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;String>
+<B>tokenUrl</B></td>
+			<td class="detailTABLE">
+			Note:  Either <code>tokenURL</code> or <code>serverToken and clientToken</code> are required in the constructor.<br/><br/>
+
+The root URL of the "Get Virtual Earth Token" page.  关于更多信息，见 <a href="../jshelp/ve_getting_started.htm">Getting started with Bing Maps in the ArcGIS JavaScript API</a>.
+			</td>
+			</tr>
+</table>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="clientToken"></a>
+&lt;String> clientToken</H4></div>
+
+<div class="detaildesc">The Bing Maps Web services token used by the browser to make Bing Maps tile requests.</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setClientToken">setClientToken</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="culture"></a>
+&lt;String> culture</H4></div>
+
+<div class="detaildesc">Specifies the culture in which to return results. 默认值是"en-US". For a list of supported cultures, see <a href="http://msdn.microsoft.com/en-us/library/cc981048.aspx" target="_blank">http://msdn.microsoft.com/en-us/library/cc981048.aspx</a>.</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> en-US
+			</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setCulture">setCulture</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="environment"></a>
+&lt;String> environment</H4></div>
+
+<div class="detaildesc">The Bing Maps server environment, use either "staging" or "production".</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> staging | production
+			</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> staging
+			</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="mapStyle"></a>
+&lt;String> mapStyle</H4></div>
+
+<div class="detaildesc">Bing Maps style.  See Constants table for valid values.</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> MAP_STYLE_ROAD
+			</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setMapStyle">setMapStyle</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="serverToken"></a>
+&lt;String> serverToken</H4></div>
+
+<div class="detaildesc">The Bing Maps Web services token used by the ArcGIS VEAdapter to make Bing Maps imagery service metadata requests.</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setServerToken">setServerToken</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="tokenDuration"></a>
+&lt;String> tokenDuration</H4></div>
+
+<div class="detaildesc">Duration of the Bing Maps token in minutes.  The minimum is 15, and the maximum is 480 (8 hours).</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> 480
+			</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="tokenUrl"></a>
+&lt;String> tokenUrl</H4></div>
+
+<div class="detaildesc">The root URL of the "Get Virtual Earth Token" page.  关于更多信息，见 <a href="../jshelp/ve_getting_started.htm">Getting started with Bing Maps in the ArcGIS JavaScript API</a>.</div>
+
+</div>
+
+<div class=sectionDivider>方法详细信息</div>
+<div class="detaildiv">
+		<div class="detailname"><a name="setClientToken"></a><H4>
+setClientToken(clientToken)</H4></div>
+
+<div class="detaildesc">Updates client token.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>clientToken</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+The new token to update with.</td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#clientToken">clientToken</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setCulture"></a><H4>
+setCulture(culture)</H4></div>
+
+<div class="detaildesc">Sets the culture in which to return results.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>culture</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+The culture value.  默认值是"en-US". For a list of supported cultures, see <a href="http://msdn.microsoft.com/en-us/library/cc981048.aspx" target="_blank">http://msdn.microsoft.com/en-us/library/cc981048.aspx</a>.</td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#culture">culture</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setMapStyle"></a><H4>
+setMapStyle(style)</H4></div>
+
+<div class="detaildesc">Sets the Bing Maps style.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>style</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+Bing Maps style.  See Constants table for valid values.</td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#mapStyle">mapStyle</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setServerToken"></a><H4>
+setServerToken(serverToken)</H4></div>
+
+<div class="detaildesc">Updates server token.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>serverToken</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+The new token to update with.</td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#serverToken">serverToken</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<br/></div></body></html> 

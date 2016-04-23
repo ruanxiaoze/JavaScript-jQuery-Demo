@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>RouteResult</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: RouteResult</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	<i>Class added v1.4.</i><br/><br/>  The result from the Route Task.  The RouteResult properties are dependent on the <a href="routeparameters.htm">RouteParameter</a> inputs.  For example, directions are only returned if RouteParameters.returnDirections is set to "true".  RouteResult has no constructor.
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.tasks.RouteResult
+</pre>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#directions">directions</a></td>
+<td class="syntaxTABLE">
+<a href="directionsfeatureset.htm">DirectionsFeatureSet</a>
+</td>
+
+<td class="syntaxTABLE">
+Route directions are returned if <code>RouteParameters.returnDirections</code> is set to true.  For more information, see <a href="../jshelp/intro_route_directions.htm">Getting driving directions</a>.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#route">route</a></td>
+<td class="syntaxTABLE">
+<a href="graphic.htm">Graphic</a>
+</td>
+
+<td class="syntaxTABLE">
+The Route graphic that is returned if <code>RouteParameters.returnRoutes</code> is true. For the list of attributes associated with the route, see the "Route properties" section in <a href="http://webhelp.esri.com/arcgisdesktop/9.3/index.cfm?TopicName=Finding_the_best_route" class="external text" title="http://webhelp.esri.com/arcgisdesktop/9.3/index.cfm?TopicName=Finding_the_best_route" target="_blank">Finding the best route</a>.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#routeName">routeName</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+The name of the route.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#stops">stops</a></td>
+<td class="syntaxTABLE">
+<a href="graphic.htm">Graphic[]</a>
+</td>
+
+<td class="syntaxTABLE">
+Array of stops. Returned only if <code>RouteParameters.returnStops</code> is true. For the list of attributes returned for each stop, see the "Stop properties" section in <a href="http://webhelp.esri.com/arcgisdesktop/9.3/index.cfm?TopicName=Finding_the_best_route" class="external text" title="http://webhelp.esri.com/arcgisdesktop/9.3/index.cfm?TopicName=Finding_the_best_route" target="_blank">Finding the best route</a>.</td>
+		</tr>
+</table>
+
+<div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="directions"></a>
+&lt;<a href="directionsfeatureset.htm">DirectionsFeatureSet</a>> directions</H4></div>
+
+<div class="detaildesc">Route directions are returned if <code>RouteParameters.returnDirections</code> is set to true.  For more information, see <a href="../jshelp/intro_route_directions.htm">Getting driving directions</a>.</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="RouteParameters.htm#returnDirections">RouteParameters.returnDirections</a>
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="route"></a>
+&lt;<a href="graphic.htm">Graphic</a>> route</H4></div>
+
+<div class="detaildesc">The Route graphic that is returned if <code>RouteParameters.returnRoutes</code> is true. For the list of attributes associated with the route, see the "Route properties" section in <a href="http://webhelp.esri.com/arcgisdesktop/9.3/index.cfm?TopicName=Finding_the_best_route" class="external text" title="http://webhelp.esri.com/arcgisdesktop/9.3/index.cfm?TopicName=Finding_the_best_route" target="_blank">Finding the best route</a>.</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="RouteParameters.htm#returnRoutes">RouteParameters.returnRoutes</a>
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="routeName"></a>
+&lt;String> routeName</H4></div>
+
+<div class="detaildesc">The name of the route.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="stops"></a>
+&lt;<a href="graphic.htm">Graphic[]</a>> stops</H4></div>
+
+<div class="detaildesc">Array of stops. Returned only if <code>RouteParameters.returnStops</code> is true. For the list of attributes returned for each stop, see the "Stop properties" section in <a href="http://webhelp.esri.com/arcgisdesktop/9.3/index.cfm?TopicName=Finding_the_best_route" class="external text" title="http://webhelp.esri.com/arcgisdesktop/9.3/index.cfm?TopicName=Finding_the_best_route" target="_blank">Finding the best route</a>.</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="RouteParameters.htm#returnStops">RouteParameters.returnStops</a>
+</div>
+
+</div>
+
+<br/></div></body></html> 

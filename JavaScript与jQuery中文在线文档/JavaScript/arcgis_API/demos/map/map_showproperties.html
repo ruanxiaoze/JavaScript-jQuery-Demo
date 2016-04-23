@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>ArcGIS JavaScript API Map Layer</title>
+    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css">
+    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"></script>
+    <script type="text/javascript">
+      dojo.require("esri.map");
+
+      var myMap, portlandParcels, transportation, census;
+
+      function init() {
+        myMap = new esri.Map("mapDiv");
+
+        portlandParcels = new esri.layers.ArcGISTiledMapServiceLayer("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Portland/Portland_ESRI_LandBase_AGO/MapServer");
+        myMap.addLayer(portlandParcels);
+
+        transportation = new esri.layers.ArcGISTiledMapServiceLayer("http://server.arcgisonline.com/ArcGIS/rest/services/Reference/ESRI_Transportation_World_2D/MapServer", {"id":"agoreference", "opacity":0.5});
+        myMap.addLayer(transportation);
+
+        census = new esri.layers.ArcGISDynamicMapServiceLayer("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Census_USA/MapServer", {"id":"census","opacity":0.5});
+        myMap.addLayer(census);
+      }
+
+      function getMapLayers() {
+        for (var j=0, jl=myMap.layerIds.length; j<jl; j++) {
+          var currentLayer = myMap.getLayer(myMap.layerIds[j]);
+          alert("id: " + currentLayer.id + ", visible: " + currentLayer.visible + ", opacity: " + currentLayer.opacity);
+        }
+      }
+
+      function getSr() {
+        alert("Spatial Reference WKID: " + myMap.spatialReference.wkid);
+      }
+
+      function getScales() {
+        var tileInfo = portlandParcels.tileInfo;
+        var scales = "";
+        for (var j=0, jl=tileInfo.lods.length; j<jl; j++) {
+          var level = tileInfo.lods[j].level;
+          var scale = tileInfo.lods[j].scale;
+          var resolution = tileInfo.lods[j].resolution;
+
+          scales = scales + "level: " + level + ", scale: " + scale + ", resolution: " + resolution + "\n";
+        }
+        alert(scales);
+      }
+
+      function getMapWidthHeight() {
+        alert("Width = " + myMap.width + "; Height = " + myMap.height);
+      }
+
+      dojo.addOnLoad(init);
+    </script>
+  </head>
+  <body class="tundra">
+    <div id="mapDiv" style="width:900px; height:600px; border:1px solid #000;"></div>
+    Simple example illustrating working with map and layer properties<br />
+    <input type="button" value="Get All Map Layers" onclick="getMapLayers()" />
+    <input type="button" value="Get SR" onclick="getSr()" />
+    <input type="button" value="Get Scales for portlandParcels" onclick="getScales()" />
+    <input type="button" value="Get Map Width Height" onclick="getMapWidthHeight()" /> <br />
+  </body>
+</html>

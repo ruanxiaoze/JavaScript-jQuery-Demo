@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>Create Map Display Mouse Coordinates</title>
+    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css">
+    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"></script>
+    <script type="text/javascript">
+      dojo.require("esri.map");
+
+      function init() {
+        var map = new esri.Map("map");
+        dojo.connect(map, "onLoad", function() {
+          //after map loads, connect to listen to mouse move & drag events
+          dojo.connect(map, "onMouseMove", showCoordinates);
+          dojo.connect(map, "onMouseDrag", showCoordinates);
+        });
+
+        var tiledMapServiceLayer = new esri.layers.ArcGISTiledMapServiceLayer("http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer");
+        map.addLayer(tiledMapServiceLayer);
+      }
+
+      function showCoordinates(evt) {
+        //get mapPoint from event
+        var mp = evt.mapPoint;
+        //display mouse coordinates
+        dojo.byId("info").innerHTML = mp.x + ", " + mp.y;
+      }
+
+      dojo.addOnLoad(init);
+    </script>
+  </head>
+  <body class="tundra">
+    <div id="map" style="position:relative; width:900px; height:600px; border:1px solid #000;">
+      <span id="info" style="position:absolute; right:25px; bottom:5px; color:#000; z-index:50;"></span>
+    </div>
+  </body>
+</html>

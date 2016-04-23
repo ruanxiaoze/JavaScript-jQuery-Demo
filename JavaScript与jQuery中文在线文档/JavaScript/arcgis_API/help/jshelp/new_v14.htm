@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>What's new in Version 1.4</title>
+</head>
+
+<body>
+
+<div id="pageBanner">What's new in Version 1.4</div>
+
+<div id="nstext">
+
+<!--***START TEXT - DO NOT WRITE ABOVE THIS LINE***-->
+
+<p>The following are new features in version 1.4 of the ArcGIS JavaScript API.</p>
+
+<H4 class="dtH4">Microsoft Virtual Earth maps and geocoding</h4>
+
+<p>Version 1.4 allows for connections to Microsoft Virtual Earth map layers and geocoding. The Virtual Earth road and aerial maps can add detailed context to your Web applications, while the Virtual Earth geocoder can place points on the map from addresses or place names.</p>
+<p>Virtual Earth services require a subscription, as well as an extra page configured on your Web server that allows you to get authentication tokens. See <a href="ve_getting_started.htm">Getting started with Microsoft Virtual Earth in the ArcGIS JavaScript API</a> to learn more.</p>
+
+<p>New classes include:</p>
+<ul>
+<li><a href="../jsapi/vetiledlayer.htm">VETiledLayer</a></li>
+<li><a href="../jsapi/vegeocoder.htm">VEGeocoder</a></li>
+<li><a href="../jsapi/veaddress.htm">VEAddress</a></li>
+<li><a href="../jsapi/vegeocoderesult.htm">VEGeocodeResult</a></li>
+
+</ul>
+
+<H4 class="dtH4">Routing</h4>
+
+<p>The ArcGIS JavaScript API can now work with ArcGIS Server network analysis services to find routes and driving directions. The routing is done through the new Route Task and its associated classes. The Route Task makes it easy to do simple point-to-point routing and get driving directions. Because ArcGIS Network Analyst does the routing work on the server, you can also do complex routing that avoids barriers, complies with time windows, and finds the best path to multiple stops.  For more information, see <a href="intro_route_overview.htm">An overview of routing with the ArcGIS JavaScript API</a>.</p>
+
+<p>New classes include:</p>
+<ul>
+<li><a href="../jsapi/routetask.htm">RouteTask</a></li>
+<li><a href="../jsapi/routeresult.htm">RouteResult</a></li>
+<li><a href="../jsapi/directionsfeatureset.htm">DirectionsFeatureSet</a></li>
+<li><a href="../jsapi/routeparameters.htm">RouteParameters</a></li>
+<li><a href="../jsapi/datalayer.htm">DataLayer</a></li>
+<li><a href="../jsapi/naoutputline.htm">NAOutputLine</a></li>
+<li><a href="../jsapi/nauturn.htm">NAUTurn</a></li>
+</ul>
+
+<H4 class="dtH4">Renderers</h4>
+
+<p>A renderer defines how you symbolize a set of graphics. Previously with the ArcGIS JavaScript API, you had to symbolize each graphic separately as it was added to the map. Now you can choose to do the work with renderers that automatically supply symbology based on attributes in your data. The simple renderer, unique value renderer, and class breaks renderer included with Version 1.4 make it easier to do thematic mapping with the ArcGIS JavaScript API.  For more information, see <a href="inside_renderers.htm">Symbolizing graphics with renderers</a>.</p>
+
+<p>New classes include:</p>
+<ul>
+<li><a href="../jsapi/renderer.htm">Renderer</a></li>
+<li><a href="../jsapi/simplerenderer.htm">SimpleRenderer</a></li>
+<li><a href="../jsapi/uniquevaluerenderer.htm">UniqueValueRenderer</a></li>
+<li><a href="../jsapi/classbreaksrenderer.htm">ClassBreaksRenderer</a></li>
+</ul>
+
+<H4 class="dtH4">Multiple graphics layers</h4>
+
+<p>Version 1.4 supports multiple graphics layers in the map, which makes it much easier to organize different types of graphics. For example, you can put polygon graphics representing counties in one graphics layer and point graphics representing traffic incidents in another graphics layer. Then you can easily add or remove either layer as needed.</p>
+
+<p>Updated classes include:</p>
+<ul>
+<li><a href="../jsapi/graphicslayer.htm">GraphicsLayer</a>:  includes new constructors.  Also added <code>renderers</code> property.</li>
+<li><a href="../jsapi/map.htm">Map</a>:  added <code>graphicsLayerIds</code> property. Other changes include the first parameter in <code>reorderLayer</code> is Layer instead of id; the <code>addLayer</code> method returns Layer.</li>
+</ul>
+
+<H4 class="dtH4">Updates to Geometry classes</h4>
+<p>The following updates were made to the Geometry classes:</p>
+<ul>
+<li><a href="../jsapi/geometry.htm">Geometry</a>:  <code>setSpatialReference</code> method returns <code>Geometry</code>.</li>
+<li><a href="../jsapi/point.htm">Point</a>: new method <code>update</code>;  <code>setX</code> and <code>setY</code> methods return Point.</li>
+<li><a href="../jsapi/multipoint.htm">Multipoint</a>: <code>addPoint</code> method returns Multipoint.</li>
+<li><a href="../jsapi/polyline.htm">Polyline</a>: new methods <code>insertPoint</code> and <code>setPoint</code>;  <code>addPath</code> method returns Polyline.</li>
+<li><a href="../jsapi/polygon.htm">Polygon</a>:  new methods <code>insertPoint</code> and <code>setPoint</code>;  <code>addRing</code> method returns Polygon.</li>
+<li><a href="../jsapi/extent.htm">Extent</a>: <code>update</code> method returns Extent.</li>
+</ul>
+
+<H4 class="dtH4">Changes to namespace classes</h4>
+<p>The following changes were made to namespace classes:</p>
+<ul>
+<li><a href="../jsapi/namespace_geometry.htm">esri.geometry namespace</a>: new methods <code>geographicToWebMercator</code>, <code>getScale</code>, and <code>webMercatorToGeogrpahic</code>.</li>
+<li><a href="../jsapi/units.htm">esri.Units</a>:  new class containing constants representing units of measure.</li>
+</ul>
+
+<H4 class="dtH4">dojo.Deferred added as the return object to asynchronous task methods</h4>
+<p>The return object <a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a> was added to asynchronous task methods.  This object monitors the status of a request and manages the communication of asynchronous threads.  Classes that have methods that return dojo.Deferred object include:</p>
+
+<ul>
+<li><a href="../jsapi/findtask.htm">FindTask</a></li>
+<li><a href="../jsapi/geometryservice.htm">GeometryService</a></li>
+<li><a href="../jsapi/geoprocessor.htm">Geoprocessor</a></li>
+<li><a href="../jsapi/identifytask.htm">IdentifyTask</a></li>
+<li><a href="../jsapi/locator.htm">Locator</a></li>
+<li><a href="../jsapi/querytask.htm">QueryTask</a></li>
+<li><a href="../jsapi/routetask.htm">RouteTask</a></li>
+<li><a href="../jsapi/vegeocoder.htm">VEGeocoder</a></li>
+</ul>
+
+<H4 class="dtH4">Performance improvements</H4>
+<p>Performance improvements in drawing vector graphics in Internet Explorer.  Drawing graphics with polygons is approximately twice as fast at 1.4 as compared to earlier versions of the API.</p>
+
+
+<H4 class="dtH4">Support for Dojo 1.3.1</H4>
+<p>When you reference the ArcGIS JavaScript API in your code, you also get a reference to version 1.3.1 of the Dojo Toolkit. </p>
+
+<H4 class="dtH4">Bug fixes</H4>
+<p>The following are the identification numbers and summaries for bug fixes and enhancements in version 1.4:</p>
+<ul>
+<li>NIM042985: Map navigation operations cause excessive memory consumption in the JavaScript API versions 1.2 and 1.3 when using Internet Explorer 7.  </li>
+<li>NIM043335: Cache PNG32 image shows with wrong background in Internet Explorer 6. </li>
+<li>NIM043427: Custom PictureMarkerSymbol disappears when zooming in when using Internet Explorer. </li>
+<li>NIM043431:  Visibility of the Dynamic MapService layer freezes when it's display is toggled too quickly. </li>
+
+</ul>
+
+</br></br>
+<!--***END TEXT - DO NOT WRITE BELOW THIS LINE***-->
+</div>
+
+</body>
+</html>

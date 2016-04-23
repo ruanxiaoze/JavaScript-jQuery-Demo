@@ -1,0 +1,233 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>QueryTask</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: QueryTask</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+    在ArcGIS Server REST API提供的地图服务图层资源上执行一个查询操作。
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.tasks.QueryTask
+</pre>
+
+<H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#QueryTaskConst">esri.tasks.QueryTask(url)</a></td>
+		<td class="syntaxTABLE">创建一个在图层资源的url上执行查询的QueryTask对象。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#url">url</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+表示一个地图服务图层的ArcGIS Server REST资源的URL。. 为了获得URL，使用 <a href="../jshelp/ags_rest.htm">Services Directory</a>.</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>方法表</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+		<th class="tableheader">方法</th>
+		<th class="tableheader">返回值</th>
+		<th class="tableheader">描述</th>
+		</tr>
+
+<tr>
+<td class="syntaxTABLE"><a href="#execute">execute(parameters, callback?, errback?)</a></td><td class="syntaxTABLE">
+<a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a>
+</td>
+<td class="syntaxTABLE">在ArcGIS Server地图图层上执行<a href="query.htm">查询</a>。返回结果是<a href="featureset.htm">FeatureSet</a>。如果查询成功，用户指定的callback函数被调用。<a href="featureset.htm">FeatureSet</a>包含<a href="graphic.htm">Graphic</a>数组要素，可以通过<a href="map.htm#graphics">Map.graphics.add()</a>加到地图里面。如果没有找到结果，这个数组不会被填充。</td>	</tr></table>
+
+<H4 class=dtH4>事件</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">事件</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#onComplete">onComplete(featureSet)
+		</a></td>
+
+<td class="syntaxTABLE">QueryTask.execute()方法执行完成，该事件被触发。结果是一个<a href="featureset.htm">FeatureSet</a>。如果可选的callback函数被指定，返回相同的信号。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onError">onError(error)
+		</a></td>
+
+<td class="syntaxTABLE">当执行任务放生错误时，触发该事件。</td>
+		</tr></table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="QueryTaskConst"></a><H4>esri.tasks.QueryTask(url)</H4>
+		</div>
+
+<div class="detaildesc">创建一个在图层资源的url上执行查询的QueryTask对象。</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;String>
+<B>url</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			表示一个服务图层的ArcGIS Server REST 资源的URL。一个示例是http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Portland/Portland_ESRI_LandBase_AGO/MapServer/1.  For more information on constructing a URL, see <a href="../jshelp/ags_rest.htm">The Services Directory and the REST API</a>.
+			</td>
+			</tr>
+</table>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="url"></a>
+&lt;String> url</H4></div>
+
+<div class="detaildesc">表示一个地图服务图层的ArcGIS Server REST资源的URL。. 为了获得URL，使用 <a href="../jshelp/ags_rest.htm">Services Directory</a>.</div>
+
+</div>
+
+<div class=sectionDivider>方法详细信息</div>
+<div class="detaildiv">
+		<div class="detailname"><a name="execute"></a><H4>
+execute(parameters, callback?, errback?)</H4></div>
+
+<div class="detaildesc">在ArcGIS Server地图图层上执行<a href="query.htm">查询</a>。返回结果是<a href="featureset.htm">FeatureSet</a>。如果查询成功，用户指定的callback函数被调用。<a href="featureset.htm">FeatureSet</a>包含<a href="graphic.htm">Graphic</a>数组要素，可以通过<a href="map.htm#graphics">Map.graphics.add()</a>加到地图里面。如果没有找到结果，这个数组不会被填充。<br/><br/>The return object of <code>dojo.Deferred</code> was added at v1.4.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="query.htm">Query</a>> <B>parameters</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">指定属性和查询的空间过滤器。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>callback</B></td>
+			<td class="detailTABLE">
+Optional</td>
+			<td class="detailTABLE">
+            <a href="featureset.htm">FeatureSet</a>参数传给callback函数，
+</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>errback</B></td>
+			<td class="detailTABLE">
+Optional</td>
+			<td class="detailTABLE">
+如果在服务器上任务执行期间发生错误，一个error对象被返回。<i>(As of v1.3) </i></td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onComplete">onComplete</a>&nbsp;&nbsp;
+<a href="#onError">onError</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<H4 class=dtH4>Events Detail</H4>
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onComplete"></a><H4>
+onComplete(featureSet)	</H4></div>
+
+
+<div class="detaildesc">QueryTask.execute()方法执行完成，该事件被触发。结果是一个<a href="featureset.htm">FeatureSet</a>。如果可选的callback函数被指定，返回相同的信号。</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="featureset.htm">FeatureSet</a>> <B>featureSet</B>
+			</td>
+
+<td class="detailTABLE">
+		执行在图层上的查询操作的结果。
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#execute">execute</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onError"></a><H4>
+onError(error)	</H4></div>
+
+
+<div class="detaildesc">当执行任务放生错误时，触发该事件。<i> (As of v1.3)</i></div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;Error> <B>error</B>
+			</td>
+
+<td class="detailTABLE">
+			ArcGIS Server错误信息在<a href="http://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/Error" target="_blank">JavaScript error object</a>中返回。
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#execute">execute</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<br/></div></body></html> 

@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>Demographic Charts</title>
+    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css">
+    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"></script>
+    <script type="text/javascript">
+      dojo.require("esri.map");
+      dojo.require("esri.tasks.query");
+
+      var map, queryTask, query, click;
+      var wd = 240;
+      var ht = 110;
+      var chartParams = { cht:"p3", chl:"White|Black|Hispanic|Asian|Other" };
+
+      function init() {
+        map = new esri.Map("map", { extent:new esri.geometry.Extent({ "xmin": -125.947265625, "ymin": 31.17919921875, "xmax": -103.974609375, "ymax": 42.16552734375  }) });
+        map.addLayer(new esri.layers.ArcGISTiledMapServiceLayer("http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer"));
+        map.addLayer(new esri.layers.ArcGISDynamicMapServiceLayer("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Census_USA/MapServer", { opacity:0.4 }));
+        dojo.connect(map, "onClick", doQuery);
+
+        queryTask = new esri.tasks.QueryTask("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Census_USA/MapServer/3");
+        dojo.connect(queryTask, "onComplete", getChart);
+
+        dojo.connect(map.infoWindow, "onHide", function() {map.graphics.clear();});
+        query = new esri.tasks.Query();
+        query.spatialRelationship = esri.tasks.Query.SPATIAL_REL_INTERSECTS;
+        query.outFields = ["NAME", "WHITE", "BLACK", "ASIAN", "HISPANIC", "OTHER"];
+        query.returnGeometry = true;
+
+        map.infoWindow.resize(275,150);
+      }
+
+      function doQuery(evt) {
+        click = query.geometry = evt.mapPoint;
+        queryTask.execute(query);
+      }
+
+      function getChart(featureSet) {
+        map.graphics.clear();
+
+        var features = featureSet.features;
+        var feature, attributes, white, black, asian, hispanic, other, total, graphic;
+        for (var i=0; i<features.length; i++) {
+          feature = features[i];
+          attributes = feature.attributes;
+
+          white = parseInt(attributes.WHITE);
+          black = parseInt(attributes.BLACK);
+          asian = parseInt(attributes.ASIAN);
+          hispanic = parseInt(attributes.HISPANIC);
+          other = parseInt(attributes.OTHER);
+
+          total = white + black + asian + hispanic + other;
+
+          white = (white / total) * 100;
+          black = (black / total) * 100;
+          asian = (asian / total) * 100;
+          hispanic = (hispanic / total) * 100;
+          other = (other / total) * 100;
+
+          var params = dojo.mixin({
+              chf:"bg,s,FFFFFF50",
+              chs:wd + "x" + ht,
+              chd: "t:" + white + "," + black + "," + hispanic + "," + asian + "," + other
+            }, chartParams);
+
+          var mySymbol = new esri.symbol.SimpleFillSymbol("none", new esri.symbol.SimpleLineSymbol("dashdot", new dojo.Color([255,0,0]), 2.5), new dojo.Color([255,255,0,0.25]));
+
+          feature.setSymbol(mySymbol);
+
+          map.infoWindow.setTitle(attributes["NAME"]);
+          map.infoWindow.setContent("<img src=\"" + "http://chart.apis.google.com/chart?"
+                                     + decodeURIComponent(dojo.objectToQuery(params)) + "\" />");
+
+          map.graphics.add(feature);
+          map.infoWindow.show(map.toScreen(click),map.getInfoWindowAnchor(map.toScreen(click)));
+        }
+      }
+
+      dojo.addOnLoad(init);
+    </script>
+  </head>
+  <body class="tundra">
+    <span style="font-size:200%; font-weight:bold;">USA County Demographics</span>
+    <div id="map" style="width:1000px; height:500px; border:1px solid #000;"></div>
+  </body>
+</html>

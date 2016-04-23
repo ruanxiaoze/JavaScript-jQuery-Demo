@@ -1,0 +1,221 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>MarkerSymbol</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: MarkerSymbol</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+    标记符号用于绘出图形图层上的points或multipoints。 <br /><br />
+MarkerSymbol没有构造函数。用<a href="simplemarkersymbol.htm">SimpleMarkerSymbol</a>或<a href="picturemarkersymbol.htm">PictureMarkerSymbol</a>.
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+<a href="symbol.htm">esri.symbol.Symbol</a>
+  |_ esri.symbol.MarkerSymbol
+</pre><H4 class=dtH4>子类</H4>
+
+<a href="picturemarkersymbol.htm">PictureMarkerSymbol</a>&nbsp;&nbsp;<a href="simplemarkersymbol.htm">SimpleMarkerSymbol</a>&nbsp;&nbsp;<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#angle">angle</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+图片的角度。0是指向右侧并且值是顺时针。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#size">size</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+标记的大小（单位：像素）。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#xoffset">xoffset</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+x轴上的偏移量（单位：像素）。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#yoffset">yoffset</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+y轴上的偏移量（单位：像素）。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>方法表</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+		<th class="tableheader">方法</th>
+		<th class="tableheader">返回值</th>
+		<th class="tableheader">描述</th>
+		</tr>
+
+<tr>
+<td class="syntaxTABLE"><a href="#setAngle">setAngle(angle)</a></td><td class="syntaxTABLE">
+<a href="markersymbol.htm">MarkerSymbol</a>
+</td>
+<td class="syntaxTABLE">设置标记的角度。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setOffset">setOffset(x, y)</a></td><td class="syntaxTABLE">
+<a href="markersymbol.htm">MarkerSymbol</a>
+</td>
+<td class="syntaxTABLE">设置标记的x和y的偏移量（单位：屏幕单位）。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setSize">setSize(size)</a></td><td class="syntaxTABLE">
+<a href="markersymbol.htm">MarkerSymbol</a>
+</td>
+<td class="syntaxTABLE">设置标记的大小（单位：像素）。</td>	</tr></table>
+
+<div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="angle"></a>
+&lt;Number> angle</H4></div>
+
+<div class="detaildesc">图片的角度。0是指向右侧并且值是顺时针。</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> 0
+			</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="size"></a>
+&lt;Number> size</H4></div>
+
+<div class="detaildesc">标记的大小（单位：像素）。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="xoffset"></a>
+&lt;Number> xoffset</H4></div>
+
+<div class="detaildesc">x轴上的偏移量（单位：像素）。</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> 0
+			</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="yoffset"></a>
+&lt;Number> yoffset</H4></div>
+
+<div class="detaildesc">y轴上的偏移量（单位：像素）。</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> 0
+			</div>
+
+</div>
+
+<div class=sectionDivider>方法详细信息</div>
+<div class="detaildiv">
+		<div class="detailname"><a name="setAngle"></a><H4>
+setAngle(angle)</H4></div>
+
+<div class="detaildesc">设置标记的角度。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="markersymbol.htm">MarkerSymbol</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>angle</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">&nbsp;角度值。0是指向右侧并且值是顺时针。
+</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setOffset"></a><H4>
+setOffset(x, y)</H4></div>
+
+<div class="detaildesc">设置标记的x和y的偏移量（单位：屏幕单位）。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="markersymbol.htm">MarkerSymbol</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>x</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+x偏移量（单位：像素）。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>y</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">&nbsp;y偏移量（单位：像素）。
+</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setSize"></a><H4>
+setSize(size)</H4></div>
+
+<div class="detaildesc">设置标记的大小（单位：像素）。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="markersymbol.htm">MarkerSymbol</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>size</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+符号的宽度（单位：像素）。</td>
+			</tr>
+</table>
+
+</div>
+
+<br/></div></body></html> 

@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>Points in Extent</title>
+    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css">
+    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"></script>
+    <script type="text/javascript">
+      dojo.require("esri.map");
+      dojo.require("esri.toolbars.draw");
+      dojo.require("esri.tasks.query");
+
+      //global variables
+      var map, defaultSymbol, highlightSymbol, resultTemplate;
+
+      function init() {
+        //create map, set initial extent and disable default info window behavior
+        map = new esri.Map("map", {
+          extent: new esri.geometry.Extent(-125.9016637859635, 44.600742276385304, -114.6516637859635, 50.225742276385304, new esri.SpatialReference({wkid:4326})),
+          showInfoWindowOnClick:false
+        });
+        dojo.connect(map, "onLoad", initToolbar);
+        map.addLayer(new esri.layers.ArcGISTiledMapServiceLayer("http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer"));
+
+        //initialize symbology
+        defaultSymbol = new esri.symbol.SimpleMarkerSymbol().setColor(new dojo.Color([0,0,255]));
+        highlightSymbol = new esri.symbol.SimpleMarkerSymbol().setColor(new dojo.Color([255,0,0]));
+
+        //initialize & execute query
+        var queryTask = new esri.tasks.QueryTask("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StatesCitiesRivers_USA/MapServer/0");
+        var query = new esri.tasks.Query();
+        query.where = "STATE_NAME = 'Washington'";
+        query.returnGeometry = true;
+        query.outFields = ["CITY_NAME"];
+        queryTask.execute(query, addPointsToMap);
+
+        //info template for points returned
+        resultTemplate = new esri.InfoTemplate("City", "<tr><td>${CITY_NAME}</tr></td>");
+      }
+
+      //initialize drawing toolbar
+      function initToolbar(map) {
+        var tb = new esri.toolbars.Draw(map);
+
+        //find points in Extent when user completes drawing extent
+        dojo.connect(tb, "onDrawEnd", findPointsInExtent);
+
+        //set drawing mode to extent
+        tb.activate(esri.toolbars.Draw.EXTENT);
+      }
+
+      //add points to map and set their symbology + info template
+      function addPointsToMap(featureSet) {
+        var features = featureSet.features;
+        for (var i=0, il=features.length; i<il; i++) {
+          map.graphics.add(features[i].setSymbol(defaultSymbol).setInfoTemplate(resultTemplate));
+        }
+      }
+
+      //find all points within argument extent
+      function findPointsInExtent(extent) {
+        var graphics = map.graphics.graphics;
+        var results = [];
+        var graphic;
+        for (var i=0, il=graphics.length; i<il; i++) {
+          graphic = graphics[i];
+
+          //if point is contained within extent, highlight it and add for display in results list
+          if (extent.contains(graphic.geometry)) {
+            graphic.setSymbol(highlightSymbol);
+            results.push(graphic.getContent());
+          }
+          //else if point was previously highlighted, reset its symbology
+          else if (graphic.symbol == highlightSymbol) {
+            graphic.setSymbol(defaultSymbol);
+          }
+        }
+
+        //display number of points in extent
+        dojo.byId("inextent").innerHTML = results.length;
+
+        //display list of points in extent
+        dojo.byId("results").innerHTML = "<table><tbody>" + results.join("") + "</tbody></table>";
+      }
+
+      dojo.addOnLoad(init);
+    </script>
+
+  </head>
+  <body class="tundra">
+    Draw an Extent on the map to find all points within this extent
+
+    <!-- map div -->
+    <div id="map" style="width:800px; height:400px; border:1px solid #000;"></div>
+    <br />
+
+    <!-- display number of points in drawn extent -->
+    <b># of points in extent = <span id="inextent">0</span></b>
+
+    <!-- list points in extent -->
+    <div id="results" style="width:400px; height:200px; border:1px solid #000; overflow:auto;">
+    </div>
+  </body>
+</html>

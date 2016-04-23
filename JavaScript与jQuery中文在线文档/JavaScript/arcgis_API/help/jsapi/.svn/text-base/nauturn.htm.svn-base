@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>NAUTurn</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: NAUTurn</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	<i>Class added v1.4.</i><br/><br/>  Contstants representing how U-Turns are handled.  NAUTurn has no constructor.
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.tasks.NAUTurn
+</pre>
+
+<H4 class=dtH4>常量</H4>
+
+	<table CLASS="syntaxTABLE" cellspacing="0">
+	<tr>
+	<th class="tableheader" width="20%">常量</th>
+		<th class="tableheader">描述</th>
+	</tr>
+
+		<tr>
+		<td class="syntaxTABLE">ALLOW_BACKTRACK</td>
+			<td class="syntaxTABLE">			Allow u-turns at the end of any street.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">AT_DEAD_ENDS_ONLY</td>
+			<td class="syntaxTABLE">			Only allow u-turns at dead ends where a street is not connected to another street.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">NO_BACKTRACK</td>
+			<td class="syntaxTABLE">			Do not allow u-turns at the end of any streets.		</td>
+	</tr>
+
+</table>
+
+<br/></div></body></html> 

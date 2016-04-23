@@ -1,0 +1,879 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>GeometryService</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: GeometryService</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	Represents a geometry service resource exposed by the ArcGIS Server REST API. It is used to perform various operations on geometries such as project, simplify, buffer, and relationships.  For more details on constant values, see <a href="http://resources.esri.com/help/9.3/arcgisserver/apis/soap/SOAP_esriGeometryRelationEnum.htm" target="_blank">esriGeometryRelationEnum</a>.
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.tasks.GeometryService
+</pre>
+
+<H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#GeometryServiceConst">esri.tasks.GeometryService(url)</a></td>
+		<td class="syntaxTABLE">Creates a new GeometryService object.  A URL is a required parameter.</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#url">url</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+URL to the ArcGIS Server REST resource that represents a locator service. To obtain the URL, use <a href="../jshelp/ags_rest.htm">Services Directory</a>.</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>常量</H4>
+
+	<table CLASS="syntaxTABLE" cellspacing="0">
+	<tr>
+	<th class="tableheader" width="20%">常量</th>
+		<th class="tableheader">描述</th>
+	</tr>
+
+		<tr>
+		<td class="syntaxTABLE">SPATIAL_REL_COINCIDENCE</td>
+			<td class="syntaxTABLE">			The boundaries of the geometries must share an intersection, but the relationship between the interiors of the shapes is not considered (they could overlap, one could be contained in the other, or their interiors could be disjoint).  This relation applies to polylines and polygons.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">SPATIAL_REL_CROSS</td>
+			<td class="syntaxTABLE">			Two polylines cross if they share only points in common, at least one of which is not an endpoint.  A polyline and an polygon cross if they share a polyline in common on the interior of the polygon which is not equivalent to the entire polyline.  Cross is a Clementini operator.
+ If either one of the geometries is empty, the geometries do not cross.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">SPATIAL_REL_DISJOINT</td>
+			<td class="syntaxTABLE">			Two geometries are disjoint if their intersection is empty.  Two geometries intersect if disjoint is "false".		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">SPATIAL_REL_IN</td>
+			<td class="syntaxTABLE">			The base geometry is within the comparison geometry if the base geometry is the intersection of the geometries and the intersection of their interiors is not empty.  An empty geometry is within another geometry, unless the other geometry is empty.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">SPATIAL_REL_INTERIORINTERSECTION</td>
+			<td class="syntaxTABLE">			Geometries intersect excluding boundary touch.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">SPATIAL_REL_INTERSECTION</td>
+			<td class="syntaxTABLE">			Geometry interiors intersect or boundaries touch, same as 'not disjoint'.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">SPATIAL_REL_LINETOUCH</td>
+			<td class="syntaxTABLE">			Two geometries are said to touch when the intersection of the geometries is non-empty, but the intersection of their interiors is empty.  This evaluates if the touch occurs along a boundary (not a point).  Valid for polygons.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">SPATIAL_REL_OVERLAP</td>
+			<td class="syntaxTABLE">			Two polylines share a common sub-line, or two polygons share a common sub-area.   Two geometries do not overlap if either one is empty.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">SPATIAL_REL_POINTTOUCH</td>
+			<td class="syntaxTABLE">			Two geometries are said to touch when the intersection of the geometries is non-empty, but the intersection of their interiors is empty.  This evaluates if the touch occurs at a point (not a boundary).		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">SPATIAL_REL_RELATION</td>
+			<td class="syntaxTABLE">			Allows specification of any relationship defined 
+ using the <a href="http://resources.esri.com/help/9.3/arcgisengine/dotnet/concepts_start.htm#40de6491-9b2d-440d-848b-2609efcd46b1.htm" target="_blank">Shape Comparison Language</a>.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">SPATIAL_REL_TOUCH</td>
+			<td class="syntaxTABLE">			The union of esriGeometryRelationPointTouch and esriGeometryRelationLineTouch.  Two geometries are said to touch when the intersection of the geometries is non-empty, but the intersection of their interiors is empty.  For example, a point touches a polyline only if the point is coincident with one of the polyline end points.  If either one of the two geometries is empty, the geometries are not touched.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">SPATIAL_REL_WITHIN</td>
+			<td class="syntaxTABLE">			Same as esriGeometryRelationIn but also allows polylines that are strictly on the boundaries of polygons to be considered in the polygon.		</td>
+	</tr>
+
+</table>
+
+<H4 class=dtH4>方法表</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+		<th class="tableheader">方法</th>
+		<th class="tableheader">返回值</th>
+		<th class="tableheader">描述</th>
+		</tr>
+
+<tr>
+<td class="syntaxTABLE"><a href="#areasAndLengths">areasAndLengths(graphics, callback?, errback?)</a></td><td class="syntaxTABLE">
+<a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a>
+</td>
+<td class="syntaxTABLE">Gets the areas and lengths for a <a href="graphic.htm">Graphic[]</a> when the geometry type is <a href="polygon.htm">Polygon</a>.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#buffer">buffer(bufferParameters, callback?, errback?)</a></td><td class="syntaxTABLE">
+<a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a>
+</td>
+<td class="syntaxTABLE">Creates buffer polygons at a specified distance around the given geometries. On completion, the onBufferComplete event is fired and the optional callback function is invoked. Both the callback and event handlers receive an array of <a href="graphic.htm">Graphic</a> that contains the buffer polygons.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#labelPoints">labelPoints(polygons, callback?, errback?)</a></td><td class="syntaxTABLE">
+<a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a>
+</td>
+<td class="syntaxTABLE">Calculates an interior point for each polygon specified. These interior points can be used by clients for labeling the polygons.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#lengths">lengths(graphics, callback?, errback?)</a></td><td class="syntaxTABLE">
+<a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a>
+</td>
+<td class="syntaxTABLE">Gets the lengths for a <a href="graphic.htm">Graphic[]</a> when the geometry type is <a href="polyline.htm">Polyline</a>.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#project">project(graphics, outSpatialReference, callback?, errback?)</a></td><td class="syntaxTABLE">
+<a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a>
+</td>
+<td class="syntaxTABLE">Projects a set of geometries into a new spatial reference. On completion, the onProjectComplete event is fired and the optional callback function is invoked. Both the callback and event handlers receive an array of <a href="graphic.htm">Graphic</a> that contains the projected geometries.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#relation">relation(graphics1, graphics2, spatialRelationship, comparisonString?, callback?, errback?)</a></td><td class="syntaxTABLE">
+<a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a>
+</td>
+<td class="syntaxTABLE">Computes the set of pairs of geometries from <code>graphics1</code> and <code>graphics2</code> that belong to the specified relation. Both arrays are assumed to be in the same spatial reference. The relations are evaluated in 2D. Z coordinates are not used. Geometry types cannot be mixed within an array.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#simplify">simplify(graphics, callback?, errback?)</a></td><td class="syntaxTABLE">
+<a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a>
+</td>
+<td class="syntaxTABLE">Alters the given geometries to make their definitions topologically legal with respect to their geometry type. On completion, the onSimplifyComplete event is fired and the optional callback function is invoked. Both the callback and event handlers receive an array of <a href="graphic.htm">Graphic</a> that contains the simplified geometries.</td>	</tr></table>
+
+<H4 class=dtH4>事件</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">事件</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#onAreasAndLengthsComplete">onAreasAndLengthsComplete(areasAndLengths)
+		</a></td>
+
+<td class="syntaxTABLE">Fires when the areasAndLengths operation is complete.</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onBufferComplete">onBufferComplete(graphics)
+		</a></td>
+
+<td class="syntaxTABLE">Fires when the buffer operation is complete.</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onError">onError(error)
+		</a></td>
+
+<td class="syntaxTABLE">Fires when an error occurs when executing the task.</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onLabelPointsComplete">onLabelPointsComplete(labelPoints)
+		</a></td>
+
+<td class="syntaxTABLE">Fires when the labelPoints operation is complete.</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onLengthsComplete">onLengthsComplete(lengths)
+		</a></td>
+
+<td class="syntaxTABLE">Fires when the lengths operation is complete.</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onProjectComplete">onProjectComplete(graphics)
+		</a></td>
+
+<td class="syntaxTABLE">Fires when the project operation is complete.</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onRelationComplete">onRelationComplete(relationships)
+		</a></td>
+
+<td class="syntaxTABLE">Fires when the relation operation is complete.</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onSimplifyComplete">onSimplifyComplete(graphics)
+		</a></td>
+
+<td class="syntaxTABLE">Fires when the simplify operation is complete.</td>
+		</tr></table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="GeometryServiceConst"></a><H4>esri.tasks.GeometryService(url)</H4>
+		</div>
+
+<div class="detaildesc">Creates a new GeometryService object.  A URL is a required parameter.</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;String>
+<B>url</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			URL to the ArcGIS Server REST resource that represents a geometry service.  An example is 
+http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Locators/ESRI_Geocode_USA/GeocodeServer.  For more information on constructing a URL, see <a href="../jshelp/ags_rest.htm">The Services Directory and the REST API</a>.
+			</td>
+			</tr>
+</table>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="url"></a>
+&lt;String> url</H4></div>
+
+<div class="detaildesc">URL to the ArcGIS Server REST resource that represents a locator service. To obtain the URL, use <a href="../jshelp/ags_rest.htm">Services Directory</a>.</div>
+
+</div>
+
+<div class=sectionDivider>方法详细信息</div>
+<div class="detaildiv">
+		<div class="detailname"><a name="areasAndLengths"></a><H4>
+areasAndLengths(graphics, callback?, errback?)</H4></div>
+
+<div class="detaildesc">Gets the areas and lengths for a <a href="graphic.htm">Graphic[]</a> when the geometry type is <a href="polygon.htm">Polygon</a>.<br/><br/>The return object of <code>dojo.Deferred</code> was added at v1.4.<i> (As of v1.1)</i></div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="graphic.htm">Graphic[]</a>> <B>graphics</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+The graphic used to calculate areas and lengths.</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>callback</B></td>
+			<td class="detailTABLE">
+Optional</td>
+			<td class="detailTABLE">
+The function to call when the method has completed.  The arguments in the function are the same as the <a href="#onAreasAndLengthsComplete">onAreasAndLengthsComplete</a> event.</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>errback</B></td>
+			<td class="detailTABLE">
+Optional</td>
+			<td class="detailTABLE">
+An error object is returned if an error occurs on the Server during task execution. <i>(As of v1.3) </i></td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onAreaAndLengthsComplete">onAreaAndLengthsComplete</a>&nbsp;&nbsp;
+<a href="#onError">onError</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="buffer"></a><H4>
+buffer(bufferParameters, callback?, errback?)</H4></div>
+
+<div class="detaildesc">Creates buffer polygons at a specified distance around the given geometries. On completion, the onBufferComplete event is fired and the optional callback function is invoked. Both the callback and event handlers receive an array of <a href="graphic.htm">Graphic</a> that contains the buffer polygons.<br/><br/>The return object of <code>dojo.Deferred</code> was added at v1.4.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="bufferparameters.htm">BufferParameters</a>> <B>bufferParameters</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+Specifies the input geometries, buffer distances, and other options.</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>callback</B></td>
+			<td class="detailTABLE">
+Optional</td>
+			<td class="detailTABLE">
+The function to call when the method has completed.  The arguments in the function are the same as the <a href="#onBufferComplete">onBufferComplete</a> event.</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>errback</B></td>
+			<td class="detailTABLE">
+Optional</td>
+			<td class="detailTABLE">
+An error object is returned if an error occurs on the Server during task execution. <i>(As of v1.3) </i></td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onBufferComplete">onBufferComplete</a>&nbsp;&nbsp;
+<a href="#onError">onError</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="labelPoints"></a><H4>
+labelPoints(polygons, callback?, errback?)</H4></div>
+
+<div class="detaildesc">Calculates an interior point for each polygon specified. These interior points can be used by clients for labeling the polygons.<br/><br/>The return object of <code>dojo.Deferred</code> was added at v1.4.<i> (As of v1.2)</i></div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="graphic.htm">Graphic[]</a>> <B>polygons</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+The graphics to process.</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>callback</B></td>
+			<td class="detailTABLE">
+Optional</td>
+			<td class="detailTABLE">
+The function to call when the method has completed.  The arguments in the function are the same as the <a href="#onLabelPointsComplete">onLabelPointsComplete</a> event.</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>errback</B></td>
+			<td class="detailTABLE">
+Optional</td>
+			<td class="detailTABLE">
+An error object is returned if an error occurs on the Server during task execution. <i>(As of v1.3) </i></td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onLabelPointsComplete">onLabelPointsComplete</a>&nbsp;&nbsp;
+<a href="#onError">onError</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="lengths"></a><H4>
+lengths(graphics, callback?, errback?)</H4></div>
+
+<div class="detaildesc">Gets the lengths for a <a href="graphic.htm">Graphic[]</a> when the geometry type is <a href="polyline.htm">Polyline</a>.<br/><br/>The return object of <code>dojo.Deferred</code> was added at v1.4.<i> (As of v1.1)</i></div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="graphic.htm">Graphic[]</a>> <B>graphics</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+The graphic used to calculate lengths.</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>callback</B></td>
+			<td class="detailTABLE">
+Optional</td>
+			<td class="detailTABLE">
+The function to call when the method has completed.  The arguments in the function are the same as the <a href="#onLengthsComplete">onLengthsComplete</a> event.</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>errback</B></td>
+			<td class="detailTABLE">
+Optional</td>
+			<td class="detailTABLE">
+An error object is returned if an error occurs on the Server during task execution. <i>(As of v1.3) </i></td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onLengthsComplete">onLengthsComplete</a>&nbsp;&nbsp;
+<a href="#onError">onError</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="project"></a><H4>
+project(graphics, outSpatialReference, callback?, errback?)</H4></div>
+
+<div class="detaildesc">Projects a set of geometries into a new spatial reference. On completion, the onProjectComplete event is fired and the optional callback function is invoked. Both the callback and event handlers receive an array of <a href="graphic.htm">Graphic</a> that contains the projected geometries.<br/><br/>The return object of <code>dojo.Deferred</code> was added at v1.4.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="graphic.htm">Graphic[]</a>> <B>graphics</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+The graphic to project.</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="spatialreference.htm">SpatialReference</a>> <B>outSpatialReference</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+The well-known ID of a spatial reference. <br />
+<pre>
+{"wkid" : 4326} 
+</pre></td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>callback</B></td>
+			<td class="detailTABLE">
+Optional</td>
+			<td class="detailTABLE">
+The function to call when the method has completed.  The arguments in the function are the same as the <a href="#onProjectComplete">onProjectComplete</a> event.</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>errback</B></td>
+			<td class="detailTABLE">
+Optional</td>
+			<td class="detailTABLE">
+An error object is returned if an error occurs on the Server during task execution. <i>(As of v1.3) </i></td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onProjectComplete">onProjectComplete</a>&nbsp;&nbsp;
+<a href="#onError">onError</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="relation"></a><H4>
+relation(graphics1, graphics2, spatialRelationship, comparisonString?, callback?, errback?)</H4></div>
+
+<div class="detaildesc">Computes the set of pairs of geometries from <code>graphics1</code> and <code>graphics2</code> that belong to the specified relation. Both arrays are assumed to be in the same spatial reference. The relations are evaluated in 2D. Z coordinates are not used. Geometry types cannot be mixed within an array.<br/><br/>The return object of <code>dojo.Deferred</code> was added at v1.4.<i> (As of v1.2)</i></div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="graphic.htm">Graphic[]</a>> <B>graphics1</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+The first set of graphics in the comparison.</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="graphic.htm">Graphic[]</a>> <B>graphics2</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+The second set of graphics in the comparison.</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>spatialRelationship</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+See the Constants table for valid values.  For a detailed description of relations, see <a href="http://resources.esri.com/help/9.3/arcgisserver/apis/soap/SOAP_esriGeometryRelationEnum.htm" target="_blank">esriGeometryRelationEnum </a>.</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>comparisonString</B></td>
+			<td class="detailTABLE">
+Optional</td>
+			<td class="detailTABLE">
+The <a target="_blank" href="http://resources.esri.com/help/9.3/arcgisengine/dotnet/concepts_start.htm#40de6491-9b2d-440d-848b-2609efcd46b1.htm">Shape Comparison Language</a> string to be evaluated.</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>callback</B></td>
+			<td class="detailTABLE">
+Optional</td>
+			<td class="detailTABLE">
+The function to call when the method has completed.  The arguments in the function are the same as the <a href="#onRelationComplete">onRelationComplete</a> event.</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>errback</B></td>
+			<td class="detailTABLE">
+Optional</td>
+			<td class="detailTABLE">
+An error object is returned if an error occurs on the Server during task execution. <i>(As of v1.3) </i></td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onRelationComplete">onRelationComplete</a>&nbsp;&nbsp;
+<a href="#onError">onError</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="simplify"></a><H4>
+simplify(graphics, callback?, errback?)</H4></div>
+
+<div class="detaildesc">Alters the given geometries to make their definitions topologically legal with respect to their geometry type. On completion, the onSimplifyComplete event is fired and the optional callback function is invoked. Both the callback and event handlers receive an array of <a href="graphic.htm">Graphic</a> that contains the simplified geometries.<br/><br/>The return object of <code>dojo.Deferred</code> was added at v1.4.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="graphic.htm">Graphic[]</a>> <B>graphics</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+The graphic to simplify.</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>callback</B></td>
+			<td class="detailTABLE">
+Optional</td>
+			<td class="detailTABLE">
+The function to call when the method has completed.  The arguments in the function are the same as the <a href="#onSimplifyComplete">onSimplifyComplete</a> event.</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>errback</B></td>
+			<td class="detailTABLE">
+Optional</td>
+			<td class="detailTABLE">
+An error object is returned if an error occurs on the Server during task execution. <i>(As of v1.3) </i></td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onSimplifyComplete">onSimplifyComplete</a>&nbsp;&nbsp;
+<a href="#onError">onError</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<H4 class=dtH4>Events Detail</H4>
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onAreasAndLengthsComplete"></a><H4>
+onAreasAndLengthsComplete(areasAndLengths)	</H4></div>
+
+
+<div class="detaildesc">Fires when the areasAndLengths operation is complete.<i> (As of v1.1)</i></div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;Object> <B>areasAndLengths</B>
+			</td>
+
+<td class="detailTABLE">
+ 			The object with the areas and lengths.  The format is { areas : Number[], lengths : Number[] }.
+			</td>
+			</tr>
+
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onBufferComplete"></a><H4>
+onBufferComplete(graphics)	</H4></div>
+
+
+<div class="detaildesc">Fires when the buffer operation is complete.</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="graphic.htm">Graphic[]</a>> <B>graphics</B>
+			</td>
+
+<td class="detailTABLE">
+ 			The graphics representing the buffer.
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#buffer">buffer</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onError"></a><H4>
+onError(error)	</H4></div>
+
+
+<div class="detaildesc">Fires when an error occurs when executing the task.<i> (As of v1.3)</i></div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;Error> <B>error</B>
+			</td>
+
+<td class="detailTABLE">
+ 			ArcGIS Server error message returned in a <a href="http://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/Error" target="_blank">JavaScript error object</a>.
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#project">project</a>&nbsp;&nbsp;
+<a href="#simplify">simplify</a>&nbsp;&nbsp;
+<a href="#areasAndLengths">areasAndLengths</a>&nbsp;&nbsp;
+<a href="#lengths">lengths</a>&nbsp;&nbsp;
+<a href="#buffer">buffer</a>&nbsp;&nbsp;
+<a href="#labelPoints">labelPoints</a>&nbsp;&nbsp;
+<a href="#relation">relation</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onLabelPointsComplete"></a><H4>
+onLabelPointsComplete(labelPoints)	</H4></div>
+
+
+<div class="detaildesc">Fires when the labelPoints operation is complete.<i> (As of v1.2)</i></div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="graphic.htm">Graphic[]</a>> <B>labelPoints</B>
+			</td>
+
+<td class="detailTABLE">
+ 			The graphics representing the points calculated inside the polygons.
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#labelPoints">labelPoints</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onLengthsComplete"></a><H4>
+onLengthsComplete(lengths)	</H4></div>
+
+
+<div class="detaildesc">Fires when the lengths operation is complete.<i> (As of v1.1)</i></div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;Object> <B>lengths</B>
+			</td>
+
+<td class="detailTABLE">
+ 			The object with the areas and lengths.  The format is { lengths : Number[] }.
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#lengths">lengths</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onProjectComplete"></a><H4>
+onProjectComplete(graphics)	</H4></div>
+
+
+<div class="detaildesc">Fires when the project operation is complete.</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="graphic.htm">Graphic[]</a>> <B>graphics</B>
+			</td>
+
+<td class="detailTABLE">
+ 			The projected graphics.
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#project">project</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onRelationComplete"></a><H4>
+onRelationComplete(relationships)	</H4></div>
+
+
+<div class="detaildesc">Fires when the relation operation is complete.<i> (As of v1.2)</i></div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;Object[]> <B>relationships</B>
+			</td>
+
+<td class="detailTABLE">
+ 			Indices in the two input geometries that met the specified relationship.   The array contains the following properties:  graphic1Index, graphic2index, graphic1, graphic2	<br /><br />
+
+<pre>
+      function relateGeometries() {
+        geometryService.relation(graphics1, graphics2, esri.tasks.GeometryService.SPATIAL_REL_WITHIN, null, processRelations);
+      }
+      function processRelations(relations) {
+        var symbol = new esri.symbol.SimpleMarkerSymbol().setColor(new dojo.Color([0, 255, 0]));
+
+        // highlight all graphic1 graphics that met the spatial relation against the second geometry
+        for (var i = 0; i < relations.length; i++) {
+          var relatedGraphic = relations[i].graphic1;
+          relatedGraphic.setSymbol(symbol);
+        }
+      }
+
+</pre>
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#relation">relation</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onSimplifyComplete"></a><H4>
+onSimplifyComplete(graphics)	</H4></div>
+
+
+<div class="detaildesc">Fires when the simplify operation is complete.</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="graphic.htm">Graphic[]</a>> <B>graphics</B>
+			</td>
+
+<td class="detailTABLE">
+ 			The simpified graphics.
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#simplify">simplify</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<br/></div></body></html> 

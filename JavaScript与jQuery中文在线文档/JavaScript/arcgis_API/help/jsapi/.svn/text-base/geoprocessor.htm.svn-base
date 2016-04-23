@@ -1,0 +1,1024 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>Geoprocessor</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: Geoprocessor</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	Represents a GP Task resource exposed by the ArcGIS Server REST API. A GP Task resource represents a single task in a GP service published using the ArcGIS Server and it supports one of the following operations: 
+<ul>
+<li>"execute" - performed on a GP Task resource when the execution type is synchronous.</li>
+<li>"submitJob" - performed on an asynchronous GP Task resource. </li>
+</ul>
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.tasks.Geoprocessor
+</pre>
+
+<H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#GeoprocessorConst">esri.tasks.Geoprocessor(url)</a></td>
+		<td class="syntaxTABLE">Creates a new Geoprocessor object that represents the GP Task identifed by a URL.</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#outputSpatialReference">outputSpatialReference</a></td>
+<td class="syntaxTABLE">
+<a href="spatialreference.htm">SpatialReference</a>
+</td>
+
+<td class="syntaxTABLE">
+The spatial reference of the output geometries. If not specified, the output geometries are in the spatial reference of the input geometries. If <i>processSpatialReferencew</i> is specified and <i>outputSpatialReference</i> is not specified, the output geometries are in the spatial reference of the process spatial reference.  支持的空间参考列表，见<a href="../jshelp/pcs.htm">投影坐标系统</a> and <a href="../jshelp/gcs.htm">地理坐标系统</a>。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#processSpatialReference">processSpatialReference</a></td>
+<td class="syntaxTABLE">
+<a href="spatialreference.htm">SpatialReference</a>
+</td>
+
+<td class="syntaxTABLE">
+The spatial reference that the model will use to perform geometry operations. If <i>processSpatialReference</i> is specified and <i>outputSpatialReference</i> is not specified, the output geometries are in the spatial reference of the process spatial reference.  支持的空间参考列表，见<a href="../jshelp/pcs.htm">投影坐标系统</a> and <a href="../jshelp/gcs.htm">地理坐标系统</a>。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#updateDelay">updateDelay</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+The time interval in milliseconds between each job status request sent to an asynchronous GP task.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#url">url</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+ArcGIS Server Rest API endpoint to the resource that receives the geoprocessing request.</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>方法表</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+		<th class="tableheader">方法</th>
+		<th class="tableheader">返回值</th>
+		<th class="tableheader">描述</th>
+		</tr>
+
+<tr>
+<td class="syntaxTABLE"><a href="#cancelJobStatusUpdates">cancelJobStatusUpdates(jobId)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">Cancels the periodic job status updates initiated automatically when submitJob() is invoked for the job identified by jobId. You can still obtain the status of this job by calling the checkStatus() method at your own discretion.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#checkJobStatus">checkJobStatus(jobId, callback?, errback?)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">Sends a request to the GP Task for the current state of the job identified by jobId. Upon receiving the response, the onStatusUpdate event is fired and the optional callback function is invoked.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#execute">execute(inputParameters, callback?, errback?)</a></td><td class="syntaxTABLE">
+<a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a>
+</td>
+<td class="syntaxTABLE">Sends a request to the server to execute a synchronous GP task. On completion, the onExecuteComplete event is fired and the optional callback function is invoked.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#getResultData">getResultData(jobId, parameterName, callback?, errback?)</a></td><td class="syntaxTABLE">
+<a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a>
+</td>
+<td class="syntaxTABLE">Sends a request to the GP Task to get the task result identified by jobId and resultParameterName. On completion, the getresultdatacomplete event will be fired and the optional callback function will be invoked.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#getResultImage">getResultImage(jobId, parameterName, imageParameters, callback?, errback?)</a></td><td class="syntaxTABLE">
+<a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a>
+</td>
+<td class="syntaxTABLE">Sends a request to the GP Task to get the task result identified by jobId and resultParameterName as an image.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#getResultImageLayer">getResultImageLayer(jobId, parameterName, imageParameters, callback?, errback?)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">Sends a request to the GP Task to get the task result identified by jobId and resultParameterName as an ArcGISDynamicMapServiceLayer.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setOutputSpatialReference">setOutputSpatialReference(spatialReference)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">Sets the the well-known ID of the spatial reference of the output geometries.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setProcessSpatialReference">setProcessSpatialReference(spatialReference)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">Sets the well-known ID of the spatial reference that the model uses to perform geometry operations.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setUpdateDelay">setUpdateDelay(delay)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">Sets the time interval in milliseconds between each job status request sent to an asynchronous GP task.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#submitJob">submitJob(inputParameters, callback?, statusCallback?, errback?)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">Submits a job to the server for asynchronous processing by the GP task. Once the job is submitted and until it is completed, the onStatusUpdate event is fired and the optional statusCallback() function is invoked at regular intervals, the duration of which is specified by the updateDelay property. Upon completion of the job, the onJobComplete event is fired and the optional callback function is invoked. <br /><br />
+
+The task execution results can be retrieved using getResultData(), getResultImage() or getResultImageLayer() methods.</td>	</tr></table>
+
+<H4 class=dtH4>事件</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">事件</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#onError">onError(error)
+		</a></td>
+
+<td class="syntaxTABLE">Fires when an error occurs when executing the task.</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onExecuteComplete">onExecuteComplete(results, messages)
+		</a></td>
+
+<td class="syntaxTABLE">Fires when a synchronous GP task is completed.</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onGetInputComplete">onGetInputComplete(input)
+		</a></td>
+
+<td class="syntaxTABLE">Not implemented for beta.</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onGetResultDataComplete">onGetResultDataComplete(result)
+		</a></td>
+
+<td class="syntaxTABLE">Fires when the result of an asynchronous GP task execution is available.</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onGetResultImageComplete">onGetResultImageComplete(mapImage)
+		</a></td>
+
+<td class="syntaxTABLE">Fires when a map image is generated by invoking the getResultImage() method.</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onGetResultImageLayerComplete">onGetResultImageLayerComplete(ArcGISDynamicMapServiceLayer)
+		</a></td>
+
+<td class="syntaxTABLE">Fires when getResultImageLayer() has completed.</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onJobComplete">onJobComplete(status)
+		</a></td>
+
+<td class="syntaxTABLE">Fires when an asynchronous GP task using submitJob is complete.</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onStatusUpdate">onStatusUpdate(status)
+		</a></td>
+
+<td class="syntaxTABLE">Fires when a job status update is available.</td>
+		</tr></table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="GeoprocessorConst"></a><H4>esri.tasks.Geoprocessor(url)</H4>
+		</div>
+
+<div class="detaildesc">Creates a new Geoprocessor object that represents the GP Task identifed by a URL.</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;String>
+<B>url</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			URL to the ArcGIS Server REST resource that represents a geoprocessing service.  An example is 
+http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Network.  For more information on constructing a URL, see <a href="../jshelp/ags_rest.htm">The Services Directory and the REST API</a>.
+			</td>
+			</tr>
+</table>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="outputSpatialReference"></a>
+&lt;<a href="spatialreference.htm">SpatialReference</a>> outputSpatialReference</H4></div>
+
+<div class="detaildesc">The spatial reference of the output geometries. If not specified, the output geometries are in the spatial reference of the input geometries. If <i>processSpatialReferencew</i> is specified and <i>outputSpatialReference</i> is not specified, the output geometries are in the spatial reference of the process spatial reference.  支持的空间参考列表，见<a href="../jshelp/pcs.htm">投影坐标系统</a> and <a href="../jshelp/gcs.htm">地理坐标系统</a>。</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setOutputSpatialReference">setOutputSpatialReference</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="processSpatialReference"></a>
+&lt;<a href="spatialreference.htm">SpatialReference</a>> processSpatialReference</H4></div>
+
+<div class="detaildesc">The spatial reference that the model will use to perform geometry operations. If <i>processSpatialReference</i> is specified and <i>outputSpatialReference</i> is not specified, the output geometries are in the spatial reference of the process spatial reference.  支持的空间参考列表，见<a href="../jshelp/pcs.htm">投影坐标系统</a> and <a href="../jshelp/gcs.htm">地理坐标系统</a>。</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setProcessSpatialReference">setProcessSpatialReference</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="updateDelay"></a>
+&lt;Number> updateDelay</H4></div>
+
+<div class="detaildesc">The time interval in milliseconds between each job status request sent to an asynchronous GP task.</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> 1000
+			</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setUpdateDelay">setUpdateDelay</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="url"></a>
+&lt;String> url</H4></div>
+
+<div class="detaildesc">ArcGIS Server Rest API endpoint to the resource that receives the geoprocessing request.</div>
+
+</div>
+
+<div class=sectionDivider>方法详细信息</div>
+<div class="detaildiv">
+		<div class="detailname"><a name="cancelJobStatusUpdates"></a><H4>
+cancelJobStatusUpdates(jobId)</H4></div>
+
+<div class="detaildesc">Cancels the periodic job status updates initiated automatically when submitJob() is invoked for the job identified by jobId. You can still obtain the status of this job by calling the checkStatus() method at your own discretion.<i> (As of v1.1)</i></div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>jobId</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+A string that uniquely identifies the job for which the job updates are cancelled.</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="checkJobStatus"></a><H4>
+checkJobStatus(jobId, callback?, errback?)</H4></div>
+
+<div class="detaildesc">Sends a request to the GP Task for the current state of the job identified by jobId. Upon receiving the response, the onStatusUpdate event is fired and the optional callback function is invoked.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>jobId</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+A string that uniquely identifies a job on the server.  It is created when a job is submitted for execution and later used to check its status and retrieve the results.</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>callback</B></td>
+			<td class="detailTABLE">
+Optional</td>
+			<td class="detailTABLE">
+The function to call when the method has completed.  The arguments in the function are the same as the <a href="#onStatusUpdate">onStatusUpdate</a> event.</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>errback</B></td>
+			<td class="detailTABLE">
+Optional</td>
+			<td class="detailTABLE">
+An error object is returned if an error occurs on the Server during task execution. <i>(As of v1.3) </i></td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onStatusUpdate">onStatusUpdate</a>&nbsp;&nbsp;
+<a href="#onError">onError</a>&nbsp;&nbsp;
+<a href="#cancelJobStatus">cancelJobStatus</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="execute"></a><H4>
+execute(inputParameters, callback?, errback?)</H4></div>
+
+<div class="detaildesc">Sends a request to the server to execute a synchronous GP task. On completion, the onExecuteComplete event is fired and the optional callback function is invoked.<br/><br/>The return object of <code>dojo.Deferred</code> was added at v1.4.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Object> <B>inputParameters</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+The inputParameters argument specifies the input parameters accepted by the task and their corresponding values. These input parameters are listed in the parameters field of the associated GP Task resource. For example, assume that a GP Task resource has the following input parameters: <br /><br />
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="syntaxTABLE">
+Input_Points (GPFeatureRecordSetLayer)<br />
+Distance (GPDouble)
+</td>
+</tr>
+</table>
+<br />
+
+The parameters argument for the above inputs is a data object of the form: 
+<br /><br />
+
+<pre>
+{
+ Input_Points: &lt;FeatureSet>,
+ Distance: &lt;Number>
+}
+</pre></td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>callback</B></td>
+			<td class="detailTABLE">
+Optional</td>
+			<td class="detailTABLE">
+The function to call when the method has completed.  The arguments in the function are the same as the <a href="#onExecuteComplete">onExecuteComplete</a> event.</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>errback</B></td>
+			<td class="detailTABLE">
+Optional</td>
+			<td class="detailTABLE">
+An error object is returned if an error occurs on the Server during task execution. <i>(As of v1.3) </i></td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onExecuteComplete">onExecuteComplete</a>&nbsp;&nbsp;
+<a href="#onError">onError</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="getResultData"></a><H4>
+getResultData(jobId, parameterName, callback?, errback?)</H4></div>
+
+<div class="detaildesc">Sends a request to the GP Task to get the task result identified by jobId and resultParameterName. On completion, the getresultdatacomplete event will be fired and the optional callback function will be invoked.<br/><br/>The return object of <code>dojo.Deferred</code> was added at v1.4.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>jobId</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+The jobId returned from <a href="jobinfo.htm">JobInfo</a>.</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>parameterName</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+The name of the result parameter as defined in Services Directory.</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>callback</B></td>
+			<td class="detailTABLE">
+Optional</td>
+			<td class="detailTABLE">
+The function to call when the method has completed.  The arguments in the function are the same as the <a href="#onGetResultDataComplete">onGetResultDataComplete</a> event.</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>errback</B></td>
+			<td class="detailTABLE">
+Optional</td>
+			<td class="detailTABLE">
+An error object is returned if an error occurs on the Server during task execution. <i>(As of v1.3) </i></td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onGetResultDataComplete">onGetResultDataComplete</a>&nbsp;&nbsp;
+<a href="#onError">onError</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="getResultImage"></a><H4>
+getResultImage(jobId, parameterName, imageParameters, callback?, errback?)</H4></div>
+
+<div class="detaildesc">Sends a request to the GP Task to get the task result identified by jobId and resultParameterName as an image.<br/><br/>The return object of <code>dojo.Deferred</code> was added at v1.4.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>jobId</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+The jobId returned from <a href="jobinfo.htm">JobInfo</a>.</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>parameterName</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+The name of the result parameter as defined in Services Directory.</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="imageparameters.htm">ImageParameters</a>> <B>imageParameters</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+Specifies the properties of the result image.</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>callback</B></td>
+			<td class="detailTABLE">
+Optional</td>
+			<td class="detailTABLE">
+The function to call when the method has completed.  The arguments in the function are the same as the <a href="#onGetResultImageComplete">onGetResultImageComplete</a> event.</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>errback</B></td>
+			<td class="detailTABLE">
+Optional</td>
+			<td class="detailTABLE">
+An error object is returned if an error occurs on the Server during task execution. <i>(As of v1.3) </i></td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onGetResultImageComplete">onGetResultImageComplete</a>&nbsp;&nbsp;
+<a href="#onError">onError</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="getResultImageLayer"></a><H4>
+getResultImageLayer(jobId, parameterName, imageParameters, callback?, errback?)</H4></div>
+
+<div class="detaildesc">Sends a request to the GP Task to get the task result identified by jobId and resultParameterName as an ArcGISDynamicMapServiceLayer.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>jobId</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+The jobId returned from <a href="jobinfo.htm">JobInfo</a>.</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>parameterName</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+The name of the result parameter as defined in Services Directory.</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="imageparameters.htm">ImageParameters</a>> <B>imageParameters</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+Contains various options that can be specified when generating a dynamic map image.</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>callback</B></td>
+			<td class="detailTABLE">
+Optional</td>
+			<td class="detailTABLE">
+The function to call when the method has completed.  The arguments in the function are the same as the <a href="#onGetResultImageLayerComplete">onGetResultImageLayerComplete</a> event.</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>errback</B></td>
+			<td class="detailTABLE">
+Optional</td>
+			<td class="detailTABLE">
+An error object is returned if an error occurs on the Server during task execution. <i>(As of v1.3) </i></td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onGetResultImageLayerComplete">onGetResultImageLayerComplete</a>&nbsp;&nbsp;
+<a href="#onError">onError</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setOutputSpatialReference"></a><H4>
+setOutputSpatialReference(spatialReference)</H4></div>
+
+<div class="detaildesc">Sets the the well-known ID of the spatial reference of the output geometries.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="spatialreference.htm">SpatialReference</a>> <B>spatialReference</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+The well-known ID of a spatial reference. <br />
+<pre>
+{"wkid" : 4326} 
+</pre></td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#outputSpatialReference">outputSpatialReference</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setProcessSpatialReference"></a><H4>
+setProcessSpatialReference(spatialReference)</H4></div>
+
+<div class="detaildesc">Sets the well-known ID of the spatial reference that the model uses to perform geometry operations.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="spatialreference.htm">SpatialReference</a>> <B>spatialReference</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+The well-known ID of a spatial reference. <br />
+<pre>
+{"wkid" : 4326} 
+</pre></td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#processSpatialReference">processSpatialReference</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setUpdateDelay"></a><H4>
+setUpdateDelay(delay)</H4></div>
+
+<div class="detaildesc">Sets the time interval in milliseconds between each job status request sent to an asynchronous GP task.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>delay</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+The value in milliseconds.  One second equals 1000 milliseconds.</td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#updateDelay">updateDelay</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="submitJob"></a><H4>
+submitJob(inputParameters, callback?, statusCallback?, errback?)</H4></div>
+
+<div class="detaildesc">Submits a job to the server for asynchronous processing by the GP task. Once the job is submitted and until it is completed, the onStatusUpdate event is fired and the optional statusCallback() function is invoked at regular intervals, the duration of which is specified by the updateDelay property. Upon completion of the job, the onJobComplete event is fired and the optional callback function is invoked. <br /><br />
+
+The task execution results can be retrieved using getResultData(), getResultImage() or getResultImageLayer() methods.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Object> <B>inputParameters</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+The inputParameters argument specifies the input parameters accepted by the task and their corresponding values. These input parameters are listed in the parameters field of the associated GP Task resource. For example, assume that a GP Task resource has the following input parameters: <br /><br />
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="syntaxTABLE">
+Input_Points (GPFeatureRecordSetLayer)<br />
+Distance (GPDouble)
+</td>
+</tr>
+</table>
+<br />
+
+The parameters argument for the above inputs is a data object of the form: 
+<br /><br />
+
+<pre>
+{
+ Input_Points: &lt;FeatureSet>,
+ Distance: &lt;Number>
+}
+</pre></td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>callback</B></td>
+			<td class="detailTABLE">
+Optional</td>
+			<td class="detailTABLE">
+The function to call when the method has completed.  The arguments in the function are the same as the <a href="#onJobComplete">onJobComplete</a> event.</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>statusCallback</B></td>
+			<td class="detailTABLE">
+Optional</td>
+			<td class="detailTABLE">
+Checks the current status of the job.  The returned <a href="jobinfo.htm">JobInfo</a> message includes the status along with the <a href="gpmessage.htm">GPMessage</a>.</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>errback</B></td>
+			<td class="detailTABLE">
+Optional</td>
+			<td class="detailTABLE">
+An error object is returned if an error occurs on the Server during task execution. <i>(As of v1.3) </i></td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onJobComplete">onJobComplete</a>&nbsp;&nbsp;
+<a href="#onError">onError</a>&nbsp;&nbsp;
+<a href="#cancelJobStatus">cancelJobStatus</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<H4 class=dtH4>Events Detail</H4>
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onError"></a><H4>
+onError(error)	</H4></div>
+
+
+<div class="detaildesc">Fires when an error occurs when executing the task.<i> (As of v1.3)</i></div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;Error> <B>error</B>
+			</td>
+
+<td class="detailTABLE">
+ 			ArcGIS Server error message returned in a <a href="http://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/Error" target="_blank">JavaScript error object</a>.
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#getResultData">getResultData</a>&nbsp;&nbsp;
+<a href="#getResultImageLayer">getResultImageLayer</a>&nbsp;&nbsp;
+<a href="#getResultImage">getResultImage</a>&nbsp;&nbsp;
+<a href="#execute">execute</a>&nbsp;&nbsp;
+<a href="#submitJob">submitJob</a>&nbsp;&nbsp;
+<a href="#checkJobStatus">checkJobStatus</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onExecuteComplete"></a><H4>
+onExecuteComplete(results, messages)	</H4></div>
+
+
+<div class="detaildesc">Fires when a synchronous GP task is completed.</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="parametervalue.htm">ParameterValue[]</a>> <B>results</B>
+			</td>
+
+<td class="detailTABLE">
+ 			An array of <a href="parametervalue.htm">ParameterValue</a> objects that gives access to the result parameters and the task execution messages.
+			</td>
+			</tr>
+
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="gpmessage.htm">GPMessage</a>> <B>messages</B>
+			</td>
+
+<td class="detailTABLE">
+ 			An array of <a href="gpmessage.htm">GPMessage</a> that has the type and description.
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#execute">execute</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onGetInputComplete"></a><H4>
+onGetInputComplete(input)	</H4></div>
+
+
+<div class="detaildesc">Not implemented for beta.</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="parametervalue.htm">ParameterValue</a>> <B>input</B>
+			</td>
+
+<td class="detailTABLE">
+ 			Not implemented for beta.
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#getInput">getInput</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onGetResultDataComplete"></a><H4>
+onGetResultDataComplete(result)	</H4></div>
+
+
+<div class="detaildesc">Fires when the result of an asynchronous GP task execution is available.</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="parametervalue.htm">ParameterValue</a>> <B>result</B>
+			</td>
+
+<td class="detailTABLE">
+ 			Contains the result parameters and the task execution messages.
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#getResultData">getResultData</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onGetResultImageComplete"></a><H4>
+onGetResultImageComplete(mapImage)	</H4></div>
+
+
+<div class="detaildesc">Fires when a map image is generated by invoking the getResultImage() method.</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="mapimage.htm">MapImage</a>> <B>mapImage</B>
+			</td>
+
+<td class="detailTABLE">
+ 			Contains the properties of a dynamically generated map image.
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#getResultImage">getResultImage</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onGetResultImageLayerComplete"></a><H4>
+onGetResultImageLayerComplete(ArcGISDynamicMapServiceLayer)	</H4></div>
+
+
+<div class="detaildesc">Fires when getResultImageLayer() has completed.</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="layer.htm">Layer</a>> <B>ArcGISDynamicMapServiceLayer</B>
+			</td>
+
+<td class="detailTABLE">
+ 			The layer that can be added to the map.
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#getResultImageLayer">getResultImageLayer</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onJobComplete"></a><H4>
+onJobComplete(status)	</H4></div>
+
+
+<div class="detaildesc">Fires when an asynchronous GP task using submitJob is complete.</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="jobinfo.htm">JobInfo</a>> <B>status</B>
+			</td>
+
+<td class="detailTABLE">
+ 			The returned <a href="jobinfo.htm">JobInfo</a> message that includes the status along with the <a href="gpmessage.htm">GPMessage</a>.
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#submitJob">submitJob</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onStatusUpdate"></a><H4>
+onStatusUpdate(status)	</H4></div>
+
+
+<div class="detaildesc">Fires when a job status update is available.</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="jobinfo.htm">JobInfo</a>> <B>status</B>
+			</td>
+
+<td class="detailTABLE">
+ 			The returned <a href="jobinfo.htm">JobInfo</a> message that includes the status along with the <a href="gpmessage.htm">GPMessage</a>.
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#checkJobStatus">checkJobStatus</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<br/></div></body></html> 

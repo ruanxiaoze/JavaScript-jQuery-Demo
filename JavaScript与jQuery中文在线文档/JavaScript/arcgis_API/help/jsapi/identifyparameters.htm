@@ -1,0 +1,274 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>IdentifyParameters</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: IdentifyParameters</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	这个数据对象被用于IdentifyTask.execute方法的identifyParameters参数。指定用于标识要素的条件。
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.tasks.IdentifyParameters
+</pre>
+
+<H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#IdentifyParametersConst">esri.tasks.IdentifyParameters()</a></td>
+		<td class="syntaxTABLE">创建一个新的IdentifyParameters对象.  构造函数没有参数。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#dpi">dpi</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+当前地图视图的分辨率。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#geometry">geometry</a></td>
+<td class="syntaxTABLE">
+<a href="geometry.htm">Geometry</a>
+</td>
+
+<td class="syntaxTABLE">
+几何体用于在Identify期间选择要素。几何体类型通过 <a href="geometry.htm#type">Geometry</a> <i>type</i>指定。最常用的标识几何体是<a href="point.htm">Point</a>。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#height">height</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+当前被查看的地图高度（单位：像素）。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#layerIds">layerIds</a></td>
+<td class="syntaxTABLE">
+Number[]
+</td>
+
+<td class="syntaxTABLE">
+执行查找操作的图层。图层通过逗号分隔的图层ID列表指定。图层id列表在<a href="arcgismapservicelayer.htm#layerInfos">ArcGISMapServiceLayer</a> <i>layerInfos</i>中返回。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#layerOption">layerOption</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+指定那些图层用于Identify。  可用值见常量表。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#mapExtent">mapExtent</a></td>
+<td class="syntaxTABLE">
+<a href="extent.htm">Extent</a>
+</td>
+
+<td class="syntaxTABLE">
+当前查看的地图<a href="extent.htm">范围</a>或地图边界框。除非<I>sr</I>被指定，否则<I>mapExtent</I>属性被视为用地图的空间参考。<br/><br/>
+
+<I>mapExtent</I>, <i>height</i>, <i>width</i>, 和<I>dpi</I>的值被用于确定在当前范围内的可见图层。也用于基于<I>tolerance</I>在地图上计算搜索距离。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#returnGeometry">returnGeometry</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+如果是true， 结果集包含和每个结果相关的几何体。默认值是false。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#spatialReference">spatialReference</a></td>
+<td class="syntaxTABLE">
+<a href="spatialreference.htm">SpatialReference</a>
+</td>
+
+<td class="syntaxTABLE">
+输入和输出的几何体的空间参考和<I>mapExtent</I>的空间参考一致。如果<i>sr</i>没有指定，几何体和范围被视为用地图的空间参考，输出几何体也用地图的空间参考。支持的空间参考列表，见<a href="../jshelp/pcs.htm">投影坐标系统</a>和<a href="../jshelp/gcs.htm">地理坐标系统</a>。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#tolerance">tolerance</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">在到指定几何体的距离内，identify可以被执行，距离单位是屏幕像数。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#width">width</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+当前被查看的地图宽度（单位：像素）。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>常量</H4>
+
+	<table CLASS="syntaxTABLE" cellspacing="0">
+	<tr>
+	<th class="tableheader" width="20%">常量</th>
+		<th class="tableheader">描述</th>
+	</tr>
+
+		<tr>
+		<td class="syntaxTABLE">LAYER_OPTION_ALL</td>
+			<td class="syntaxTABLE">	
+            identity所有图层，即使图层是不可见的。性能注意：如果服务有很多图层，使用这个选项，请求不会很好的执行。
+            一个可见的图层意味着你可以在地图上的当前范围内看到它。如果一个图层被关闭或不在设置的分辨率范围内，该图层不能被identity。</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">LAYER_OPTION_TOP</td>
+			<td class="syntaxTABLE">		仅仅identity最顶层可见图层。	</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">LAYER_OPTION_VISIBLE</td>
+			<td class="syntaxTABLE">		identity所以可见的图层。</td>
+	</tr>
+
+</table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="IdentifyParametersConst"></a><H4>esri.tasks.IdentifyParameters()</H4>
+		</div>
+
+<div class="detaildesc">创建一个新的IdentifyParameters对象.  构造函数没有参数。</div>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="dpi"></a>
+&lt;Number> dpi</H4></div>
+
+<div class="detaildesc">当前地图视图的分辨率。</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> 96
+			</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="geometry"></a>
+&lt;<a href="geometry.htm">Geometry</a>> geometry</H4></div>
+
+<div class="detaildesc">几何体用于在Identify期间选择要素。几何体类型通过 <a href="geometry.htm#type">Geometry</a> <i>type</i>指定。最常用的标识几何体是<a href="point.htm">Point</a>。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="height"></a>
+&lt;Number> height</H4></div>
+
+<div class="detaildesc">当前被查看的地图高度（单位：像素）。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="layerIds"></a>
+&lt;Number[]> layerIds</H4></div>
+
+<div class="detaildesc">执行查找操作的图层。图层通过逗号分隔的图层ID列表指定。图层id列表在<a href="arcgismapservicelayer.htm#layerInfos">ArcGISMapServiceLayer</a> <i>layerInfos</i>中返回。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="layerOption"></a>
+&lt;String> layerOption</H4></div>
+
+<div class="detaildesc">指定那些图层用于Identify。  可用值见常量表。</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> LAYER_OPTION_TOP
+			</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="mapExtent"></a>
+&lt;<a href="extent.htm">Extent</a>> mapExtent</H4></div>
+
+<div class="detaildesc">当前查看的地图<a href="extent.htm">范围</a>或地图边界框。除非<I>sr</I>被指定，否则<I>mapExtent</I>属性被视为用地图的空间参考。<br/><br/>
+
+<I>mapExtent</I>, <i>height</i>, <i>width</i>, 和<I>dpi</I>的值被用于确定在当前范围内的可见图层。也用于基于<I>tolerance</I>在地图上计算搜索距离。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="returnGeometry"></a>
+&lt;Boolean> returnGeometry</H4></div>
+
+<div class="detaildesc">如果是true， 结果集包含和每个结果相关的几何体。默认值是false。</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> false
+			</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="spatialReference"></a>
+&lt;<a href="spatialreference.htm">SpatialReference</a>> spatialReference</H4></div>
+
+<div class="detaildesc">输入和输出的几何体的空间参考和<I>mapExtent</I>的空间参考一致。如果<i>sr</i>没有指定，几何体和范围被视为用地图的空间参考，输出几何体也用地图的空间参考。支持的空间参考列表，见<a href="../jshelp/pcs.htm">投影坐标系统</a>和<a href="../jshelp/gcs.htm">地理坐标系统</a>。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="tolerance"></a>
+&lt;Number> tolerance</H4></div>
+
+<div class="detaildesc">在到指定几何体的距离内，identify可以被执行，距离单位是屏幕像数。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="width"></a>
+&lt;Number> width</H4></div>
+
+<div class="detaildesc">当前被查看的地图宽度（单位：像素）。</div>
+
+</div>
+
+<br/></div></body></html> 

@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>Geometry</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: Geometry</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	几何体对象的基础类。该类没有构造函数。
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.geometry.Geometry
+</pre>
+
+<H4 class=dtH4>Subclasses</H4>
+
+<a href="extent.htm">Extent</a>&nbsp;&nbsp;<a href="multipoint.htm">Multipoint</a>&nbsp;&nbsp;<a href="point.htm">Point</a>&nbsp;&nbsp;<a href="polygon.htm">Polygon</a>&nbsp;&nbsp;<a href="polyline.htm">Polyline</a>&nbsp;&nbsp;<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#spatialReference">spatialReference</a></td>
+<td class="syntaxTABLE">
+<a href="spatialreference.htm">SpatialReference</a>
+</td>
+
+<td class="syntaxTABLE">
+几何体的空间参考。  支持的空间参考列表，见<a href="../jshelp/pcs.htm">投影坐标系统</a> and <a href="../jshelp/gcs.htm">地理坐标系统</a>。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#type">type</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+几何体类型。
+		</td></tr>
+</table>
+
+<H4 class=dtH4>方法表</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+		<th class="tableheader">方法</th>
+		<th class="tableheader">返回值</th>
+		<th class="tableheader">描述</th>
+		</tr>
+
+<tr>
+<td class="syntaxTABLE"><a href="#setSpatialReference">setSpatialReference(sr)</a></td><td class="syntaxTABLE">
+<a href="geometry.htm">Geometry</a>
+</td>
+<td class="syntaxTABLE">设置空间参考。<br/><br/>
+
+<code>Geometry</code>返回值在v1.4中增加。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#toJson">toJson()</a></td><td class="syntaxTABLE">
+Object
+</td>
+<td class="syntaxTABLE">转换对象为ArcGIS Server JSON表示法。</td>	</tr></table>
+
+<div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="spatialReference"></a>
+&lt;<a href="spatialreference.htm">SpatialReference</a>> spatialReference</H4></div>
+
+<div class="detaildesc">几何体的空间参考。  支持的空间参考列表，见<a href="../jshelp/pcs.htm">投影坐标系统</a> and <a href="../jshelp/gcs.htm">地理坐标系统</a>。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="type"></a>
+&lt;String> type</H4></div>
+
+<div class="detaildesc">几何体类型。
+
+</div><div class="detaildesc">
+<strong>已知值:</strong> point | multipoint | polyline | polygon | extent
+			</div>
+
+</div>
+
+<div class=sectionDivider>方法详细信息</div>
+<div class="detaildiv">
+		<div class="detailname"><a name="setSpatialReference"></a><H4>
+setSpatialReference(sr)</H4></div>
+
+<div class="detaildesc">设置空间参考。<br/><br/>
+
+<code>Geometry</code>返回值在v1.4中增加。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="geometry.htm">Geometry</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="spatialreference.htm">SpatialReference</a>> <B>sr</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+几何体的空间参考。</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="toJson"></a><H4>
+toJson()</H4></div>
+
+<div class="detaildesc">转换对象为ArcGIS Server JSON表示法。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> Object</div>
+</div>
+
+<br/></div></body></html> 

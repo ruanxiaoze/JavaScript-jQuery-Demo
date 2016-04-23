@@ -1,0 +1,228 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>SimpleLineSymbol</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: SimpleLineSymbol</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	Line symbols are used to draw linear features on the graphics layer.  SimpleLineSymbol is either a solid line or a predefined pattern of dashes and dots.
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+<a href="symbol.htm">esri.symbol.Symbol</a>
+  |_ <a href="linesymbol.htm">esri.symbol.LineSymbol</a>
+        |_ esri.symbol.SimpleLineSymbol
+</pre><H4 class=dtH4>Subclasses</H4>
+
+<a href="cartographiclinesymbol.htm">CartographicLineSymbol</a>&nbsp;&nbsp;<H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#SimpleLineSymbolConst2">esri.symbol.SimpleLineSymbol(style, color, width)</a></td>
+		<td class="syntaxTABLE">Creates a new SimpleLineSymbol object with parameters.</td>
+		</tr>
+<tr><td class="syntaxTABLE"><a href="#SimpleLineSymbolConst3">esri.symbol.SimpleLineSymbol(json)</a></td>
+		<td class="syntaxTABLE">Creates a new SimpleLineSymbol object using a JSON object.</td>
+		</tr>
+<tr><td class="syntaxTABLE"><a href="#SimpleLineSymbolConst1">esri.symbol.SimpleLineSymbol()</a></td>
+		<td class="syntaxTABLE">Creates a new empty SimpleLineSymbol object.</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#style">style</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+The line style.  See the Constants table for valid values.  The default value is STYLE_SOLID.</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>常量</H4>
+
+	<table CLASS="syntaxTABLE" cellspacing="0">
+	<tr>
+	<th class="tableheader" width="20%">常量</th>
+		<th class="tableheader">描述</th>
+	</tr>
+
+		<tr>
+		<td class="syntaxTABLE">STYLE_DASH</td>
+			<td class="syntaxTABLE">			The line is made of dashes.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">STYLE_DASHDOT</td>
+			<td class="syntaxTABLE">			The line is made of a dash-dot pattern.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">STYLE_DASHDOTDOT</td>
+			<td class="syntaxTABLE">			The line is made of a dash-dot-dot pattern.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">STYLE_DOT</td>
+			<td class="syntaxTABLE">			The line is made of dots.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">STYLE_NULL</td>
+			<td class="syntaxTABLE">			The line has no symbol.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">STYLE_SOLID</td>
+			<td class="syntaxTABLE">			The line is solid.		</td>
+	</tr>
+
+</table>
+
+<H4 class=dtH4>方法表</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+		<th class="tableheader">方法</th>
+		<th class="tableheader">返回值</th>
+		<th class="tableheader">描述</th>
+		</tr>
+
+<tr>
+<td class="syntaxTABLE"><a href="#setStyle">setStyle(style)</a></td><td class="syntaxTABLE">
+<a href="simplelinesymbol.htm">SimpleLineSymbol</a>
+</td>
+<td class="syntaxTABLE">Sets the line symbol style.</td>	</tr></table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="SimpleLineSymbolConst2"></a><H4>esri.symbol.SimpleLineSymbol(style, color, width)</H4>
+		</div>
+
+<div class="detaildesc">Creates a new SimpleLineSymbol object with parameters.</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;String>
+<B>style</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			See Constants table for values.
+			</td>
+			</tr>
+<tr>
+<td class="detailTABLE">
+&lt;dojo.Color>
+<B>color</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			Symbol color, which is based on <a href="http://redesign.dojotoolkit.org/jsdoc/dojo/HEAD/dojo.Color" target="_blank">dojo.Color</a>.  Colors can be denoted in the following formats:<br/><br/>
+
+<ul>
+<li>R, G, B:  <code>new dojo.Color([255,0,0])</code> </li>
+<li>R,G,B,A.  The "A" value represents transparency where 0.0 is fully transparent and 1.0 has no transparency: <code>new dojo.Color([255,0,0,0.25])</code> </li>
+<li>Hex string: <code>new dojo.Color("#C0C0C0")</code> </li>
+<li>Named string:  <code>new dojo.Color("blue")</code> </li>
+</ul>
+			</td>
+			</tr>
+<tr>
+<td class="detailTABLE">
+&lt;Number>
+<B>width</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			Width of the line in pixels.
+			</td>
+			</tr>
+</table>
+
+</div><div class="detaildiv"><div class="detailname"><a name="SimpleLineSymbolConst3"></a><H4>esri.symbol.SimpleLineSymbol(json)</H4>
+		</div>
+
+<div class="detaildesc">Creates a new SimpleLineSymbol object using a JSON object.</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;Object>
+<B>json</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			JSON object representing the SimpleLineSymbol.
+			</td>
+			</tr>
+</table>
+
+</div><div class="detaildiv"><div class="detailname"><a name="SimpleLineSymbolConst1"></a><H4>esri.symbol.SimpleLineSymbol()</H4>
+		</div>
+
+<div class="detaildesc">Creates a new empty SimpleLineSymbol object.</div>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="style"></a>
+&lt;String> style</H4></div>
+
+<div class="detaildesc">The line style.  See the Constants table for valid values.  The default value is STYLE_SOLID.</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> STYLE_SOLID
+			</div>
+
+</div>
+
+<div class=sectionDivider>方法详细信息</div>
+<div class="detaildiv">
+		<div class="detailname"><a name="setStyle"></a><H4>
+setStyle(style)</H4></div>
+
+<div class="detaildesc">Sets the line symbol style.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="simplelinesymbol.htm">SimpleLineSymbol</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>style</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+Line style.  See the Constants table for valid values.</td>
+			</tr>
+</table>
+
+</div>
+
+<br/></div></body></html> 

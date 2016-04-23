@@ -1,0 +1,248 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<meta name="keywords" content="ArcGIS JavaScript API" />
+		<link href="jsdoc.css" rel="stylesheet" type="text/css" />
+		<title>Working with Dojo</title>
+	</head>
+	<body>
+		<div id="pageBanner">Working with Dojo</div>
+		<div id="nstext">
+			<!--***START TEXT - DO NOT WRITE ABOVE THIS LINE***-->
+			<p><a href="http://dojotoolkit.org/about">Dojo</a> is an open source toolkit that 
+				helps you write robust and efficient JavaScript code. JavaScript is a language 
+				that runs within the Web browser, and there are various flavors of Web browser 
+				that interpret the JavaScript in slightly different ways. Toolkits such as 
+				Dojo, <a href="http://developer.yahoo.com/yui/">YUI</a>, <a href="http://prototypejs.org/">
+					Prototype</a>, and many others are designed to abstract away the browser 
+				idiosyncrasies so that you don't have to learn them all and handle them in your 
+				code.</p>
+			<p>There are often several ways to code the same thing using JavaScript. Toolkits 
+				like Dojo provide functions you can use to do things in easier or more 
+				efficient ways. Using libraries from a toolkit can reduce the lines of code you 
+				write and make your JavaScript applications quicker and more stable.</p>
+			<h3>What does it mean that the ArcGIS JavaScript API is built on top of Dojo?</h3>
+			<p>The ESRI developers who created the ArcGIS JavaScript API used Dojo to simplify 
+				their development process and to ensure that the applications you build behave 
+				the same in different browsers. For example, the map zoom and panning 
+				animations use Dojo, as does the graphics layer.</p>
+			<p>Furthermore, the zoom level slider and info windows that you see in your 
+				JavaScript API maps are Dojo widgets (dijits). The slider dijit is provided 
+				with Dojo, and the info window is a custom dijit created by ESRI for the ArcGIS 
+				JavaScript API.</p>
+			<h3>How much Dojo do I need to know in order to use the ArcGIS JavaScript API?</h3>
+			<p>The amount of Dojo you use when you work with the ArcGIS JavaScript API is up to 
+				you, but at a minimum you'll need to use several common functions:</p>
+			<ul>
+				<li>
+					dojo.require: Similar to the &lt;script> include tag on an HTML page. It 
+					imports resources into your JavaScript page.
+					<div class="detailSample">
+						<pre>
+dojo.require("esri.map");
+</pre>
+					</div>
+					<p>For the JavaScript API, the most commonly imported resources are:</p>
+					<table CLASS="detailTABLE" cellspacing="0">
+						<tr>
+							<th class="detailTABLE">
+								Resource</th>
+							<th class="detailTABLE">
+								Use for:</th>
+						</tr>
+						<tr>
+							<td class="detailTABLE">esri.map</td>
+							<td class="detailTABLE">Map, geometry, graphics, and symbols
+							</td>
+						</tr>
+						<tr>
+							<td class="detailTABLE">esri.layers.agsdynamic</td>
+							<td class="detailTABLE">ArcGISDynamicMapServiceLayer
+							</td>
+						</tr>
+						<tr>
+							<td class="detailTABLE">esri.layers.agstiled</td>
+							<td class="detailTABLE">ArcGISTiledMapServiceLayer
+							</td>
+						</tr>
+						<tr>
+							<td class="detailTABLE">esri.tasks.find</td>
+							<td class="detailTABLE">Find task
+							</td>
+						</tr>
+						<tr>
+							<td class="detailTABLE">esri.tasks.geometry</td>
+							<td class="detailTABLE">Geometry task
+							</td>
+						</tr>
+						<tr>
+							<td class="detailTABLE">esri.tasks.gp</td>
+							<td class="detailTABLE">Geoprocessing task
+							</td>
+						</tr>
+						<tr>
+							<td class="detailTABLE">esri.tasks.identify</td>
+							<td class="detailTABLE">Identify task
+							</td>
+						</tr>
+						<tr>
+							<td class="detailTABLE">esri.tasks.locator</td>
+							<td class="detailTABLE">Locator task
+							</td>
+						</tr>
+						<tr>
+							<td class="detailTABLE">esri.tasks.query</td>
+							<td class="detailTABLE">Query task
+							</td>
+						</tr>
+						<tr>
+							<td class="detailTABLE">esri.toolbars.draw</td>
+							<td class="detailTABLE">Draw
+							</td>
+						</tr>
+						<tr>
+							<td class="detailTABLE">esri.toolbars.navigation</td>
+							<td class="detailTABLE">Navigation
+							</td>
+						</tr>
+					</table>
+				</li>
+				<li>
+					dojo.addOnLoad: Similar to &lt;body onload="">. It registers an initializing 
+					block after the page has finished loading.
+					<div class="detailSample">
+						<pre>
+dojo.addOnLoad(init); 
+</pre>
+					</div>
+				</li>
+				<li>
+					dojo.connect: Similar to Element.addEventListener and Element.attachEvent 
+					JavaScript functions. It registers a listener to listen to specific events on 
+					an Object or element on the page and returns results from a function.
+					<div class="detailSample">
+						<pre>
+dojo.connect(myMap, "onLoad", myLoadHandler); 
+</pre>
+					</div>
+				</li>
+				<li>
+					dojo.byId: Similar to the document.getElementById(id) JavaScript function. The 
+					function searches and returns the first HTML element with the argument ID.
+					<div class="detailSample">
+						<pre>
+dojo.byId("myInputField").value = myMap.id; 
+</pre>
+					</div>
+			</ul>
+			<p>When writing your ArcGIS JavaScript applications, you can take advantage of the 
+				full Dojo toolkit, which includes buttons, grids, tree views, charts, and other 
+				widgets. The toolkit is divided into three parts:</p>
+			<p>Core - Essential functions like those listed above<br>
+				Dijit - Themeable widgets such as trees, menus, and buttons<br>
+				DojoX- Extension projects in various stages of development, such as graphics, 
+				grids, and charts</p>
+			<h3>How do I get Dojo? Do I have to install it?</h3>
+			<p>Dojo is included with the ArcGIS JavaScript API. When you include the script tag 
+				referencing the ArcGIS JavaScript API, you get access to the full Dojo tookit 
+				version. The chart below shows the version of Dojo corresponding to each 
+				version of the ArcGIS JavaScript API:</p>
+			<table CLASS="detailTABLE" cellspacing="0" style="width:400px">
+				<tr class="detailTABLE">
+					<th class="detailTABLE">
+						ArcGIS JavaScript API version</th>
+					<th class="detailTABLE">
+						Dojo version</th>
+				</tr>
+				<tr class="detailTABLE">
+					<td class="detailTABLE">1.0</td>
+					<td class="detailTABLE">1.1.0</td>
+				</tr>
+				<tr class="detailTABLE">
+					<td class="detailTABLE">1.1</td>
+					<td class="detailTABLE">1.1.0</td>
+				</tr>
+				<tr class="detailTABLE">
+					<td class="detailTABLE">1.2</td>
+					<td class="detailTABLE">1.2</td>
+				</tr>
+				<tr class="detailTABLE">
+					<td class="detailTABLE">1.3</td>
+					<td class="detailTABLE">1.2.3 with vml patch</td>
+				</tr>
+				<tr class="detailTABLE">
+					<td class="detailTABLE">1.4</td>
+					<td class="detailTABLE">1.3.1</td>
+				</tr>
+				<tr class="detailTABLE">
+					<td class="detailTABLE">1.5</td>
+					<td class="detailTABLE">1.3.2</td>
+				</tr>
+			</table>
+			<p>Many Dojo users download Dojo and host it themselves, or they reference the 
+				publicly available Dojo hosted on the AOL Content Delivery Network (CDN). When 
+				building ArcGIS JavaScript applications, there is no need to download or host 
+				Dojo.</p>
+			<h3>What if I'm already hosting Dojo or I want to reference a newer version of 
+				Dojo?</h3>
+			<p>In general you should use the Dojo included with the ArcGIS JavaScript API, 
+				although you can reference a local deployment of Dojo if needed. You need to 
+				place the script tag referencing Dojo above the script tag referencing the 
+				ArcGIS JavaScript API. When you do this, the Dojo you referenced will be used 
+				instead of the Dojo normally included with the ArcGIS JavaScript API.</p>
+			<p>For example, the code below shows Dojo 1.2.0 from the AOL CDN used with the ArcGIS 
+				JavaScript API 1.2. You could replace the path to the CDN with the path to your 
+				local Dojo.</p>
+			<pre>&lt;link rel="stylesheet" type="text/css" href="http http://o.aolcdn.com/dojo/1.2.0/dijit/themes/tundra/tundra.css"&gt;
+&lt;script type="text/javascript" src="http://o.aolcdn.com/dojo/1.2.0/dojo/dojo.xd.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.2"&gt;&lt;/script&gt;
+</pre>
+			<p>If you're using version 1.0 or 1.1 of the ArcGIS JavaScript API, the code is a 
+				bit different. You need to explicitly reference the esri.js and jsapi.js files. 
+				The following example uses Dojo 1.1.1 from the AOL CDN with version 1.1 of 
+				the ArcGIS JavaScript API:</p>
+			<pre>
+&lt;link rel="stylesheet" type="text/css" <br/>&nbsp;&nbsp;&nbsp;&nbsp;href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.1/js/dojo/dijit/themes/tundra/tundra.css"&gt;
+&lt;script type="text/javascript" src="http://o.aolcdn.com/dojo/1.1.1/dojo/dojo.xd.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/1.1/js/esri/esri.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/1.1/js/esri/jsapi.js"&gt;&lt;/script&gt;</pre>
+		
+			<h3>What are dijits and why are they useful?</h3>
+			<p>You can use Dojo widgets, or "dijits", to add prepackaged user interface 
+				components to your applications. Dojo has many existing dijits you can choose 
+				from such as text boxes, buttons, menus, calendars, color pickers, and so on. 
+				The online Book of Dojo has a nice <a href="http://dojotoolkit.org/book/dojo-book-0-9/part-2-dijit/dijit-glance">
+					overview of the Dijit library</a> that you can use to browse the dijits.</p>
+			<p>Dijits have been tested to behave consistently in different browsers and comply 
+				with accessibility and localization requirements. The dijit framework is 
+				extensible, so with a little ambition you can even create your own dijits.</p>
+			<p>You can also combine several dijits into one for easy re-use. Suppose your 
+				company has multiple Web designers that want to embed maps in their pages. You 
+				can wrap up a map and some other elements inside a dijit, which the Web 
+				designers can then add to their pages without having to learn how to use the 
+				ArcGIS JavaScript API.</p>
+			<p>Dijits can also help users accomplish focused workflows, such as finding nearby 
+				dentists, selecting a site for a business, or generating a route. In this way, 
+				dijits are similar to "tasks" in the Web ADF.</p>
+			<p>If you have dijits that appear in your page when the application loads, you 
+				should include this line before adding the script tag that references the 
+				ArcGIS JavaScript API (version 1.1 or 1.2):</p>
+			<pre>&lt;script type="text/javascript"&gt;djConfig = { parseOnLoad: true }&lt;/script&gt;</pre>
+			<h3>How do I get help with Dojo?</h3>
+			<p>The Dojo Web site, <a href="http://www.dojotoolkit.org/">www.dojotoolkit.org</a> 
+				contains the official Dojo documentation. Documentation may be sparse, 
+				especially for projects in DojoX. Depending on what you're doing, you may find 
+				more information in one of the various Dojo books that have recently become 
+				available. The <a href="http://www.dojotoolkit.org/forum">Dojo forums</a> and 
+				the #dojo chat room on the IRC server irc.freenode.net are other good ways to 
+				get help.</p>
+			<p>The <a href="http://blogs.esri.com/Dev/blogs/arcgisserver/default.aspx">ArcGIS 
+					Server Blog</a> also has periodic posts about working with Dojo and dijits 
+				in ArcGIS JavaScript API applications.</p>
+			<br />
+			<br />
+			<!--***END TEXT - DO NOT WRITE BELOW THIS LINE***-->
+		</div>
+	</body>
+</html>

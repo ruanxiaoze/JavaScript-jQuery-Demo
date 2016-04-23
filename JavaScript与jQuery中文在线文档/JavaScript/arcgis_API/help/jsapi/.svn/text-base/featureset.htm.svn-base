@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>FeatureSet</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: FeatureSet</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	A collection of features returned from ArcGIS Server or used as input to tasks.  Each feature in the FeatureSet may contain geometry, attributes, symbolgy, and an InfoTemplate.  If the FeatureSet does not contain geometry, and only contains attributes, the FeatureSet can be treated as a table where each feature is a row object.  Tasks that return FeatureSet include <a href="querytask.htm">QueryTask</a>, <a href="geoprocessor.htm">Geoprocessor</a>, and <a href="routetask.htm">RouteTask</a>.  In addition, Geoprocessor and RouteTask may require FeatureSet as input.
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.tasks.FeatureSet
+</pre>
+
+<H4 class=dtH4>Subclasses</H4>
+
+<a href="directionsfeatureset.htm">DirectionsFeatureSet</a>&nbsp;&nbsp;<H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#FeatureSetConst">esri.tasks.FeatureSet()</a></td>
+		<td class="syntaxTABLE">Creates a new FeatureSet object.  The constructor takes no parameters.</td>
+		</tr>
+<tr><td class="syntaxTABLE"><a href="#FeatureSetConst2">esri.tasks.FeatureSet(json)</a></td>
+		<td class="syntaxTABLE">Creates a new FeatureSet object using a JSON object.</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#displayFieldName">displayFieldName</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+The name of the layer's primary display field. The value of this property matches the name of one of the fields of the feature.  Only applicable when the FeatureSet is returned from a task.  It is ignored when the FeatureSet is used as input to a geoprocessing task.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#features">features</a></td>
+<td class="syntaxTABLE">
+<a href="graphic.htm">Graphic[]</a>
+</td>
+
+<td class="syntaxTABLE">
+The array of graphics returned.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#fieldAliases">fieldAliases</a></td>
+<td class="syntaxTABLE">
+Object
+</td>
+
+<td class="syntaxTABLE">
+Set of name-value pairs for the attribute's field and alias names.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#geometryType">geometryType</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+The geometry type of the FeatureSet.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#spatialReference">spatialReference</a></td>
+<td class="syntaxTABLE">
+<a href="spatialreference.htm">SpatialReference</a>
+</td>
+
+<td class="syntaxTABLE">
+When a FeatureSet is used as input to <a href="geoprocessor.htm">Geoprocessor</a>, the spatial reference is set to the map's spatial reference by default.  This value can be changed.  When a FeatureSet is returned from a task, the value is the result as returned from the server.  支持的空间参考列表，见<a href="../jshelp/pcs.htm">投影坐标系统</a> and <a href="../jshelp/gcs.htm">地理坐标系统</a>。</td>
+		</tr>
+</table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="FeatureSetConst"></a><H4>esri.tasks.FeatureSet()</H4>
+		</div>
+
+<div class="detaildesc">Creates a new FeatureSet object.  The constructor takes no parameters.</div>
+
+</div><div class="detaildiv"><div class="detailname"><a name="FeatureSetConst2"></a><H4>esri.tasks.FeatureSet(json)</H4>
+		</div>
+
+<div class="detaildesc">Creates a new FeatureSet object using a JSON object.<i> (As of v1.3)</i></div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;Object>
+<B>json</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			A JSON object that contains feature set.
+			</td>
+			</tr>
+</table>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="displayFieldName"></a>
+&lt;String> displayFieldName</H4></div>
+
+<div class="detaildesc">The name of the layer's primary display field. The value of this property matches the name of one of the fields of the feature.  Only applicable when the FeatureSet is returned from a task.  It is ignored when the FeatureSet is used as input to a geoprocessing task.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="features"></a>
+&lt;<a href="graphic.htm">Graphic[]</a>> features</H4></div>
+
+<div class="detaildesc">The array of graphics returned.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="fieldAliases"></a>
+&lt;Object> fieldAliases</H4></div>
+
+<div class="detaildesc">Set of name-value pairs for the attribute's field and alias names.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="geometryType"></a>
+&lt;String> geometryType</H4></div>
+
+<div class="detaildesc">The geometry type of the FeatureSet.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="spatialReference"></a>
+&lt;<a href="spatialreference.htm">SpatialReference</a>> spatialReference</H4></div>
+
+<div class="detaildesc">When a FeatureSet is used as input to <a href="geoprocessor.htm">Geoprocessor</a>, the spatial reference is set to the map's spatial reference by default.  This value can be changed.  When a FeatureSet is returned from a task, the value is the result as returned from the server.  支持的空间参考列表，见<a href="../jshelp/pcs.htm">投影坐标系统</a> and <a href="../jshelp/gcs.htm">地理坐标系统</a>。</div>
+
+</div>
+
+<br/></div></body></html> 

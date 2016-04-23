@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>AddressCandidate</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: AddressCandidate</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	Represents an address and its location.  AddressCandidate has no constructor.
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.tasks.AddressCandidate
+</pre>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#address">address</a></td>
+<td class="syntaxTABLE">
+Object
+</td>
+
+<td class="syntaxTABLE">
+Address of the candidate. It contains one property for each of the address fields defined by a geocode service. Each address field describes some part of the address information for the candidate.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#attributes">attributes</a></td>
+<td class="syntaxTABLE">
+Object
+</td>
+
+<td class="syntaxTABLE">
+Name value pairs of field name and field value as defined in <i>outFields</i> in <a href="locator.htm#addressToLocations">Locator.addressToLocations</a>.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#location">location</a></td>
+<td class="syntaxTABLE">
+<a href="point.htm">Point</a>
+</td>
+
+<td class="syntaxTABLE">
+X- and y-coordinate of the candidate.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#score">score</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+Numeric score between 0 and 100 for geocode candidates. A candidate with a score of 100 means a perfect match, and 0 means no match.</td>
+		</tr>
+</table>
+
+<div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="address"></a>
+&lt;Object> address</H4></div>
+
+<div class="detaildesc">Address of the candidate. It contains one property for each of the address fields defined by a geocode service. Each address field describes some part of the address information for the candidate.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="attributes"></a>
+&lt;Object> attributes</H4></div>
+
+<div class="detaildesc">Name value pairs of field name and field value as defined in <i>outFields</i> in <a href="locator.htm#addressToLocations">Locator.addressToLocations</a>.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="location"></a>
+&lt;<a href="point.htm">Point</a>> location</H4></div>
+
+<div class="detaildesc">X- and y-coordinate of the candidate.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="score"></a>
+&lt;Number> score</H4></div>
+
+<div class="detaildesc">Numeric score between 0 and 100 for geocode candidates. A candidate with a score of 100 means a perfect match, and 0 means no match.</div>
+
+</div>
+
+<br/></div></body></html> 

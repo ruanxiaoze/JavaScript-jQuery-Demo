@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>LinearUnit</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: LinearUnit</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	A data object containing a linear distance.
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.tasks.LinearUnit
+</pre>
+
+<H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#LinearUnitConst">esri.tasks.LinearUnit()</a></td>
+		<td class="syntaxTABLE">Creates a new LinearUnit object.  The constructor takes no parameters.</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#distance">distance</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+Specifies the value of the linear distance.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#units">units</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+Specifies the unit type of the linear distance, such as "esriMeters", "esriMiles", "esriKilometers" etc.</td>
+		</tr>
+</table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="LinearUnitConst"></a><H4>esri.tasks.LinearUnit()</H4>
+		</div>
+
+<div class="detaildesc">Creates a new LinearUnit object.  The constructor takes no parameters.</div>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="distance"></a>
+&lt;Number> distance</H4></div>
+
+<div class="detaildesc">Specifies the value of the linear distance.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="units"></a>
+&lt;String> units</H4></div>
+
+<div class="detaildesc">Specifies the unit type of the linear distance, such as "esriMeters", "esriMiles", "esriKilometers" etc.</div>
+
+</div>
+
+<br/></div></body></html> 

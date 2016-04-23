@@ -1,0 +1,220 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>BufferParameters</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: BufferParameters</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+    为缓存操作设置距离，单位和其他参数。
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.tasks.BufferParameters
+</pre>
+
+<H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#BufferParametersConst">esri.tasks.BufferParameters()</a></td>
+		<td class="syntaxTABLE">创建一个新的BufferParameters对象。  构造函数没有参数。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#bufferSpatialReference">bufferSpatialReference</a></td>
+<td class="syntaxTABLE">
+<a href="spatialreference.htm">SpatialReference</a>
+</td>
+
+<td class="syntaxTABLE">
+几何体被缓存所使用的空间参考。支持的空间参考列表，见<a href="../jshelp/pcs.htm">投影坐标系统</a>和<a href="../jshelp/gcs.htm">地理坐标系统</a>。 <br /><br />
+
+如果<i>bufferSpatialReference</i>没有指定，几何体用<i>outSpatialReference</i>指定的空间参考被缓存。如果<i>outSpatialReference</i>也没有指定，则使用<i>features</i>的空间参考。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#distances">distances</a></td>
+<td class="syntaxTABLE">
+Number[]
+</td>
+
+<td class="syntaxTABLE">
+输入<i>features</i>被缓存的距离。距离单位通过<i>unit</i>指定。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#features">features</a></td>
+<td class="syntaxTABLE">
+<a href="graphic.htm">Graphic[]</a>
+</td>
+
+<td class="syntaxTABLE">
+输入图形或要素将缓存。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#outSpatialReference">outSpatialReference</a></td>
+<td class="syntaxTABLE">
+<a href="spatialreference.htm">SpatialReference</a>
+</td>
+
+<td class="syntaxTABLE">
+返回几何体的空间参考。 支持的空间参考列表，见<a href="../jshelp/pcs.htm">投影坐标系统</a>和<a href="../jshelp/gcs.htm">地理坐标系统</a>。<br /><br />
+
+如果<i>outSpatialReference</i>没有指定，输出几何体使用<i>bufferSR</i>指定的空间参考，如果<i>bufferSpatialReference</i>也没有指定，使用<i>features</i>的空间参考。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#unionResults">unionResults</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+如果是true，所有在给定距离的缓存几何体被合并到单个(possibly multipart)多边形中，并且合并的几何体被放置在输出数组中。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#unit">unit</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+计算每个缓存距离的单位。如果<i>unit</i>没有指定，由<i>bufferSpatialReference</i>得到单位，如果<i>bufferSpatialReference</i>没有指定，由<i>features</i>的空间参考得到单位。单位值见常量表。
+
+<!-- <br /><br />For a list of valid units, see <a href="http://edndoc.esri.com/arcobjects/9.2/ComponentHelp/esriGeometry/esriSRUnitType.htm" target="_blank">esriSRUnitType Constants</a> and <a href="http://edndoc.esri.com/arcobjects/9.2/ComponentHelp/esriGeometry/esriSRUnit2Type.htm" target="_blank">esriSRUnit2Type Constants</a>. --></td>
+		</tr>
+</table>
+
+<H4 class=dtH4>常量</H4>
+
+	<table CLASS="syntaxTABLE" cellspacing="0">
+	<tr>
+	<th class="tableheader" width="20%">常量</th>
+		<th class="tableheader">描述</th>
+	</tr>
+
+		<tr>
+		<td class="syntaxTABLE">UNIT_FOOT</td>
+			<td class="syntaxTABLE">英尺</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">UNIT_KILOMETER</td>
+			<td class="syntaxTABLE">			公里		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">UNIT_METER</td>
+			<td class="syntaxTABLE">			米		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">UNIT_NAUTICAL_MILE</td>
+			<td class="syntaxTABLE">			海里		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">UNIT_STATUTE_MILE</td>
+			<td class="syntaxTABLE">			英里		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">UNIT_US_NAUTICAL_MILE</td>
+			<td class="syntaxTABLE">			US海里		</td>
+	</tr>
+
+</table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="BufferParametersConst"></a><H4>esri.tasks.BufferParameters()</H4>
+		</div>
+
+<div class="detaildesc">创建一个新的BufferParameters 对象.  构造函数没有参数。</div>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="bufferSpatialReference"></a>
+&lt;<a href="spatialreference.htm">SpatialReference</a>> bufferSpatialReference</H4></div>
+
+<div class="detaildesc">几何体被缓存所使用的空间参考。支持的空间参考列表，见<a href="../jshelp/pcs.htm">投影坐标系统</a>和<a href="../jshelp/gcs.htm">地理坐标系统</a>。 <br /><br />
+
+如果<i>bufferSpatialReference</i>没有指定，几何体用<i>outSpatialReference</i>指定的空间参考被缓存。如果<i>outSpatialReference</i>也没有指定，则使用<i>features</i>的空间参考。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="distances"></a>
+&lt;Number[]> distances</H4></div>
+
+<div class="detaildesc">输入<i>features</i>被缓存的距离。距离单位通过<i>unit</i>指定。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="features"></a>
+&lt;<a href="graphic.htm">Graphic[]</a>> features</H4></div>
+
+<div class="detaildesc">输入图形或要素将缓存。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="outSpatialReference"></a>
+&lt;<a href="spatialreference.htm">SpatialReference</a>> outSpatialReference</H4></div>
+
+<div class="detaildesc">返回几何体的空间参考。 支持的空间参考列表，见<a href="../jshelp/pcs.htm">投影坐标系统</a>和<a href="../jshelp/gcs.htm">地理坐标系统</a>。<br /><br />
+
+如果<i>outSpatialReference</i>没有指定，输出几何体使用<i>bufferSR</i>指定的空间参考，如果<i>bufferSpatialReference</i>也没有指定，使用<i>features</i>的空间参考。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="unionResults"></a>
+&lt;Boolean> unionResults</H4></div>
+
+<div class="detaildesc">如果是true，所有在给定距离的缓存几何体被合并到单个(possibly multipart)多边形中，并且合并的几何体被放置在输出数组中。</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> false
+			</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="unit"></a>
+&lt;Number> unit</H4></div>
+
+<div class="detaildesc">计算每个缓存距离的单位。如果<i>unit</i>没有指定，由<i>bufferSpatialReference</i>得到单位，如果<i>bufferSpatialReference</i>没有指定，由<i>features</i>的空间参考得到单位。单位值见常量表。
+
+<!-- <br /><br />For a list of valid units, see <a href="http://edndoc.esri.com/arcobjects/9.2/ComponentHelp/esriGeometry/esriSRUnitType.htm" target="_blank">esriSRUnitType Constants</a> and <a href="http://edndoc.esri.com/arcobjects/9.2/ComponentHelp/esriGeometry/esriSRUnit2Type.htm" target="_blank">esriSRUnit2Type Constants</a>. --></div>
+
+</div>
+
+<br/></div></body></html> 

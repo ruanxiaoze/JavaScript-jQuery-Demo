@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>VE Tile Layer</title>
+    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css">
+    <script type="text/javascript">djConfig = { parseOnLoad:true }</script>
+    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"></script>
+
+    <script type="text/javascript" charset="utf-8">
+      dojo.require("esri.map");
+      dojo.require("esri.virtualearth.VETiledLayer");
+      dojo.require("dijit.form.Button");
+
+      var veTileLayer;
+
+      function init() {
+        var map = new esri.Map("map");
+
+        var duration = 15; //minimum 15 mins, maximum 480 (8 hrs) mins
+        var environment = "production"; //tiles won't have a watermark but they'll deduct from account
+
+        //TODO: Replace with URL to your own "Get Virtual Earth Token" page
+        var tokenUrl = "/common/vetokenhandler/vetoken.cfm";
+
+        //Creates the Virtual Earth layer to add to the map
+        veTileLayer = new esri.virtualearth.VETiledLayer({
+          tokenUrl: tokenUrl,
+          tokenDuration: duration,
+          environment: environment,
+          mapStyle: esri.virtualearth.VETiledLayer.MAP_STYLE_AERIAL
+        });
+
+        map.addLayer(veTileLayer);
+      }
+
+      dojo.addOnLoad(init);
+    </script>
+
+  </head>
+  <body class="tundra">
+    <div style="position:relative;">
+      <div id="map" style="width:1024px; height:512px; border:1px solid #000;"></div>
+      <div style="position:absolute; left:737px; top:10px; z-Index:999;">
+        <button dojoType="dijit.form.Button" onClick="veTileLayer.setMapStyle(esri.virtualearth.VETiledLayer.MAP_STYLE_AERIAL);">Aerial</button>
+        <button dojoType="dijit.form.Button" onClick="veTileLayer.setMapStyle(esri.virtualearth.VETiledLayer.MAP_STYLE_AERIAL_WITH_LABELS)">Aerial with labels</button>
+        <button dojoType="dijit.form.Button" onClick="veTileLayer.setMapStyle(esri.virtualearth.VETiledLayer.MAP_STYLE_ROAD)">Roads</button>
+      </div>
+    </div>
+  </body>
+</html>

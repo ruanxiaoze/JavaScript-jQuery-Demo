@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>Supplying parameters for the Geoprocessor</title>
+</head>
+
+<body>
+
+<div id="pageBanner">Supplying parameters for the Geoprocessor</div>
+
+<div id="nstext">
+
+<!--***START TEXT - DO NOT WRITE ABOVE THIS LINE***-->
+
+<p>The parameters list in the <A href="ags_rest.htm">Services
+					Directory</A> shows the required inputs and
+				outputs of any geoprocessing task. You need to supply all the parameters whose Direction is
+				esriGPParameterDirectionInput and whose Parameter Type is
+				esriGPParameterTypeRequired. You do not have to supply the output parameters
+				because the output is always returned to the callback function as an array of
+				<A href="../jsapi/parametervalue.htm">ParameterValue</A>.</p>
+			<p>You can set up the parameters using JavaScript object notation (JSON), like the
+				following:</p>
+			<pre>var params = { "Input_Observation_Point":featureSet, "Viewshed_Distance":vsDistance };</pre>
+			<p>Be sure to use the same parameter name and order that appears in the Services
+				Directory.</p>
+			<p>An important challenge you have as a developer is understanding how to construct
+				the required parameters for your model. The chart below shows what you need to
+				create for each type of parameter. Notice that some parameters are represented
+				by primitive JavaScript data types, such as string and number, and some are
+				represented by objects from the ArcGIS JavaScript API, such as FeatureSet and
+				RasterData.</p>
+			<a name="parameter_table"></a>
+			<table CLASS="detailTABLE" cellspacing="0" ID="Table1">
+				<tr class="detailTABLE">
+					<th class="detailTABLE">
+						<b>Parameter type</b></th>
+					<th class="detailTABLE">
+						<b>Corresponding JavaScript object</b></th>
+				</tr>
+				<tr class="detailTABLE">
+					<td class="detailTABLE">GPBoolean</td>
+					<td class="detailTABLE">boolean</td>
+				</tr>
+				<tr class="detailTABLE">
+					<td class="detailTABLE">GPDataFile</td>
+					<td class="detailTABLE"><A href="../jsapi/DataFile.htm">DataFile</A></td>
+				</tr>
+				<tr class="detailTABLE">
+					<td class="detailTABLE">GPDate</td>
+					<td class="detailTABLE"><A href="../jsapi/Date.htm">Date</A></td>
+				</tr>
+				<tr class="detailTABLE">
+					<td class="detailTABLE">GPDouble</td>
+					<td class="detailTABLE">number</td>
+				</tr>
+				<tr class="detailTABLE">
+					<td class="detailTABLE">GPFeatureRecordSetLayer</td>
+					<td class="detailTABLE"><A href="../jsapi/FeatureSet.htm">FeatureSet</A></td>
+				</tr>
+				<tr class="detailTABLE">
+					<td class="detailTABLE">GPLinearUnit</td>
+					<td class="detailTABLE"><A href="../jsapi/LinearUnit.htm">LinearUnit</A></td>
+				</tr>
+				<tr class="detailTABLE">
+					<td class="detailTABLE">GPLong</td>
+					<td class="detailTABLE">number</td>
+				</tr>
+				<tr class="detailTABLE">
+					<td class="detailTABLE">GPRasterData</td>
+					<td class="detailTABLE"><A href="../jsapi/RasterData.htm">RasterData</A></td>
+				</tr>
+				<tr class="detailTABLE">
+					<td class="detailTABLE">GPRasterLayer</td>
+					<td class="detailTABLE"><A href="../jsapi/RasterData.htm">RasterData</A></td>
+				</tr>
+				<tr class="detailTABLE">
+					<td class="detailTABLE">GPRecordSet</td>
+					<td class="detailTABLE"><A href="../jsapi/FeatureSet.htm">FeatureSet</A></td>
+				</tr>
+				<tr class="detailTABLE">
+					<td class="detailTABLE">GPString</td>
+					<td class="detailTABLE">string</td>
+				</tr>
+			</table>
+			<p>String parameters may require that you do some research to understand the syntax
+				the model expects from the string. The <a href="http://webhelp.esri.com/arcgisdesktop/9.3/index.cfm?TopicName=An_overview_of_commonly_used_tools"
+					target="_blank">Geoprocessing Tool Reference</a> in the ArcGIS Desktop Help
+				is your best resource for understanding how to construct string parameters for
+				tools. Most tools have a command line example that can give you a pretty good
+				idea of how your string parameter needs to look.</p>
+			<p>Another tactic for finding out string syntax is to add the geoprocessing service
+				to ArcToolbox and run the model from there. Examine the detailed messages that
+				appear and you'll see how the parameters are structured. For example, you might
+				see a message like:</p>
+			<pre>Executing (IDW): Idw C:\Data\spot_elev.shp ELEVATION %SCRATCHWORKSPACE%\Idw_hamilton1 45.76818 2 "VARIABLE 6 500" #</pre>
+			<p>This message appears when you run the <a href="http://webhelp.esri.com/arcgisdesktop/9.3/index.cfm?topicname=IDW" target="_blank">
+					IDW</a> tool. If you were having trouble understanding how to construct the
+				search radius parameter, a string, you could learn from this message that it is
+				structured "VARIABLE 6 500". In other words, the search type, number of points,
+				and maximum distance appear in that order, separated by spaces. The
+				Geoprocessing Tool Reference would also tell you this.</p>
+			<p>A final note about parameters: If you're submitting a FeatureSet with a lot of
+				features or complex geometry, you should reference a proxy page in your code in
+				case your request exceeds the 2000 character limit on GET requests imposed by
+				some Web browsers. See <A href="../jshelp/ags_proxy.htm">Using the proxy page</A>
+				to learn more.</p>
+
+<!--***END TEXT - DO NOT WRITE BELOW THIS LINE***-->
+</div>
+
+</body>
+</html>

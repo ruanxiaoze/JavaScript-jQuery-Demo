@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>Units</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: Units</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	<i>Class added v1.4.</i><br/><br/>  ESRI unit 常量。
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.Units
+</pre>
+
+<H4 class=dtH4>常量</H4>
+
+	<table CLASS="syntaxTABLE" cellspacing="0">
+	<tr>
+	<th class="tableheader" width="20%">常量</th>
+		<th class="tableheader">描述</th>
+	</tr>
+
+		<tr>
+		<td class="syntaxTABLE">CENTIMETERS</td>
+			<td class="syntaxTABLE">			单位是厘米。</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">DECIMAL_DEGREES</td>
+			<td class="syntaxTABLE">			单位是十进制度。		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">DECIMETERS</td>
+			<td class="syntaxTABLE">			单位是公寸。		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">FEET</td>
+			<td class="syntaxTABLE">			单位是英尺。		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">INCHES</td>
+			<td class="syntaxTABLE">			单位是英寸。		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">KILOMETERS</td>
+			<td class="syntaxTABLE">			单位是公里。		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">METERS</td>
+			<td class="syntaxTABLE">			单位是米。		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">MILES</td>
+			<td class="syntaxTABLE">			单位是英里。		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">MILLIMETERS</td>
+			<td class="syntaxTABLE">			单位是毫米。		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">NAUTICAL_MILES</td>
+			<td class="syntaxTABLE">			单位是海里。		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">POINTS</td>
+			<td class="syntaxTABLE">			单位是点。.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">UNKNOWN</td>
+			<td class="syntaxTABLE">			单位是未知的。		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">YARDS</td>
+			<td class="syntaxTABLE">			单位是码。		</td>
+	</tr>
+
+</table>
+
+<br/></div></body></html> 

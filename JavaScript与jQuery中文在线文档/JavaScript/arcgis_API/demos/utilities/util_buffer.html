@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+  <title>Buffer</title>
+  <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css">
+  <script src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5" type="text/javascript"></script>
+
+  <script type="text/javascript">
+    dojo.require("esri.map");
+    dojo.require("esri.tasks.geometry");
+
+    var map = null;
+    var gsvc = null;
+
+    function initialize() {
+      map = new esri.Map("map");
+      var layer = new esri.layers.ArcGISTiledMapServiceLayer("http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer");
+      map.addLayer(layer);
+      map.setExtent(new esri.geometry.Extent(-97.76, 32.32, -96.11, 33.42, new esri.SpatialReference({wkid: 4326})));
+
+      gsvc = new esri.tasks.GeometryService("http://sampleserver1.arcgisonline.com/arcgis/rest/services/Geometry/GeometryServer");
+      dojo.connect(map, "onClick", doBuffer);
+    }
+
+    function doBuffer(evt) {
+      map.graphics.clear();
+      var symbol = new esri.symbol.SimpleMarkerSymbol();
+      var graphic = new esri.Graphic(evt.mapPoint, symbol);
+
+      var params = new esri.tasks.BufferParameters();
+      params.features = [ graphic ];
+
+      // CASE [1]: if you want to buffer in angular units.
+      //params.distances = [ 5, 10 ];
+      //params.unit = esri.tasks.BufferParameters.UNIT_DEGREE;
+
+      // CASE [2]: if you want to buffer in linear units such as meters, km, miles etc.
+      params.distances = [ 5, 10 ];
+      params.unit = esri.tasks.BufferParameters.UNIT_KILOMETER;
+      params.bufferSpatialReference = new esri.SpatialReference({wkid: 32662});
+      params.outSpatialReference = map.spatialReference;
+
+      gsvc.buffer(params, showBuffer);
+    }
+
+    function showBuffer(features) {
+
+      var symbol = new esri.symbol.SimpleFillSymbol(
+        esri.symbol.SimpleFillSymbol.STYLE_SOLID,
+        new esri.symbol.SimpleLineSymbol(
+          esri.symbol.SimpleLineSymbol.STYLE_SOLID,
+          new dojo.Color([0,0,255,0.65]), 2
+        ),
+        new dojo.Color([0,0,255,0.35])
+      );
+
+      for (var j=0, jl=features.length; j<jl; j++) {
+        features[j].setSymbol(symbol);
+        map.graphics.add(features[j]);
+      }
+    }
+
+    dojo.addOnLoad(initialize);
+  </script>
+
+</head>
+
+<body class="tundra">
+  <b>Click a location on the map to buffer. Click again on another location to buffer again.</b>
+  <div id="map" style="width:600px; height:400px; border:1px solid #000;"></div>
+</body>
+
+</html>

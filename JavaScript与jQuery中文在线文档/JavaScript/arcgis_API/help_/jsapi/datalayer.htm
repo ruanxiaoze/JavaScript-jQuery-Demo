@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>DataLayer</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: DataLayer</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	<i>v1.4增加的类。</i><br/><br/>  <a href="routeparameters.htm#stops">RouteParameters.stops</a> 或 <a href="routeparameters.htm#barriers">RouteParameters.barriers</a>的可能的输入。
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.tasks.DataLayer
+</pre>
+
+<H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#DataLayerConst">esri.tasks.DataLayer()</a></td>
+		<td class="syntaxTABLE">创建一个新的DataLayer对象。 </td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#geometry">geometry</a></td>
+<td class="syntaxTABLE">
+<a href="geometry.htm">Geometry</a>
+</td>
+
+<td class="syntaxTABLE">
+The geometry to apply to the spatial filter. The spatial relationship as specified by <code>spatialRelationship</code> is applied to this geometry while performing the query.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#name">name</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+The name of the data layer in the map service that is being referenced.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#spatialRelationship">spatialRelationship</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+The spatial relationship to be applied on the input geometry while performing the query.  See the Constants Table for a list of valid values.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#where">where</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+A where clause for the query. Any legal SQL where clause operating on the fields in the layer is allowed, for example: <code>query.where = "POP2000 &gt; 350000"</code>.</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>常量</H4>
+
+	<table CLASS="syntaxTABLE" cellspacing="0">
+	<tr>
+	<th class="tableheader" width="20%">常量</th>
+		<th class="tableheader">描述</th>
+	</tr>
+
+		<tr>
+		<td class="syntaxTABLE">SPATIAL_REL_CONTAINS</td>
+			<td class="syntaxTABLE">			Part or all of a feature from feature class 1 is contained within a feature from feature class 2.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">SPATIAL_REL_CROSSES</td>
+			<td class="syntaxTABLE">			The feature from feature class 1 crosses a feature from feature class 2.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">SPATIAL_REL_ENVELOPEINTERSECTS</td>
+			<td class="syntaxTABLE">			The envelope of feature class 1 intersects with the envelope of feature class 2.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">SPATIAL_REL_INDEXINTERSECTS</td>
+			<td class="syntaxTABLE">			The envelope of the query feature class intersects the index entry for the target feature class.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">SPATIAL_REL_INTERSECTS</td>
+			<td class="syntaxTABLE">			Part of a feature from feature class 1 is contained in a feature from feature class 2.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">SPATIAL_REL_OVERLAPS</td>
+			<td class="syntaxTABLE">			Features from feature class 1 overlap features in feature class 2.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">SPATIAL_REL_TOUCHES</td>
+			<td class="syntaxTABLE">			The feature from feature class 1 touches the border of a feature from feature class 2.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">SPATIAL_REL_WITHIN</td>
+			<td class="syntaxTABLE">			The feature from feature class 1 is completely enclosed by the feature from feature class 2		</td>
+	</tr>
+
+</table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="DataLayerConst"></a><H4>esri.tasks.DataLayer()</H4>
+		</div>
+
+<div class="detaildesc">创建一个新的DataLayer对象。</div>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="geometry"></a>
+&lt;<a href="geometry.htm">Geometry</a>> geometry</H4></div>
+
+<div class="detaildesc">The geometry to apply to the spatial filter. The spatial relationship as specified by <code>spatialRelationship</code> is applied to this geometry while performing the query.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="name"></a>
+&lt;String> name</H4></div>
+
+<div class="detaildesc">The name of the data layer in the map service that is being referenced.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="spatialRelationship"></a>
+&lt;String> spatialRelationship</H4></div>
+
+<div class="detaildesc">The spatial relationship to be applied on the input geometry while performing the query.  See the Constants Table for a list of valid values.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="where"></a>
+&lt;String> where</H4></div>
+
+<div class="detaildesc">A where clause for the query. Any legal SQL where clause operating on the fields in the layer is allowed, for example: <code>query.where = "POP2000 &gt; 350000"</code>.</div>
+
+</div>
+
+<br/></div></body></html> 

@@ -1,0 +1,341 @@
+<html>
+	<head>
+		<script type="text/javascript" language="javascript">
+  <!--
+  function CloseNav() {
+    if ((top.right.location == null) || (top.right.location == undefined) || (typeof(top.right.location.href) != "string") || (top.right.location.href == ""))
+      top.location="arcims_banner.htm";
+    else
+      top.location=top.right.location;
+  }
+    //Links to other domains normally wont work because of browser security
+    function SyncDocUrl(CallSyncTree)
+    {
+      if ((window.parent.frames[2] == null) || (window.parent.frames[2] == undefined))
+        return "";
+      if ((window.parent.frames[2].document == null) || (window.parent.frames[2].document == undefined))
+        return "";
+      var url = window.parent.frames[2].document.URL;
+      if ((CallSyncTree) && (url != "")) {
+        syncTree(url);
+        }
+      return url;
+    }
+
+
+  function GetFrameWidth() { 
+    var x = 300; 
+    if (self.innerHeight) // all except Explorer 
+	x = self.innerWidth; 
+    else if (document.documentElement && document.documentElement.clientHeight) // Explorer 6 Strict Mode 
+	x = document.documentElement.clientWidth; 
+    else if (document.body) // other Explorers 
+	x = document.body.clientWidth; 
+    return(x); 
+  } 
+
+  function GetFrameHeight() { 
+    var y = 400; 
+    if (self.innerHeight) // all except Explorer 
+      y = self.innerHeight; 
+    else if (document.documentElement && document.documentElement.clientWidth) // Explorer 6 Strict Mode 
+      y = document.documentElement.clientHeight; 
+    else if (document.body) // other Explorers 
+      y = document.body.clientHeight; 
+    return(y); 
+  } 
+
+  function resizeTree2() {
+    var treeDiv = document.getElementById("tree");
+    var xTop = treeDiv.offsetTop;
+    treeDiv.style.width = GetFrameWidth();
+    var HH = GetFrameHeight(); 
+    if (HH -  xTop > 0)
+      treeDiv.style.height = HH -  xTop;
+  }
+  function OnLoadCode() {
+    resizeTree2();
+    SyncDocUrl(true);
+  }
+  -->
+		</script>
+		<title>Contents</title>
+		<link rel="stylesheet" type="text/css" href="tree.css" />
+		<script src="tree.js" language="javascript" type="text/javascript">
+		</script>
+	</head>
+	<body id="docBody" style="color: Black; margin: 5px 0px 0px 0px;" onLoad="OnLoadCode()"
+		onResize="resizeTree2()" onselectstart="return false;">
+		<!-- <div style="display: inline; white-space: nowrap; margin: 0px 0px 0px 5px;">
+<a href="arcims_toc.htm"><img src="hh_navtab11.gif" width="59" height="21" border="0"></a>
+<a href="arcims_index.htm"><img src="hh_navtab12.gif" width="40" height="21" border="0"></a>
+<a href="arcims_search.htm"><img src="hh_navtab13.gif" width="49" height="21" border="0"></a> 
+<a href="javascript:CloseNav()"><img src="hh_navtab0x.gif" width="100" height="21" border="0"></a>
+</div>-->
+		<!-- <div align="right" style="margin: 3 5 5 3;">
+   <span style="cursor: pointer; font-size: 8pt; font-family: verdana,arial,sans-serif;"
+      onmouseover="this.style.textDecoration='underline'"
+      onmouseout="this.style.textDecoration='none'"
+      onclick="SyncDocUrl(true);">sync toc</span>
+</div> -->
+		<div id="tree" style="top: 35px; left: 0px;" class="treeDiv">
+			<div id="treeRoot" onselectstart="return false" ondragstart="return false">
+				<div><h3>&nbsp;JavaScript API Samples</h3>
+				</div>
+				<div class="treeNode">
+					<img src="treenodedot.gif" class="treeNoLinkImage" /> <a href="jshelp/overview_samples.htm" target="right" class="treeUnselected" onClick="clickAnchor(this)">
+						Samples Overview</a>
+				</div>
+				<div class="treeNode">
+					<img src="treenodeplus.gif" class="treeLinkImage" onClick="expandCollapse(this.parentNode)" />
+					<span style="cursor: pointer;" onClick="expandCollapse(this.parentNode)">Map</span>
+					<div class="treeSubnodesHidden">
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/map_add.html" target="right" class="treeUnselected" onClick="clickAnchor(this)">Add 
+								a map</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/map_currentextent.html" target="right" class="treeUnselected" onClick="clickAnchor(this)">Add 
+								map and show current map extent</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/map_xycoords.html" target="right" class="treeUnselected" onClick="clickAnchor(this)">Add 
+								a map and show x,y coordinates</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/map_dynamic.html" target="right" class="treeUnselected" onClick="clickAnchor(this)">Add 
+								a dynamic map</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/map_twodynamic.html" target="right" class="treeUnselected" onClick="clickAnchor(this)">Add 
+								two dynamic maps</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/map_tiledynamic.html" target="right" class="treeUnselected" onClick="clickAnchor(this)">Combine 
+								tiled and dynamic layers</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/map_twoagol.html" target="right" class="treeUnselected" onClick="clickAnchor(this)">Combine 
+								two ArcGIS Online services</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/map_infowindow.html" target="right" class="treeUnselected" onClick="clickAnchor(this)">Show 
+								an info window</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/map_showloading.html" target="right" class="treeUnselected" onClick="clickAnchor(this)">Show 
+								loading icon</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/map_customtilelevels.html" target="right" class="treeUnselected"
+								onClick="clickAnchor(this)">Set visible scales</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/map_customextent_and_sr.html" target="right" class="treeUnselected"
+								onClick="clickAnchor(this)">Set custom extent and spatial reference</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/map_showproperties.html" target="right" class="treeUnselected" onClick="clickAnchor(this)">Show 
+								map properties</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/map_setextent.html" target="right" class="treeUnselected" onClick="clickAnchor(this)">Set 
+								map extent using second service</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/map_multiplelayerdef.html" target="right" class="treeUnselected"
+								onClick="clickAnchor(this)">Show map using layer definitions</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/map_dynamiclayerlist.html" target="right" class="treeUnselected"
+								onClick="clickAnchor(this)">Dynamically create layer list</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/map_explicitlayerlist.html" target="right" class="treeUnselected"
+								onClick="clickAnchor(this)">Explicitly create layer list</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/map_switch_layer_on_zoom.html" target="right" class="treeUnselected"
+								onClick="clickAnchor(this)">Switch layer when zoomed in</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/map_agol.html" target="right" class="treeUnselected" onClick="clickAnchor(this)">Display 
+								multiple ArcGIS Online services</a></div>
+					</div>
+				</div> <!--end book-->
+				<div class="treeNode">
+					<img src="treenodeplus.gif" class="treeLinkImage" onClick="expandCollapse(this.parentNode)" />
+					<span style="cursor: pointer;" onClick="expandCollapse(this.parentNode)">Map Configuration</span>
+					<div class="treeSubnodesHidden">
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/mapconfig_debug.html" target="right" class="treeUnselected" onClick="clickAnchor(this)">Add 
+								a debug console</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/mapconfig_customarrows.html" target="right" class="treeUnselected"
+								onClick="clickAnchor(this)">Customize navigation arrows</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/mapconfig_smoothpan.html" target="right" class="treeUnselected"
+								onClick="clickAnchor(this)">Customize pan animation</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/mapconfig_customlabels.html" target="right" class="treeUnselected"
+								onClick="clickAnchor(this)">Add labels to slider</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/mapconfig_nolabels.html" target="right" class="treeUnselected" onClick="clickAnchor(this)">Add 
+								slider with no ticks</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/mapconfig_orientation.html" target="right" class="treeUnselected"
+								onClick="clickAnchor(this)">Change slider orientation</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/mapconfig_pos_size.html" target="right" class="treeUnselected" onClick="clickAnchor(this)">Change 
+								slider size</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/mapconfig_smoothzoom.html" target="right" class="treeUnselected"
+								onClick="clickAnchor(this)">Customize zoom animation</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/mapconfig_zoombox.html" target="right" class="treeUnselected" onClick="clickAnchor(this)">Customize 
+								zoom box</a></div>
+					</div>
+				</div> <!--end book-->
+				<div class="treeNode">
+					<img src="treenodeplus.gif" class="treeLinkImage" onClick="expandCollapse(this.parentNode)" />
+					<span style="cursor: pointer;" onClick="expandCollapse(this.parentNode)">Layers</span>
+					<div class="treeSubnodesHidden">
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/layers_custom_wms.html" target="right" class="treeUnselected" onClick="clickAnchor(this)">Creating 
+								a WMS layer type</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/layers_custom_tiled.html" target="right" class="treeUnselected"
+								onClick="clickAnchor(this)">Creating a custom tiled layer type</a></div>
+					</div>
+				</div> <!--end book-->
+				
+				<div class="treeNode">
+					<img src="treenodeplus.gif" class="treeLinkImage" onClick="expandCollapse(this.parentNode)" />
+					<span style="cursor: pointer;" onClick="expandCollapse(this.parentNode)">Microsoft Virtual Earth</span>
+					<div class="treeSubnodesHidden">
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/ve_layer.html" target="right" class="treeUnselected" onClick="clickAnchor(this)">Add a Virtual Earth map layer</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/ve_geocode.html" target="right" class="treeUnselected"
+								onClick="clickAnchor(this)">Geocode with Virtual Earth</a></div>
+					</div>
+				</div> <!--end book-->
+				
+				<div class="treeNode">
+					<img src="treenodeplus.gif" class="treeLinkImage" onClick="expandCollapse(this.parentNode)" />
+					<span style="cursor: pointer;" onClick="expandCollapse(this.parentNode)">Graphics</span>
+					<div class="treeSubnodesHidden">
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/graphics_add.html" target="right" class="treeUnselected" onClick="clickAnchor(this)">Add 
+								graphics to a map</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/graphics_extent_query.html" target="right" class="treeUnselected"
+								onClick="clickAnchor(this)">Select graphic points within an extent</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/graphics_multiple_layers.html" target="right" class="treeUnselected"
+								onClick="clickAnchor(this)">Use multiple graphics layers</a></div>
+					</div>
+				</div> <!--end book-->
+				
+				<div class="treeNode">
+					<img src="treenodeplus.gif" class="treeLinkImage" onClick="expandCollapse(this.parentNode)" />
+					<span style="cursor: pointer;" onClick="expandCollapse(this.parentNode)">Renderers</span>
+					<div class="treeSubnodesHidden">
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/renderer_unique_value.html" target="right" class="treeUnselected" onClick="clickAnchor(this)">Use a unique value renderer</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/renderer_class_breaks.html" target="right" class="treeUnselected"
+								onClick="clickAnchor(this)">Use a class breaks renderer</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/renderer_equal_interval.html" target="right" class="treeUnselected"
+								onClick="clickAnchor(this)">Calculate equal interval class breaks</a></div>
+					</div>
+				</div> <!--end book-->
+				
+				
+				<div class="treeNode">
+					<img src="treenodeplus.gif" class="treeLinkImage" onClick="expandCollapse(this.parentNode)" />
+					<span style="cursor: pointer;" onClick="expandCollapse(this.parentNode)">Query Task</span>
+					<div class="treeSubnodesHidden">
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/query_nomap.html" target="right" class="treeUnselected" onClick="clickAnchor(this)">Query 
+								data without a map</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/query_charts.html" target="right" class="treeUnselected" onClick="clickAnchor(this)">Show 
+								query results with a chart</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/query_multiresults.html" target="right" class="treeUnselected" onClick="clickAnchor(this)">Show 
+								multiple query results</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/query_showinfowindow.html" target="right" class="treeUnselected"
+								onClick="clickAnchor(this)">Query, immediately open info window</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/query_clickinfowindow.html" target="right" class="treeUnselected"
+								onClick="clickAnchor(this)">Query, click for info window</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/query_hoverinfowindow.html" target="right" class="treeUnselected"
+								onClick="clickAnchor(this)">Show info window on mouse hover</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/query_click.html" target="right" class="treeUnselected" onClick="clickAnchor(this)">Load 
+								query results, show on click</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/query_hover.html" target="right" class="treeUnselected" onClick="clickAnchor(this)">Load 
+								query results, show on hover</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/query_buffer.html" target="right" class="treeUnselected" onClick="clickAnchor(this)">Query 
+								map with buffer polygon</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/query_gpresult.html" target="right" class="treeUnselected" onClick="clickAnchor(this)">Query 
+								map with GP result</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/query_bypoly.html" target="right" class="treeUnselected" onClick="clickAnchor(this)">Query 
+								for polygon and adjacent polygons</a></div>
+						<!---             <div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/SuperTuesdayApp2.html" target="right" class="treeUnselected" onclick="clickAnchor(this)">Super Tuesday application</a></div> --->
+					</div>
+				</div> <!--end book-->
+				<div class="treeNode">
+					<img src="treenodeplus.gif" class="treeLinkImage" onClick="expandCollapse(this.parentNode)" />
+					<span style="cursor: pointer;" onClick="expandCollapse(this.parentNode)">Identify Task</span>
+					<div class="treeSubnodesHidden">
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/identify_drilldown.html" target="right" class="treeUnselected" onClick="clickAnchor(this)">Identify 
+								features on a map</a></div>
+					</div>
+				</div> <!--end book-->
+				<div class="treeNode">
+					<img src="treenodeplus.gif" class="treeLinkImage" onClick="expandCollapse(this.parentNode)" />
+					<span style="cursor: pointer;" onClick="expandCollapse(this.parentNode)">Find Task</span>
+					<div class="treeSubnodesHidden">
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/find_nomap.html" target="right" class="treeUnselected" onClick="clickAnchor(this)">Find 
+								features without a map</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/find_map.html" target="right" class="treeUnselected" onClick="clickAnchor(this)">Find 
+								features on a map</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/find_map_datagrid.html" target="right" class="treeUnselected" onClick="clickAnchor(this)">Show 
+								Find Task results in DataGrid</a></div>
+					</div>
+				</div> <!--end book-->
+				<div class="treeNode">
+					<img src="treenodeplus.gif" class="treeLinkImage" onClick="expandCollapse(this.parentNode)" />
+					<span style="cursor: pointer;" onClick="expandCollapse(this.parentNode)">Geocode Task</span>
+					<div class="treeSubnodesHidden">
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/locator_address.html" target="right" class="treeUnselected" onClick="clickAnchor(this)">Geocode 
+								an address</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/locator_reverse.html" target="right" class="treeUnselected" onClick="clickAnchor(this)">Reverse 
+								geocode</a></div>
+					</div>
+				</div> <!--end book-->
+				<div class="treeNode">
+					<img src="treenodeplus.gif" class="treeLinkImage" onClick="expandCollapse(this.parentNode)" />
+					<span style="cursor: pointer;" onClick="expandCollapse(this.parentNode)">Geoprocessor Task</span>
+					<div class="treeSubnodesHidden">
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/gp_servicearea.html" target="right" class="treeUnselected" onClick="clickAnchor(this)">Service 
+								area task</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/gp_viewshed.html" target="right" class="treeUnselected" onClick="clickAnchor(this)">Calculate 
+								a viewshed</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/gp_bottle.html" target="right" class="treeUnselected" onClick="clickAnchor(this)">Message 
+								in a bottle</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/gp_zonalstats.html" target="right" class="treeUnselected" onClick="clickAnchor(this)">Population 
+								zonal stats</a></div>
+					</div>
+				</div> <!--end book-->
+				<div class="treeNode">
+					<img src="treenodeplus.gif" class="treeLinkImage" onClick="expandCollapse(this.parentNode)" />
+					<span style="cursor: pointer;" onClick="expandCollapse(this.parentNode)">Route Task</span>
+					<div class="treeSubnodesHidden">
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/routetask_find_route.html" target="right" class="treeUnselected"
+								onClick="clickAnchor(this)">Find a route</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/routetask_directions.html" target="right" class="treeUnselected"
+								onClick="clickAnchor(this)">Get driving directions</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/routetask_multiple_stops.html" target="right" class="treeUnselected"
+								onClick="clickAnchor(this)">Find routes with barriers and multiple stops</a></div>
+					</div>
+				</div> <!--end book-->
+				<div class="treeNode">
+					<img src="treenodeplus.gif" class="treeLinkImage" onClick="expandCollapse(this.parentNode)" />
+					<span style="cursor: pointer;" onClick="expandCollapse(this.parentNode)">Toolbars</span>
+					<div class="treeSubnodesHidden">
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/toolbar_navigation.html" target="right" class="treeUnselected" onClick="clickAnchor(this)">Use 
+								a navigation toolbar</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/toolbar_draw.html" target="right" class="treeUnselected" onClick="clickAnchor(this)">Use 
+								a drawing toolbar</a></div>
+					</div>
+				</div> <!--end book-->
+				<div class="treeNode">
+					<img src="treenodeplus.gif" class="treeLinkImage" onClick="expandCollapse(this.parentNode)" />
+					<span style="cursor: pointer;" onClick="expandCollapse(this.parentNode)">Utilities</span>
+					<div class="treeSubnodesHidden">
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/util_measureline.html" target="right" class="treeUnselected" onClick="clickAnchor(this)">Measure 
+								distances</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/util_measurepoly.html" target="right" class="treeUnselected" onClick="clickAnchor(this)">Measure 
+								polygon area and perimeter</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/util_buffer.html" target="right" class="treeUnselected" onClick="clickAnchor(this)">Buffer 
+								a point</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/util_buffergraphic.html" target="right" class="treeUnselected" onClick="clickAnchor(this)">Buffer 
+								user-defined graphics</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/util_project.html" target="right" class="treeUnselected" onClick="clickAnchor(this)">Project 
+								a point</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/util_label_point.html" target="right" class="treeUnselected" onClick="clickAnchor(this)">Create 
+								points for labeling</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/util_simplify.html" target="right" class="treeUnselected" onClick="clickAnchor(this)">Simplify 
+								a polygon</a></div>
+						<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/util_relation.html" target="right" class="treeUnselected" onClick="clickAnchor(this)">Determine 
+								spatial relationships</a></div>
+					</div>
+				</div> <!--end book-->
+				<!-- 		<div class="treeNode">
+          <img src="treenodeplus.gif" class="treeLinkImage" onclick="expandCollapse(this.parentNode)" />
+          <span style="cursor: pointer;" onclick="expandCollapse(this.parentNode)">Applications</span>
+          <div class="treeSubnodesHidden">
+            <div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/arcgisonlinecontent.html" target="right" class="treeUnselected" onclick="clickAnchor(this)">Display multiple ArcGIS Online services</a></div>
+            <div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/demographic_charts.html" target="right" class="treeUnselected" onclick="clickAnchor(this)">demographic_charts.html</a></div>
+
+            <div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jssamples/demographic_charts_iphone.html" target="right" class="treeUnselected" onclick="clickAnchor(this)">demographic_charts_iphone.html</a></div>	
+		  </div>
+	  
+		</div>-->  <!--end book-->
+				<!-- Book template		
+		<div class="treeNode">
+          <img src="treenodeplus.gif" class="treeLinkImage" onclick="expandCollapse(this.parentNode)" />
+          <span style="cursor: pointer;" onclick="expandCollapse(this.parentNode)">Layers</span>
+          <div class="treeSubnodesHidden">
+			<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="http://skrzat/axlguide/jsdoc/class_style.cfm?theClass=ArcGISTiledMapServiceLayer" target="right" class="treeUnselected" onclick="clickAnchor(this)">ArcGISTiledMapServiceLayer</a></div>		  
+		  </div>
+		</div>-->  <!--end book-->
+			</div>
+		</div>
+	</body>
+</html>

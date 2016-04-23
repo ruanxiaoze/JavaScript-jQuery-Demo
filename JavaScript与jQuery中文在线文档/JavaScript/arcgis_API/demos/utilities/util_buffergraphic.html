@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+  <title>Buffer</title>
+  <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css">
+  <script src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5" type="text/javascript"></script>
+  <script type="text/javascript">
+    dojo.require("esri.map");
+    dojo.require("esri.tasks.geometry");
+    dojo.require("esri.toolbars.draw");
+
+    var map, gsvc, tb;
+
+    function initialize() {
+      var startExtent = new esri.geometry.Extent(-117.125,36.672,-105.875,42.297, new esri.SpatialReference({wkid:4326}) );
+      map = new esri.Map("map", {extent:startExtent});
+      dojo.connect(map, "onLoad", initToolbar);
+
+      var layer = new esri.layers.ArcGISTiledMapServiceLayer("http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer");
+      map.addLayer(layer);
+      gsvc = new esri.tasks.GeometryService("http://sampleserver1.arcgisonline.com/arcgis/rest/services/Geometry/GeometryServer");
+
+      esriConfig.defaults.io.proxyUrl = "/arcgisserver/apis/javascript/proxy/proxy.ashx";
+      esriConfig.defaults.io.alwaysUseProxy = false;
+    }
+
+    function initToolbar(map) {
+      tb = new esri.toolbars.Draw(map);
+      dojo.connect(tb, "onDrawEnd", doBuffer);
+    }
+
+    function doBuffer(geometry) {
+      switch (geometry.type) {
+         case "point":
+           var symbol = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_SQUARE, 10, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([255,0,0]), 1), new dojo.Color([0,255,0,0.25]));
+           break;
+         case "polyline":
+           var symbol = new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_DASH, new dojo.Color([255,0,0]), 1);
+           break;
+         case "polygon":
+           var symbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_NONE, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_DASHDOT, new dojo.Color([255,0,0]), 2), new dojo.Color([255,255,0,0.25]));
+           break;
+      }
+
+
+      var graphic = new esri.Graphic(geometry, symbol);
+      map.graphics.add(graphic);
+
+      var params = new esri.tasks.BufferParameters();
+
+
+      params.distances = [ dojo.byId("distance").value ];
+      params.bufferSpatialReference = new esri.SpatialReference({wkid: dojo.byId("bufferSpatialReference").value});
+      params.outSpatialReference = map.spatialReference;
+      params.unit = eval("esri.tasks.BufferParameters."+dojo.byId("unit").value);
+
+      if (geometry.type === "polygon") {
+        //if geometry is a polygon then simplify polygon.  This will make the user drawn polygon topologically correct.
+        gsvc.simplify([graphic], function(graphics) {
+          params.features = graphics;
+          gsvc.buffer(params, function(features) {
+            showBuffer(features);
+          });
+        });
+      } else {
+        params.features = [graphic];
+        gsvc.buffer(params, function(features) {
+          showBuffer(features);
+        });
+      }
+    }
+
+    function showBuffer(features) {
+      var symbol = new esri.symbol.SimpleFillSymbol(
+        esri.symbol.SimpleFillSymbol.STYLE_SOLID,
+        new esri.symbol.SimpleLineSymbol(
+          esri.symbol.SimpleLineSymbol.STYLE_SOLID,
+          new dojo.Color([255,0,0,0.65]), 2
+        ),
+        new dojo.Color([255,0,0,0.35])
+      );
+
+      for (var j=0, jl=features.length; j<jl; j++) {
+        features[j].setSymbol(symbol);
+        map.graphics.add(features[j]);
+      }
+      tb.deactivate();
+      map.showZoomSlider();
+    }
+
+    dojo.addOnLoad(initialize);
+  </script>
+
+</head>
+
+<body class="tundra">
+  <b>Pick a tool and draw on the map. The drawn graphic will be buffered based on the parameters specified below.  The in and out Spatial Reference is WKID:4326.</b><br/>
+  <!--<button onclick="tb.activate(esri.toolbars.Draw.POINT);map.hideZoomSlider();">Point</button>-->
+  <button onclick="tb.activate(esri.toolbars.Draw.LINE);map.hideZoomSlider();">Line</button>
+  <button onclick="tb.activate(esri.toolbars.Draw.POLYLINE);map.hideZoomSlider();">Polyline</button>
+  <button onclick="tb.activate(esri.toolbars.Draw.FREEHAND_POLYLINE);map.hideZoomSlider();">Freehand Polyline</button>
+  <button onclick="tb.activate(esri.toolbars.Draw.POLYGON);map.hideZoomSlider();">Polygon</button>
+  <button onclick="tb.activate(esri.toolbars.Draw.FREEHAND_POLYGON);map.hideZoomSlider();">Freehand Polygon</button>
+
+  <div id="map" style="width:1024px; height:512px; border:1px solid #000;"></div>
+  Buffer Spatial Reference WKID:&nbsp;<input type="text" id="bufferSpatialReference" size="5" value="32612" />&nbsp;&nbsp;
+  Buffer Distance:&nbsp;<input type="text" id="distance" size="10" value="25" />&nbsp;&nbsp;
+  <select id="unit">
+    <option value="UNIT_STATUTE_MILE">Miles</option>
+    <option value="UNIT_FOOT">Feet</option>
+    <option value="UNIT_KILOMETER">Kilometers</option>
+    <option value="UNIT_METER">Meters</option>
+    <option value="UNIT_NAUTICAL_MILE">Nautical Miles</option>
+    <option value="UNIT_US_NAUTICAL_MILE">US Nautical Miles</option>
+    <option value="UNIT_DEGREE">Degrees</option>
+  </select>
+  <input type="button" value="Clear Graphics" onclick="map.graphics.clear();" />
+</body>
+
+</html>

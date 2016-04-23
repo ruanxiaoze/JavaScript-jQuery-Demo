@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>SpatialReference</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: SpatialReference</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+    地图，图层或任务输入和输出的空间参考。投影和地理坐标系统都可以通过well-known ID (WKID)或definition string (WKT)定义。 <i>JavaScript API 仅仅支持WKID。</i>对于支持的ID列表和ID相关的定义字符串，参见：
+<UL>
+<li><a href="../jshelp/pcs.htm">投影坐标系统列表</a></li>
+<li><a href="../jshelp/gcs.htm">地理坐标系统列表</a></li>
+</UL>
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.SpatialReference
+</pre>
+
+<H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#SpatialReferenceConst">esri.SpatialReference(json)</a></td>
+		<td class="syntaxTABLE">创建一个新的SpatialReference对象。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#wkid">wkid</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+空间参考的WKID。支持的空间参考列表，见<a href="../jshelp/pcs.htm">投影坐标系统</a>和<a href="../jshelp/gcs.htm">地理坐标系统</a>。</td>
+		</tr>
+</table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="SpatialReferenceConst"></a><H4>esri.SpatialReference(json)</H4>
+		</div>
+
+<div class="detaildesc"><span class="syntaxTABLE">创建一个新的SpatialReference对象。</span></div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;Object>
+<B>json</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			空间参考的REST JSON表示方式。:  {"wkid" : &lt;wkid>}<!--***-->
+			</td>
+			</tr>
+</table>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="wkid"></a>
+&lt;Number> wkid</H4></div>
+
+<div class="detaildesc">空间参考的WKID。支持的空间参考列表，见<a href="../jshelp/pcs.htm">投影坐标系统</a>和<a href="../jshelp/gcs.htm">地理坐标系统</a>。</div>
+
+</div>
+
+<br/></div></body></html> 

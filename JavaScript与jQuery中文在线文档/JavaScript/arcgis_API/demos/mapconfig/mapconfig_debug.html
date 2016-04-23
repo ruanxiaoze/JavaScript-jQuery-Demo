@@ -1,0 +1,31 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>Dojo Debug Console</title>
+    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css">
+    <!-- Declare djConfig before including reference to ArcGIS JavaScript API -->
+    <script type="text/javascript">djConfig = { isDebug:true };</script>
+    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"></script>
+    <script type="text/javascript">
+      dojo.require("esri.map");
+
+      function init() {
+        var map = new esri.Map("map");
+        dojo.connect(map, "onLoad", function() {
+          console.log("Map loaded");
+          dojo.connect(map, "onExtentChange", function(extent) { console.log("Extent changed : " + dojo.toJson(extent.toJson())); });
+        });
+        dojo.connect(map, "onLayerAdd", function() { console.log("Layer added"); });
+        map.addLayer(new esri.layers.ArcGISTiledMapServiceLayer("http://server.arcgisonline.com/arcgis/rest/services/ESRI_StreetMap_World_2D/MapServer"));
+      }
+
+      dojo.addOnLoad(init);
+    </script>
+  </head>
+  <body class="tundra">
+    Add dojo console window
+    <div id="map" style="width:512px; height:512px; border:1px solid #000;"></div>
+  </body>
+</html>

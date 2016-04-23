@@ -1,0 +1,294 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>Query</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: Query</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	Query for input to the <a href="querytask.htm">QueryTask</a>.  Not all query properties are required to execute a QueryTask.  The query definition requires one of the following properties: queryGeometry, text, or where.  Optional properties include <i>outFields</i>, <i>outSpatialReference</i>, and <i>returnGeometry</i>.
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.tasks.Query
+</pre>
+
+<H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#QueryConst">esri.tasks.Query()</a></td>
+		<td class="syntaxTABLE">Creates a new QueryTask object used to execute a query on the layer resource identified by the URL.</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#geometry">geometry</a></td>
+<td class="syntaxTABLE">
+<a href="geometry.htm">Geometry</a>
+</td>
+
+<td class="syntaxTABLE">
+The geometry to apply to the spatial filter. The spatial relationship as specified by <I>spatialRelationship</I> is applied to this geometry while performing the query. The valid geometry types are <a href="extent.htm">Extent</a>, <a href="point.htm">Point</a>,  <a href="multipoint.htm">Multipoint</a>, <a href="polyline.htm">Polyline</a>, or <a href="polygon.htm">Polygon</a>. <br/><br/></td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#outFields">outFields</a></td>
+<td class="syntaxTABLE">
+String[]
+</td>
+
+<td class="syntaxTABLE">
+Attribute fields to include in the <a href="featureset.htm">FeatureSet</a>.  Fields must exist in the map layer.  You must list the actual field names rather than the alias names.  Returned fields are also the actual field names.  However, you are able to use the alias names when you display the results. You can set field alias names in the map document or in Manager.  <br/><br/>
+
+When you specify the output fields, you should limit the fields to only those you expect to use in the query or the results.  The fewer fields you include, the faster the response will be. <br/><br/>
+
+Each query must have access to the Shape and Objectid fields for a layer, but your list of fields does not need to include these two fields.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#outSpatialReference">outSpatialReference</a></td>
+<td class="syntaxTABLE">
+<a href="spatialreference.htm">SpatialReference</a>
+</td>
+
+<td class="syntaxTABLE">
+The spatial reference for the returned geometry. If not specified, the geometry is returned in the spatial reference of the map.  支持的空间参考列表，见<a href="../jshelp/pcs.htm">投影坐标系统</a> and <a href="../jshelp/gcs.htm">地理坐标系统</a>。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#returnGeometry">returnGeometry</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+If "true", each feature in the <a href="featureset.htm">FeatureSet</a> includes the geometry. Set to "false" (default) if you do not plan to include highlighted features on a map since the geometry makes up a significant portion of the response.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#spatialRelationship">spatialRelationship</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+The spatial relationship to be applied on the input geometry while performing the query.  The valid values are listed in the Constants table.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#text">text</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+Shorthand for a where clause using "like".  The field used is the display field defined in the map document.  You can determine what the display field is for a layer in Services Directory.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#where">where</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+A where clause for the query.  Any legal SQL where clause operating on the fields in the layer is allowed.</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>常量</H4>
+
+	<table CLASS="syntaxTABLE" cellspacing="0">
+	<tr>
+	<th class="tableheader" width="20%">常量</th>
+		<th class="tableheader">描述</th>
+	</tr>
+
+		<tr>
+		<td class="syntaxTABLE">SPATIAL_REL_CONTAINS</td>
+			<td class="syntaxTABLE">			Part or all of a feature from feature class 1 is contained within a feature from feature class 2.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">SPATIAL_REL_CROSSES</td>
+			<td class="syntaxTABLE">			The feature from feature class 1 crosses a feature from feature class 2.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">SPATIAL_REL_ENVELOPEINTERSECTS</td>
+			<td class="syntaxTABLE">			The envelope of feature class 1 intersects with the envelope of feature class 2.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">SPATIAL_REL_INDEXINTERSECTS</td>
+			<td class="syntaxTABLE">			The envelope of the query feature class intersects the index entry for the target feature class.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">SPATIAL_REL_INTERSECTS</td>
+			<td class="syntaxTABLE">			Part of a feature from feature class 1 is contained in a feature from feature class 2.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">SPATIAL_REL_OVERLAPS</td>
+			<td class="syntaxTABLE">			Features from feature class 1 overlap features in feature class 2.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">SPATIAL_REL_TOUCHES</td>
+			<td class="syntaxTABLE">			The feature from feature class 1 touches the border of a feature from feature class 2.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">SPATIAL_REL_WITHIN</td>
+			<td class="syntaxTABLE">			The feature from feature class 1 is completely enclosed by the feature from feature class 2		</td>
+	</tr>
+
+</table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="QueryConst"></a><H4>esri.tasks.Query()</H4>
+		</div>
+
+<div class="detaildesc">Creates a new QueryTask object used to execute a query on the layer resource identified by the URL.</div>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="geometry"></a>
+&lt;<a href="geometry.htm">Geometry</a>> geometry</H4></div>
+
+<div class="detaildesc">The geometry to apply to the spatial filter. The spatial relationship as specified by <I>spatialRelationship</I> is applied to this geometry while performing the query. The valid geometry types are <a href="extent.htm">Extent</a>, <a href="point.htm">Point</a>,  <a href="multipoint.htm">Multipoint</a>, <a href="polyline.htm">Polyline</a>, or <a href="polygon.htm">Polygon</a>. <br/><br/></div>
+
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>
+      function executeQueryTask(event) {
+        //When the user clicks on a map, the onClick event returns the event point 
+		where the user clicked. The event contains mapPoint (esri.geometry.Point)
+
+        query.geometry = event.mapPoint;
+
+        //Execute task
+        queryTask.execute(query, showResults);
+      }
+</pre><br/>
+		</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="outFields"></a>
+&lt;String[]> outFields</H4></div>
+
+<div class="detaildesc">Attribute fields to include in the <a href="featureset.htm">FeatureSet</a>.  Fields must exist in the map layer.  You must list the actual field names rather than the alias names.  Returned fields are also the actual field names.  However, you are able to use the alias names when you display the results. You can set field alias names in the map document or in Manager.  <br/><br/>
+
+When you specify the output fields, you should limit the fields to only those you expect to use in the query or the results.  The fewer fields you include, the faster the response will be. <br/><br/>
+
+Each query must have access to the Shape and Objectid fields for a layer, but your list of fields does not need to include these two fields.</div>
+
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>query.outFields = ["NAME", "STATE_ABBR", "POP04"];</pre><br/>
+		</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="outSpatialReference"></a>
+&lt;<a href="spatialreference.htm">SpatialReference</a>> outSpatialReference</H4></div>
+
+<div class="detaildesc">The spatial reference for the returned geometry. If not specified, the geometry is returned in the spatial reference of the map.  支持的空间参考列表，见<a href="../jshelp/pcs.htm">投影坐标系统</a> and <a href="../jshelp/gcs.htm">地理坐标系统</a>。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="returnGeometry"></a>
+&lt;Boolean> returnGeometry</H4></div>
+
+<div class="detaildesc">If "true", each feature in the <a href="featureset.htm">FeatureSet</a> includes the geometry. Set to "false" (default) if you do not plan to include highlighted features on a map since the geometry makes up a significant portion of the response.</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> false
+			</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="spatialRelationship"></a>
+&lt;String> spatialRelationship</H4></div>
+
+<div class="detaildesc">The spatial relationship to be applied on the input geometry while performing the query.  The valid values are listed in the Constants table.</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> SPATIAL_REL_INTERSECTS
+			</div>
+
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>
+var myQuery = new esri.tasks.Query();
+myQuery.spatialRelationship = esri.tasks.Query.SPATIAL_REL_CONTAINS;
+</pre><br/>
+		</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="text"></a>
+&lt;String> text</H4></div>
+
+<div class="detaildesc">Shorthand for a where clause using "like".  The field used is the display field defined in the map document.  You can determine what the display field is for a layer in Services Directory.</div>
+
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		<pre>query.text = stateName;</pre><br/>
+		</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="where"></a>
+&lt;String> where</H4></div>
+
+<div class="detaildesc">A where clause for the query.  Any legal SQL where clause operating on the fields in the layer is allowed.</div>
+
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		Sring query example. Be sure you have the correct sequence of single and double quotes when writing the where clause in JavaScript.
+
+		<pre>
+  query.where = "NAME = '" + stateName + "'"; 
+		</pre>
+		
+		Number query example.
+		<pre>
+  query.where = "POP04 > " + population;
+		</pre><br/>
+		</div>
+
+</div>
+
+<br/></div></body></html> 

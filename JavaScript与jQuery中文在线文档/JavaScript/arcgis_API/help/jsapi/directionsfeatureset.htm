@@ -1,0 +1,187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>DirectionsFeatureSet</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: DirectionsFeatureSet</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	<i>v1.4增加的类。</i><br/><br/>  <a href="featureset.htm">FeatureSet</a>有针对选择路线的属性。<a href="featureset.htm#features">FeatureSet.features</a>属性包含分段显示方向文本和路线几何体。每个要素的属性提供关于路线分割的信息。下列属性被返回：
+<br/><br/>
+
+<ul>
+<li>text - 方向文本。 </li>
+<li>length - 路线段的长度。 </li>
+<li>time - 路线段的步行时间。 </li>
+<li>ETA - 路线段的预计到达时间（当地时间）</li>
+<li><a href="http://resources.esri.com/help/9.3/ArcGISDesktop/ArcObjects/esriNetworkAnalyst/esriDirectionsManeuverType.htm" target="_blank">maneuverType</a> - 方向展示的策略类型。 </li>
+</ul>
+
+<br/>
+DirectionsFeatureSet没有构造函数。关于更多信息，见 <a href="../jshelp/intro_route_directions.htm">Getting driving directions</a>.
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+<a href="featureset.htm">esri.tasks.FeatureSet</a>
+  |_ esri.tasks.DirectionsFeatureSet
+</pre><H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#extent">extent</a></td>
+<td class="syntaxTABLE">
+<a href="extent.htm">Extent</a>
+</td>
+
+<td class="syntaxTABLE">
+路线的范围。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#mergedGeometry">mergedGeometry</a></td>
+<td class="syntaxTABLE">
+<a href="polyline.htm">Polyline</a>
+</td>
+
+<td class="syntaxTABLE">
+单个多段线表示路线。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#routeId">routeId</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+服务器返回路线ID。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#routeName">routeName</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+<code>RouteParameters.stops</code>指定的名称。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#totalDriveTime">totalDriveTime</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+计算的路线实际开车时间。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#totalLength">totalLength</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+路线长度，长度单位通过<code>RouteParameters.directionsLengthUnits</code>指定。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#totalTime">totalTime</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+用<code>RouteParameters.directionsTimeAttribute</code>计算的路线总时间。</td>
+		</tr>
+</table>
+
+<div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="extent"></a>
+&lt;<a href="extent.htm">Extent</a>> extent</H4></div>
+
+<div class="detaildesc">路线的范围。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="mergedGeometry"></a>
+&lt;<a href="polyline.htm">Polyline</a>> mergedGeometry</H4></div>
+
+<div class="detaildesc">单个多段线表示路线。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="routeId"></a>
+&lt;String> routeId</H4></div>
+
+<div class="detaildesc">服务器返回路线ID。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="routeName"></a>
+&lt;String> routeName</H4></div>
+
+<div class="detaildesc"><code>RouteParameters.stops</code>指定的名称。</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="RouteParameters.htm#stops">RouteParameters.stops</a>
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="totalDriveTime"></a>
+&lt;Number> totalDriveTime</H4></div>
+
+<div class="detaildesc">计算的路线实际开车时间。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="totalLength"></a>
+&lt;Number> totalLength</H4></div>
+
+<div class="detaildesc">路线长度，长度单位通过<code>RouteParameters.directionsLengthUnits</code>指定。</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="RouteParameters.htm#directionsLengthUnits">RouteParameters.directionsLengthUnits</a>
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="totalTime"></a>
+&lt;Number> totalTime</H4></div>
+
+<div class="detaildesc">用<code>RouteParameters.directionsTimeAttribute</code>计算的路线总时间。</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="RouteParameters.htm#directionsTimeAttribute">RouteParameters.directionsTimeAttribute</a>
+</div>
+
+</div>
+
+<br/></div></body></html> 

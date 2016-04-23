@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>DynamicMapServiceLayer</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: DynamicMapServiceLayer</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+    ArcGIS Server 动态地图服务的基础类。<br /><br />
+
+DynamicMapServiceLayer没有构造函数。使用<a href="arcgisdynamicmapservicelayer.htm">ArcGISDynamicMapServicLayer</a> 和 <a href="arcgisimageservicelayer.htm">ArcGISImageServiceLayer.htm</a> 代替。 <i>(As of v1.2)</i>
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+<a href="layer.htm">esri.layers.Layer</a>
+  |_ esri.layers.DynamicMapServiceLayer
+</pre><H4 class=dtH4>子类</H4>
+
+<a href="arcgisdynamicmapservicelayer.htm">ArcGISDynamicMapServiceLayer</a>&nbsp;&nbsp;<a href="arcgisimageservicelayer.htm">ArcGISImageServiceLayer</a>&nbsp;&nbsp;<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#fullExtent">fullExtent</a></td>
+<td class="syntaxTABLE">
+<a href="extent.htm">Extent</a>
+</td>
+
+<td class="syntaxTABLE">
+地图服务定义的完整的范围。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#initialExtent">initialExtent</a></td>
+<td class="syntaxTABLE">
+<a href="extent.htm">Extent</a>
+</td>
+
+<td class="syntaxTABLE">
+地图服务定义的初始范围。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#spatialReference">spatialReference</a></td>
+<td class="syntaxTABLE">
+<a href="spatialreference.htm">SpatialReference</a>
+</td>
+
+<td class="syntaxTABLE">
+地图服务的空间参考。  支持的空间参考列表，见<a href="../jshelp/pcs.htm">投影坐标系统</a>和<a href="../jshelp/gcs.htm">地理坐标系统</a>。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>方法表</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+		<th class="tableheader">方法</th>
+		<th class="tableheader">返回值</th>
+		<th class="tableheader">描述</th>
+		</tr>
+
+<tr>
+<td class="syntaxTABLE"><a href="#getImageUrl">getImageUrl(extent, width, height, callback)</a></td><td class="syntaxTABLE">
+String
+</td>
+<td class="syntaxTABLE">当扩展DynamicMapServiceLayer时方法将执行。  更多详细信息，见<A href="../jshelp/inside_custom_layers.htm">创建自定义图层类型</A>.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#refresh">refresh()</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">通过建立新的到服务器的请求刷新地图。为了以这种方式刷新图层，setDisableClientCaching必需是true。这保证了地图图片不是客户端的缓存。</td>	</tr></table>
+
+<div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="fullExtent"></a>
+&lt;<a href="extent.htm">Extent</a>> fullExtent</H4></div>
+
+<div class="detaildesc">地图服务定义的完整的范围。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="initialExtent"></a>
+&lt;<a href="extent.htm">Extent</a>> initialExtent</H4></div>
+
+<div class="detaildesc">地图服务定义的初始范围。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="spatialReference"></a>
+&lt;<a href="spatialreference.htm">SpatialReference</a>> spatialReference</H4></div>
+
+<div class="detaildesc">地图服务的空间参考。  支持的空间参考列表，见<a href="../jshelp/pcs.htm">投影坐标系统</a>和<a href="../jshelp/gcs.htm">地理坐标系统</a>。</div>
+
+</div>
+
+<div class=sectionDivider>方法详细信息</div>
+<div class="detaildiv">
+		<div class="detailname"><a name="getImageUrl"></a><H4>
+getImageUrl(extent, width, height, callback)</H4></div>
+
+<div class="detaildesc">当扩展DynamicMapServiceLayer时方法将执行。  更多详细信息，见<A href="../jshelp/inside_custom_layers.htm">创建自定义图层类型</A>.<i> (As of v1.3)</i></div>
+
+<div class="detaildesc"><strong>返回值:</strong> String</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="extent.htm">Extent</a>> <B>extent</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+地图的当前范围。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>width</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+地图的当前宽度（单位：像素）。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>height</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+地图的当前高度（单位：像素）</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>callback</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+方法完成后调用的函数。</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="refresh"></a><H4>
+refresh()</H4></div>
+
+<div class="detaildesc">通过建立新的到服务器的请求刷新地图。为了以这种方式刷新图层，setDisableClientCaching必需是true。这保证了地图图片不是客户端的缓存。<i> (As of v1.2)</i></div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+</div>
+
+<br/></div></body></html> 

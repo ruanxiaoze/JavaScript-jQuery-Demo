@@ -1,0 +1,215 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>ImageServiceParameters</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: ImageServiceParameters</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	Represents the image service parameter options used when calling <a href="arcgisimageservicelayer.htm#exportMapImage">ArcGISImageServiceLayer.exportMapImage</a>.   <i>(As of v1.2)</i>
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.layers.ImageServiceParameters
+</pre>
+
+<H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#ImageServiceParametersConst">esri.layers.ImageServiceParameters()</a></td>
+		<td class="syntaxTABLE">Creates a new ImageServiceParameters object.  The constructor takes no parameters.</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#bandIds">bandIds</a></td>
+<td class="syntaxTABLE">
+Number[]
+</td>
+
+<td class="syntaxTABLE">
+Array of current band selections.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#compressionQuality">compressionQuality</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+Current compression quality value.  The compression quality controls how much loss the image will be subjected to.  Only valid with JPG image types.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#extent">extent</a></td>
+<td class="syntaxTABLE">
+<a href="extent.htm">Extent</a>
+</td>
+
+<td class="syntaxTABLE">
+Extent of the exported image.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#format">format</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+Map image format.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#height">height</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+Requested image height in pixels.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#interpolation">interpolation</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+Current interpolation method.  The interpolation method affects how the raster dataset is transformed when it undergoes warping or when it changes coordinate space.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#width">width</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+Requested image width in pixels.</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>常量</H4>
+
+	<table CLASS="syntaxTABLE" cellspacing="0">
+	<tr>
+	<th class="tableheader" width="20%">常量</th>
+		<th class="tableheader">描述</th>
+	</tr>
+
+		<tr>
+		<td class="syntaxTABLE">INTERPOLATION_BILINEAR</td>
+			<td class="syntaxTABLE">			Resamples pixel by bilinear interpolation.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">INTERPOLATION_CUBICCONVOLUTION</td>
+			<td class="syntaxTABLE">			Resamples pixel by cubic convolution.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">INTERPOLATION_MAJORITY</td>
+			<td class="syntaxTABLE">			Resamples pixel by majority value.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">INTERPOLATION_NEARESTNEIGHBOR</td>
+			<td class="syntaxTABLE">			Resamples pixel by nearest neighbor.		</td>
+	</tr>
+
+</table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="ImageServiceParametersConst"></a><H4>esri.layers.ImageServiceParameters()</H4>
+		</div>
+
+<div class="detaildesc">Creates a new ImageServiceParameters object.  The constructor takes no parameters.</div>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="bandIds"></a>
+&lt;Number[]> bandIds</H4></div>
+
+<div class="detaildesc">Array of current band selections.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="compressionQuality"></a>
+&lt;Number> compressionQuality</H4></div>
+
+<div class="detaildesc">Current compression quality value.  The compression quality controls how much loss the image will be subjected to.  Only valid with JPG image types.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="extent"></a>
+&lt;<a href="extent.htm">Extent</a>> extent</H4></div>
+
+<div class="detaildesc">Extent of the exported image.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="format"></a>
+&lt;String> format</H4></div>
+
+<div class="detaildesc">Map image format.</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> png8 | png24 | jpg | bmp | gif
+			</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> png8
+			</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="height"></a>
+&lt;Number> height</H4></div>
+
+<div class="detaildesc">Requested image height in pixels.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="interpolation"></a>
+&lt;String> interpolation</H4></div>
+
+<div class="detaildesc">Current interpolation method.  The interpolation method affects how the raster dataset is transformed when it undergoes warping or when it changes coordinate space.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="width"></a>
+&lt;Number> width</H4></div>
+
+<div class="detaildesc">Requested image width in pixels.</div>
+
+</div>
+
+<br/></div></body></html> 

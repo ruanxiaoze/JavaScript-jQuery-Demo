@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>Default API configurations for v1.3 and higher</title>
+</head>
+
+<body>
+
+<div id="pageBanner">Default API configurations for v1.3 and higher</div>
+
+<div id="nstext">
+
+<!--***START TEXT - DO NOT WRITE ABOVE THIS LINE***-->
+<p><b>Note:  "esri.config" is a replacement to "esriConfig" as of version 1.3.  If you are using version 1.2 or lower, you should refer to <a href="inside_defaults_12.htm">Default API configurations for v1.2 and lower</a>.  For version 1.3 or higher, you use "esri.config" in place of "esriConfig".  Although "esriConfig" will continue to work with version 1.3, you should update your applications to use "esri.config" instead.  </b></p>
+
+<p>The ArcGIS JavaScript API has some default configurations that can be overridden programatically.  An example configuration is the symbol used for the rubber band zoom box.  In the following code, the variable zoomSymbol is initialized.  In the next line, the default zoomSymbol is overridden with the new symbol.</p>
+
+<pre>
+        var zoomSymbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_DASHDOT, new dojo.Color([0,0,255]), 2), new dojo.Color([255,255,0,0.5]));
+        esri.config.defaults.map.zoomSymbol = zoomSymbol.toJson();
+</pre>
+
+<p>The following list contains the default JavaScript API configurations:</p>
+
+
+
+<div class="detaildiv">
+	<div class="detailname"><a name="panDuration"></a><H4>
+esri.config.defaults.map.panDuration</H4>
+	</div>
+	<div class="detaildesc">The length of time in milliseconds that the map will take to pan from one extent to another.</div>
+	<div class="detaildesc"><strong>Default:</strong> 300</div>
+	<div class="detaildesc"><strong>Sample:</strong> <a href="../jssamples/mapconfig_smoothpan.html">Customize pan animation</a> 
+	</div>
+</div>
+
+<div class="detaildiv">
+	<div class="detailname"><a name="panRate"></a><H4>
+esri.config.defaults.map.panRate</H4>
+	</div>
+	<div class="detaildesc">The length of time in milliseconds that the map will refresh as it pans to the next extent.</div>
+	<div class="detaildesc"><strong>Default:</strong> 50</div>
+	<div class="detaildesc"><strong>Sample:</strong> <a href="../jssamples/mapconfig_smoothpan.html">Customize pan animation</a> 
+	</div>	
+</div>
+
+<div class="detaildiv">
+	<div class="detailname"><a name="slider"></a><H4>
+esri.config.defaults.map.slider</H4>
+	</div>
+	<div class="detaildesc">The parameters that define the location, size, and orientation of the slider.</div>
+	<div class="detaildesc"><strong>Default:</strong> {left:"30px",top:"30px",width:null,height:"200px"}</div>
+	<div class="detaildesc"><strong>Sample:</strong> <a href="../jssamples/mapconfig_orientation.html">Change slider orientation</a> 
+	</div>
+</div>
+
+<div class="detaildiv">
+	<div class="detailname"><a name="sliderLabel"></a><H4>
+esri.config.defaults.map.sliderLabel</H4>
+	</div>
+	<div class="detaildesc">The parameters that define the slider tick and accompanying tick label.  If this is null then the slider will not show tick marks.</div>
+	<div class="detaildesc"><strong>Default:</strong> {tick:5,labels:null,style:"width:2em; font-family:Verdana; font-size:75%;"}</div>
+	<div class="detaildesc"><strong>Sample:</strong> <a href="../jssamples/mapconfig_customlabels.html">Add labels to slider</a> 
+	</div>
+</div>
+
+<div class="detaildiv">
+	<div class="detailname"><a name="zoomDuration"></a><H4>
+esri.config.defaults.map.zoomDuration</H4>
+	</div>
+	<div class="detaildesc">The length of time in milliseconds that the map will take to zoom from one extent to another.</div>
+	<div class="detaildesc"><strong>Default:</strong> 300</div>
+	<div class="detaildesc"><strong>Sample:</strong> <a href="../jssamples/mapconfig_smoothzoom.html">Customize zoom animation</a> 
+	</div>
+</div>
+
+<div class="detaildiv">
+	<div class="detailname"><a name="zoomRate"></a><H4>
+esri.config.defaults.map.zoomRate</H4>
+	</div>
+	<div class="detaildesc">The length of time in milliseconds that the map will refresh as it zooms to the next extent.</div>
+	<div class="detaildesc"><strong>Default:</strong> 50</div>
+	<div class="detaildesc"><strong>Sample:</strong> <a href="../jssamples/mapconfig_smoothzoom.html">Customize zoom animation</a> 
+	</div>
+</div>
+
+<div class="detaildiv">
+	<div class="detailname"><a name="zoomSymbol"></a><H4>
+esri.config.defaults.map.zoomSymbol</H4>
+	</div>
+	<div class="detaildesc">The SimpleFillSymbol to use to represent the color, fill, and outline properties of the RubberBand zoom.  This is the JSON representation of the SimpleFillSymbol.</div>
+	<div class="detaildesc"><strong>Default:</strong> {color:[0,0,0,64],outline:{color:[255,0,0,255],width:1.5,style:"esriSLSSolid"},style:"esriSFSSolid"}</div>
+	<div class="detaildesc"><strong>Sample:</strong> <a href="../jssamples/mapconfig_zoombox.html">Customize zoom box</a> 
+	</div>
+</div>
+
+<div class="detaildiv">
+	<div class="detailname"><a name="alwaysUseProxy"></a><H4>
+esri.config.defaults.io.alwaysUseProxy</H4>
+	</div>
+	<div class="detaildesc">Whether or not to always use the proxy for communication to a REST endpoint.</div>
+	<div class="detaildesc"><strong>Default:</strong> FALSE</div>
+	<div class="detaildesc"><strong>See also:</strong> <a href="ags_proxy.htm">Using the proxy page</a> 
+	</div>
+</div>
+
+<div class="detaildiv">
+	<div class="detailname"><a name="proxyUrl"></a><H4>
+esri.config.defaults.io.proxyUrl</H4>
+	</div>
+	<div class="detaildesc">The location of the proxy url that should be used when posting large payloads to an endpoint.  This must reside on the same domain as the HTML application.</div>
+	<div class="detaildesc"><strong>Default:</strong> null</div>
+	<div class="detaildesc"><strong>See also:</strong> <a href="ags_proxy.htm">Using the proxy page</a> 
+	</div>
+</div>
+
+<div class="detaildiv">
+	<div class="detailname"><a name="timeout"></a><H4>
+esri.config.defaults.io.timeout</H4>
+	</div>
+	<div class="detaildesc">Each request through esri.request 
+					is allowed up to 60 seconds to respond. If no response is returned or a 
+					server-side error is returned, the esri.Error and error back handlers are 
+					called, in that order. <i>(As of 1.3)</i></div>
+	<div class="detaildesc"><strong>Default:</strong> 60 seconds</div>
+
+</div>
+
+
+<!--***END TEXT - DO NOT WRITE BELOW THIS LINE***-->
+</div>
+
+</body>
+</html>

@@ -1,0 +1,634 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>RouteParameters</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: RouteParameters</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	<i>Class added v1.4.</i><br/><br/>  Input parameters for a <a href="routetask.htm">RouteTask</a>.
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.tasks.RouteParameters
+</pre>
+
+<H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#RouteParametersConst">esri.tasks.RouteParameters()</a></td>
+		<td class="syntaxTABLE">Creates a new RouteParameters object.</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#accumulateAttributes">accumulateAttributes</a></td>
+<td class="syntaxTABLE">
+String[]
+</td>
+
+<td class="syntaxTABLE">
+The list of network attribute names to be accumulated with the analysis, i.e. which attributes should be returned as part of the response.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#barriers">barriers</a></td>
+<td class="syntaxTABLE">
+Object
+</td>
+
+<td class="syntaxTABLE">
+The set of barriers loaded as network locations during analysis.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#directionsLanguage">directionsLanguage</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+The language used when computing directions.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#directionsLengthUnits">directionsLengthUnits</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+The length units to use when computing directions.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#directionsTimeAttribute">directionsTimeAttribute</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+The name of network attribute to use for the drive time when computing directions. The default is as defined in the specific routing network layer used in your RouteTask.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#doNotLocateOnRestrictedElements">doNotLocateOnRestrictedElements</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+If true, avoids network elements restricted by <code>barriers</code> or due to restrictions specified in <code>restrictionAttributes</code>.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#findBestSequence">findBestSequence</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+If true, optimizes the order of the stops in the route while taking into account <code>preserveFirstStop</code> and <code>preserveLastStop</code>, if they are set to true.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#ignoreInvalidLocations">ignoreInvalidLocations</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+In routes where a stop is not located on a network or a stop could not be reached, the results will differ depending on the value of <code>ignoreInvalidLocations</code>. <br/><br/>
+
+<ul>
+<li>当值为false，the solve operation will fail if at least one of the stops specified cannot be located or reached.</li>
+<li>When true, as long as there are at least two valid stops that have been connected by a route, a valid result is returned.  If multiple routes are processed in a single request, as long as least one route is built, a valid result is returned.  The list of routes that cannot be solved is included in the message parameter of <code>RouteTask.onSolveComplete</code>.
+</li>
+</ul></td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#impedanceAttribute">impedanceAttribute</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+The network attribute name to be used as the impedance attribute in analysis. The default is as defined in the specific routing network layer used in your RouteTask.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#outputGeometryPrecision">outputGeometryPrecision</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+The precision of the output geometry after generalization.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#outputGeometryPrecisionUnits">outputGeometryPrecisionUnits</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+The units of the output geometry precision.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#outputLines">outputLines</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+The type of output lines to be generated in the result. The default is as defined in the specific routing network layer used in your RouteTask. For possible values, see <a href="naoutputline.htm">NAOutputLine</a>.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#outSpatialReference">outSpatialReference</a></td>
+<td class="syntaxTABLE">
+<a href="spatialreference.htm">SpatialReference</a>
+</td>
+
+<td class="syntaxTABLE">
+The well-known ID of the spatial reference for the geometries returned with the analysis results. If not specified, the geometries are returned in the spatial reference of the map.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#preserveFirstStop">preserveFirstStop</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+If true, keeps the first stop fixed in the sequence even when <code>findBestSequence</code> is true. Only applicable if <code>findBestSequence</code> is true.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#preserveLastStrop">preserveLastStrop</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+If true, keeps the last stop fixed in the sequence even when <code>findBestSequence</code> is true. Only applicable if <code>findBestSequence</code> is true.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#restrictionAttributes">restrictionAttributes</a></td>
+<td class="syntaxTABLE">
+String[]
+</td>
+
+<td class="syntaxTABLE">
+The list of network attribute names to be used as restrictions with the analysis.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#restrictUTurns">restrictUTurns</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+Specifies how U-Turns should be handled.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#returnBarriers">returnBarriers</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+If true, barriers are returned as the second parameter of <code>RouteTask.onSolveComplete</code>.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#returnDirections">returnDirections</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+If true, directions are generated and returned in the <code>directions</code> property of each <code>RouteResult</code>.  For more information, see <a href="../jshelp/intro_route_directions.htm">Getting driving directions</a>.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#returnRoutes">returnRoutes</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+If true, routes are generated and returned in the <code>route</code> property of each <code>RouteResult</code>.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#returnStops">returnStops</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+If true, stops are returned in the <code>stops</code> property of each <code>RouteResult</code>.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#startTime">startTime</a></td>
+<td class="syntaxTABLE">
+<a href="date.htm">Date</a>
+</td>
+
+<td class="syntaxTABLE">
+The time the route begins. If not specified, the default is the time specified in the route service.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#stops">stops</a></td>
+<td class="syntaxTABLE">
+Object
+</td>
+
+<td class="syntaxTABLE">
+The set of stops loaded as network locations during analysis.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#useHierarchy">useHierarchy</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+If true, the hierarchy attribute for the network should be used in analysis.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#useTimeWindows">useTimeWindows</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+If true, time windows should be used in the analysis.</td>
+		</tr>
+</table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="RouteParametersConst"></a><H4>esri.tasks.RouteParameters()</H4>
+		</div>
+
+<div class="detaildesc">Creates a new RouteParameters object.</div>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="accumulateAttributes"></a>
+&lt;String[]> accumulateAttributes</H4></div>
+
+<div class="detaildesc">The list of network attribute names to be accumulated with the analysis, i.e. which attributes should be returned as part of the response. The default is as defined in the specific routing network layer used in your RouteTask. You can specify any attributes names listed in the Service Directory under "Network Dataset -> Network Attributes" as "Usage Type: esriNAUTCost".  See also <a href="http://webhelp.esri.com/arcgisdesktop/9.3/index.cfm?TopicName=Understanding_the_network_attribute" target="_blank">Understanding the network attribute</a>.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="barriers"></a>
+&lt;Object> barriers</H4></div>
+
+<div class="detaildesc">The set of barriers loaded as network locations during analysis. Can be either an instance of <a href="datalayer.htm">DataLayer</a> or <a href="featureset.htm">FeatureSet</a>.</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#doNotLocateOnRestrictedElements">doNotLocateOnRestrictedElements</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="directionsLanguage"></a>
+&lt;String> directionsLanguage</H4></div>
+
+<div class="detaildesc">The language used when computing directions. The default is as defined in the specific routing network layer used in your RouteTask. By default, NAServer gets installed with en_US only - it is up to the server administrator to add additional languages.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="directionsLengthUnits"></a>
+&lt;String> directionsLengthUnits</H4></div>
+
+<div class="detaildesc">The length units to use when computing directions. The default is as defined in the specific routing network layer used in your RouteTask.</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> esriFeet | esriKilometers | esriMeters | esriMiles | esriNauticalMiles | esriYards
+			</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="DirectionsFeatureSet.htm#totalLength">DirectionsFeatureSet.totalLength</a>
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="directionsTimeAttribute"></a>
+&lt;String> directionsTimeAttribute</H4></div>
+
+<div class="detaildesc">The name of network attribute to use for the drive time when computing directions. The default is as defined in the specific routing network layer used in your RouteTask.</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="DirectionsFeatureSet.htm#totalTime">DirectionsFeatureSet.totalTime</a>
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="doNotLocateOnRestrictedElements"></a>
+&lt;Boolean> doNotLocateOnRestrictedElements</H4></div>
+
+<div class="detaildesc">If true, avoids network elements restricted by <code>barriers</code> or due to restrictions specified in <code>restrictionAttributes</code>.</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> false
+			</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#barriers">barriers</a>&nbsp;&nbsp;
+<a href="#restrictionAttributes">restrictionAttributes</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="findBestSequence"></a>
+&lt;Boolean> findBestSequence</H4></div>
+
+<div class="detaildesc">If true, optimizes the order of the stops in the route while taking into account <code>preserveFirstStop</code> and <code>preserveLastStop</code>, if they are set to true. The default is as defined in the specific routing network layer used in your RouteTask.  For more information, see <a href="../jshelp/intro_route_stop_seq.htm">Finding the best stop sequence</a> and <a href="../jshelp/intro_route_time_windows.htm">Routing with time windows</a>.</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="ignoreInvalidLocations"></a>
+&lt;Boolean> ignoreInvalidLocations</H4></div>
+
+<div class="detaildesc">In routes where a stop is not located on a network or a stop could not be reached, the results will differ depending on the value of <code>ignoreInvalidLocations</code>. <br/><br/>
+
+<ul>
+<li>当值为false，the solve operation will fail if at least one of the stops specified cannot be located or reached.</li>
+<li>When true, as long as there are at least two valid stops that have been connected by a route, a valid result is returned.  If multiple routes are processed in a single request, as long as least one route is built, a valid result is returned.  The list of routes that cannot be solved is included in the message parameter of <code>RouteTask.onSolveComplete</code>.
+</li>
+</ul></div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="RouteTask.htm#onSolveComplete">RouteTask.onSolveComplete</a>
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="impedanceAttribute"></a>
+&lt;String> impedanceAttribute</H4></div>
+
+<div class="detaildesc">The network attribute name to be used as the impedance attribute in analysis. The default is as defined in the specific routing network layer used in your RouteTask. You can specify any attributes names listed in the Service Directory under "Network Dataset -> Network Attributes" as "Usage Type: esriNAUTCost". You can also specify a value of "none" to indicate that no network attributes should be used for impedance. If you specify an empty array, it will default to the default of the service. <br/><br/>
+
+For example, set <code>impedanceAttribute="Time"</code> for quickest route and <code>impedanceAttribute="Length"</code> for shortest drive, assuming the service has those two esriNAUTCost attributes. <br/><br/>
+
+For more information, see <a href="http://webhelp.esri.com/arcgisdesktop/9.3/index.cfm?TopicName=Understanding_the_network_attribute" target="_blank">Understanding the network attribute</a>.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="outputGeometryPrecision"></a>
+&lt;Number> outputGeometryPrecision</H4></div>
+
+<div class="detaildesc">The precision of the output geometry after generalization. If 0, no generalization of output geometry is performed.  If present and positive, it represents the MaximumAllowableOffset parameter - generalization is performed according to IPolycurve.Generalize.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="outputGeometryPrecisionUnits"></a>
+&lt;String> outputGeometryPrecisionUnits</H4></div>
+
+<div class="detaildesc">The units of the output geometry precision. The default value is "esriUnknownUnits".</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="outputLines"></a>
+&lt;String> outputLines</H4></div>
+
+<div class="detaildesc">The type of output lines to be generated in the result. The default is as defined in the specific routing network layer used in your RouteTask. For possible values, see <a href="naoutputline.htm">NAOutputLine</a>.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="outSpatialReference"></a>
+&lt;<a href="spatialreference.htm">SpatialReference</a>> outSpatialReference</H4></div>
+
+<div class="detaildesc">The well-known ID of the spatial reference for the geometries returned with the analysis results. If not specified, the geometries are returned in the spatial reference of the map. 支持的空间参考列表，见<a href="../jshelp/pcs.htm">投影坐标系统</a> and <a href="../jshelp/gcs.htm">地理坐标系统</a>。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="preserveFirstStop"></a>
+&lt;Boolean> preserveFirstStop</H4></div>
+
+<div class="detaildesc">If true, keeps the first stop fixed in the sequence even when <code>findBestSequence</code> is true. Only applicable if <code>findBestSequence</code> is true. The default is as defined in the specific routing network layer used in your RouteTask.</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="preserveLastStrop"></a>
+&lt;Boolean> preserveLastStrop</H4></div>
+
+<div class="detaildesc">If true, keeps the last stop fixed in the sequence even when <code>findBestSequence</code> is true. Only applicable if <code>findBestSequence</code> is true. The default is as defined in the specific routing network layer used in your RouteTask.</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="restrictionAttributes"></a>
+&lt;String[]> restrictionAttributes</H4></div>
+
+<div class="detaildesc">The list of network attribute names to be used as restrictions with the analysis. The default is as defined in the specific routing network layer used in your RouteTask. Possible values are listed in the Service Directory under "Network Dataset -> Network Attributes". You can also specify a value of "none" to indicate that no network attributes should be used as restrictions. If you specify an empty array, it will default to the default of the service.</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#doNotLocateOnRestrictedElements">doNotLocateOnRestrictedElements</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="restrictUTurns"></a>
+&lt;String> restrictUTurns</H4></div>
+
+<div class="detaildesc">Specifies how U-Turns should be handled. The default is as defined in the specific routing network layer used in your RouteTask. Possible values are "esriNFSBAllowBacktrack", "esriNFSBAtDeadEndsOnly" and "esriNFSBNoBacktrack". See also <a href="nauturn.htm">NAUTurn</a>.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="returnBarriers"></a>
+&lt;Boolean> returnBarriers</H4></div>
+
+<div class="detaildesc">If true, barriers are returned as the second parameter of <code>RouteTask.onSolveComplete</code>.</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> false
+			</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="RouteTask.htm#onSolveComplete">RouteTask.onSolveComplete</a>
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="returnDirections"></a>
+&lt;Boolean> returnDirections</H4></div>
+
+<div class="detaildesc">If true, directions are generated and returned in the <code>directions</code> property of each <code>RouteResult</code>.  For more information, see <a href="../jshelp/intro_route_directions.htm">Getting driving directions</a>.</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> false
+			</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="RouteResult.htm#directions">RouteResult.directions</a>
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="returnRoutes"></a>
+&lt;Boolean> returnRoutes</H4></div>
+
+<div class="detaildesc">If true, routes are generated and returned in the <code>route</code> property of each <code>RouteResult</code>.</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> true
+			</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="RouteResult.htm#route">RouteResult.route</a>
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="returnStops"></a>
+&lt;Boolean> returnStops</H4></div>
+
+<div class="detaildesc">If true, stops are returned in the <code>stops</code> property of each <code>RouteResult</code>.</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> false
+			</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="RouteResult.htm#stops">RouteResult.stops</a>
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="startTime"></a>
+&lt;<a href="date.htm">Date</a>> startTime</H4></div>
+
+<div class="detaildesc">The time the route begins. If not specified, the default is the time specified in the route service.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="stops"></a>
+&lt;Object> stops</H4></div>
+
+<div class="detaildesc">The set of stops loaded as network locations during analysis. Can be either an instance of <a href="datalayer.htm">DataLayer</a> or <a href="featureset.htm">FeatureSet</a>.  When <code>RouteParameters.stops</code> takes a <code>FeatureSet</code>, each feature in the FeatureSet must have a defined spatial reference.  If the feature contains x and y attributes, those values are used for the stop, even if the feature includes geometry.  For the list of attributes that can be set on a stop, see the "Stop properties" section in <a href="http://webhelp.esri.com/arcgisdesktop/9.3/index.cfm?TopicName=Finding_the_best_route" target="_blank">Finding the best route</a>.</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="DirectionsFeatureSet.htm#routeName">DirectionsFeatureSet.routeName</a>
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="useHierarchy"></a>
+&lt;Boolean> useHierarchy</H4></div>
+
+<div class="detaildesc">If true, the hierarchy attribute for the network should be used in analysis. The default is as defined in the specific routing network layer used in your RouteTask.</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="useTimeWindows"></a>
+&lt;Boolean> useTimeWindows</H4></div>
+
+<div class="detaildesc">If true, time windows should be used in the analysis. The default is as defined in the specific routing network layer used in your RouteTask.</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+</div>
+
+<br/></div></body></html> 

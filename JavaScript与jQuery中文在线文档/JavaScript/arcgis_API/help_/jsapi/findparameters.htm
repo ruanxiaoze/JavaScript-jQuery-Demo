@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>FindParameters</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: FindParameters</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	这个数据对象被用来做FindTask.execute方法的findParameters参数。该参数指定查找操作的搜索条件。
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.tasks.FindParameters
+</pre>
+
+<H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#FindParametersConst">esri.tasks.FindParameters()</a></td>
+		<td class="syntaxTABLE">创建一个新的FindParameters对象.  构造函数没有参数。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#contains">contains</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+如果是false， 操作搜索完全匹配<I>searchText</I>字符串的值。 否则, 搜索包含提供的<I>searchText</I>字符串的值。 默认值是true。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#layerIds">layerIds</a></td>
+<td class="syntaxTABLE">
+Number[]
+</td>
+
+<td class="syntaxTABLE">
+执行查找操作的图层。图层通过逗号分隔的图层ID列表指定。图层id列表在<a href="arcgismapservicelayer.htm#layerInfos">ArcGISMapServiceLayer</a> <i>layerInfos</i>中返回。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#outSpatialReference">outSpatialReference</a></td>
+<td class="syntaxTABLE">
+<a href="spatialreference.htm">SpatialReference</a>
+</td>
+
+<td class="syntaxTABLE">
+输出几何体的空间参考。 如果<I>outSR</I>没有指定，输出几何体用地图的空间参考返回。  支持的空间参考列表，见<a href="../jshelp/pcs.htm">投影坐标系统</a>和<a href="../jshelp/gcs.htm">地理坐标系统</a>。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#returnGeometry">returnGeometry</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+如果是true，结果集包括和每个结果有关系的几何体。默认值是false。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#searchFields">searchFields</a></td>
+<td class="syntaxTABLE">
+String[]
+</td>
+
+<td class="syntaxTABLE">
+用于搜索的图层字段的名称。字段通过逗号分隔的字段名称列表指定。如果参数没有指定，搜索所有字段。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#searchText">searchText</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+搜索字符串文版被用于搜索图层和在图层中指定的字段以及<i>searchFields</i>参数。</td>
+		</tr>
+</table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="FindParametersConst"></a><H4>esri.tasks.FindParameters()</H4>
+		</div>
+
+<div class="detaildesc">创建一个新的FindParameters对象.  构造函数没有参数。</div>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="contains"></a>
+&lt;Boolean> contains</H4></div>
+
+<div class="detaildesc">如果是false， 操作搜索完全匹配<I>searchText</I>字符串的值。 Otherwise, 搜索包含提供的<I>searchText</I>字符串的值。 默认值是true。</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> true
+			</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="layerIds"></a>
+&lt;Number[]> layerIds</H4></div>
+
+<div class="detaildesc">执行查找操作的图层。图层通过逗号分隔的图层ID列表指定。图层id列表在<a href="arcgismapservicelayer.htm#layerInfos">ArcGISMapServiceLayer</a> <i>layerInfos</i>中返回。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="outSpatialReference"></a>
+&lt;<a href="spatialreference.htm">SpatialReference</a>> outSpatialReference</H4></div>
+
+<div class="detaildesc">输出几何体的空间参考。 如果<I>outSR</I>没有指定，输出几何体用地图的空间参考返回。  支持的空间参考列表，见<a href="../jshelp/pcs.htm">投影坐标系统</a>和<a href="../jshelp/gcs.htm">地理坐标系统</a>。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="returnGeometry"></a>
+&lt;Boolean> returnGeometry</H4></div>
+
+<div class="detaildesc">如果是true，结果集包括和每个结果有关系的几何体。默认值是false。</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> false
+			</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="searchFields"></a>
+&lt;String[]> searchFields</H4></div>
+
+<div class="detaildesc">用于搜索的图层字段的名称。字段通过逗号分隔的字段名称列表指定。如果参数没有指定，搜索所有字段。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="searchText"></a>
+&lt;String> searchText</H4></div>
+
+<div class="detaildesc">搜索字符串文版被用于搜索图层和在图层中指定的字段以及<i>searchFields</i>参数。</div>
+
+</div>
+
+<br/></div></body></html> 

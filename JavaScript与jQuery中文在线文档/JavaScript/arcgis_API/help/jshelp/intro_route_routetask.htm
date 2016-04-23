@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<meta name="keywords" content="ArcGIS JavaScript API" />
+		<link href="jsdoc.css" rel="stylesheet" type="text/css" />
+		<title>Working with the RouteTask</title>
+	</head>
+	<body>
+		<div id="pageBanner">Working with the RouteTask</div>
+		<div id="nstext">
+			<!--***START TEXT - DO NOT WRITE ABOVE THIS LINE***-->
+			<p>When you work with the <a href="../jsapi/routetask.htm">RouteTask</a>, you'll 
+				follow the general pattern of 1) creating the task, 2) configuring the 
+				parameters, and 3) solving the route. You must also specify what to do with the 
+				results and handle any errors returned by the task.</p>
+			<h3>Creating the route task</h3>
+			<p>When you create an instance of RouteTask, you provide a URL to a network layer resource. This is exposed through the REST endpoint of an ArcGIS Server <a href="http://webhelp.esri.com/arcgisserver/9.3.1/dotNet/network_service.htm" target="_blank"> network analysis service</a>. If you're not certain how to construct the 
+				URL, you can use the <a href="../jshelp/ags_rest.htm">Services Directory</a> to help you. In the code snippet below, MyMapDoc is the network analysis service and MyRoute is the network layer resource.</p>
+			<pre>
+routeTask = new esri.tasks.RouteTask
+        ("http://myServer/ArcGIS/rest/services/MyMapDoc/NAServer/MyRoute");</pre>
+			<h3>Configuring the route parameters</h3>
+			<p>In order to get the results you want from the route task, you need to specify 
+				the details of your routing problem such as stop locations, barrier locations, 
+				the impedance attribute, etc. You do this using <a href="../jsapi/routeparameters.htm">
+					esri.tasks.RouteParameters</a>.</p>
+			<pre>routeParams = new esri.tasks.RouteParameters();</pre>
+			<p>The example below shows how you'd use RouteParameters to define two stops for a 
+				route:</p>
+			<pre>//define 2 stops by coordinate pairs
+var stop1 = 
+new esri.Graphic(new esri.geometry.Point(-117.21,34.065), stopSymbol);
+var stop2 =
+new esri.Graphic(new esri.geometry.Point(-117.185,34.05), stopSymbol);
+
+routeParams.stops = new esri.tasks.FeatureSet();
+routeParams.stops.features.push(stop1);
+routeParams.stops.features.push(stop2);
+</pre>
+			<p>The route parameters also designate whether driving directions are returned, 
+				whether stops are visited in the order they were added, and whether the task 
+				fails if one stop is unreachable. For a complete description of each parameter, 
+				see the <a href="../jsapi/routeparameters.htm">RouteParameters</a> entry in the 
+				API reference.</p>
+			<p>In the above example, the stops were specified using x,y geometries. Optionally, 
+				you can specify stops and barriers as <i>network locations</i>. Network 
+				locations have their positions recorded relative to other segments on the 
+				network. Using network locations can result in faster route solving. See <a href="http://webhelp.esri.com/arcgisdesktop/9.3/index.cfm?topicname=Network_analysis_classes" target="_blank">
+					Network analysis classes</a> in the ArcGIS Desktop Help to learn about the 
+				four network location fields: SourceID, SourceOID, PosAlong, and SideOfEdge.</p>
+			<p>You can solve multiple routes at once by adding route names to each of your 
+				stops. The code below sets up two routes: Route A and Route B.</p>
+			<pre>var stop1 = new esri.Graphic(new esri.geometry.Point(-117.21,  34.065), stopSymbol);
+stop1.attributes = new Object();
+stop1.attributes.Name = "A";
+stop1.attributes.RouteName = "Route A";
+
+var stop2 = new esri.Graphic(new esri.geometry.Point(-117.185, 34.05 ), stopSymbol);
+stop2.attributes = new Object();
+stop2.attributes.Name = "B";
+stop2.attributes.RouteName = "Route A";
+
+var stop3 = new esri.Graphic(new esri.geometry.Point(-117.19,  34.062), stopSymbol);
+stop3.attributes = new Object();
+stop3.attributes.Name = "C";
+stop3.attributes.RouteName = "Route B";
+
+var stop4 = new esri.Graphic(new esri.geometry.Point(-117.18,  34.05), stopSymbol);
+stop4.attributes = new Object();
+stop4.attributes.Name = "D";
+stop4.attributes.RouteName = "Route B";
+</pre>
+			<p>When solving multiple routes in this way, you'll get an array of <a href="../jsapi/routeresult.htm">RouteResult</a> objects. You can iterate through this array and add the routes to 
+				the map.</p>
+			<h3>Solving the route</h3>
+			<p>Once you've created the route task and configured its parameters, you can call 
+				RouteTask.solve() to solve the route.</p>
+			<pre>routeTask.solve(routeParams);</pre>
+			<p>In addition to calling the solve method, you need to handle the onSolveComplete 
+				and onError events on the RouteTask. These functions define what the 
+				application will do with the results, whether the result is a route or an error 
+				message.</p>
+			<pre>dojo.connect(routeTask, "onSolveComplete", showRoute);
+dojo.connect(routeTask, "onError", errorHandler);
+. . .
+function showRoute(routeResults, barriers) {. . .}
+function errorHandler(err) {. . .}
+</pre>
+			<p>Sometimes a valid result is returned with warning messages. To access these 
+				messages you can add a third parameter to your onSolveComplete handler 
+				function, like this:</p>
+			<pre>
+function showRoute(routeResults, barriers, gpMessages) {
+  for (var i = 0; i < gpMessages.length; i++)
+  alert(gpMessages[i].type + ": " + gpMessages[i].description);
+  map.graphics.add(routeResults[0].route.setSymbol(routeSymbol));
+}</pre>
+			<p>Your onError handler function can print the messages in a similar way:</p>
+			<pre>
+function errorHandler(err) {
+  alert("An error occured\n" + err.message + 
+          "\n" + err.details.join("\n"));
+}
+</pre>
+			<!--***END TEXT - DO NOT WRITE BELOW THIS LINE***-->
+		</div>
+	</body>
+</html>

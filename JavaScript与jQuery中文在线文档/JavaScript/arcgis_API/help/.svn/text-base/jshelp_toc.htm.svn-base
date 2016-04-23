@@ -1,0 +1,328 @@
+<html>
+	<head>
+		<script type="text/javascript" language="javascript">
+
+  function CloseNav() {
+    if ((top.right.location == null) || (top.right.location == undefined) || (typeof(top.right.location.href) != "string") || (top.right.location.href == ""))
+      top.location="jshelp/intro_firstmap.htm";
+    else
+      top.location=top.right.location;
+  }
+    //Links to other domains normally wont work because of browser security
+    function SyncDocUrl(CallSyncTree)
+    {
+      if ((window.parent.frames[2] == null) || (window.parent.frames[2] == undefined))
+        return "";
+      if ((window.parent.frames[2].document == null) || (window.parent.frames[2].document == undefined))
+        return "";
+      var url = window.parent.frames[2].document.URL;
+      if ((CallSyncTree) && (url != "")) {
+        syncTree(url);
+        }
+      return url;
+    }
+
+
+  function GetFrameWidth() {
+    var x = 300;
+    if (self.innerHeight) // all except Explorer
+	x = self.innerWidth;
+    else if (document.documentElement && document.documentElement.clientHeight) // Explorer 6 Strict Mode
+	x = document.documentElement.clientWidth;
+    else if (document.body) // other Explorers
+	x = document.body.clientWidth;
+    return(x);
+  }
+
+  function GetFrameHeight() {
+    var y = 400;
+    if (self.innerHeight) // all except Explorer
+      y = self.innerHeight;
+    else if (document.documentElement && document.documentElement.clientWidth) // Explorer 6 Strict Mode
+      y = document.documentElement.clientHeight;
+    else if (document.body) // other Explorers
+      y = document.body.clientHeight;
+    return(y);
+  }
+
+  function resizeTree2() {
+    var treeDiv = document.getElementById("tree");
+    var xTop = treeDiv.offsetTop;
+    treeDiv.style.width = GetFrameWidth();
+    var HH = GetFrameHeight();
+    if (HH -  xTop > 0)
+      treeDiv.style.height = HH -  xTop;
+  }
+  function OnLoadCode() {
+    resizeTree2();
+    SyncDocUrl(true);
+  }
+
+		</script>
+		<meta HTTP-EQUIV="REFRESH">
+		<title>Contents</title>
+		<link rel="stylesheet" type="text/css" href="tree.css" />
+		<script src="tree.js" language="javascript" type="text/javascript">
+		</script>
+	</head>
+	<body id="docBody" style="color: Black; margin: 5px 0px 0px 0px;" onLoad="OnLoadCode()"
+		onResize="resizeTree2()" onselectstart="return false;">
+		<!-- <div style="display: inline; white-space: nowrap; margin: 0px 0px 0px 5px;">
+<a href="arcims_toc.htm"><img src="hh_navtab11.gif" width="59" height="21" border="0"></a>
+<a href="arcims_index.htm"><img src="hh_navtab12.gif" width="40" height="21" border="0"></a>
+<a href="arcims_search.htm"><img src="hh_navtab13.gif" width="49" height="21" border="0"></a>
+<a href="javascript:CloseNav()"><img src="hh_navtab0x.gif" width="100" height="21" border="0"></a>
+</div>-->
+		<!-- <div align="right" style="margin: 3 5 5 3;">
+   <span style="cursor: pointer; font-size: 8pt; font-family: verdana,arial,sans-serif;"
+      onmouseover="this.style.textDecoration='underline'"
+      onmouseout="this.style.textDecoration='none'"
+      onclick="SyncDocUrl(true);">sync toc</span>
+</div> -->
+		<div id="tree" style="top: 35px; left: 0px;" class="treeDiv">
+			<div id="treeRoot" onselectstart="return false" ondragstart="return false">
+				<div><h3>Concepts</h3>
+				</div>
+				<!-- <div class="treeNode">
+  <img src="treenodedot.gif" class="treeNoLinkImage" />
+  <a href="jshelp/overview_api.htm" target="right" class="treeUnselected" onclick="clickAnchor(this)">Overview of the JavaScript API</a>
+</div> -->
+				<div class="treeNode">
+					<img src="treenodedot.gif" class="treeNoLinkImage" /> <a href="jshelp/overview_api.htm" target="right" class="treeUnselected" onClick="clickAnchor(this)">
+						ArcGIS JavaScript API Overview</a>
+				</div>
+				<div class="treeNode">
+					<img src="treenodedot.gif" class="treeNoLinkImage" /> <a href="jshelp/new_v15.htm" target="right" class="treeUnselected" onClick="clickAnchor(this)">
+						What's New in Version 1.5</a>
+				</div>
+				<!--What's new -->
+				<div class="treeNode">
+					<img src="treenodeplus.gif" class="treeLinkImage" onClick="expandCollapse(this.parentNode)" />
+					<span style="cursor: pointer;" onClick="expandCollapse(this.parentNode)">What's New archive</span>
+					<div class="treeSubnodesHidden">
+						<div class="treeNode">
+							<img src="treenodedot.gif" class="treeNoLinkImage" /> <a href="jshelp/new_v14.htm" target="right" class="treeUnselected" onClick="clickAnchor(this)">
+								What's New in Version 1.4</a>
+						</div>
+						<div class="treeNode">
+							<img src="treenodedot.gif" class="treeNoLinkImage" /> <a href="jshelp/new_v13.htm" target="right" class="treeUnselected" onClick="clickAnchor(this)">
+								What's New in Version 1.3</a>
+						</div>
+						<div class="treeNode">
+							<img src="treenodedot.gif" class="treeNoLinkImage" /> <a href="jshelp/new_v12.htm" target="right" class="treeUnselected" onClick="clickAnchor(this)">
+								What's New in Version 1.2</a>
+						</div>
+					</div>
+				</div> <!--end book-->
+				<!--getting started-->
+				<div class="treeNode">
+					<img src="treenodeplus.gif" class="treeLinkImage" onClick="expandCollapse(this.parentNode)" />
+					<span style="cursor: pointer;" onClick="expandCollapse(this.parentNode)">Getting Started</span>
+					<div class="treeSubnodesHidden">
+						<div class="treeNode">
+							<img src="treenodedot.gif" class="treeNoLinkImage" /> <a href="jshelp/intro_firstmap.htm" target="right" class="treeUnselected" onClick="clickAnchor(this)">
+								Adding a map</a>
+						</div>
+						<div class="treeNode">
+							<img src="treenodedot.gif" class="treeNoLinkImage" /> <a href="jshelp/intro_extents.htm" target="right" class="treeUnselected" onClick="clickAnchor(this)">
+								Setting and using extents in a map</a>
+						</div>
+						<div class="treeNode">
+							<img src="treenodedot.gif" class="treeNoLinkImage" /> <a href="jshelp/intro_firsttask.htm" target="right" class="treeUnselected" onClick="clickAnchor(this)">
+								Adding a task</a>
+						</div>
+						<div class="treeNode">
+							<img src="treenodedot.gif" class="treeNoLinkImage" /> <a href="jshelp/intro_querytask.htm" target="right" class="treeUnselected" onClick="clickAnchor(this)">
+								Using QueryTask, Query, and FeatureSet</a>
+						</div>
+						<!--geoprocessing book-->
+						<div class="treeNode">
+							<img src="treenodeplus.gif" class="treeLinkImage" onClick="expandCollapse(this.parentNode)" />
+							<span style="cursor: pointer;" onClick="expandCollapse(this.parentNode)">Using the Geoprocessor</span>
+							<div class="treeSubnodesHidden">
+								<div class="treeNode">
+									<img src="treenodedot.gif" class="treeNoLinkImage" /> <a href="jshelp/intro_gp_overview.htm" target="right" class="treeUnselected" onClick="clickAnchor(this)">
+										An overview of geoprocessing with the ArcGIS JavaScript API</a>
+								</div>
+								<div class="treeNode">
+									<img src="treenodedot.gif" class="treeNoLinkImage" /> <a href="jshelp/intro_gp_creating.htm" target="right" class="treeUnselected" onClick="clickAnchor(this)">
+										Creating the Geoprocessor</a>
+								</div>
+								<div class="treeNode">
+									<img src="treenodedot.gif" class="treeNoLinkImage" /> <a href="jshelp/intro_gp_parameters.htm" target="right" class="treeUnselected" onClick="clickAnchor(this)">
+										Supplying parameters for the Geoprocessor</a>
+								</div>
+								<div class="treeNode">
+									<img src="treenodedot.gif" class="treeNoLinkImage" /> <a href="jshelp/intro_gp_running.htm" target="right" class="treeUnselected" onClick="clickAnchor(this)">
+										Running a geoprocessing task and getting the results</a>
+								</div>
+							</div>
+						</div> <!--end gp book-->
+						<!--routing book-->
+						<div class="treeNode">
+							<img src="treenodeplus.gif" class="treeLinkImage" onClick="expandCollapse(this.parentNode)" />
+							<span style="cursor: pointer;" onClick="expandCollapse(this.parentNode)">Using the RouteTask</span>
+							<div class="treeSubnodesHidden">
+								<div class="treeNode">
+									<img src="treenodedot.gif" class="treeNoLinkImage" /> <a href="jshelp/intro_route_overview.htm" target="right" class="treeUnselected" onClick="clickAnchor(this)">
+										An overview of routing with the ArcGIS JavaScript API</a>
+								</div>
+								<div class="treeNode">
+									<img src="treenodedot.gif" class="treeNoLinkImage" /> <a href="jshelp/intro_route_routetask.htm" target="right" class="treeUnselected" onClick="clickAnchor(this)">
+										Working with the RouteTask</a>
+								</div>
+								<div class="treeNode">
+									<img src="treenodedot.gif" class="treeNoLinkImage" /> <a href="jshelp/intro_route_stop_seq.htm" target="right" class="treeUnselected" onClick="clickAnchor(this)">
+										Finding the best stop sequence</a>
+								</div>
+								<div class="treeNode">
+									<img src="treenodedot.gif" class="treeNoLinkImage" /> <a href="jshelp/intro_route_directions.htm" target="right" class="treeUnselected" onClick="clickAnchor(this)">
+										Getting driving directions</a>
+								</div>
+								<div class="treeNode">
+									<img src="treenodedot.gif" class="treeNoLinkImage" /> <a href="jshelp/intro_route_time_windows.htm" target="right" class="treeUnselected"
+										onClick="clickAnchor(this)">Routing with time windows</a>
+								</div>
+							</div>
+						</div>
+						<!--end routing book-->
+					</div>
+				</div> <!--end book-->
+				<!--Inside the API-->
+				<div class="treeNode">
+					<img src="treenodeplus.gif" class="treeLinkImage" onClick="expandCollapse(this.parentNode)" />
+					<span style="cursor: pointer;" onClick="expandCollapse(this.parentNode)">Inside the API</span>
+					<div class="treeSubnodesHidden">
+						<div class="treeNode">
+							<img src="treenodedot.gif" class="treeNoLinkImage" /> <a href="jshelp/inside_graphics.htm" target="right" class="treeUnselected" onClick="clickAnchor(this)">
+								Working with graphics</a>
+						</div>
+						<div class="treeNode">
+							<img src="treenodedot.gif" class="treeNoLinkImage" /> <a href="jshelp/inside_renderers.htm" target="right" class="treeUnselected" onClick="clickAnchor(this)">
+								Symbolizing graphics with renderers</a>
+						</div>
+						<div class="treeNode">
+							<img src="treenodedot.gif" class="treeNoLinkImage" /> <a href="jshelp/inside_events.htm" target="right" class="treeUnselected" onClick="clickAnchor(this)">
+								Working with events</a>
+						</div>
+						<div class="treeNode">
+							<img src="treenodedot.gif" class="treeNoLinkImage" /> <a href="jshelp/intro_navigation.htm" target="right" class="treeUnselected" onClick="clickAnchor(this)">
+								Map navigation</a>
+						</div>
+						<div class="treeNode">
+							<img src="treenodedot.gif" class="treeNoLinkImage" /> <a href="jshelp/inside_custom_layers.htm" target="right" class="treeUnselected" onClick="clickAnchor(this)">
+								Creating custom layer types</a>
+						</div>
+						<div class="treeNode">
+							<img src="treenodedot.gif" class="treeNoLinkImage" /> <a href="jshelp/inside_defaults.htm" target="right" class="treeUnselected" onClick="clickAnchor(this)">
+								Default API configurations</a>
+						</div>
+						<div class="treeNode">
+							<img src="treenodedot.gif" class="treeNoLinkImage" /> <a href="jshelp/inside_dojo.htm" target="right" class="treeUnselected" onClick="clickAnchor(this)">
+								Working with Dojo</a>
+						</div>
+						<div class="treeNode">
+							<img src="treenodedot.gif" class="treeNoLinkImage" /> <a href="jshelp/inside_guidelines.htm" target="right" class="treeUnselected" onClick="clickAnchor(this)">
+								Coding guidelines</a>
+						</div>
+					</div>
+				</div> <!--end book-->
+				<!--Working with ArcGIS Server Services-->
+				<div class="treeNode">
+					<img src="treenodeplus.gif" class="treeLinkImage" onClick="expandCollapse(this.parentNode)" />
+					<span style="cursor: pointer;" onClick="expandCollapse(this.parentNode)">Working with ArcGIS Server Services</span>
+					<div class="treeSubnodesHidden">
+						<div class="treeNode">
+							<img src="treenodedot.gif" class="treeNoLinkImage" /> <a href="jshelp/ags_overview.htm" target="right" class="treeUnselected" onClick="clickAnchor(this)">
+								ArcGIS Server services overview</a>
+						</div>
+						<!--         <div class="treeNode">
+          <img src="treenodedot.gif" class="treeNoLinkImage" />
+          <a href="jshelp/ags_use.htm" target="right" class="treeUnselected" onclick="clickAnchor(this)">How to use an ArcGIS Server service</a>
+        </div> -->
+						<div class="treeNode">
+							<img src="treenodedot.gif" class="treeNoLinkImage" /> <a href="jshelp/ags_rest.htm" target="right" class="treeUnselected" onClick="clickAnchor(this)">
+								The Services Directory and the REST API</a>
+						</div>
+						<div class="treeNode">
+							<img src="treenodedot.gif" class="treeNoLinkImage" /> <a href="jshelp/ags_security.htm" target="right" class="treeUnselected" onClick="clickAnchor(this)">
+								Working with secure ArcGIS services</a>
+						</div>
+						<div class="treeNode">
+							<img src="treenodedot.gif" class="treeNoLinkImage" /><a href="jshelp/ags_proxy.htm" target="right" class="treeUnselected" onClick="clickAnchor(this)">Using 
+								the proxy page</a>
+						</div>
+						<!---          <div class="treeNode">
+          <img src="treenodedot.gif" class="treeNoLinkImage" />
+          <a href="jshelp/none.htm" target="right" class="treeUnselected" onclick="clickAnchor(this)">Working with ArcGIS Online services</a>
+        </div>  --->
+					</div>
+				</div> <!--end book-->
+				<!--Working with Bing Maps services-->
+				<div class="treeNode">
+					<img src="treenodeplus.gif" class="treeLinkImage" onClick="expandCollapse(this.parentNode)" />
+					<span style="cursor: pointer;" onClick="expandCollapse(this.parentNode)">Working with Bing Maps</span>
+					<div class="treeSubnodesHidden">
+						<div class="treeNode">
+							<img src="treenodedot.gif" class="treeNoLinkImage" /> <a href="jshelp/ve_getting_started.htm" target="right" class="treeUnselected" onClick="clickAnchor(this)">
+								Getting started with Bing Maps in the ArcGIS JavaScript API</a>
+						</div>
+						<div class="treeNode">
+							<img src="treenodedot.gif" class="treeNoLinkImage" /> <a href="jshelp/ve_maps.htm" target="right" class="treeUnselected" onClick="clickAnchor(this)">
+								Using Bing Maps</a>
+						</div>
+						<div class="treeNode">
+							<img src="treenodedot.gif" class="treeNoLinkImage" /> <a href="jshelp/ve_geocoding.htm" target="right" class="treeUnselected" onClick="clickAnchor(this)">
+								Geocoding with Bing Maps</a>
+						</div>
+					</div>
+				</div>
+				<!--end book-->
+				<!--JavaScript basics-->
+				<!-- temporary removal
+<div class="treeNode">
+          <img src="treenodeplus.gif" class="treeLinkImage" onclick="expandCollapse(this.parentNode)" />
+		<span style="cursor: pointer;" onclick="expandCollapse(this.parentNode)">General JavaScript concepts</span>
+	<div class="treeSubnodesHidden">
+
+        <div class="treeNode">
+          <img src="treenodedot.gif" class="treeNoLinkImage" />
+          <a href="jshelp/none.htm" target="right" class="treeUnselected" onclick="clickAnchor(this)">Overview</a>
+        </div>
+        <div class="treeNode">
+          <img src="treenodedot.gif" class="treeNoLinkImage" />
+          <a href="jshelp/none.htm" target="right" class="treeUnselected" onclick="clickAnchor(this)">JavaScript tutorials</a>
+        </div>
+        <div class="treeNode">
+          <img src="treenodedot.gif" class="treeNoLinkImage" />
+          <a href="jshelp/none.htm" target="right" class="treeUnselected" onclick="clickAnchor(this)">Debugging JavaScript</a>
+        </div>
+	</div>
+</div> -->  <!--end book-->
+				<!--Projections-->
+				<div class="treeNode">
+					<img src="treenodeplus.gif" class="treeLinkImage" onClick="expandCollapse(this.parentNode)" />
+					<span style="cursor: pointer;" onClick="expandCollapse(this.parentNode)">Coordinate System IDs</span>
+					<div class="treeSubnodesHidden">
+						<div class="treeNode">
+							<img src="treenodedot.gif" class="treeNoLinkImage" /> <a href="jshelp/pcs.htm" target="right" class="treeUnselected" onClick="clickAnchor(this)">
+								投影坐标系统</a>
+						</div>
+						<div class="treeNode">
+							<img src="treenodedot.gif" class="treeNoLinkImage" /> <a href="jshelp/gcs.htm" target="right" class="treeUnselected" onClick="clickAnchor(this)">
+								地理坐标系统</a>
+						</div>
+					</div>
+				</div> <!--end book-->
+				<!-- Book template
+		<div class="treeNode">
+          <img src="treenodeplus.gif" class="treeLinkImage" onclick="expandCollapse(this.parentNode)" />
+          <span style="cursor: pointer;" onclick="expandCollapse(this.parentNode)">Layers</span>
+          <div class="treeSubnodesHidden">
+			<div class="treeNode"><img src="treenodedot.gif" class="treeNoLinkImage" /><a href="http://skrzat/axlguide/jsdoc/class_style.cfm?theClass=ArcGISTiledMapServiceLayer" target="right" class="treeUnselected" onclick="clickAnchor(this)">ArcGISTiledMapServiceLayer</a></div>
+		  </div>
+		</div>-->  <!--end book-->
+			</div>
+		</div>
+	</body>
+</html>

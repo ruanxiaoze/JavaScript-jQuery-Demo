@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>State Info</title>
+    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css">
+    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"></script>
+    <script type="text/javascript" language="Javascript">
+      dojo.require("esri.tasks.query");
+
+      var myQueryTask, myQuery;
+
+      function init() {
+        //build query
+        myQueryTask = new esri.tasks.QueryTask("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Census_USA/MapServer/5");
+
+        //build query filter
+        myQuery = new esri.tasks.Query();
+        myQuery.returnGeometry = false;
+        myQuery.outFields = ["STATE_NAME","POP2007","MALES","FEMALES"];
+
+      }
+
+      function execute(stateName) {
+        myQuery.text = stateName;
+
+        //execute query
+        myQueryTask.execute(myQuery,showResults);
+      }
+
+      function showResults(myFeatureSet) {
+        var s = "";
+        for (var i=0, il=myFeatureSet.features.length; i<il; i++) {
+          var featureAttributes = myFeatureSet.features[i].attributes;
+          for (att in featureAttributes) {
+            s = s + "<strong>" + att + ": </strong>" + featureAttributes[att] + "<br />";
+          }
+        }
+        dojo.byId("info").innerHTML = s;
+      }
+
+      dojo.addOnLoad(init);
+    </script>
+  </head>
+  <body>
+    <span>
+      US state name :
+      <input type="text" id="stateName" value="California" />
+      <input type="button" value="Get Details" onclick="execute(dojo.byId('stateName').value);" />
+    </span>
+    <br />
+    <br />
+    <div id="info" class="tundra" style="padding:5px; margin:5px; background-color:#eee;">
+    </div>
+  </body>
+</html>

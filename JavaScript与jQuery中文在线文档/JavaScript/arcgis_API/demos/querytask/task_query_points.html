@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>QueryTask with value, results as an InfoWindow</title>
+    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css">
+    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"></script>
+    <script type="text/javascript" language="Javascript">
+      dojo.require("esri.map");
+      dojo.require("esri.tasks.query");
+
+      var map, queryTask, query;
+      var symbol, infoTemplate;
+
+      function init() {
+        //create map
+        map = new esri.Map("mapDiv");
+
+        //create and add new layer
+        var layer = new esri.layers.ArcGISDynamicMapServiceLayer("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StatesCitiesRivers_USA/MapServer");
+        map.addLayer(layer);
+
+        //build query task
+        queryTask = new esri.tasks.QueryTask("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StatesCitiesRivers_USA/MapServer/0");
+
+        //build query filter
+        query = new esri.tasks.Query();
+        query.returnGeometry = true;
+        query.outFields = ["CITY_NAME", "STATE_NAME", "POP1990"];
+
+
+        //create the infoTemplate to be used in an InfoWindow.
+        //All ${attributeName} will be substituted with the attribute value for current feature.
+        infoTemplate = new esri.InfoTemplate("${CITY_NAME}", "Name : ${CITY_NAME}<br/> State : ${STATE_NAME}<br />Population : ${POP1990}");
+
+		//create symbol for selected features
+		symbol = new esri.symbol.SimpleMarkerSymbol();
+		symbol.setStyle(esri.symbol.SimpleMarkerSymbol.STYLE_SQUARE);
+		symbol.setSize(10);
+		symbol.setColor(new dojo.Color([255,255,0,0.5]));
+
+      }
+
+	  function executeQueryTask(population) {
+        //set query based on what user typed in for population;
+		query.where = "POP1990 > " + population;
+
+        //execute query and call showResults on completion
+        queryTask.execute(query,showResults);
+      }
+
+
+      function showResults(featureSet) {
+        //remove all graphics on the maps graphics layer
+        map.graphics.clear();
+
+        //QueryTask returns a featureSet.  Loop through features in the featureSet and add them to the map.
+
+		//Performance enhancer - assign featureSet array to a single variable.
+		var resultFeatures = featureSet.features;
+
+        for (var i=0, il=resultFeatures.length; i<il; i++) {
+          //Get the current feature from the featureSet.
+          //Feature is a graphic
+          var graphic = resultFeatures[i];
+          graphic.setSymbol(symbol);
+
+          //Set the infoTemplate.
+          graphic.setInfoTemplate(infoTemplate);
+
+          //Add graphic to the map graphics layer.
+          map.graphics.add(graphic);
+        }
+      }
+
+      dojo.addOnLoad(init);
+    </script>
+  </head>
+  <body class="tundra">
+  <br/>
+      US city population greater than : <input type="text" id="population" value="500000" />
+    <input type="button" value="Get Details" onclick="executeQueryTask(dojo.byId('population').value);" />
+
+
+    <div id="mapDiv" style="width:600px; height:600px; border:1px solid #000;"></div>
+	Click on a city once it's highlighted to get an InfoWindow.
+
+  </body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<title>What's new in Version 1.5</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+		<meta name="keywords" content="ArcGIS JavaScript API">
+		<link href="jsdoc.css" rel="stylesheet" type="text/css">
+	</head>
+	<body>
+		<div id="pageBanner">What's new in Version 1.5</div>
+		<div id="nstext">
+			<!--***START TEXT - DO NOT WRITE ABOVE THIS LINE***-->
+			<p>The following are new features in version 1.5 of the ArcGIS JavaScript API.</p>
+			<p><b>Note:</b> The ArcGIS JavaScript Extension for the Google Maps API and the 
+				ArcGIS JavaScript Extension for Microsoft Virtual Earth have no changes at 
+				version 1.5.</p>
+			<H4 class="dtH4">Support for Firefox 3.5</H4>
+			<p>Version 1.5 includes support for Firefox 3.5. Previous versions of the ArcGIS 
+				JavaScript API had problems showing picture marker symbols in Firefox 3.5.</p>
+			<H4 class="dtH4">Support for Dojo 1.3.2</H4>
+			<p>When you reference the ArcGIS JavaScript API version 1.5, you get access to Dojo 
+				1.3.2.</p>
+			<p>See the <a href="http://bugs.dojotoolkit.org/milestone/1.3.2" target="_blank">Dojo 
+					Milestone 1.3.2 page</a> for a list of specific issues fixed between Dojo 
+				1.3.1 and 1.3.2. These are changes that will take effect when you upgrade from 
+				version 1.4 to 1.5 of the ArcGIS JavaScript API.</p>
+			<p>If you're upgrading from version 1.3 of the ArcGIS JavaScript API or earlier, 
+				also see the <a href="http://www.dojotoolkit.org/book/dojo-1-3-release-notes" target="_blank">
+					Dojo 1.3 Release Notes</a>.</p>
+			<H4 class="dtH4">Ability to change mouse cursor type</H4>
+			<p>In version 1.5 you can change the default mouse cursor behavior and types. The 
+				Map already has some built-in cursor changes such as switching to the the 
+				four-headed arrow "move" cursor during a pan. You can add other cursor changes 
+				by calling <i>Map.setMapCursor()</i> in response to map events. For example, if 
+				you made a custom tool for identifying or learning about map features, you 
+				might change to the question mark "help" cursor upon activation of the tool. 
+				When the user finishes with the tool, you can call setMapCursor again to return 
+				to the original cursor.</p>
+			<p>When you call setMapCursor, you need to supply the cursor type. A list of 
+				standard CSS cursor values is available <a href="http://www.w3.org/TR/CSS2/ui.html#cursor-props" target="_blank">
+					here</a>. Web browsers have built-in support for various cursors, many of 
+				which are common to all browsers. Use caution when using cursors that are not 
+				supported by all browsers.</p>
+			<H4 class="dtH4">Ability to access the JavaScript API through HTTPS</H4>
+			<p>Beginning at version 1.5, you can use "https" in the URLs that you use to 
+				reference the ArcGIS JavaScript API. This means that your page will access the 
+				ArcGIS JavaScript API through an encrypted connection. This can be useful if 
+				your page already uses HTTPS and you don't want your users to see a message 
+				from the browser indicating that some elements in the page are not secure. 
+				Referencing the ArcGIS JavaScript API through HTTPS does not require changes to 
+				your coding syntax or logic.</p>
+			<H4 class="dtH4">Bug fixes</H4>
+			<p>In addition to the enhancements above, version 1.5 contains various bug fixes to 
+				improve the stability and performance of the ArcGIS JavaScript API. Two 
+				important fixes are:
+				<ul>
+					<li>
+					In some scenarios, the click event on the zoom slider did not get released, 
+					causing the cursor to seem "stuck" to the slider. (NIM043117)
+					<li>
+						If you hid a graphic, panned the graphic off the map, then partially panned the 
+						graphic back onto the map, the graphic would become visibile.</li>
+				</ul>
+			<P></P>
+			<!--***END TEXT - DO NOT WRITE BELOW THIS LINE***-->
+		</div>
+	</body>
+</html>

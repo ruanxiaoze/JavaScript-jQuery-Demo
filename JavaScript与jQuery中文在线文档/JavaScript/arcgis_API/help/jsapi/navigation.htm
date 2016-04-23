@@ -1,0 +1,224 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>Navigation</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: Navigation</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	支持如平移和缩放等基本导航的工具栏。
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.toolbars.Navigation
+</pre>
+
+<H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#NavigationConst">esri.toolbars.Navigation(map)</a></td>
+		<td class="syntaxTABLE">创建新的Navigation对象。地图是一个必需的参数。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>常量</H4>
+
+	<table CLASS="syntaxTABLE" cellspacing="0">
+	<tr>
+	<th class="tableheader" width="20%">常量</th>
+		<th class="tableheader">描述</th>
+	</tr>
+
+		<tr>
+		<td class="syntaxTABLE">PAN</td>
+			<td class="syntaxTABLE">	地图被平移.</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">ZOOM_IN</td>
+			<td class="syntaxTABLE">		地图放大。		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">ZOOM_OUT</td>
+			<td class="syntaxTABLE">			地图缩小。		</td>
+	</tr>
+
+</table>
+
+<H4 class=dtH4>方法表</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+		<th class="tableheader">方法</th>
+		<th class="tableheader">返回值</th>
+		<th class="tableheader">描述</th>
+		</tr>
+
+<tr>
+<td class="syntaxTABLE"><a href="#activate">activate(navType)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">激活地图导航工具栏。激活的工具栏覆盖默认地图导航。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#deactivate">deactivate()</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">禁用工具栏并重新激活地图导航。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#isFirstExtent">isFirstExtent()</a></td><td class="syntaxTABLE">
+Boolean
+</td>
+<td class="syntaxTABLE">当是&quot;true&quot;，地图在第一个范围。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#isLastExtent">isLastExtent()</a></td><td class="syntaxTABLE">
+Boolean
+</td>
+<td class="syntaxTABLE">当是true，地图在最后一个范围。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#zoomToFullExtent">zoomToFullExtent()</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">缩放到基本图层的全部范围。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#zoomToNextExtent">zoomToNextExtent()</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">缩放到范围历史中的下一个范围。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#zoomToPrevExtent">zoomToPrevExtent()</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">缩放到范围历史中的上一个范围。</td>	</tr></table>
+
+<H4 class=dtH4>事件</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">事件</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#onExtentHistoryChange">onExtentHistoryChange()
+		</a></td>
+
+<td class="syntaxTABLE">当范围历史改变时触发。</td>
+		</tr></table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="NavigationConst"></a><H4>esri.toolbars.Navigation(map)</H4>
+		</div>
+
+<div class="detaildesc">创建新的Navigation对象。地图是一个必需的参数。</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;<a href="map.htm">Map</a>>
+<B>map</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			工具栏相关的地图。</td>
+			</tr>
+</table>
+
+</div><div class=sectionDivider>方法详细信息</div>
+<div class="detaildiv">
+		<div class="detailname"><a name="activate"></a><H4>
+activate(navType)</H4></div>
+
+<div class="detaildesc">激活地图导航工具栏。激活的工具栏覆盖默认地图导航。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>navType</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+            导航类型。可用导航值在常量表中列出。</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="deactivate"></a><H4>
+deactivate()</H4></div>
+
+<div class="detaildesc">禁用工具栏并重新激活地图导航。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="isFirstExtent"></a><H4>
+isFirstExtent()</H4></div>
+
+<div class="detaildesc">当是&quot;true&quot;，地图在第一个范围。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> Boolean</div>
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="isLastExtent"></a><H4>
+isLastExtent()</H4></div>
+
+<div class="detaildesc">当是true，地图在最后一个范围。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> Boolean</div>
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="zoomToFullExtent"></a><H4>
+zoomToFullExtent()</H4></div>
+
+<div class="detaildesc">缩放到基本图层的全部范围。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="zoomToNextExtent"></a><H4>
+zoomToNextExtent()</H4></div>
+
+<div class="detaildesc">缩放到范围历史中的下一个范围。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="zoomToPrevExtent"></a><H4>
+zoomToPrevExtent()</H4></div>
+
+<div class="detaildesc">缩放到范围历史中的上一个范围。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+</div>
+
+<H4 class=dtH4>Events Detail</H4>
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onExtentHistoryChange"></a><H4>
+onExtentHistoryChange()	</H4></div>
+
+
+<div class="detaildesc">当范围历史改变时触发。</div>
+
+</div>
+
+<br/></div></body></html> 

@@ -1,0 +1,232 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>Adding a task</title>
+</head>
+
+<body>
+
+<div id="pageBanner">Adding a task</div>
+
+<div id="nstext">
+
+<!--***START TEXT - DO NOT WRITE ABOVE THIS LINE***-->
+
+<p>This example provides details on how to implement a task.  The query task is used, which shows tabular results but does not include a map. [<a href="../../demos/QueryTask/task_simple_query.html" target="_blank">Show me</a>]  </p>
+
+<p>The following is the HTML page in its entirety: </p>
+
+<div class="detailSample">
+<pre>
+&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;State Info&lt;/title&gt;
+    &lt;link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css"&gt;
+    &lt;script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript"&gt;
+      dojo.require("esri.tasks.query");
+
+      var myQueryTask, myQuery;
+
+      function init() {
+        //build query
+        myQueryTask = new
+esri.tasks.QueryTask("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Census_USA/MapServer/5");
+
+        //build query filter
+        myQuery = new esri.tasks.Query();
+        myQuery.returnGeometry = false;
+        myQuery.outFields = ["STATE_NAME","POP2007","MALES","FEMALES"];
+      }
+
+      function execute(stateName) {
+        myQuery.text = stateName;
+        //execute query
+        myQueryTask.execute(myQuery,showResults);
+      }
+
+      function showResults(myFeatureSet) {
+        var s = "";
+        for (var i=0, il=myFeatureSet.features.length; i&lt;il; i++) {
+          var featureAttributes = myFeatureSet.features[i].attributes;
+          for (att in featureAttributes) {
+            s = s + "&lt;strong&gt;" + att + ": &lt;/strong&gt;" +
+			featureAttributes[att] + "&lt;br /&gt;";
+          }
+        }
+        dojo.byId("info").innerHTML = s;
+      }
+
+      dojo.addOnLoad(init);
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;form action=""&gt;
+      US state name :
+      &lt;input type="text" id="stateName" value="California" /&gt;
+      &lt;input type="button" value="Get Details"
+onclick="execute(dojo.byId('stateName').value);" /&gt;
+    &lt;/form&gt;
+    &lt;br /&gt;
+    &lt;br /&gt;
+    &lt;div id="info" class="tundra" style="padding:5px; margin:5px; background-color:#eee;"&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+</div>
+
+<p>The following discussion assumes you are already familiar with the basic concepts of the JavaScript API and Dojo, and you understand the basic patterns of how the JavaScript API works within an HTML page.  For more information, see <a href="intro_firstmap.htm">Adding a map</a>.</p>
+
+<h3>Scripts inside HTML HEAD</h3>
+<p>The scripts section inside HTML HEAD is where you write your functions that call the JavaScript API. </p>
+
+<div class="detailSample">
+<pre>
+    &lt;script type="text/javascript" language="Javascript">
+</pre>
+</div>
+
+<p><b>Reference the packages.</b></p>
+<p>Since you are implementing a task, you need to reference the <i>tasks</i> package using dojo.require().  本例中，the "esri.tasks.query" package is referenced.  For more information on what packages can be referenced, see <a href="inside_dojo.htm">About Dojo</a>.</p>
+
+
+<div class="detailSample">
+<pre>
+      dojo.require("esri.tasks.query");
+</pre>
+</div>
+
+<p><b>Create the init() function.</b></p>
+<p>The init() function is where the query is built.  First, a QueryTask named myQueryTask is initialized using the QueryTask constructor.  </p>
+<ul>
+<li>The value "esri.tasks.QueryTask" is the full reference to the QueryTask class.  Class names are always capitalized.  </li>
+<li>The URL you see is the endpoint for a MapServer service named "USA".  The query layer is layer "5", which references a states layer.  This endpoint is a unique reference that you can generate using Services Directory.   </li>
+</ul>
+
+<div class="detailSample">
+<pre>
+      function init() {
+        myQueryTask = new
+esri.tasks.QueryTask("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Census_USA/MapServer/5");
+</pre>
+</div>
+
+<p>Next, you need to build the query filter.  </p>
+<ul>
+<li>A Query named myQuery is initialized using the Query constructor.  This constructor does not include any parameters.  </li>
+<li>Depending on your application, you may want to have the geometry returned for each feature.  If you do not want the geometry, you must set the property "returnGeometry" to false. </li>
+<li>You need to include which fields you want displayed in the results using the property "outFields".  This list must use the actual field names rather than the alias names.  You can display the field aliases in the results<!--***-->.
+</ul>
+
+<div class="detailSample">
+<pre>
+        //build query filter
+        myQuery = new esri.tasks.Query();
+        myQuery.returnGeometry = false;
+        myQuery.outFields = ["STATE_NAME","POP2007","MALES","FEMALES"];
+      }
+</pre>
+</div>
+
+<p><b>Create a callback function.</b></p>
+<p>The callback function is the function referenced from the input in the HTML page.  本例中，a function named "execute" is called after a user types in a state name and clicks the "Get Results" button.  </p>
+<ul>
+<li>The state name is used as input text for the search.  The property <a href="../jsapi/query.htm#text">Query.text</a> is short hand for a where clause using "like".  This search is done only on the display field associated with the layer.  This display field can be set in ArcMap document.  If no display field is set, the default display field is the first text field.  You can determine what the display field is for a layer in Services Directory.  </li>
+<li>Execute the query.  You do this through the <a href="../jsapi/querytask.htm#execute">QueryTask.execute</a> method.  The inputs to the method are the Query and a reference to a function named "showResults".  </li>
+</ul>
+
+<div class="detailSample">
+<pre>
+      function execute(stateName) {
+        myQuery.text = stateName;
+        //execute query
+        myQueryTask.execute(myQuery,showResults);
+      }
+</pre>
+</div>
+
+<p><b>Create a function to show the results.</b></p>
+<p>The showResults() function first parses the results based on the information received when the QueryTask was executed in the callback function.  The results are passed into the showResults function in "myFeatureSet", which is a FeatureSet object.  A FeatureSet contains an array of <a href="../jsapi/graphic.htm">Graphic</a> features. </p>
+
+<div class="detailSample">
+<pre>
+      function showResults(myFeatureSet) {
+</pre>
+</div>
+
+<p>In the next section of this function, the variable "s" is populated with the field names and the field values contained in "myFeatureSet". </p>
+<ul>
+<li>The outer for loop is repeated for each feature in "myFeatureSet".  本例中，since only one state is processed, "myFeatureSet" contains only one Graphic, and the for loop is repeated only once. </li>
+<li>The variable "featureAttributes" is assigned the attributes for the Graphic in "myFeatureSet". </li>
+<li>The inner for loop is repeated for each attribute in "featureAttributes".  The field name and the field value are assigned to "s". </li>
+</ul>
+
+<div class="detailSample">
+<pre>
+        var s = "";
+        for (var i=0, il=myFeatureSet.features.length; i&lt;il; i++) {
+          var featureAttributes = myFeatureSet.features[i].attributes;
+          for (att in featureAttributes) {
+            s = s + "&lt;strong>" + att + ": &lt;/strong>" +
+			featureAttributes[att] + "&lt;br />";
+          }
+        }
+</pre>
+</div>
+
+<p>The next step in this function is to assign the value of "s" as innerHTML, which allows text on an HTML page to be replaced with new text.  本例中，dojo.byId is used, which is similar to the document.getElementById(id) JavaScript function. This function searches and returns the first HTML element with the argument ID of "info".  In this case, the text is written inside the HTML DIV with id="info".</p>
+
+<div class="detailSample">
+<pre>
+        dojo.byId("info").innerHTML = s;
+      }
+</pre>
+</div>
+
+<p><b>Specify the addOnLoad event.</b></p>
+<p>As with all HTML pages using the JavaScript API, you must specify the Dojo addOnLoad event.  The parameter it takes is "init", which represents what takes place in the init() function.  The final step is to include the closing script tag.</p>
+
+<div class="detailSample">
+<pre>
+      dojo.addOnLoad(init);
+    &lt;/script>
+</pre>
+</div>
+
+<h3>HTML BODY</h3>
+
+<p>The next section is the BODY section of the HTML page.  </p>
+<ul>
+<li>The first input provides a text box for a user to type in a state name. The default value is "California".  </li>
+<li>The second input is a button.  When a user clicks the button, the onclick event is invoked and calls the execute() function.  The "stateName" reference in dojo.byId is the same "stateName" referenced as the ID of the first input.  The value is the state name typed in by the user.  </li>
+<li>The DIV id "info" references the same variable set in the showResults() function. </li>
+</ul>
+
+<div class="detailSample">
+<pre>
+  &lt;body&gt;
+    &lt;form action=""&gt;
+      US state name :
+      &lt;input type="text" id="stateName" value="California" /&gt;
+      &lt;input type="button" value="Get Details"
+onclick="execute(dojo.byId('stateName').value);" /&gt;
+    &lt;/form&gt;
+    &lt;br /&gt;
+    &lt;br /&gt;
+    &lt;div id="info" class="tundra" style="padding:5px; margin:5px; background-color:#eee;"&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+</pre>
+</div>
+
+<!--***END TEXT - DO NOT WRITE BELOW THIS LINE***-->
+</div>
+
+</body>
+</html>

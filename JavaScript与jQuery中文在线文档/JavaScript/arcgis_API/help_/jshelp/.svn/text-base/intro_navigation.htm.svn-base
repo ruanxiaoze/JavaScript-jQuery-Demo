@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>Map navigation</title>
+</head>
+
+<body>
+
+<div id="pageBanner">Map navigation</div>
+
+<div id="nstext">
+
+<!--***START TEXT - DO NOT WRITE ABOVE THIS LINE***-->
+
+<p>Users can choose the mouse, keyboard, and sliders for panning and zooming a map, depending on what is enabled in the HTML page.  By default, users can do the following: </p>
+
+    <ul>
+      <li>Drag the mouse to pan</li>
+      <li>Mouse Scroll Forward to zoom in</li>
+      <li>Mouse Scroll Backward to zoom out</li>
+      <li>SHIFT + Drag the mouse to zoom in</li>
+      <li>SHIFT + CTRL + Drag the mouse to zoom out</li>
+      <li>SHIFT + Click to recenter</li>
+      <li>Double Click to Center and Zoom in</li>
+      <li>SHIFT + Double Click to Center and Zoom in</li>
+	  <li>Use arrow keys to pan</li>
+      <li>Use + key to zoom in a level</li>
+      <li>Use - key to zoom out a level</li>
+    </ul>
+
+<p>You can disable any of these options by using one of several Map methods.  The following table lists: </p>
+<ul>
+<li>The enable and disable method pairs. For example, if you want to disable panning using the mouse, you would use the Map.disablePan() method. These methods can be called anytime after the map has been loaded and the onLoad event has been fired. For example:</li>
+<pre>
+var map = ...;
+dojo.connect(map, "onLoad", function() {
+  map.disablePan();
+});
+</pre>
+
+
+<li>The associated property to determine if the feature is enabled.  For example, to determine if mouse panning is disabled, you could check using the Map.isPan Boolean property.  You cannot determine these values until the Map class has been loaded.  Therefore, you cannot retrieve these values in the init() function.  These properties are read only.  You must use the enable and disable methods to set navigation behavior. </li>
+</ul>
+<br/>
+<table CLASS="detailTABLE" cellspacing="0" >
+<tr>
+<th class="detailTABLE">Methods</th>
+<th class="detailTABLE">Property</th>
+<th class="detailTABLE">Description</th>
+</tr>
+<tr>
+<td class="detailTABLE">enablePan(), disablePan() </td>
+<td class="detailTABLE">isPan </td>
+<td class="detailTABLE">When enabled, users can pan the map using the mouse.
+<ul><li>Drag the mouse to pan</li></ul></td>
+</tr>
+<tr>
+<td class="detailTABLE">enableScrollWheelZoom(),
+disableScrollWheelZoom() </td>
+<td class="detailTABLE">isScrollWheelZoom </td>
+<td class="detailTABLE">When enabled, users can use the mouse scroll wheel to zoom in and out.
+<ul><li>Mouse Scroll Forward to zoom in</li>
+<li>Mouse Scroll Backward to zoom out</li></ul></td>
+</tr>
+<tr>
+<td class="detailTABLE">enableRubberBandZoom(),
+disableRubberBandZoom() </td>
+<td class="detailTABLE">isRubberBandZoom </td>
+<td class="detailTABLE">When enabled, users can draw a bounding box to zoom in or out from the map using the mouse.
+<ul><li>SHIFT + Drag the mouse to zoom in</li>
+<li>SHIFT + CTRL + Drag the mouse to zoom out</li></ul></td>
+</tr>
+<tr>
+<td class="detailTABLE">enableClickRecenter(),
+disableClickRecenter()</td>
+<td class="detailTABLE">isClickRecenter </td>
+<td class="detailTABLE">When enabled, users can double click on a map to recenter and zoom in a level.
+<ul><li>SHIFT + Click to recenter</li></ul></td>
+</tr>
+<tr>
+<td class="detailTABLE">enableDoubleClickZoom(),
+disableDoubleClickZoom()</td>
+<td class="detailTABLE">isDoubleClickZoom </td>
+<td class="detailTABLE">When enabled, users can double click on a map to recenter and zoom in a level.
+<ul><li>Double Click to Center and Zoom in</li></ul></td>
+</tr>
+<tr>
+<td class="detailTABLE">enableShiftDoubleClickZoom(),
+disableShiftDoubleClickZoom()</td>
+<td class="detailTABLE">isShiftDoubleClickZoom </td>
+<td class="detailTABLE">When enabled, users can shift + double click on a map to recenter and zoom in a level.
+<ul><li>SHIFT + Double Click to Center and Zoom in</li></ul></td>
+</tr>
+<tr>
+<td class="detailTABLE">enableKeyboardNavigation(),
+disableKeyboardNavigation()</td>
+<td class="detailTABLE">isKeyboardNavigation </td>
+<td class="detailTABLE">When enabled, users can pan using the arrow keys and zoom using the + and - keys on the keyboard.
+<ul><li>Use arrow keys to pan</li>
+      <li>Use + key to zoom in a level</li>
+      <li>Use - key to zoom out a level</li></ul></td>
+</tr>
+<tr>
+<td class="detailTABLE">showPanArrows(),
+hidePanArrows()</td>
+<td class="detailTABLE">isPanArrows </td>
+<td class="detailTABLE">Shows or hides the pan arrows on the map.
+</td>
+</tr>
+<tr>
+<td class="detailTABLE">showZoomSlider(),
+hideZoomSlider()</td>
+<td class="detailTABLE">isZoomSlider </td>
+<td class="detailTABLE">Shows or hides the zoom slider on the map.</td>
+</tr>
+<tr>
+<td class="detailTABLE">enableMapNavigation(),
+disableMapNavigation()</td>
+<td class="detailTABLE">none </td>
+<td class="detailTABLE">Enables or disables all map navigation except the pan arrows and slider.</td>
+</tr>
+</table>
+
+<h3>Additional panning options</h3>
+<p>In addition to methods and properties related to mouse and keyboard operations, methods are also available to pan and center the map based on user input or code driven.  Methods available for panning in this matter are: </p>
+
+<ul>
+<li>panUp():  North</li>
+<li>panUpperRight():  Northeast</li>
+<li>panRight():  East</li>
+<li>panLowerRight():  Southeast</li>
+<li>panDown():  South</li>
+<li>panLowerLeft():  Southwest</li>
+<li>panLeft():  West</li>
+<li>panUpperLeft():  Northwest</li>
+</ul>
+
+<p>You do not need to use these pan methods for the default pan arrows on the map since the pan functions are already built in.  However, if you need to create a custom pan operation, these methods are available to you.  </p>
+
+<h3>Additional centering options</h3>
+<p>You can programmatically recenter a map based on user input using the centerAt() and panTo() methods.  </p>
+
+<ul>
+<li>centerAt() recenters the map based on a map coordinate. </li>
+<li>centerAndZoom() recenters the map based on map coordinates and also zooms to the argument zoom level. </li>
+<li>panTo() recenters the map based on a screen coordinate.  </li>
+</ul>
+
+<p>Depending on your application, you can decide if it is easier to work in screen or map coordinates. </p>
+
+<p>These methods are in addition to the Shift + Click option available to users for recentering a map.  </p>
+
+<!--map_navigation.html***>-->
+
+<!--***END TEXT - DO NOT WRITE BELOW THIS LINE***-->
+</div>
+
+</body>
+</html>

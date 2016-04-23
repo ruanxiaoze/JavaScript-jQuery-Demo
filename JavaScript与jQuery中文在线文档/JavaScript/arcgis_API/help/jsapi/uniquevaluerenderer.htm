@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>UniqueValueRenderer</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: UniqueValueRenderer</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	<i>v1.4增加的类。</i><br/><br/>  
+    唯一值渲染器用符号表现了匹配属性的图形的组。关于渲染器的更多信息，见 <a href="../jshelp/inside_renderers.htm">渲染器标记图形</a>.
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+<a href="renderer.htm">esri.Renderer</a>
+  |_ esri.renderer.UniqueValueRenderer
+</pre><H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#UniqueValueRendererConst">esri.renderer.UniqueValueRenderer(defaultSymbol, attributeField)</a></td>
+		<td class="syntaxTABLE">创建新的UniqueValueRenderer对象。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#attributeField">attributeField</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+渲染器用来匹配值的属性字段名称。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#values">values</a></td>
+<td class="syntaxTABLE">
+String[]
+</td>
+
+<td class="syntaxTABLE">
+为渲染器定义的值的数组。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>方法表</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+		<th class="tableheader">方法</th>
+		<th class="tableheader">返回值</th>
+		<th class="tableheader">描述</th>
+		</tr>
+
+<tr>
+<td class="syntaxTABLE"><a href="#addValue">addValue(value, symbol)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">增加唯一值。做了修改以后，必须刷新图形。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#removeValue">removeValue(value)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">删除唯一值。做了修改后，必须刷新图形。</td>	</tr></table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="UniqueValueRendererConst"></a><H4>esri.renderer.UniqueValueRenderer(defaultSymbol, attributeField)</H4>
+		</div>
+
+<div class="detaildesc">创建新的UniqueValueRenderer对象。</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;<a href="symbol.htm">Symbol</a>>
+<B>defaultSymbol</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			渲染器的默认符号。这个符号被用于不匹配的值。
+			</td>
+			</tr>
+<tr>
+<td class="detailTABLE">
+&lt;String>
+<B>attributeField</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			渲染器用于匹配值的属性字段。
+			</td>
+			</tr>
+</table>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="attributeField"></a>
+&lt;String> attributeField</H4></div>
+
+<div class="detaildesc">渲染器用来匹配值的属性字段名称。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="values"></a>
+&lt;String[]> values</H4></div>
+
+<div class="detaildesc">为渲染器定义的值的数组。</div>
+
+</div>
+
+<div class=sectionDivider>方法详细信息</div>
+<div class="detaildiv">
+		<div class="detailname"><a name="addValue"></a><H4>
+addValue(value, symbol)</H4></div>
+
+<div class="detaildesc">增加唯一值。做了修改以后，必须刷新图形。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>value</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+用于匹配的值。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="symbol.htm">Symbol</a>> <B>symbol</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+用于值的符号</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="removeValue"></a><H4>
+removeValue(value)</H4></div>
+
+<div class="detaildesc">删除唯一值。做了修改后，必须刷新图形。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>value</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE"> 要删除的值。
+</td>
+			</tr>
+</table>
+
+</div>
+
+<br/></div></body></html> 

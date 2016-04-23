@@ -1,0 +1,224 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>ParameterValue</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: ParameterValue</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	Represent the output parameters of a GP task and their properties and values.  ParameterValue has no constructor.
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.tasks.ParameterValue
+</pre>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#dataType">dataType</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+Specifies the type of data for the parameter. It can have one of the following values: "GPString", "GPDouble", "GPLong", "GPBoolean", "GPDate", "GPLinearUnit", "GPDataFile", "GPRasterData", "GPRecordSet", "GPRasterDataLayer", "GPFeatureRecordSetLayer".</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#paramName">paramName</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+Unique name of the parameter.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#value">value</a></td>
+<td class="syntaxTABLE">
+Object
+</td>
+
+<td class="syntaxTABLE">
+The value of the parameter. The data structure of this value depends on the <i>dataType</i>.</td>
+		</tr>
+</table>
+
+<div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="dataType"></a>
+&lt;String> dataType</H4></div>
+
+<div class="detaildesc">Specifies the type of data for the parameter. It can have one of the following values: "GPString", "GPDouble", "GPLong", "GPBoolean", "GPDate", "GPLinearUnit", "GPDataFile", "GPRasterData", "GPRecordSet", "GPRasterDataLayer", "GPFeatureRecordSetLayer".</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="paramName"></a>
+&lt;String> paramName</H4></div>
+
+<div class="detaildesc">Unique name of the parameter.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="value"></a>
+&lt;Object> value</H4></div>
+
+<div class="detaildesc">The value of the parameter. The data structure of this value depends on the <i>dataType</i>. <br /><br />
+<table class="syntaxTABLE" style="width:auto;">
+    <tr>
+        <th class="tableheader" >
+Data Type
+        </th>
+        <th class="tableheader" >
+JavaScript Type
+        </th>
+        <th class="tableheader" >
+Example
+        </th>
+    </tr>
+    <tr>
+        <td class="syntaxTABLE">
+GPString
+        </td>
+        <td class="syntaxTABLE">
+String
+        </td>
+        <td class="syntaxTABLE">
+"MyString"
+        </td>
+    </tr>
+    <tr>
+        <td class="syntaxTABLE">
+GPDouble
+        </td>
+        <td class="syntaxTABLE">
+Number (float)
+        </td>
+        <td class="syntaxTABLE">
+12.56
+        </td>
+    </tr>
+    <tr>
+        <td class="syntaxTABLE">
+GPLong
+        </td>
+        <td class="syntaxTABLE">
+Number (int)
+        </td>
+        <td class="syntaxTABLE">
+345
+        </td>
+    </tr>
+    <tr>
+        <td class="syntaxTABLE">
+GPBoolean
+        </td>
+        <td class="syntaxTABLE">
+Boolean
+        </td>
+        <td class="syntaxTABLE">
+true
+        </td>
+    </tr>
+    <tr>
+        <td class="syntaxTABLE">
+GPDate
+        </td>
+        <td class="syntaxTABLE">
+Date
+        </td>
+        <td class="syntaxTABLE">
+&nbsp;
+        </td>
+    </tr>
+    <tr>
+        <td class="syntaxTABLE">
+GPLinearUnit
+        </td>
+        <td class="syntaxTABLE">
+&lt;<a href="linearunit.htm">LinearUnit</a>&gt;
+        </td>
+        <td class="syntaxTABLE">
+&nbsp;
+        </td>
+    </tr>
+    <tr>
+        <td class="syntaxTABLE">
+GPDataFile
+        </td>
+        <td class="syntaxTABLE">
+&lt;<a href="datafile.htm">DataFile</a>&gt;
+        </td>
+        <td class="syntaxTABLE">
+&nbsp;
+        </td>
+    </tr>
+    <tr>
+        <td class="syntaxTABLE">
+GPRasterData
+        </td>
+        <td class="syntaxTABLE">
+&lt;<a href="rasterdata.htm">RasterData</a>&gt;
+        </td>
+        <td class="syntaxTABLE">
+&nbsp;
+        </td>
+    </tr>
+    <tr>
+        <td class="syntaxTABLE">
+GPRecordSet
+        </td>
+        <td class="syntaxTABLE">
+&lt;<a href="featureset.htm">FeatureSet</a>&gt;
+        </td>
+        <td class="syntaxTABLE">
+&nbsp;
+        </td>
+    </tr>
+    <tr>
+        <td class="syntaxTABLE">
+GPRasterDataLayer
+        </td>
+        <td class="syntaxTABLE">
+&lt;<a href="rasterdata.htm">RasterData</a>&gt;
+        </td>
+        <td class="syntaxTABLE">
+&nbsp;
+        </td>
+    </tr>
+    <tr>
+        <td class="syntaxTABLE">
+GPFeatureRecordSetLayer
+        </td>
+        <td class="syntaxTABLE">
+&lt;<a href="featureset.htm">FeatureSet</a>&gt;
+        </td>
+        <td class="syntaxTABLE">
+&nbsp;
+        </td>
+    </tr>
+</table></div>
+
+</div>
+
+<br/></div></body></html> 

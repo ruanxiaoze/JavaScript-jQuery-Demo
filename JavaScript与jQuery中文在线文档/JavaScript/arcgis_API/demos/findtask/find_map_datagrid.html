@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>Display Find Task results in Dojo DataGrid</title>
+    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css">
+    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dojox/grid/resources/Grid.css">
+    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dojox/grid/resources/tundraGrid.css">
+
+    <script type="text/javascript">
+      djConfig = {
+        parseOnLoad:true
+      }
+    </script>
+
+    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"></script>
+
+    <script type="text/javascript">
+      dojo.require("esri.map");
+      dojo.require("dojox.grid.DataGrid");
+      dojo.require("dojo.data.ItemFileReadStore");
+      dojo.require("esri.tasks.find");
+
+      var findTask, findParams;
+      var map, startExtent;
+      var grid, store;
+
+      function init() {
+        dojo.connect(grid, "onRowClick", onRowClickHandler);
+
+        //Create map and add the ArcGIS Online imagery layer
+        startExtent = new esri.geometry.Extent(-122.9, 45.3, -122.4, 45.7, new esri.SpatialReference({wkid:4326}));
+        map = new esri.Map("map", { extent: startExtent });
+        var streetMapLayer = new esri.layers.ArcGISTiledMapServiceLayer("http://services.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer");
+        map.addLayer(streetMapLayer);
+
+        //Create Find Task using the URL of the map service to search
+        findTask = new esri.tasks.FindTask("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Portland/Portland_ESRI_LandBase_AGO/MapServer");
+
+        //Create the find parameters
+        findParams = new esri.tasks.FindParameters();
+        findParams.returnGeometry = true;
+        findParams.layerIds = [1];
+        findParams.searchFields = ["OWNER1","OWNER2","OWNER3"];
+      }
+
+      function doFind() {
+        //Set the search text to the value in the box
+        findParams.searchText = dojo.byId("ownerName").value;
+        findTask.execute(findParams,showResults);
+      }
+
+      function showResults(results) {
+        //This function works with an array of FindResult that the task returns
+        map.graphics.clear();
+        var symbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_NULL, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([255,255,0]), 2), new dojo.Color([0,0,0,0]));
+
+        //Create items array to be added to store's data
+        var items = []; //all items to be stored in data store
+        for (var i=0, il=results.length; i<il; i++) {
+          items.push(results[i].feature.attributes);  //append each attribute list as item in store
+          var graphic = results[i].feature;
+          graphic.setSymbol(symbol);
+          map.graphics.add(graphic);
+        }
+
+        //Create data object to be used in store
+        var data = {
+          identifier: "TLID",  //This field needs to have unique values
+          label: "TLID", //Name field for display. Not pertinent to a grid but may be used elsewhere.
+          items: items
+        };
+
+         //Create data store and bind to grid.
+        store = new dojo.data.ItemFileReadStore({ data:data });
+        grid.setStore(store);
+        grid.setQuery({ TLID: '*' });
+
+        //Zoom back to the initial map extent
+        map.setExtent(startExtent);
+
+      }
+
+      //Zoom to the parcel when the user clicks a row
+      function onRowClickHandler(evt){
+        var clickedTaxLotId = grid.getItem(evt.rowIndex).TLID;
+        var selectedTaxLot;
+        for (var i=0, il=map.graphics.graphics.length; i<il; i++) {
+          var currentGraphic = map.graphics.graphics[i];
+          if ((currentGraphic.attributes) && currentGraphic.attributes.TLID == clickedTaxLotId){
+            selectedTaxLot = currentGraphic;
+            break;
+          }
+        }
+        var taxLotExtent = selectedTaxLot.geometry.getExtent();
+        map.setExtent(taxLotExtent);
+      }
+
+      dojo.addOnLoad(init);
+    </script>
+  </head>
+  <body class="tundra">
+    Owner name: <input type="text" id="ownerName" size="60" value="Quinteros" />
+    <input type="button" value="Search" onclick="doFind();" /><br />
+    <br />
+    <div id="map" style="width:600px; height:300px; border:1px solid #000;"></div>
+     <table dojoType="dojox.grid.DataGrid" jsid="grid" id="grid" rowsPerPage="5" rowSelector="20px" style="height:300px; width:600px">
+      <thead>
+        <tr>
+          <th field="TLID">Tax lot ID</th>
+          <th field="OWNER1">Owner 1</th>
+          <th field="OWNER2">Owner 2</th>
+          <th field="OWNER3">Owner 3</th>
+          <th field="TOTALVAL">Total value</th>
+          <th field="SITECITY">City</th>
+        </tr>
+      </thead>
+    </table>
+  </body>
+</html>

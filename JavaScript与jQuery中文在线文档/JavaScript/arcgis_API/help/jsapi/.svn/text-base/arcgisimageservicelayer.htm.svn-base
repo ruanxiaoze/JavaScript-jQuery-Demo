@@ -1,0 +1,606 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>ArcGISImageServiceLayer</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: ArcGISImageServiceLayer</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	Allows you to work with an image map service resource exposed by the ArcGIS Server REST API.   <i>(As of v1.2)</i>
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+<a href="layer.htm">esri.Layer</a>
+  |_ <a href="dynamicmapservicelayer.htm">esri.layers.DynamicMapServiceLayer</a>
+        |_ esri.layers.ArcGISImageServiceLayer
+</pre><H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#ArcGISImageServiceLayerConst">esri.layers.ArcGISImageServiceLayer(url, options?)</a></td>
+		<td class="syntaxTABLE">Creates a new ArcGISImageServiceLayer object.  A URL is a required parameter.  This layer also takes some optional parameters.  These optional parameters can be included in any order.</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#bandCount">bandCount</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+Number of bands in ArcGISImageServiceLayer.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#bandIds">bandIds</a></td>
+<td class="syntaxTABLE">
+Number[]
+</td>
+
+<td class="syntaxTABLE">
+Array of current band selections.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#bands">bands</a></td>
+<td class="syntaxTABLE">
+Object[]
+</td>
+
+<td class="syntaxTABLE">
+The raster bands that the raster dataset is composed of and their statistics. The length of this array gives the number of bands and the array index represents the band ID.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#compressionQuality">compressionQuality</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+Current compression quality value.  The compression quality controls how much loss the image will be subjected to.  Only valid with JPG image types.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#copyrightText">copyrightText</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+Copyright string as defined by the image service.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#Description">Description</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+Description as defined by the image service.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#disableClientCaching">disableClientCaching</a></td>
+<td class="syntaxTABLE">
+Boolean
+</td>
+
+<td class="syntaxTABLE">
+When true, images are always requested from the server and the browser's cache is ignored.  This should be used when the data supporting the map service changes frequently.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#format">format</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+The output image type.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#interpolation">interpolation</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+Current interpolation method.  The interpolation method affects how the raster dataset is transformed when it undergoes warping or when it changes coordinate space.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#pixelSizeX">pixelSizeX</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+Size of pixel in X direction.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#pixelSizeY">pixelSizeY</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+Size of pixel in Y direction.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#pixelType">pixelType</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+The pixel type of the image service. Pertains to the type of values stored in the raster, such as signed integer, unsigned integer, or floating point. Integers are whole numbers, whereas floating points have decimals.</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>方法表</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+		<th class="tableheader">方法</th>
+		<th class="tableheader">返回值</th>
+		<th class="tableheader">描述</th>
+		</tr>
+
+<tr>
+<td class="syntaxTABLE"><a href="#exportMapImage">exportMapImage(imageServiceParameters?, callback?)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">Exports a map using values as specified by <a href="imageserviceparameters.htm">ImageServiceParameters</a>.  On completion, <a href="mapimage.htm">MapImage</a> is returned.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setBandIds">setBandIds(bandIds)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">Sets the R,G,B of the exported image to the appropriate ImageService Band ID.  BandIds are zero based.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setCompressionQuality">setCompressionQuality(quality)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">Sets the compression quality of the exported image.  Only valid with JPG image format.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setDisableClientCaching">setDisableClientCaching(disable)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">Sets whether images are always requested from the server and the browser's cache is ignored. This should be used when the data supporting the map service changes frequently.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setInterpolation">setInterpolation(interpolation)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">Sets the interpolation method.  The interpolation method affects how the raster dataset is transformed when it undergoes warping or when it changes coordinate space.</td>	</tr></table>
+
+<H4 class=dtH4>事件</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">事件</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#onMapImageExport">onMapImageExport(mapImage)
+		</a></td>
+
+<td class="syntaxTABLE">Fires when the map export is completed.</td>
+		</tr></table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="ArcGISImageServiceLayerConst"></a><H4>esri.layers.ArcGISImageServiceLayer(url, options?)</H4>
+		</div>
+
+<div class="detaildesc">Creates a new ArcGISImageServiceLayer object.  A URL is a required parameter.  This layer also takes some optional parameters.  These optional parameters can be included in any order.</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;String>
+<B>url</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			URL to the ArcGIS Server REST resource that represents a map service.  An example is 
+http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Portland/Portland_ESRI_LandBase_AGO/MapServer.  For more information on constructing a URL, see <a href="../jshelp/ags_rest.htm">The Services Directory and the REST API</a>.
+			</td>
+			</tr>
+<tr>
+<td class="detailTABLE">
+&lt;Object>
+<B>options</B></td>
+<td class="detailTABLE">
+Optional	</td>
+<td class="detailTABLE">
+			可选参数。见选选项列表。
+			</td>
+			</tr>
+</table>
+
+<div class="detaildesc"><strong>可选项:</strong></div><table CLASS="detailTABLE" cellspacing="0" >
+<tr>
+			<td class="detailTABLE">
+&lt;String>
+<B>id</B></td>
+			<td class="detailTABLE">
+			Id to assign to the layer. If not assigned, esri.Map assigns value.
+			</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="imageserviceparameters.htm">ImageServiceParameters</a>>
+<B>imageServiceParameters</B></td>
+			<td class="detailTABLE">
+			The image service parameter options used when exporting an Image Service layer.
+			</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Number>
+<B>opacity</B></td>
+			<td class="detailTABLE">
+			Initial opacity or transparency of layer.  Values range from 0.0 to 1.0, where 0.0 is 100% transparent and 1.0 has no transparency.  The default value is 1.0.
+			</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Boolean>
+<B>visible</B></td>
+			<td class="detailTABLE">
+			Initial visibility of the layer.  Default is true.
+			</td>
+			</tr>
+</table>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="bandCount"></a>
+&lt;Number> bandCount</H4></div>
+
+<div class="detaildesc">Number of bands in ArcGISImageServiceLayer.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="bandIds"></a>
+&lt;Number[]> bandIds</H4></div>
+
+<div class="detaildesc">Array of current band selections.</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setBandIds">setBandIds</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="bands"></a>
+&lt;Object[]> bands</H4></div>
+
+<div class="detaildesc">The raster bands that the raster dataset is composed of and their statistics. The length of this array gives the number of bands and the array index represents the band ID.</div>
+
+<div class="detaildesc">
+		<strong>代码片段:</strong><br/>
+		The array is an object of the form: <br />
+<pre> 
+[
+ {
+   "min": &lt;Number>,
+   "max": &lt;Number>,
+   "mean": &lt;Number>,
+   "stddev": &lt;Number>
+
+ },
+ ...
+]
+</pre><br/>
+		</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="compressionQuality"></a>
+&lt;Number> compressionQuality</H4></div>
+
+<div class="detaildesc">Current compression quality value.  The compression quality controls how much loss the image will be subjected to.  Only valid with JPG image types.</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setCompressionQuality">setCompressionQuality</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="copyrightText"></a>
+&lt;String> copyrightText</H4></div>
+
+<div class="detaildesc">Copyright string as defined by the image service.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="Description"></a>
+&lt;String> Description</H4></div>
+
+<div class="detaildesc">Description as defined by the image service.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="disableClientCaching"></a>
+&lt;Boolean> disableClientCaching</H4></div>
+
+<div class="detaildesc">When true, images are always requested from the server and the browser's cache is ignored.  This should be used when the data supporting the map service changes frequently.<i> (As of v1.2)</i></div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> true | false
+			</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> false
+			</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="format"></a>
+&lt;String> format</H4></div>
+
+<div class="detaildesc">The output image type.</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> png8 | png24 | jpg | bmp | gif
+			</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> png8
+			</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="interpolation"></a>
+&lt;String> interpolation</H4></div>
+
+<div class="detaildesc">Current interpolation method.  The interpolation method affects how the raster dataset is transformed when it undergoes warping or when it changes coordinate space.</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setInterpolation">setInterpolation</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="pixelSizeX"></a>
+&lt;Number> pixelSizeX</H4></div>
+
+<div class="detaildesc">Size of pixel in X direction.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="pixelSizeY"></a>
+&lt;Number> pixelSizeY</H4></div>
+
+<div class="detaildesc">Size of pixel in Y direction.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="pixelType"></a>
+&lt;Number> pixelType</H4></div>
+
+<div class="detaildesc">The pixel type of the image service. Pertains to the type of values stored in the raster, such as signed integer, unsigned integer, or floating point. Integers are whole numbers, whereas floating points have decimals.</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> C64 | C128 | F32 | F64 | S8 | S16 | S32 | U1 | U2 | U4 | U8 | U16 | U32 | UNKNOWN
+			</div>
+
+</div>
+
+<div class=sectionDivider>方法详细信息</div>
+<div class="detaildiv">
+		<div class="detailname"><a name="exportMapImage"></a><H4>
+exportMapImage(imageServiceParameters?, callback?)</H4></div>
+
+<div class="detaildesc">Exports a map using values as specified by <a href="imageserviceparameters.htm">ImageServiceParameters</a>.  On completion, <a href="mapimage.htm">MapImage</a> is returned.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="imageserviceparameters.htm">ImageServiceParameters</a>> <B>imageServiceParameters</B></td>
+			<td class="detailTABLE">
+Optional</td>
+			<td class="detailTABLE">
+Input parameters assigned before exporting the map image.</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>callback</B></td>
+			<td class="detailTABLE">
+Optional</td>
+			<td class="detailTABLE">
+The function to call when the method has completed.  The arguments in the function are the same as the <a href="#onMapImageExport">onMapImageExport</a> event.</td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onMapImageExport">onMapImageExport</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setBandIds"></a><H4>
+setBandIds(bandIds)</H4></div>
+
+<div class="detaildesc">Sets the R,G,B of the exported image to the appropriate ImageService Band ID.  BandIds are zero based.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Number[]> <B>bandIds</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+Array of band IDs to use in the exported image.<br />
+
+
+<pre>
+myArcGISImageServiceLayer.setBandIds([2,1,0]);
+</pre></td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#bandIds">bandIds</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setCompressionQuality"></a><H4>
+setCompressionQuality(quality)</H4></div>
+
+<div class="detaildesc">Sets the compression quality of the exported image.  Only valid with JPG image format.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>quality</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+A value from 0 to 100.  100 is best quality but largest in file size.</td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#compressionQuality">compressionQuality</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setDisableClientCaching"></a><H4>
+setDisableClientCaching(disable)</H4></div>
+
+<div class="detaildesc">Sets whether images are always requested from the server and the browser's cache is ignored. This should be used when the data supporting the map service changes frequently.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Boolean> <B>disable</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+When true, brower client side caching is disabled.</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setInterpolation"></a><H4>
+setInterpolation(interpolation)</H4></div>
+
+<div class="detaildesc">Sets the interpolation method.  The interpolation method affects how the raster dataset is transformed when it undergoes warping or when it changes coordinate space.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>interpolation</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+Interpolation value defined in <a href="imageserviceparameters.htm">ImageServiceParameters</a> Constants Table.</td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#interpolation">interpolation</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<H4 class=dtH4>Events Detail</H4>
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onMapImageExport"></a><H4>
+onMapImageExport(mapImage)	</H4></div>
+
+
+<div class="detaildesc">Fires when the map export is completed.</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="mapimage.htm">MapImage</a>> <B>mapImage</B>
+			</td>
+
+<td class="detailTABLE">
+ 			Contains the properties of a dynamically generated map image.
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#exportMapImage">exportMapImage</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<br/></div></body></html> 

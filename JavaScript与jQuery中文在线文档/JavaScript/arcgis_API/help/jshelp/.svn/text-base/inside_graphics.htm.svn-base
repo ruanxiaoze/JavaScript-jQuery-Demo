@@ -1,0 +1,204 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="keywords" content="ArcGIS JavaScript API" />
+		<link href="jsdoc.css" rel="stylesheet" type="text/css" />
+		<title>Working with graphics</title>
+	</head>
+	<body>
+		<div id="pageBanner">Working with graphics</div>
+		<div id="nstext">
+			<!--***START TEXT - DO NOT WRITE ABOVE THIS LINE***-->
+			<p>The ArcGIS JavaScript API allows for the drawing of graphics on top of the map. 
+				The graphics can be drawn by the user as markup or input to a task, or they can 
+				be drawn by the application in response to a task. For example, the application 
+				might add the results of a query to the map as graphics.</p>
+			<p>You can create and add one or more GraphicsLayers to your ArcGIS JavaScript API 
+				maps. A <A href="../jsapi/graphicslayer.htm">GraphicsLayer</A> contains an 
+				array of <A href="../jsapi/graphic.htm">Graphic</A> objects. The array is empty 
+				at first, but you can add graphics any time after the map loads.</p>
+			<p>Think of a graphic as a container for four things: A geometry, a symbol, 
+				attributes, and an info template.
+			</p>
+			<ul>
+				<li>
+					The <b>geometry</b> determines where the graphic is located and can be point, 
+					multipoint, polyline, or polygon.</li>
+				<li>
+					The <b>symbol</b> determines how the graphic looks and can be a marker symbol 
+					(for point and multipoint geometries), a line symbol (for polylines), or a fill 
+					symbol (for polygons).</li>
+				<li>
+					<b>Attributes</b> are name-value pairs that describe the graphic. If you create 
+					the graphic, you need to assign the attributes. If the graphic is created in 
+					response to a task performed on a layer, the graphic automatically includes the 
+					field attributes of the layer. Some tasks allow you to limit the attributes 
+					that are returned to the result graphic. <A href="../jsapi/query.htm#outfields">Query.outFields</A>
+					is an example of a property that limits the returned attributes of a task.</li>
+				<li>
+					The <b>info template</b> defines the format of the <A href="../jsapi/infowindow.htm">
+						InfoWindow</A> that will appear by default when the graphic is clicked. 
+					Note that InfoWindow is a property of <A href="../jsapi/map.htm">Map</A>, 
+					whereas <A href="../jsapi/infotemplate.htm">InfoTemplate</A> is a property of <A href="../jsapi/graphic.htm">
+						Graphic</A>. This allows graphics with different info templates to be 
+					displayed on the same map.</li>
+			</ul>
+			<p>Graphics are not required to have all of the above items, and no one item is 
+				required. For example, many task results are returned as graphic objects in a <A href="../jsapi/featureset.htm">
+					FeatureSet</A>. These graphics only have geometry and attributes when they 
+				are returned. If you want to add the graphics to a map, you must define a 
+				symbol for them.</p>
+			<p>If you're writing code that allows users to draw graphics on the map, the <A href="../jsapi/draw.htm">
+					Draw</A> toolbar can make your work easier. The Draw toolbar is a class 
+				that can help you capture the geometry that a user draws on the screen. You can 
+				then define a symbol and apply it to the geometry in a new graphic object. The 
+				sample <A href="../jssamples/MapDrawingToolbar.html">Use a drawing toolbar</A> demonstrates 
+				this workflow.</p>
+			<p>The way that you add task results to the map as graphics varies by task type. If 
+				your task returns a FeatureSet, you get an array of graphics (<A href="../jsapi/featureset.htm#features">FeatureSet.features</A>) 
+				that you can loop through and add to the map. The code below shows how you 
+				might do this with results from <A href="../jsapi/querytask.htm">QueryTask</A>. 
+				Notice that the code defines a symbol and an info template for the graphic.</p>
+			<pre>dojo.connect(queryTask, "onComplete", function(featureSet) {
+          map.graphics.clear();
+          var symbol = new esri.symbol.SimpleFillSymbol();
+          //Loop through features in the featureSet and add them to the map.
+          for (var i=0, il=featureSet.features.length; i&lt;il; i++) {
+            //Get the current feature from the featureSet.
+            //Feature is a graphic
+            <b>var graphic = featureSet.features[i];</B>
+            graphic.setSymbol(symbol);
+            graphic.setInfoTemplate(infoTemplate);
+
+            //Add graphic to the map graphics layer.
+            map.graphics.add(graphic);
+          }
+        });</pre>
+			<p>Other tasks do not provide a feature set as a result but do provide the 
+				geometry, which you can use to create a graphic. For example, a <A href="../jsapi/locator.htm">
+					Locator</A> task finds an <A href="../jsapi/addresscandidate.htm">AddressCandidate</A>, 
+				whose <A href="../jsapi/addresscandidate.htm#location">location</A> property is 
+				a <A href="../jsapi/point.htm">Point</A> geometry. You can use this geometry to 
+				create a graphic showing the address location, as in the code below:</p>
+			<pre>for (var i=0, il=candidates.length; i&lt;il; i++) {
+          candidate = candidates[i];
+          if (candidate.score &gt; 80) {
+            var attributes = { address: candidate.address, score:candidate.score, locatorName:candidate.attributes.Loc_name };
+            <b>var graphic = new esri.Graphic(candidate.location, symbol, attributes, infoTemplate);</B>
+            map.graphics.add(graphic);
+          }
+        }</pre>
+			<p>See the <a href="http://resources.esri.com/help/9.3/arcgisserver/apis/javascript/arcgis/help/jssamples_start.htm"
+					target="_blank">Samples </a>for more ideas of how to create graphics from 
+				the results of different tasks.</p>
+			<a name="optimizing_code_for_graphics_and_symbols"></a>
+			<h3>Optimizing code for graphics and symbols</h3>
+			<p>Below are some ways that you can optimize your code when working with graphics 
+				and their associated geometries and symbols.</p>
+			<p><b>Adding graphics to the map</b></p>
+			<p>When adding a graphic to map, always set the geometry and symbology of the 
+				graphic before adding it to the map's graphics layer. If a graphic has been 
+				added to a map, calling <A href="../jsapi/graphic.htm#setGeometry">setGeometry</A>
+				or <A href="../jsapi/graphic.htm#setSymbol">setSymbol</A> will force the 
+				graphic to redraw.
+			</p>
+			<p>Less efficient:</p>
+			<pre>var graphic = new esri.Graphic(geometry, defaultSymbol);
+map.graphics.add(graphic);
+if (isSelected) {
+  graphic.setSymbol(highlightSymbol);
+}
+</pre>
+			<p>More efficient:</p>
+			<pre>var graphic = new esri.Graphic(geometry, isSelected ? highlightSymbol : defaultSymbol);
+map.graphics.add(graphic);
+</pre>
+			<p><b>Creating and customizing symbols</b></p>
+			<p>When you create a symbol, you should use the default symbol constructor and 
+				override just the custom properties. Check the default set of properties of 
+				each symbol type before you start customizing the symbol.</p>
+			<p>The code below creates a symbol by setting all properties, even though the 
+				default symbol is already a solid line. This is less efficient:</p>
+			<pre>var symbol = new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID,
+        new dojo.Color([255,0,0]), 1);
+</pre>
+			<p>The code below is more efficient. It takes the default symbol and only overrides 
+				properties that need to be customized, in this case, the color:</p>
+			<pre>var symbol = new esri.symbol.SimpleLineSymbol().setColor(new dojo.Color([255,0,0]));
+</pre>
+			<p>Note that you can only use this technique with symbols that have a default 
+				constructor. These are <A href="../jsapi/cartographiclinesymbol.htm">CartographicLineSymbol</A>,
+				<A href="../jsapi/simplefillsymbol.htm">SimpleFillSymbol</A>, <A href="../jsapi/simplelinesymbol.htm">
+					SimpleLineSymbol</A>, and <A href="../jsapi/simplemarkersymbol.htm">SimpleMarkerSymbol</A>.</p>
+			<p><b>Chaining methods</b></p>
+			<p>Because JavaScript is a scripting language, every line of code takes up valuable 
+				processor time. One way to improve processor time is to chain method calls to 
+				reduce lines of code. Objects such as <A href="../jsapi/graphic.htm">esri.Graphic</A>
+				and <A href="../jsapi/cartographiclinesymbol.htm">esri.symbol.*</A> provide 
+				setter methods that return the object itself, allowing for chaining of methods.</p>
+			<p>Less efficient:</p>
+			<pre>var symbol = new esri.symbol.SimpleMarkerSymbol();
+symbol.setSize(10);
+symbol.setColor(new dojo.Color([255,0,0]));
+</pre>
+			<p>More efficient:</p>
+			<pre>var symbol  = new esri.symbol.SimpleMarkerSymbol().setSize(10).setColor(new dojo.Color([255,0,0]));
+</pre>
+			<p>When chaining method calls, you need to determine a balance between efficiency 
+				and readability of your code. Your code might be more readable and maintainable 
+				if you avoid chaining; however, you will forfeit the performance benefit that 
+				chaining offers.</p>
+			<a name="combining_polylines_and_polygons"></a>
+			<h3>Combining polylines and polygons for faster drawing</h3>
+			<p>The ArcGIS JavaScript API can render single and multi-part polylines and 
+				polygons using the browser's graphics capabilities. The API can render one 
+				large multi-part graphic faster than many single-part graphics. Depending on 
+				the type of application being developed, the graphics drawing can be 
+				streamlined by combining large number of single and multi-part polygons into 
+				one multi-part polygon. The same is true for polylines.</p>
+			<p>Consider a simple application in which the user queries the name of a county and 
+				the resultant polygons are drawn on the screen. The following function draws 
+				the results of the query on the map. It iterates through the result <A href="../jsapi/FeatureSet.htm">
+					FeatureSet</A> and adds each feature to the map's graphics layer.</p>
+			<pre>function showResults(featureSet) {
+  //get features from result feature set
+  var features = featureSet.features;
+  for (var i=0, il=features.length; i&lt;il; i++) {
+    //set symbol and add graphic feature to map
+    map.graphics.add(features[i].setSymbol(symbol));
+  }
+}
+</pre>
+			<p>The following modified function creates a single combined polygon. The <A href="../jsapi/polygon.htm#rings">
+					rings</A> from the feature geometry of each result are added to the 
+				combined polygon. The performance benefit of using a single polygon outweighs 
+				the cost of the additional lines of code.</p>
+			<pre>function showResults(featureSet) {
+  //get features from result feature set
+  var features = featureSet.features;
+  //create single combined polygon
+  var polygon = new esri.geometry.Polygon(featureSet.spatialReference);
+  //create variable for individual feature rings
+  var rings;
+  for (var i=0, il=features.length; i&lt;il; i++) {
+    //assign variable to the rings array of the feature geometry
+    rings = features[i].geometry.rings;
+    for (var r=0, rl=rings.length; r&lt;rl; r++) {
+      //add ring to combined polygon
+      polygon.addRing(rings[r]);
+    }
+  }
+  
+  //create and add graphic using combined polygon
+  map.graphics.add(new esri.Graphic(polygon, symbol));
+}
+</pre>
+			<p>Although this technique improves the drawing speed of polylines and polygons, 
+				it's important to note that events and attributes for individual graphics are 
+				not available in the combined graphic. If the application needs to access those 
+				events or attributes, this technique is not appropriate.</p>
+			<!--***END TEXT - DO NOT WRITE BELOW THIS LINE***-->
+		</div>
+	</body>
+</html>

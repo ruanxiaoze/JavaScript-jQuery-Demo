@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>Find Task</title>
+    <style type="text/css">
+      @import "http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css";
+      @import "http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dojox/grid/compat/_grid/Grid.css";
+      @import "http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dojox/grid/compat/_grid/tundraGrid.css";
+      body { font-size: 0.9em;
+	         font-family: Geneva, Arial, Helvetica, sans-serif;
+	       }
+	  .heading { font-weight: bold;
+	             padding-bottom: 0.25em;
+	           }
+       #grid { border: 1px solid #333;
+	           width: 33em;
+	           height: 30em;
+             }
+    </style>
+    <script type="text/javascript">djConfig={parseOnLoad:true}</script>
+    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"></script>
+    <script type="text/javascript" language="Javascript">
+      dojo.require("dojox.grid.Grid");
+      dojo.require("dojox.grid.compat._data.model");  //Because of changes in the Dojo data grid and model you must load the comapt_data.model if using version 1.3.
+      dojo.require("esri.map");
+      dojo.require("esri.tasks.find");
+
+      var findTask, findParams, map;
+
+      function init() {
+          map = new esri.Map("map");
+          var censusMapLayer = new esri.layers.ArcGISDynamicMapServiceLayer("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StatesCitiesRivers_USA/MapServer", {id:"usa"});
+          map.addLayer(censusMapLayer);
+
+          //create find task with url to map service
+          findTask = new esri.tasks.FindTask("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Specialty/ESRI_StatesCitiesRivers_USA/MapServer");
+
+          //create find parameters and define known values
+          findParams = new esri.tasks.FindParameters();
+          findParams.returnGeometry = true;
+          findParams.layerIds = [0,1,2];
+          findParams.searchFields = ["CITY_NAME","NAME","SYSTEM","STATE_ABBR","STATE_NAME"];
+
+      }
+
+
+      function execute(searchText) {
+        //set the search text to find parameters
+        findParams.searchText = searchText;
+        findTask.execute(findParams,showResults);
+      }
+
+      function showResults(results) {
+        //find results return an array of findResult.
+        map.graphics.clear();
+        var dataForGrid = [];
+
+        for (var i=0, il=results.length; i<il; i++) {
+          var curFeature = results[i];
+          var graphic = curFeature.feature;
+          var layerName = curFeature.layerName;
+          var layerId = curFeature.layerId;
+          var foundFieldName = curFeature.foundFieldName;
+          var foundFieldValue = graphic.attributes[foundFieldName];
+
+          var attValues = [layerName,layerId,foundFieldName,foundFieldValue];
+          dataForGrid.push(attValues);
+
+          switch (graphic.geometry.type) {
+            case "point":
+              var symbol = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_SQUARE, 10, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([255,0,0]), 1), new dojo.Color([0,255,0,0.25]));
+              break;
+            case "polyline":
+              var symbol = new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_DASH, new dojo.Color([255,0,0]), 1);
+              break;
+            case "polygon":
+              var symbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_NONE, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_DASHDOT, new dojo.Color([255,0,0]), 2), new dojo.Color([255,255,0,0.25]));
+              break;
+          }
+          graphic.setSymbol(symbol);
+          map.graphics.add(graphic);
+        }
+
+        var model = new dojox.grid.data.Table(null, dataForGrid);
+
+        var view1 = {
+          cells: [
+            [{name: 'Layer Name'},{name: 'Layer ID'},{name: 'Found Field Name'},{name: 'Found Field Value'}]
+          ]
+        };
+
+        var layout = [ view1 ];
+        gridWidget.setModel(model);
+        gridWidget.setStructure(layout);
+
+      }
+
+      dojo.addOnLoad(init);
+    </script>
+  </head>
+  <body class="tundra">
+    <div class="heading">Find State/City/River: <input type="text" id="searchText" value="KS" />
+    <input type="button" value="Find" onclick="execute(dojo.byId('searchText').value);" /></div>
+    <div id="map" style="width:400px; height:300px; border:1px solid #000;"></div>
+    <div id="grid" dojoType="dojox.Grid" jsId="gridWidget" structure="layout"></div>
+  </body>
+</html>

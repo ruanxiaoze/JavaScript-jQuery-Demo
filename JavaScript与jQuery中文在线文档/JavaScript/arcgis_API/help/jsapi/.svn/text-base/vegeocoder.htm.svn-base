@@ -1,0 +1,435 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>VEGeocoder</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: VEGeocoder</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	<i>Class added v1.4.</i><br/><br/>  Bing Maps geocoder.  See <a href="locator.htm">Locator</a> for geocoding with ArcGIS Server locators.
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.virtualearth.VEGeocoder
+</pre>
+
+<H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#VEGeocoderConst">esri.virtualearth.VEGeocoder(options)</a></td>
+		<td class="syntaxTABLE">Creates a new VEGeocoder object.  The parameters can be included in any order.  Either <code>tokenURL</code> or <code>serverToken</code> is required in the constructor.  All other parameters are optional.</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#culture">culture</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+Specifies the culture in which to return results. The default value is "en-US". For a list of supported cultures, see <a href="http://msdn.microsoft.com/en-us/library/cc981048.aspx" target="_blank">http://msdn.microsoft.com/en-us/library/cc981048.aspx</a>.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#environment">environment</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+Whether to use the Bing Maps staging or production environment.  Trial Bing Maps accounts must always use staging.  Subscription accounts can use either staging or production.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#serverToken">serverToken</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+The Bing Maps services token used by the ArcGIS VEAdapter to make Bing Maps geocode service requests.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#tokenDuration">tokenDuration</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+Duration of the Bing Maps token in minutes.  The minimum is 15, and the maximum is 480 (8 hours).</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#tokenUrl">tokenUrl</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+The root URL of the "Get Virtual Earth Token" page.  For more information, see <a href="../jshelp/ve_getting_started.htm">Getting started with Bing Maps in the ArcGIS JavaScript API</a>.</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>方法表</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+		<th class="tableheader">方法</th>
+		<th class="tableheader">返回值</th>
+		<th class="tableheader">描述</th>
+		</tr>
+
+<tr>
+<td class="syntaxTABLE"><a href="#addressToLocations">addressToLocations(query, callback?, errback?)</a></td><td class="syntaxTABLE">
+<a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a>
+</td>
+<td class="syntaxTABLE">Sends a geocode request to Bing Maps to find candidates for a single address specified in the <span class="code">query</span> argument. On completion, the onAddressToLocationsComplete event is fired and the optional callback function is invoked.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setCulture">setCulture(culture)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">Sets the culture in which to return results.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setServerToken">setServerToken(token)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">Updates server token.</td>	</tr></table>
+
+<H4 class=dtH4>事件</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">事件</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#onAddressToLocationsComplete">onAddressToLocationsComplete(geocodeResults)
+		</a></td>
+
+<td class="syntaxTABLE">Fires when VEGeocode.addressToLocation() has completed.  The result is an array of <a href="vegeocoderesult.htm">VEGeocodeResult</a>. This is the same signature returned if the optional callback is specified.</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onError">onError(error)
+		</a></td>
+
+<td class="syntaxTABLE">Fires when an error occurs when executing the task.</td>
+		</tr></table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="VEGeocoderConst"></a><H4>esri.virtualearth.VEGeocoder(options)</H4>
+		</div>
+
+<div class="detaildesc">Creates a new VEGeocoder object.  The parameters can be included in any order.  Either <code>tokenURL</code> or <code>serverToken</code> is required in the constructor.  All other parameters are optional.</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;Object>
+<B>options</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			See options list for parameters.
+			</td>
+			</tr>
+</table>
+
+<div class="detaildesc"><strong>可选项:</strong></div><table CLASS="detailTABLE" cellspacing="0" >
+<tr>
+			<td class="detailTABLE">
+&lt;String>
+<B>culture</B></td>
+			<td class="detailTABLE">
+			Specifies the culture in which to return results. The default value is "en-US". For a list of supported cultures, see <a href="http://msdn.microsoft.com/en-us/library/cc981048.aspx" target="_blank">http://msdn.microsoft.com/en-us/library/cc981048.aspx</a>.
+			</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;String>
+<B>environment</B></td>
+			<td class="detailTABLE">
+			Whether to use the Bing Maps staging or production environment. Trial Bing Maps accounts must always use staging. Subscription accounts can use either staging or production.
+			</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;String>
+<B>serverToken</B></td>
+			<td class="detailTABLE">
+			Note:  Either <code>tokenURL</code> or <code>serverToken</code> is required in the constructor.<br/><br/>
+
+The Bing Maps Web services token used by the ArcGIS VEAdapter to make Bing Maps geocode service requests.
+			</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;String>
+<B>tokenDuration</B></td>
+			<td class="detailTABLE">
+			The duration of the token in minutes.  The minimum value is 15 and the maximum value is 480 (8 hours).
+			</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;String>
+<B>tokenUrl</B></td>
+			<td class="detailTABLE">
+			Note:  Either <code>tokenURL</code> or <code>serverToken</code> is required in the constructor.<br/><br/>
+
+The root URL of the "Get Virtual Earth Token" page.  For more information, see <a href="../jshelp/ve_getting_started.htm">Getting started with Bing Maps in the ArcGIS JavaScript API</a>.
+			</td>
+			</tr>
+</table>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="culture"></a>
+&lt;String> culture</H4></div>
+
+<div class="detaildesc">Specifies the culture in which to return results. The default value is "en-US". For a list of supported cultures, see <a href="http://msdn.microsoft.com/en-us/library/cc981048.aspx" target="_blank">http://msdn.microsoft.com/en-us/library/cc981048.aspx</a>.</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> en-US
+			</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setCulture">setCulture</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="environment"></a>
+&lt;String> environment</H4></div>
+
+<div class="detaildesc">Whether to use the Bing Maps staging or production environment.  Trial Bing Maps accounts must always use staging.  Subscription accounts can use either staging or production.</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> staging | production
+			</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> staging
+			</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="serverToken"></a>
+&lt;String> serverToken</H4></div>
+
+<div class="detaildesc">The Bing Maps services token used by the ArcGIS VEAdapter to make Bing Maps geocode service requests.</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setServerToken">setServerToken</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="tokenDuration"></a>
+&lt;String> tokenDuration</H4></div>
+
+<div class="detaildesc">Duration of the Bing Maps token in minutes.  The minimum is 15, and the maximum is 480 (8 hours).</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> 480
+			</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="tokenUrl"></a>
+&lt;String> tokenUrl</H4></div>
+
+<div class="detaildesc">The root URL of the "Get Virtual Earth Token" page.  For more information, see <a href="../jshelp/ve_getting_started.htm">Getting started with Bing Maps in the ArcGIS JavaScript API</a>.</div>
+
+</div>
+
+<div class=sectionDivider>方法详细信息</div>
+<div class="detaildiv">
+		<div class="detailname"><a name="addressToLocations"></a><H4>
+addressToLocations(query, callback?, errback?)</H4></div>
+
+<div class="detaildesc">Sends a geocode request to Bing Maps to find candidates for a single address specified in the <span class="code">query</span> argument. On completion, the onAddressToLocationsComplete event is fired and the optional callback function is invoked.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>query</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+The address to locate.</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>callback</B></td>
+			<td class="detailTABLE">
+Optional</td>
+			<td class="detailTABLE">
+The function to call when the method has completed.  The arguments in the function are the same as the <a href="#onAddressToLocationsComplete">onAddressToLocationsComplete</a> event.</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>errback</B></td>
+			<td class="detailTABLE">
+Optional</td>
+			<td class="detailTABLE">
+An error object is returned if an error occurs during task execution.</td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onAddressToLocationsComplete">onAddressToLocationsComplete</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setCulture"></a><H4>
+setCulture(culture)</H4></div>
+
+<div class="detaildesc">Sets the culture in which to return results.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>culture</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+The culture value.  The default value is "en-US". For a list of supported cultures, see <a href="http://msdn.microsoft.com/en-us/library/cc981048.aspx" target="_blank">http://msdn.microsoft.com/en-us/library/cc981048.aspx</a>.</td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#culture">culture</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setServerToken"></a><H4>
+setServerToken(token)</H4></div>
+
+<div class="detaildesc">Updates server token.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>token</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+The new token to update with.</td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#serverToken">serverToken</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<H4 class=dtH4>Events Detail</H4>
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onAddressToLocationsComplete"></a><H4>
+onAddressToLocationsComplete(geocodeResults)	</H4></div>
+
+
+<div class="detaildesc">Fires when VEGeocode.addressToLocation() has completed.  The result is an array of <a href="vegeocoderesult.htm">VEGeocodeResult</a>. This is the same signature returned if the optional callback is specified.</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="vegeocoderesult.htm">VEGeocodeResult[]</a>> <B>geocodeResults</B>
+			</td>
+
+<td class="detailTABLE">
+ 			Contains an array of candidates that match the given address as well as their scores.
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#addressToLocations">addressToLocations</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onError"></a><H4>
+onError(error)	</H4></div>
+
+
+<div class="detaildesc">Fires when an error occurs when executing the task.</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;Error> <B>error</B>
+			</td>
+
+<td class="detailTABLE">
+ 			Error message returned in a <a href="http://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/Error" target="_blank">JavaScript error object</a>.
+			</td>
+			</tr>
+
+</table>
+
+</div>
+
+<br/></div></body></html> 

@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>Finding the best stop sequence</title>
+</head>
+
+<body>
+
+<div id="pageBanner">Finding the best stop sequence</div>
+
+<div id="nstext">
+
+<!--***START TEXT - DO NOT WRITE ABOVE THIS LINE***-->
+
+<p>The <a href="../jsapi/routetask.htm">RouteTask</a> can help you find the most efficient path for visiting a given list of stops. This is sometimes known as the "traveling salesperson" problem. To solve it, set <a href="../jsapi/routeparameters.htm#findbestsequence">RouteParameters.findBestSequence</a> to true. Instead of being visited sequentially, the stops will be visited in the most efficient order. You can optionally designate whether the first and last stops on the list should remain fixed.</p>
+
+<p>Suppose you've specified three stops, like this:</p>
+<pre>var stop1 = new esri.Graphic(
+new esri.geometry.Point(-117.21,  34.065), stopSymbol);
+stop1.attributes = new Object();
+stop1.attributes.Name = "A";
+
+var stop2 = new esri.Graphic(
+new esri.geometry.Point(-117.185, 34.05 ), stopSymbol);
+stop2.attributes = new Object();
+stop2.attributes.Name = "B";
+
+var stop3 = new esri.Graphic(
+new esri.geometry.Point(-117.19,  34.062), stopSymbol);
+stop3.attributes = new Object();
+stop3.attributes.Name = "C";
+
+routeParams.stops = new esri.tasks.FeatureSet();
+routeParams.stops.features.push(stop1);
+routeParams.stops.features.push(stop2);
+routeParams.stops.features.push(stop3);
+</pre>
+
+<p>If you want these stops to be visited in the most efficient way, you will need to specify the following parameters:</p>
+
+<pre>routeParams.findBestSequence=true;
+routeParams.preserveFirstStop=false;
+routeParams.preserveLastStop=false;
+routeParams.returnStops = true;
+</pre>
+
+<p>When you get the results from the solve operation, examine the sequence values on the returned stops. Here's how you could report the sequence programmatically:</p>
+
+<pre>for (var i = 0; i < routeResults[0].stops.length; i++){
+  alert("Stop " + routeResults[0].stops[i].attributes.Name 
+          + " visited " + routeResults[0].stops[i].attributes.Sequence);
+}
+</pre>
+
+<p>In the above code, the alerts report the most efficient sequence of stops. If you change the code so findBestSequence = false, you'll notice a different sequence because each stop will be visited in the order it was added.</p>
+
+
+<!--***END TEXT - DO NOT WRITE BELOW THIS LINE***-->
+</div>
+
+</body>
+</html>

@@ -1,0 +1,353 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>CartographicLineSymbol</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: CartographicLineSymbol</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	Line symbols are used to draw linear features on the graphics layer.  CartographicLineSymbol, like <a href="simplelinesymbol.htm">SimpleLineSymbol</a>, is either a solid line or a predefined pattern of dashes and dots.  Line joins and line caps can be added to further define the line symbol.
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+<a href="symbol.htm">esri.symbol.Symbol</a>
+  |_ <a href="linesymbol.htm">esri.symbol.LineSymbol</a>
+        |_ <a href="simplelinesymbol.htm">esri.symbol.SimpleLineSymbol</a>
+		      |_esri.symbol.CartographicLineSymbol
+</pre><H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#CartographicLineSymbolConst1">esri.symbol.CartographicLineSymbol()</a></td>
+		<td class="syntaxTABLE">Creates a new empty CartographicLineSymbol object.</td>
+		</tr>
+<tr><td class="syntaxTABLE"><a href="#CartographicLineSymbolConst3">esri.symbol.CartographicLineSymbol(json)</a></td>
+		<td class="syntaxTABLE">Creates a new CartographicLineSymbol object using a JSON object.</td>
+		</tr>
+<tr><td class="syntaxTABLE"><a href="#CartographicLineSymbolConst2">esri.symbol.CartographicLineSymbol(style?, color?, width?, cap?, join?, miterLimit?)</a></td>
+		<td class="syntaxTABLE">Creates a new CartographicLineSymbol object with parameters.</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#cap">cap</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+The cap style.  See the Constants table for valid values.  The default value is CAP_BUTT.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#join">join</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+The join style.  See the Constants table for valid values.  The default value is JOIN_MITER.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#miterLimit">miterLimit</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+Size threshold for showing mitered line joins.</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>常量</H4>
+
+	<table CLASS="syntaxTABLE" cellspacing="0">
+	<tr>
+	<th class="tableheader" width="20%">常量</th>
+		<th class="tableheader">描述</th>
+	</tr>
+
+		<tr>
+		<td class="syntaxTABLE">CAP_BUTT</td>
+			<td class="syntaxTABLE">			Line ends square at the end point.<br/><br/><img src="images/captype.gif" alt="line cap types"/>		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">CAP_ROUND</td>
+			<td class="syntaxTABLE">			Line is rounded just beyond the end point.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">CAP_SQUARE</td>
+			<td class="syntaxTABLE">			Line is squared just beyond the end point.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">JOIN_BEVEL</td>
+			<td class="syntaxTABLE">			The joined lines are beveled.<br/><br/><img src="images/jointype.gif" alt="line join types"/>		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">JOIN_MITER</td>
+			<td class="syntaxTABLE">			The joined lines are not rounded or beveled.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">JOIN_ROUND</td>
+			<td class="syntaxTABLE">			The joined lines are rounded.		</td>
+	</tr>
+
+</table>
+
+<H4 class=dtH4>方法表</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+		<th class="tableheader">方法</th>
+		<th class="tableheader">返回值</th>
+		<th class="tableheader">描述</th>
+		</tr>
+
+<tr>
+<td class="syntaxTABLE"><a href="#setCap">setCap(cap)</a></td><td class="syntaxTABLE">
+<a href="cartographiclinesymbol.htm">CartographicLineSymbol</a>
+</td>
+<td class="syntaxTABLE">Sets the cap style.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setJoin">setJoin(join)</a></td><td class="syntaxTABLE">
+<a href="cartographiclinesymbol.htm">CartographicLineSymbol</a>
+</td>
+<td class="syntaxTABLE">Sets the join style.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setMiterLimit">setMiterLimit(miterLimit)</a></td><td class="syntaxTABLE">
+<a href="cartographiclinesymbol.htm">CartographicLineSymbol</a>
+</td>
+<td class="syntaxTABLE">Sets the size threshold for showing mitered line joins.</td>	</tr></table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="CartographicLineSymbolConst1"></a><H4>esri.symbol.CartographicLineSymbol()</H4>
+		</div>
+
+<div class="detaildesc">Creates a new empty CartographicLineSymbol object.</div>
+
+</div><div class="detaildiv"><div class="detailname"><a name="CartographicLineSymbolConst3"></a><H4>esri.symbol.CartographicLineSymbol(json)</H4>
+		</div>
+
+<div class="detaildesc">Creates a new CartographicLineSymbol object using a JSON object.</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;Object>
+<B>json</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			JSON object representing the CartographicLineSymbol.
+			</td>
+			</tr>
+</table>
+
+</div><div class="detaildiv"><div class="detailname"><a name="CartographicLineSymbolConst2"></a><H4>esri.symbol.CartographicLineSymbol(style?, color?, width?, cap?, join?, miterLimit?)</H4>
+		</div>
+
+<div class="detaildesc">Creates a new CartographicLineSymbol object with parameters.</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;String>
+<B>style</B></td>
+<td class="detailTABLE">
+Optional	</td>
+<td class="detailTABLE">
+			See Constants table for values.
+			</td>
+			</tr>
+<tr>
+<td class="detailTABLE">
+&lt;dojo.Color>
+<B>color</B></td>
+<td class="detailTABLE">
+Optional	</td>
+<td class="detailTABLE">
+			Symbol color, which is based on <a href="http://redesign.dojotoolkit.org/jsdoc/dojo/HEAD/dojo.Color" target="_blank">dojo.Color</a>.  Colors can be denoted in the following formats:<br/><br/>
+
+<ul>
+<li>R, G, B:  <code>new dojo.Color([255,0,0])</code> </li>
+<li>R,G,B,A.  The "A" value represents transparency where 0.0 is fully transparent and 1.0 has no transparency: <code>new dojo.Color([255,0,0,0.25])</code> </li>
+<li>Hex string: <code>new dojo.Color("#C0C0C0")</code> </li>
+<li>Named string:  <code>new dojo.Color("blue")</code> </li>
+</ul>
+			</td>
+			</tr>
+<tr>
+<td class="detailTABLE">
+&lt;Number>
+<B>width</B></td>
+<td class="detailTABLE">
+Optional	</td>
+<td class="detailTABLE">
+			Width of the line in pixels.
+			</td>
+			</tr>
+<tr>
+<td class="detailTABLE">
+&lt;String>
+<B>cap</B></td>
+<td class="detailTABLE">
+Optional	</td>
+<td class="detailTABLE">
+			See Constants table for values.
+			</td>
+			</tr>
+<tr>
+<td class="detailTABLE">
+&lt;String>
+<B>join</B></td>
+<td class="detailTABLE">
+Optional	</td>
+<td class="detailTABLE">
+			See Constants table for values.
+			</td>
+			</tr>
+<tr>
+<td class="detailTABLE">
+&lt;String>
+<B>miterLimit</B></td>
+<td class="detailTABLE">
+Optional	</td>
+<td class="detailTABLE">
+			Size threshold for showing mitered line joins.
+			</td>
+			</tr>
+</table>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="cap"></a>
+&lt;String> cap</H4></div>
+
+<div class="detaildesc">The cap style.  See the Constants table for valid values.  The default value is CAP_BUTT.</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> CAP_BUTT
+			</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="join"></a>
+&lt;String> join</H4></div>
+
+<div class="detaildesc">The join style.  See the Constants table for valid values.  The default value is JOIN_MITER.</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> JOIN_MITRE
+			</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="miterLimit"></a>
+&lt;String> miterLimit</H4></div>
+
+<div class="detaildesc">Size threshold for showing mitered line joins.</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> 10
+			</div>
+
+</div>
+
+<div class=sectionDivider>方法详细信息</div>
+<div class="detaildiv">
+		<div class="detailname"><a name="setCap"></a><H4>
+setCap(cap)</H4></div>
+
+<div class="detaildesc">Sets the cap style.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="cartographiclinesymbol.htm">CartographicLineSymbol</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>cap</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+Cap style.  See the Constants table for valid values.</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setJoin"></a><H4>
+setJoin(join)</H4></div>
+
+<div class="detaildesc">Sets the join style.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="cartographiclinesymbol.htm">CartographicLineSymbol</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>join</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+Join style.  See the Constants table for valid values.</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setMiterLimit"></a><H4>
+setMiterLimit(miterLimit)</H4></div>
+
+<div class="detaildesc">Sets the size threshold for showing mitered line joins.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="cartographiclinesymbol.htm">CartographicLineSymbol</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>miterLimit</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+Miter limit.</td>
+			</tr>
+</table>
+
+</div>
+
+<br/></div></body></html> 

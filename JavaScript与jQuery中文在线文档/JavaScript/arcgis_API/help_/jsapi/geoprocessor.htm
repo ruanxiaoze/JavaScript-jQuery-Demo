@@ -1,0 +1,1025 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>Geoprocessor</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: Geoprocessor</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	表示ArcGIS Server REST API提供的GP任务资源。一个地理处理任务资源代表地理处理服务的单个任务，支持如下操作： 
+<ul>
+<li>"execute" - 当执行类型是同步时在地理处理任务资源上执行。</li>
+<li>"submitJob" - 在一个异步的地理处理服务资源上执行。 </li>
+</ul>
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.tasks.Geoprocessor
+</pre>
+
+<H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#GeoprocessorConst">esri.tasks.Geoprocessor(url)</a></td>
+		<td class="syntaxTABLE">通过定义的地理处理任务的URL创建一个Geoprocessor对象。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#outputSpatialReference">outputSpatialReference</a></td>
+<td class="syntaxTABLE">
+<a href="spatialreference.htm">SpatialReference</a>
+</td>
+
+<td class="syntaxTABLE">
+输出几何体的空间参考。 如果没有指定，输出几何体用输入几何体的空间参考。如果<i>processSpatialReferencew</i>被指定而<i>outputSpatialReference</i>没有指定，输出几何体用<i>outputSpatialReference</i>指定的空间参考。  支持的空间参考列表，见<a href="../jshelp/pcs.htm">投影坐标系统</a>和<a href="../jshelp/gcs.htm">地理坐标系统</a>。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#processSpatialReference">processSpatialReference</a></td>
+<td class="syntaxTABLE">
+<a href="spatialreference.htm">SpatialReference</a>
+</td>
+
+<td class="syntaxTABLE">
+空间参考是用于执行几何操作的模型。如果<i>processSpatialReference</i>被指定<i>outputSpatialReference</i>没有指定，输出几何体用<i>processSpatialReference</i>指定的空间参考。  支持的空间参考列表，见<a href="../jshelp/pcs.htm">投影坐标系统</a>和<a href="../jshelp/gcs.htm">地理坐标系统</a>。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#updateDelay">updateDelay</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+每个发送给一个异步GP任务的工作状态间的时间间隔（单位：毫秒）。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#url">url</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+接收地理处理请求的ArcGIS Server Rest API资源端点。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>方法表</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+		<th class="tableheader">方法</th>
+		<th class="tableheader">返回值</th>
+		<th class="tableheader">描述</th>
+		</tr>
+
+<tr>
+<td class="syntaxTABLE"><a href="#cancelJobStatusUpdates">cancelJobStatusUpdates(jobId)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">
+取消一个定期的工作状态更新。用户仍然可以通过调用checkStatus()获得这个工作的状态。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#checkJobStatus">checkJobStatus(jobId, callback?, errback?)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">
+发送一个请求给GP任务来得到指定jobId的当前状态。根据收到的响应，onStatusUpdate事件被触发并且可选的callback函数被调用。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#execute">execute(inputParameters, callback?, errback?)</a></td><td class="syntaxTABLE">
+<a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a>
+</td>
+<td class="syntaxTABLE">
+发送一个请求到服务器端来执行一个同步的GP任务。完成时，onExecuteComplete事件被调用并且可选的callback函数被执行。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#getResultData">getResultData(jobId, parameterName, callback?, errback?)</a></td><td class="syntaxTABLE">
+<a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a>
+</td>
+<td class="syntaxTABLE">
+发送一个请求给GP任务来获的通过jobID和resultParameterName指定的任务结果。完成时，getresultdatacomplete会被触发，可选的callback函数会被调用。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#getResultImage">getResultImage(jobId, parameterName, imageParameters, callback?, errback?)</a></td><td class="syntaxTABLE">
+<a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a>
+</td>
+<td class="syntaxTABLE">
+发送一个请求到GP任务来获得任务结果的图片。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#getResultImageLayer">getResultImageLayer(jobId, parameterName, imageParameters, callback?, errback?)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">获得GP任务的ArcGISDynamicMapServiceLayer结果。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setOutputSpatialReference">setOutputSpatialReference(spatialReference)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">设置输出几何体的空间参考的WKID。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setProcessSpatialReference">setProcessSpatialReference(spatialReference)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">设置用于执行几何操作的空间参考的WKID。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setUpdateDelay">setUpdateDelay(delay)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">设置每个发送给一个异步GP任务的工作状态间的时间间隔（单位：毫秒）。</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#submitJob">submitJob(inputParameters, callback?, statusCallback?, errback?)</a></td><td class="syntaxTABLE">
+none
+</td>
+<td class="syntaxTABLE">通过GP任务为异步处理提交一个工作到服务器。一旦工作被提交，直到工作结束，onStatusUpdate事件被定期触发并且可选的statusCallback()函数被定期调用，时间间隔通过updateDelay属性设置。工作完成，onJobComplete事件被触发，callback函数被调用。<br /><br />
+
+任务执行结果可以使用getResultData(), getResultImage() 或getResultImageLayer()方法接收。</td>	</tr></table>
+
+<H4 class=dtH4>事件</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">事件</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#onError">onError(error)
+		</a></td>
+
+<td class="syntaxTABLE">当执行任务发生错误时触发该事件。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onExecuteComplete">onExecuteComplete(results, messages)
+		</a></td>
+
+<td class="syntaxTABLE">当同步地理处理任务完成时触发该事件。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onGetInputComplete">onGetInputComplete(input)
+		</a></td>
+
+<td class="syntaxTABLE">测试版未实现。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onGetResultDataComplete">onGetResultDataComplete(result)
+		</a></td>
+
+<td class="syntaxTABLE">当异步地理处理任务执行的结果是可用的时触发该事件。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onGetResultImageComplete">onGetResultImageComplete(mapImage)
+		</a></td>
+
+<td class="syntaxTABLE">通过调用getResultImage()方法生产一个地图图像时触发该事件。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onGetResultImageLayerComplete">onGetResultImageLayerComplete(ArcGISDynamicMapServiceLayer)
+		</a></td>
+
+<td class="syntaxTABLE">getResultImageLayer()完成时触发该事件。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onJobComplete">onJobComplete(status)
+		</a></td>
+
+<td class="syntaxTABLE">使用submitJob执行的异步地理处理任务完成时触发该事件。</td>
+		</tr><tr>
+		<td class="syntaxTABLE"><a href="#onStatusUpdate">onStatusUpdate(status)
+		</a></td>
+
+<td class="syntaxTABLE">当工作状态更新是可用的时触发该事件。</td>
+		</tr></table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="GeoprocessorConst"></a><H4>esri.tasks.Geoprocessor(url)</H4>
+		</div>
+
+<div class="detaildesc">通过定义的地理处理任务的URL创建一个Geoprocessor对象。</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;String>
+<B>url</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			表示地理处理服务的ArcGIS Server REST资源的URL。  一个示例是 
+http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Network.  关于构造URL的更多信息，见 <a href="../jshelp/ags_rest.htm">服务目录和REST API</a>.
+			</td>
+			</tr>
+</table>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="outputSpatialReference"></a>
+&lt;<a href="spatialreference.htm">SpatialReference</a>> outputSpatialReference</H4></div>
+
+<div class="detaildesc">输出几何体的空间参考。 如果没有指定，输出几何体用输入几何体的空间参考。如果<i>processSpatialReferencew</i>被指定而<i>outputSpatialReference</i>没有指定，输出几何体用<i>outputSpatialReference</i>指定的空间参考。  支持的空间参考列表，见<a href="../jshelp/pcs.htm">投影坐标系统</a>和<a href="../jshelp/gcs.htm">地理坐标系统</a>。</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setOutputSpatialReference">setOutputSpatialReference</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="processSpatialReference"></a>
+&lt;<a href="spatialreference.htm">SpatialReference</a>> processSpatialReference</H4></div>
+
+<div class="detaildesc">空间参考是用于执行几何操作的模型。如果<i>processSpatialReference</i>被指定<i>outputSpatialReference</i>没有指定，输出几何体用<i>processSpatialReference</i>指定的空间参考。  支持的空间参考列表，见<a href="../jshelp/pcs.htm">投影坐标系统</a>和<a href="../jshelp/gcs.htm">地理坐标系统</a>。</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setProcessSpatialReference">setProcessSpatialReference</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="updateDelay"></a>
+&lt;Number> updateDelay</H4></div>
+
+<div class="detaildesc">每个发送给一个异步GP任务的工作状态间的时间间隔（单位：毫秒）。</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> 1000
+			</div>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#setUpdateDelay">setUpdateDelay</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="url"></a>
+&lt;String> url</H4></div>
+
+<div class="detaildesc">接收地理处理请求的ArcGIS Server Rest API资源端点。</div>
+
+</div>
+
+<div class=sectionDivider>方法详细信息</div>
+<div class="detaildiv">
+		<div class="detailname"><a name="cancelJobStatusUpdates"></a><H4>
+cancelJobStatusUpdates(jobId)</H4></div>
+
+<div class="detaildesc">取消一个定期的工作状态更新。用户仍然可以通过调用checkStatus()获得这个工作的状态。<i> (As of v1.1)</i></div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>jobId</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+要取消工作更新的工作的唯一标识。</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="checkJobStatus"></a><H4>
+checkJobStatus(jobId, callback?, errback?)</H4></div>
+
+<div class="detaildesc">发送一个请求给GP任务来得到指定jobId的当前状态。根据收到的响应，onStatusUpdate事件被触发并且可选的callback函数被调用。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>jobId</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+服务器上工作的唯一标识字符串。当工作被提交执行时创建，接下来用于检查工作状态和接收结果。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>callback</B></td>
+			<td class="detailTABLE">
+可选项</td>
+			<td class="detailTABLE">
+方法完成后调用的函数。函数参数和<a href="#onStatusUpdate">onStatusUpdate</a>事件的一样。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>errback</B></td>
+			<td class="detailTABLE">
+可选项</td>
+			<td class="detailTABLE">
+如果在任务执行期间，如果服务器端发生错误，error对象被返回。 <i>(As of v1.3) </i></td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onStatusUpdate">onStatusUpdate</a>&nbsp;&nbsp;
+<a href="#onError">onError</a>&nbsp;&nbsp;
+<a href="#cancelJobStatus">cancelJobStatus</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="execute"></a><H4>
+execute(inputParameters, callback?, errback?)</H4></div>
+
+<div class="detaildesc">发送一个请求到服务器端来执行一个同步的GP任务。完成时，onExecuteComplete事件被调用并且可选的callback函数被执行。<br/><br/><code>dojo.Deferred</code>返回结果在v1.4增加。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Object> <B>inputParameters</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+            参数指定了任务接受的输入参数以及值。这些输入参数在相关地理处理任务资源的参数字段中被列出。例如，假设一个地理处理任务资源有如下输入参数： <br /><br />
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="syntaxTABLE">
+Input_Points (GPFeatureRecordSetLayer)<br />
+Distance (GPDouble)
+</td>
+</tr>
+</table>
+<br /><br />
+
+<pre>
+{
+ Input_Points: &lt;FeatureSet>,
+ Distance: &lt;Number>
+}
+</pre></td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>callback</B></td>
+			<td class="detailTABLE">
+可选项</td>
+			<td class="detailTABLE">
+方法完成后调用的函数。函数参数和<a href="#onExecuteComplete">onExecuteComplete</a>事件的一样。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>errback</B></td>
+			<td class="detailTABLE">
+可选项</td>
+			<td class="detailTABLE">
+如果在任务执行期间，如果服务器端发生错误，error对象被返回。 <i>(As of v1.3) </i></td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onExecuteComplete">onExecuteComplete</a>&nbsp;&nbsp;
+<a href="#onError">onError</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="getResultData"></a><H4>
+getResultData(jobId, parameterName, callback?, errback?)</H4></div>
+
+<div class="detaildesc">发送一个请求给GP任务来获的通过jobID和resultParameterName指定的任务结果。完成时，getresultdatacomplete会被触发，可选的callback函数会被调用。<br/><br/><code>dojo.Deferred</code>返回结果在v1.4增加。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>jobId</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+从<a href="jobinfo.htm">JobInfo</a>返回的jobId。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>parameterName</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+在服务目录里定义的结果参数名称。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>callback</B></td>
+			<td class="detailTABLE">
+可选项</td>
+			<td class="detailTABLE">
+方法完成后调用的函数。函数参数和<a href="#onGetResultDataComplete">onGetResultDataComplete</a>事件的一样。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>errback</B></td>
+			<td class="detailTABLE">
+可选项</td>
+			<td class="detailTABLE">
+如果在任务执行期间，如果服务器端发生错误，error对象被返回。 <i>(As of v1.3) </i></td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onGetResultDataComplete">onGetResultDataComplete</a>&nbsp;&nbsp;
+<a href="#onError">onError</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="getResultImage"></a><H4>
+getResultImage(jobId, parameterName, imageParameters, callback?, errback?)</H4></div>
+
+<div class="detaildesc">发送一个请求到GP任务来获得任务结果的图片。<br/><br/><code>dojo.Deferred</code>返回结果在v1.4增加。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="http://docs.dojocampus.org/dojo/Deferred" target="_blank">dojo.Deferred</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>jobId</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+从<a href="jobinfo.htm">JobInfo</a>返回的jobId。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>parameterName</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+在服务目录里定义的结果参数名称。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="imageparameters.htm">ImageParameters</a>> <B>imageParameters</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+指定结果图像的属性。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>callback</B></td>
+			<td class="detailTABLE">
+可选项</td>
+			<td class="detailTABLE">
+方法完成后调用的函数。函数参数和<a href="#onGetResultImageComplete">onGetResultImageComplete</a>事件的一样。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>errback</B></td>
+			<td class="detailTABLE">
+可选项</td>
+			<td class="detailTABLE">
+如果在任务执行期间，如果服务器端发生错误，error对象被返回。 <i>(As of v1.3) </i></td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onGetResultImageComplete">onGetResultImageComplete</a>&nbsp;&nbsp;
+<a href="#onError">onError</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="getResultImageLayer"></a><H4>
+getResultImageLayer(jobId, parameterName, imageParameters, callback?, errback?)</H4></div>
+
+<div class="detaildesc"><span class="syntaxTABLE">获得GP任务的ArcGISDynamicMapServiceLayer结果。</span></div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>jobId</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+从<a href="jobinfo.htm">JobInfo</a>返回的jobId。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>parameterName</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+在服务目录里定义的结果参数名称。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="imageparameters.htm">ImageParameters</a>> <B>imageParameters</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+包含各种生成动态地图图片时指定的各种选项。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>callback</B></td>
+			<td class="detailTABLE">
+可选项</td>
+			<td class="detailTABLE">
+方法完成后调用的函数。函数参数和<a href="#onGetResultImageLayerComplete">onGetResultImageLayerComplete</a>事件的一样。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>errback</B></td>
+			<td class="detailTABLE">
+可选项</td>
+			<td class="detailTABLE">
+如果在任务执行期间，如果服务器端发生错误，error对象被返回。 <i>(As of v1.3) </i></td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onGetResultImageLayerComplete">onGetResultImageLayerComplete</a>&nbsp;&nbsp;
+<a href="#onError">onError</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setOutputSpatialReference"></a><H4>
+setOutputSpatialReference(spatialReference)</H4></div>
+
+<div class="detaildesc">设置输出几何体的空间参考的WKID。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="spatialreference.htm">SpatialReference</a>> <B>spatialReference</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+空间参考的WKID。<br />
+<pre>
+{"wkid" : 4326} 
+</pre></td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#outputSpatialReference">outputSpatialReference</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setProcessSpatialReference"></a><H4>
+setProcessSpatialReference(spatialReference)</H4></div>
+
+<div class="detaildesc">设置用于执行几何操作的空间参考的WKID。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="spatialreference.htm">SpatialReference</a>> <B>spatialReference</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+空间参考的WKID。<br />
+<pre>
+{"wkid" : 4326} 
+</pre></td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#processSpatialReference">processSpatialReference</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setUpdateDelay"></a><H4>
+setUpdateDelay(delay)</H4></div>
+
+<div class="detaildesc">设置每个发送给一个异步GP任务的工作状态间的时间间隔（单位：毫秒）。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Number> <B>delay</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+值的单位是毫秒。一秒等于1000毫秒。</td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#updateDelay">updateDelay</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="submitJob"></a><H4>
+submitJob(inputParameters, callback?, statusCallback?, errback?)</H4></div>
+
+<div class="detaildesc">通过GP任务为异步处理提交一个工作到服务器。一旦工作被提交，直到工作结束，onStatusUpdate事件被定期触发并且可选的statusCallback()函数被定期调用，时间间隔通过updateDelay属性设置。工作完成，onJobComplete事件被触发，callback函数被调用。<br /><br />
+
+任务执行结果可以使用getResultData(), getResultImage() 或getResultImageLayer()方法接收。</div>
+
+<div class="detaildesc"><strong>返回值:</strong> none</div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;Object> <B>inputParameters</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+    参数指定了任务接受的输入参数以及值。这些输入参数在相关地理处理任务资源的参数字段中被列出。例如，假设一个地理处理任务资源有如下输入参数：<br /><br />
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="syntaxTABLE">
+Input_Points (GPFeatureRecordSetLayer)<br />
+Distance (GPDouble)
+</td>
+</tr>
+</table>
+<br />
+
+<br /><br />
+
+<pre>
+{
+ Input_Points: &lt;FeatureSet>,
+ Distance: &lt;Number>
+}
+</pre></td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>callback</B></td>
+			<td class="detailTABLE">
+可选项</td>
+			<td class="detailTABLE">
+方法完成后调用的函数。函数参数和<a href="#onJobComplete">onJobComplete</a>事件的一样。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>statusCallback</B></td>
+			<td class="detailTABLE">
+可选项</td>
+			<td class="detailTABLE">
+            检查工作的当前状态。返回的<a href="jobinfo.htm">JobInfo</a>信息包括<a href="gpmessage.htm">GPMessage</a>的状态。</td>
+			</tr>
+<tr>
+			<td class="detailTABLE">
+&lt;Function> <B>errback</B></td>
+			<td class="detailTABLE">
+可选项</td>
+			<td class="detailTABLE">
+如果在任务执行期间，如果服务器端发生错误，error对象被返回。 <i>(As of v1.3) </i></td>
+			</tr>
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#onJobComplete">onJobComplete</a>&nbsp;&nbsp;
+<a href="#onError">onError</a>&nbsp;&nbsp;
+<a href="#cancelJobStatus">cancelJobStatus</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<H4 class=dtH4>Events Detail</H4>
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onError"></a><H4>
+onError(error)	</H4></div>
+
+
+<div class="detaildesc">当执行任务发生错误时触发该事件。<i> (As of v1.3)</i></div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;Error> <B>error</B>
+			</td>
+
+<td class="detailTABLE">
+ 			用<a href="http://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/Error" target="_blank">JavaScript error对象</a>返回的ArcGIS Server错误信息。
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#getResultData">getResultData</a>&nbsp;&nbsp;
+<a href="#getResultImageLayer">getResultImageLayer</a>&nbsp;&nbsp;
+<a href="#getResultImage">getResultImage</a>&nbsp;&nbsp;
+<a href="#execute">execute</a>&nbsp;&nbsp;
+<a href="#submitJob">submitJob</a>&nbsp;&nbsp;
+<a href="#checkJobStatus">checkJobStatus</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onExecuteComplete"></a><H4>
+onExecuteComplete(results, messages)	</H4></div>
+
+
+<div class="detaildesc">当同步地理处理任务完成时触发该事件。</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="parametervalue.htm">ParameterValue[]</a>> <B>results</B>
+			</td>
+
+<td class="detailTABLE">
+ 			<a href="parametervalue.htm">ParameterValue</a>对象的数组给出访问到结果参数和任务执行信息。
+			</td>
+			</tr>
+
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="gpmessage.htm">GPMessage</a>> <B>messages</B>
+			</td>
+
+<td class="detailTABLE">
+ 			<a href="gpmessage.htm">GPMessage</a>数组有类型和描述。
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#execute">execute</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onGetInputComplete"></a><H4>
+onGetInputComplete(input)	</H4></div>
+
+
+<div class="detaildesc">测试版未实现。</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="parametervalue.htm">ParameterValue</a>> <B>input</B>
+			</td>
+
+<td class="detailTABLE">
+ 			测试版未实现。
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#getInput">getInput</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onGetResultDataComplete"></a><H4>
+onGetResultDataComplete(result)	</H4></div>
+
+
+<div class="detaildesc">当异步地理处理任务执行的结果是可用的时触发该事件。</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="parametervalue.htm">ParameterValue</a>> <B>result</B>
+			</td>
+
+<td class="detailTABLE">
+ 			包含结果参数和任务执行信息。
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#getResultData">getResultData</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onGetResultImageComplete"></a><H4>
+onGetResultImageComplete(mapImage)	</H4></div>
+
+
+<div class="detaildesc">通过调用getResultImage()方法生产一个地图图像时触发该事件。</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="mapimage.htm">MapImage</a>> <B>mapImage</B>
+			</td>
+
+<td class="detailTABLE">
+ 			包含动态生成地图图像的属性。
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#getResultImage">getResultImage</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onGetResultImageLayerComplete"></a><H4>
+onGetResultImageLayerComplete(ArcGISDynamicMapServiceLayer)	</H4></div>
+
+
+<div class="detaildesc">getResultImageLayer()完成时触发该事件。</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="layer.htm">Layer</a>> <B>ArcGISDynamicMapServiceLayer</B>
+			</td>
+
+<td class="detailTABLE">
+ 			能被增加到地图的图层。
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#getResultImageLayer">getResultImageLayer</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onJobComplete"></a><H4>
+onJobComplete(status)	</H4></div>
+
+
+<div class="detaildesc">使用submitJob执行的异步地理处理任务完成时触发该事件。</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="jobinfo.htm">JobInfo</a>> <B>status</B>
+			</td>
+
+<td class="detailTABLE">
+ 			返回的<a href="jobinfo.htm">JobInfo</a>信息包括<a href="gpmessage.htm">GPMessage</a>状态
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#submitJob">submitJob</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname">
+		<a name="onStatusUpdate"></a><H4>
+onStatusUpdate(status)	</H4></div>
+
+
+<div class="detaildesc">当工作状态更新是可用的时触发该事件。</div>
+
+<div class="detaildesc">
+<strong>Arguments:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE" width="20%">
+&lt;<a href="jobinfo.htm">JobInfo</a>> <B>status</B>
+			</td>
+
+<td class="detailTABLE">
+ 			返回的<a href="jobinfo.htm">JobInfo</a>信息包括<a href="gpmessage.htm">GPMessage</a>状态
+			</td>
+			</tr>
+
+</table>
+
+	<div class="detaildesc">
+			<strong>参见:</strong><br/>
+
+<a href="#checkJobStatus">checkJobStatus</a>&nbsp;&nbsp;
+</div>
+
+</div>
+
+<br/></div></body></html> 

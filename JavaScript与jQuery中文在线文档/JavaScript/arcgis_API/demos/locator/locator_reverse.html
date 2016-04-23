@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>Find Address</title>
+    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css">
+    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"></script>
+    <script type="text/javascript">
+      dojo.require("esri.map");
+      dojo.require("esri.tasks.locator");
+
+      function init() {
+        var map = new esri.Map("map", { extent: new esri.geometry.Extent(-95.2991, 38.9379, -95.2476, 38.963, new esri.SpatialReference({wkid:4326})) });
+
+        var tiledMapServiceLayer = new esri.layers.ArcGISTiledMapServiceLayer("http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer");
+        map.addLayer(tiledMapServiceLayer);
+
+        var locator = new esri.tasks.Locator("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Locators/ESRI_Geocode_USA/GeocodeServer");
+
+        var infoTemplate = new esri.InfoTemplate("Location", "Street: ${Address}<br />City: ${City}<br />State: ${State}<br />Zip: ${Zip}");
+        var symbol = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_CIRCLE, 15, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([0,0,255]), 2), new dojo.Color([0,0,255]));
+
+        dojo.connect(locator, "onLocationToAddressComplete", function(candidate) {
+          if (candidate.address) {
+            var graphic = new esri.Graphic(candidate.location, symbol, candidate.address, infoTemplate);
+            map.graphics.add(graphic);
+            map.infoWindow.setTitle(graphic.getTitle());
+            map.infoWindow.setContent(graphic.getContent());
+            var screenPnt = map.toScreen(candidate.location);
+            map.infoWindow.show(screenPnt,map.getInfoWindowAnchor(screenPnt));
+          }
+        });
+
+        dojo.connect(map, "onClick", function(evt) {
+          map.graphics.clear();
+          locator.locationToAddress(evt.mapPoint, 100);
+        });
+      }
+
+      dojo.addOnLoad(init);
+    </script>
+  </head>
+  <body class="tundra">
+    Left click on the map to get address.
+    <div id="map" style="width:1200px; height:600px; border:1px solid #000;"></div>
+  </body>
+</html>

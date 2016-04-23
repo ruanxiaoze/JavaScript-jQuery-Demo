@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>JobInfo</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: JobInfo</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	Represents information pertaining to the execution of an asynchronous GP task on the server.  JobInfo has no constructor.
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.tasks.JobInfo
+</pre>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#jobId">jobId</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+The unique job ID assigned by ArcGIS Server.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#jobStatus">jobStatus</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+The job status.  Returned values are included in the Constants table.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#messages">messages</a></td>
+<td class="syntaxTABLE">
+GpMessage[]
+</td>
+
+<td class="syntaxTABLE">
+An array of messages that include the message type and a description.</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>常量</H4>
+
+	<table CLASS="syntaxTABLE" cellspacing="0">
+	<tr>
+	<th class="tableheader" width="20%">常量</th>
+		<th class="tableheader">描述</th>
+	</tr>
+
+		<tr>
+		<td class="syntaxTABLE">STATUS_CANCELLED</td>
+			<td class="syntaxTABLE">			The job has been cancelled.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">STATUS_CANCELLING</td>
+			<td class="syntaxTABLE">			The job is in the process of cancelling.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">STATUS_DELETED</td>
+			<td class="syntaxTABLE">			The job has been deleted.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">STATUS_DELETING</td>
+			<td class="syntaxTABLE">			The job is in the process of deleting.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">STATUS_EXECUTING</td>
+			<td class="syntaxTABLE">			The job is being executed by job processor.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">STATUS_FAILED</td>
+			<td class="syntaxTABLE">			The job execution has failed.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">STATUS_NEW</td>
+			<td class="syntaxTABLE">			The job is new.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">STATUS_SUBMITTED</td>
+			<td class="syntaxTABLE">			The job is submitted for execution.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">STATUS_SUCCEEDED</td>
+			<td class="syntaxTABLE">			The job has completed successfully.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">STATUS_TIMED_OUT</td>
+			<td class="syntaxTABLE">			The job execution has timed out.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">STATUS_WAITING</td>
+			<td class="syntaxTABLE">			The job is waiting for available job processor.		</td>
+	</tr>
+
+</table>
+
+<div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="jobId"></a>
+&lt;String> jobId</H4></div>
+
+<div class="detaildesc">The unique job ID assigned by ArcGIS Server.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="jobStatus"></a>
+&lt;String> jobStatus</H4></div>
+
+<div class="detaildesc">The job status.  Returned values are included in the Constants table.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="messages"></a>
+&lt;GpMessage[]> messages</H4></div>
+
+<div class="detaildesc">An array of messages that include the message type and a description.</div>
+
+</div>
+
+<br/></div></body></html> 

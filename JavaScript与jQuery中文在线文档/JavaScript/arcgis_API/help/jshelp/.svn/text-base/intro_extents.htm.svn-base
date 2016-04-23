@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>Setting and using extents in a map</title>
+</head>
+
+<body>
+
+<div id="pageBanner">Setting and using extents in a map</div>
+
+<div id="nstext">
+
+<!--***START TEXT - DO NOT WRITE ABOVE THIS LINE***-->
+
+<p>One common operation when using a map is setting the map's extent or getting the extent for use in other operations.  </p>
+
+<h3>Default extent</h3>
+<p>If you include no extent information when you initialize a map, the default extent is the initial extent, which is the extent of the map as it was last saved in the map document.  If you are using more than one service, the default extent is the initial extent of the base map or first layer added. </p>
+
+<h3>Setting a new starting extent</h3>
+<p>If you want the starting extent to be something other than the default extent, you have several options for setting this new extent. </p>
+
+<ul>
+<li>Set the extent in the Map constructor.
+
+<div class="detailSample">
+<pre>
+function init() {
+  var startExtent = new esri.geometry.Extent(-95.271, 38.933, -95.228, 38.976,
+          new esri.SpatialReference({wkid:4326}) );
+  myMap = new esri.Map("mapDiv", { extent: startExtent });
+  var mapServiceURL = "http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer";
+  myMap.addLayer(new esri.layers.ArcGISTiledMapServiceLayer(mapServiceURL));
+}
+</pre>
+</div>
+<!--sh_extents_constr.html***-->
+</li>
+<li>Set the extent using the Map.setExtent method.
+<div class="detailSample">
+<pre>
+function init() {
+  myMap = new esri.Map("mapDiv");
+  var startExtent = new esri.geometry.Extent(-95.271, 38.933, -95.228, 38.976,
+          new esri.SpatialReference({wkid:4326}) );
+
+  myMap.setExtent(startExtent);
+  var mapServiceURL = "http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer";
+  myMap.addLayer(new esri.layers.ArcGISTiledMapServiceLayer(mapServiceURL));
+}
+</pre>
+</div>
+<!--sh_extents_noconst.html >-->
+</li>
+<li>As a variation of #2, set each property of the extent separately.
+<div class="detailSample">
+<pre>
+function init() {
+  myMap = new esri.Map("mapDiv");
+  var spatialRef = new esri.SpatialReference({wkid:4326});
+  var startExtent = new esri.geometry.Extent();
+  startExtent.xmin = -124.71;
+  startExtent.ymin = 31.89;
+  startExtent.xmax = -113.97;
+  startExtent.ymax = 42.63;
+  startExtent.spatialReference = spatialRef;
+
+  myMap.setExtent(startExtent);
+  var mapServiceURL = "http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer";
+  myMap.addLayer(new esri.layers.ArcGISTiledMapServiceLayer(mapServiceURL));
+}
+</pre>
+</div>
+</li>
+</ul>
+
+<h3>Setting the beginning extent when using multiple services</h3>
+<p>When you include multiple services in the same application, the default extent is the initial extent of the base layer.  If you want the beginning extent to be something new, and you know the extent ahead of time, you can include that extent in the Map constructor.  </p>
+
+<p>In some cases, you may not know the extent ahead of time.  In other cases, you know you want to use the extent of a secondary layer.  For example, the ArcGIS Online services all have a world extent.  Instead of the world extent, you may want your map extent to be the extent of your local data.  </p>
+
+<p>In the following example, two services or layers are used.  The base layer is an ArcGIS Online layer with a world extent.  The second layer has an extent of the State of Kansas, which is the desired extent to use.  The initLayers() function creates the two layers.  You must create a second function to set the extent since you cannot call properties or events on a class before the class has been loaded.  In this case, the function createMapAddLayers() is called after the layer onLoad has been fired for both map services.  This function creates the map, sets the extent to myService2, and then adds both map services to the map.  The initial map extent uses the Layer.fullExtent property as defined by the map service.  If you want to use the initial extent instead, you would use Layer.initialExtent.  </p>
+
+<div class="detailSample">
+<pre>
+function initLayers() {
+  var primaryMapServiceURL = "http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer";
+  var myService1 = new esri.layers.ArcGISTiledMapServiceLayer(primaryMapServiceURL);
+
+  var secondaryMapServiceURL = "http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Petroleum/KGS_OilGasFields_Kansas/MapServer";
+  myService2 = new esri.layers.ArcGISDynamicMapServiceLayer(secondaryMapServiceURL, {opacity:0.75});
+
+  var layerLoadCount = 0;
+  //When both layers have loaded, run addLayersSetExtent
+  dojo.connect(myService1, "onLoad", function(service) {
+    layerLoadCount += 1;
+    if (layerLoadCount === 2) {
+  	createMapAddLayers(myService1,myService2);
+    }
+  });
+
+  dojo.connect(myService2, "onLoad", function(service) {
+    layerLoadCount += 1;
+    if (layerLoadCount === 2) {
+      createMapAddLayers(myService1,myService2);
+    }
+  });
+}
+
+//Create a map, set the extent, and add the services to the map.
+function createMapAddLayers(myService1,myService2) {
+  //create map
+  myMap = new esri.Map("mapDiv", { extent:myService2.fullExtent });
+  myMap.addLayer(myService1);
+  myMap.addLayer(myService2);
+}
+</pre>
+</div>
+<!--agol_multiple_layers2.html>-->
+
+<h3>Getting the current extent using Map events</h3>
+<p>You can get the current extent of the map by using the <a href="../jsapi/map.htm#onExtentChange">Map.onExtentChange</a> event.    </p>
+
+<p>In the following example, Map.onExtentChange is referenced in the init() function.  When a user pans or zooms the map, a callback is made to the showExtent() function.  The onExtentChange event has built in objects.  The first object is the extent.  本例中，the object is named <i>ext</i>, and the object properties include <i>xmin</i>, <i>ymin</i>, <i>xmax</i>, and <i>ymax</i>.  In the showExtent() function, the  four extent values are concatenated together in a string for display on the HTML page.  </p>
+
+<div class="detailSample">
+<pre>
+   function init(){
+     var myMap = new esri.Map("mapDiv");
+
+     var mapServiceURL = "http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer";
+     myMap.addLayer(new esri.layers.ArcGISTiledMapServiceLayer(mapServiceURL));
+     myMap.addLayer(mapServiceURL);
+
+     dojo.connect(myMap, "onExtentChange", showExtent);
+   }
+
+   function showExtent(ext){
+     var s = "";
+     s = "XMin: " + ext.xmin +
+       " YMin: " + ext.ymin +
+       " XMax: " + ext.xmax +
+       " YMax: " + ext.ymax;
+     dojo.byId("onExtentChangeInfo").innerHTML = s;
+   }
+</pre>
+</div>
+<!--map_extent_coords.html>-->
+
+<h3>Getting the current extent using Map.extent</h3>
+
+<p>You can get the current extent of the map by using the <a href="../jsapi/map.htm#extent">Map.extent</a> property. This property is a read-only property.  If you want to set the extent, you need to use the <a href="../jsapi/map.htm#setExtent">Map.setExtent</a> method.</p>
+
+<!--***END TEXT - DO NOT WRITE BELOW THIS LINE***-->
+</div>
+
+</body>
+</html>

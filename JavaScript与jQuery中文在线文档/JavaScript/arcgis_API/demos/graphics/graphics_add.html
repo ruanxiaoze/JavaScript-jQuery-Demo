@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>Shapes and Symbols</title>
+    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.5/js/dojo/dijit/themes/tundra/tundra.css">
+    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=1.5"></script>
+    <script type="text/javascript">
+      dojo.require("esri.map");
+      dojo.require("esri.layers.agstiled");
+      dojo.require("esri.toolbars.draw");
+
+      var map, tb;
+      function init() {
+        map = new esri.Map("map");
+        dojo.connect(map, "onLoad", initToolbar);
+
+        map.addLayer(new esri.layers.ArcGISTiledMapServiceLayer("http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer"));
+
+      }
+
+      function initToolbar(map) {
+        tb = new esri.toolbars.Draw(map);
+        dojo.connect(tb, "onDrawEnd", addGraphic);
+      }
+
+      function addGraphic(geometry) {
+        var symbol = dojo.byId("symbol").value;
+        if (symbol) {
+            symbol = eval(symbol);
+        }
+        else {
+          var type = geometry.type;
+          if (type === "point" || type === "multipoint") {
+            symbol = tb.markerSymbol;
+          }
+          else if (type === "line" || type === "polyline") {
+            symbol = tb.lineSymbol;
+          }
+          else {
+            symbol = tb.fillSymbol;
+          }
+        }
+
+        map.graphics.add(new esri.Graphic(geometry, symbol));
+      }
+
+      dojo.addOnLoad(init);
+    </script>
+  </head>
+  <body class="tundra">
+    <button onclick="tb.activate(esri.toolbars.Draw.POINT);">Point</button>
+    <button onclick="tb.activate(esri.toolbars.Draw.MULTI_POINT);">Multipoint</button>
+    <button onclick="tb.activate(esri.toolbars.Draw.EXTENT);">Extent</button>
+    <button onclick="tb.activate(esri.toolbars.Draw.POLYLINE);">Polyline</button>
+    <button onclick="tb.activate(esri.toolbars.Draw.FREEHAND_POLYLINE);">Freehand Polyline</button>
+    <button onclick="tb.activate(esri.toolbars.Draw.POLYGON);">Polygon</button>
+    <button onclick="tb.activate(esri.toolbars.Draw.FREEHAND_POLYGON);">Freehand Polygon</button>
+    <button onclick="tb.activate(esri.toolbars.Draw.LINE);">Line</button>
+
+    <button onclick="tb.deactivate()">Deactivate</button>
+
+    <select id="symbol">
+      <option value="">--- Select Symbol ---</option>
+      <option value="">--- Simple Marker Symbols ---</option>
+      <option value="new esri.symbol.SimpleMarkerSymbol();">Default</option>
+      <option value="new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_SQUARE, 10, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([255,0,0]), 1), new dojo.Color([0,255,0,0.25]))">Square</option>
+      <option value="new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_CROSS, 50, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_DASH, new dojo.Color([0,0,0]), 2))">Cross, dash outline</option>
+      <option value="new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_X, 25, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_DOT, new dojo.Color([0,0,255]), 2))">X, dot outline</option>
+      <option value="new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_DIAMOND, 20, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([0,0,0]), 1), new dojo.Color([255,255,0,0.5]))">Diamond</option>
+      <option value="new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_DIAMOND, 30, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([0,0,0]), 3), new dojo.Color([255,255,0,0.5])).setAngle(15)">Diamond, 15 angle</option>
+      <option value="new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_DIAMOND, 30, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([0,0,0]), 3), new dojo.Color([255,255,0,0.5])).setAngle(15).setOffset(0,5)">Diamond, 15 angle, 5 offset in Y</option>
+      <option value="">--- Picture Marker Symbols ---</option>
+      <option value="">No Default</option>
+      <option value="new esri.symbol.PictureMarkerSymbol('http://www.esri.com/graphics/aexicon.jpg', 51, 51)">Simple Globe</option>
+      <option value="new esri.symbol.PictureMarkerSymbol('http://www.esri.com/graphics/aexicon.jpg', 25, 25).setAngle(315)">Simple Globe, 25x25, 315 angle</option>
+      <option value="new esri.symbol.PictureMarkerSymbol('http://www.esri.com/graphics/aexicon.jpg', 51, 25).setAngle(315).setOffset(10,0)">Simple Globe, 25x25, 315 angle, 10 offsetx</option>
+
+      <option value="">--- Simple Line Symbols ---</option>
+      <option value="new esri.symbol.SimpleLineSymbol();">Default</option>
+      <option value="new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_NONE, new dojo.Color([255,0,0]), 1)">None</option>
+      <option value="new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_DASHDOT, new dojo.Color([255,0,0]), 2)">Dash Dot</option>
+      <option value="new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_DASH, new dojo.Color([255,0,0]), 3)">Dash</option>
+      <option value="new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_DOT, new dojo.Color([255,0,0]), 5)">Dot</option>
+      <option value="">--- Cartographic Line Symbols ---</option>
+      <option value="new esri.symbol.CartographicLineSymbol()">Default</option>
+      <option value="new esri.symbol.CartographicLineSymbol(esri.symbol.CartographicLineSymbol.STYLE_SOLID, new dojo.Color([255,0,0]), 10)">Solid</option>
+      <option value="new esri.symbol.CartographicLineSymbol(esri.symbol.CartographicLineSymbol.STYLE_SOLID, new dojo.Color([255,0,0]), 10, esri.symbol.CartographicLineSymbol.CAP_ROUND, esri.symbol.CartographicLineSymbol.JOIN_ROUND)">Solid, round cap, round join</option>
+      <option value="new esri.symbol.CartographicLineSymbol(esri.symbol.CartographicLineSymbol.STYLE_SOLID, new dojo.Color([255,0,0]), 10, esri.symbol.CartographicLineSymbol.CAP_SQUARE, esri.symbol.CartographicLineSymbol.JOIN_BEVEL)">Solid, square cap, bevel join</option>
+      <option value="new esri.symbol.CartographicLineSymbol(esri.symbol.CartographicLineSymbol.STYLE_SOLID, new dojo.Color([255,0,0]), 10, esri.symbol.CartographicLineSymbol.CAP_ROUND, esri.symbol.CartographicLineSymbol.JOIN_MITER, 5)">Solid, round cap, miter (5) join</option>
+      <option value="">--- Simple Fill Symbols ---</option>
+      <option value="new esri.symbol.SimpleFillSymbol()">Default</option>
+      <option value="new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_NONE, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_DASHDOT, new dojo.Color([255,0,0]), 2), new dojo.Color([255,255,0,0.25]))">None</option>
+      <option value="new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_DASHDOT, new dojo.Color([255,0,0]), 2), new dojo.Color([255,255,0,0.5]))">Solid</option>
+      <option value="new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_HORIZONTAL, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_DASHDOT, new dojo.Color([255,0,0]), 2), new dojo.Color([255,255,0,0.25]))">Horizontal</option>
+      <option value="new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_FORWARDDIAGONAL, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_DASHDOT, new dojo.Color([255,0,0]), 2), new dojo.Color([255,255,0,0.25]))">Forward diagonal</option>
+      <option value="new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_DIAGONALCROSS, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_DASHDOT, new dojo.Color([255,0,0]), 2), new dojo.Color([255,255,0,0.25]))">Diagonal cross</option>
+      <option value="">--- Picture Fill Symbols ---</option>
+      <option value="">No Default</option>
+      <option value="new esri.symbol.PictureFillSymbol('images/sand.png', new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color('#000'), 1), 42, 42)">Sand</option>
+      <option value="new esri.symbol.PictureFillSymbol('images/mangrove.png', new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color('#000'), 1), 42, 42)">Mangrove</option>
+      <option value="new esri.symbol.PictureFillSymbol('images/swamp.png', new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color('#000'), 1), 42, 42)">Swamp</option>
+      <option value="new esri.symbol.PictureFillSymbol('images/stiple.png', new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color('#000'), 1), 42, 42)">Ordered 10% Stiple</option>
+    </select>
+
+    <div id="map" style="width:1024px; height:512px; border:2px solid #000;" class="tundra"></div>
+
+    <br />
+    Zoom Slider :
+    <input type="button" value="Hide" onclick="map.hideZoomSlider()" />
+    <input type="button" value="Show" onclick="map.showZoomSlider()" />
+
+  </body class="tundra">
+</html>

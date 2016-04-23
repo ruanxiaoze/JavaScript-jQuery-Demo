@@ -1,0 +1,275 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>SimpleMarkerSymbol</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: SimpleMarkerSymbol</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	Marker symbols are used to draw points and multipoints on the graphics layer. SimpleMarkerSymbol is used to display points as a simple shape, for example, a circle. In addition, the symbol can have an optional outline, which is defined by a line symbol.
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+<a href="symbol.htm">esri.symbol.Symbol</a>
+  |_ <a href="markersymbol.htm">esri.symbol.MarkerSymbol</a>
+        |_ esri.symbol.SimpleMarkerSymbol
+</pre><H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#SimpleMarkerSymbolConst3">esri.symbol.SimpleMarkerSymbol(json)</a></td>
+		<td class="syntaxTABLE">Creates a new SimpleMarkerSymbol object using a JSON object.</td>
+		</tr>
+<tr><td class="syntaxTABLE"><a href="#SimpleMarkerSymbolConst1">esri.symbol.SimpleMarkerSymbol()</a></td>
+		<td class="syntaxTABLE">Creates a new empty SimpleMarkerSymbol object.</td>
+		</tr>
+<tr><td class="syntaxTABLE"><a href="#SimpleMarkerSymbolConst2">esri.symbol.SimpleMarkerSymbol(style, size, outline, color)</a></td>
+		<td class="syntaxTABLE">Creates a new SimpleMarkerSymbol object with parameters.</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#outline">outline</a></td>
+<td class="syntaxTABLE">
+<a href="simplelinesymbol.htm">SimpleLineSymbol</a>
+</td>
+
+<td class="syntaxTABLE">
+Outline of the marker.</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#style">style</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+The marker style.  See the Constants table for valid values.  The default value is STYLE_CIRCLE.</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>常量</H4>
+
+	<table CLASS="syntaxTABLE" cellspacing="0">
+	<tr>
+	<th class="tableheader" width="20%">常量</th>
+		<th class="tableheader">描述</th>
+	</tr>
+
+		<tr>
+		<td class="syntaxTABLE">STYLE_CIRCLE</td>
+			<td class="syntaxTABLE">			The marker is a circle.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">STYLE_CROSS</td>
+			<td class="syntaxTABLE">			The marker is a cross.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">STYLE_DIAMOND</td>
+			<td class="syntaxTABLE">			The marker is a diamond.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">STYLE_SQUARE</td>
+			<td class="syntaxTABLE">			The marker is a square.		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">STYLE_X</td>
+			<td class="syntaxTABLE">			The marker is a diagonal cross.		</td>
+	</tr>
+
+</table>
+
+<H4 class=dtH4>方法表</H4>
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+		<th class="tableheader">方法</th>
+		<th class="tableheader">返回值</th>
+		<th class="tableheader">描述</th>
+		</tr>
+
+<tr>
+<td class="syntaxTABLE"><a href="#setOutline">setOutline(outline)</a></td><td class="syntaxTABLE">
+<a href="simplemarkersymbol.htm">SimpleMarkerSymbol</a>
+</td>
+<td class="syntaxTABLE">Sets the outline of the marker symbol.</td>	</tr><tr>
+<td class="syntaxTABLE"><a href="#setStyle">setStyle(style)</a></td><td class="syntaxTABLE">
+<a href="simplemarkersymbol.htm">SimpleMarkerSymbol</a>
+</td>
+<td class="syntaxTABLE">Sets the marker symbol style.</td>	</tr></table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="SimpleMarkerSymbolConst3"></a><H4>esri.symbol.SimpleMarkerSymbol(json)</H4>
+		</div>
+
+<div class="detaildesc">Creates a new SimpleMarkerSymbol object using a JSON object.</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;Object>
+<B>json</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			JSON object representing the SimpleMarkerSymbol.
+			</td>
+			</tr>
+</table>
+
+</div><div class="detaildiv"><div class="detailname"><a name="SimpleMarkerSymbolConst1"></a><H4>esri.symbol.SimpleMarkerSymbol()</H4>
+		</div>
+
+<div class="detaildesc">Creates a new empty SimpleMarkerSymbol object.</div>
+
+</div><div class="detaildiv"><div class="detailname"><a name="SimpleMarkerSymbolConst2"></a><H4>esri.symbol.SimpleMarkerSymbol(style, size, outline, color)</H4>
+		</div>
+
+<div class="detaildesc">Creates a new SimpleMarkerSymbol object with parameters.</div>
+
+<div class="detaildesc"><strong>参数:</strong></div><table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+<td class="detailTABLE">
+&lt;String>
+<B>style</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			See Constants table for values.
+			</td>
+			</tr>
+<tr>
+<td class="detailTABLE">
+&lt;Number>
+<B>size</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			Size of the marker in pixels.
+			</td>
+			</tr>
+<tr>
+<td class="detailTABLE">
+&lt;<a href="simplelinesymbol.htm">SimpleLineSymbol</a>>
+<B>outline</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			See <a href="simplelinesymbol.htm">SimpleLineSymbol</a>.
+			</td>
+			</tr>
+<tr>
+<td class="detailTABLE">
+&lt;dojo.Color>
+<B>color</B></td>
+<td class="detailTABLE">
+必需的	</td>
+<td class="detailTABLE">
+			Symbol color, which is based on <a href="http://redesign.dojotoolkit.org/jsdoc/dojo/HEAD/dojo.Color" target="_blank">dojo.Color</a>.  Colors can be denoted in the following formats:<br/><br/>
+
+<ul>
+<li>R, G, B:  <code>new dojo.Color([255,0,0])</code> </li>
+<li>R,G,B,A.  The "A" value represents transparency where 0.0 is fully transparent and 1.0 has no transparency: <code>new dojo.Color([255,0,0,0.25])</code> </li>
+<li>Hex string: <code>new dojo.Color("#C0C0C0")</code> </li>
+<li>Named string:  <code>new dojo.Color("blue")</code> </li>
+</ul>
+			</td>
+			</tr>
+</table>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="outline"></a>
+&lt;<a href="simplelinesymbol.htm">SimpleLineSymbol</a>> outline</H4></div>
+
+<div class="detaildesc">Outline of the marker.</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="style"></a>
+&lt;String> style</H4></div>
+
+<div class="detaildesc">The marker style.  See the Constants table for valid values.  The default value is STYLE_CIRCLE.</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> STYLE_CIRCLE
+			</div>
+
+</div>
+
+<div class=sectionDivider>方法详细信息</div>
+<div class="detaildiv">
+		<div class="detailname"><a name="setOutline"></a><H4>
+setOutline(outline)</H4></div>
+
+<div class="detaildesc">Sets the outline of the marker symbol.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="simplemarkersymbol.htm">SimpleMarkerSymbol</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;<a href="simplelinesymbol.htm">SimpleLineSymbol</a>> <B>outline</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+Symbol used for outline.</td>
+			</tr>
+</table>
+
+</div>
+
+<div class="detaildiv">
+		<div class="detailname"><a name="setStyle"></a><H4>
+setStyle(style)</H4></div>
+
+<div class="detaildesc">Sets the marker symbol style.</div>
+
+<div class="detaildesc"><strong>返回值:</strong> <a href="simplemarkersymbol.htm">SimpleMarkerSymbol</a></div>
+<div class="detaildesc">
+<strong>输入参数:</strong></div>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+			<td class="detailTABLE">
+&lt;String> <B>style</B></td>
+			<td class="detailTABLE">
+必需的	</td>
+			<td class="detailTABLE">
+Marker style.  See the Constants table for valid values.</td>
+			</tr>
+</table>
+
+</div>
+
+<br/></div></body></html> 

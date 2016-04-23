@@ -1,0 +1,337 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>Using the proxy page</title>
+</head>
+
+<body>
+
+<div id="pageBanner">Using the proxy page</div>
+
+<div id="nstext">
+
+<!--***START TEXT - DO NOT WRITE ABOVE THIS LINE***-->
+
+<p> The ArcGIS JavaScript API provides a proxy page that you may use to handle communication with the ArcGIS Server services you use in your
+        application. The proxy page consists of server-side code that runs on your Web server.
+        The browser sends the request to your proxy, and your proxy in turn forwards the
+        request to the ArcGIS Server service.</p>
+    <p>
+
+        You may wish to use the proxy page in your application in either or both of these
+        two situations:</p>
+    <ul>
+        <li>The application creates requests that exceed the limit on the length of URLs imposed by
+            the browser. A common situation would be when the application creates buffers around
+            complex polygons, and then sends the buffer polygons to select features with
+            the QueryTask. The geometry of the buffer may
+            consume more than the URL limit, and the application will fail. Some modern browsers
+            restrict URLs with more than about 2000 characters.</li>
+
+        <li>The application uses a service that is <a href="ags_security.htm">secured with
+            token-based authentication</a>, and you do not wish to allow users to view the token,
+            or you do not want to transmit the token over the network between your Web server
+            and your users. </li>
+    </ul>
+    <p>
+
+        To handle these situations, your application can have client browsers send service
+        requests to the proxy page running on your Web server. Your proxy page then sends
+        the requests to the ArcGIS Server service. In the first case above, the application only
+        needs to use the proxy when the URL length exceeds 2000 characters. In the second
+        case, the proxy page is always used. Since the proxy requires extra time and
+        resources on your server, you should use the proxy page only when your application
+        requires it.</p>
+    <p>
+        To use the proxy page, you need to perform the following steps. These are described
+        in detail below.</p>
+
+    <ol>
+        <li><a href="#Download_Configure">Download and configure</a> the proxy page appropriate for your server</li>
+        <li><a href="#Add_code">Add code</a> to your application page to enable use of the proxy</li>
+
+        <li><a href="#Secure_web_app">Secure the Web application</a>, especially when using a service with token-based authentication</li>
+        <li><a href="#Test">Test</a> to ensure the proxy is working correctly</li>
+
+    </ol>
+    <p>
+        Step three is critical for applications that use tokens. If you do not secure the
+        application correctly, then the ArcGIS Server services used by the application are
+        vulnerable to unlimited use by unauthorized persons. See the <a href="#Secure_web_app">
+
+            section on securing the application</a> below for further information.</p>
+    <p>
+        Here are some technical details on the proxy page for interested readers. In the
+        first situation described earlier, with lengthy URLs, the proxy page allows the
+        browser to perform a POST request rather than the GET request that the browser would
+        normally do with service requests. A POST request does not have the same relatively
+        low limit on amount of data sent as does a GET request. However, for security reasons,
+        browsers are not allowed to POST except back to the server that sent the page to
+        the browser.
+        Hence the proxy page must run on the same Web server where your application
+        runs. In the second situation,
+        the authentication token is configured in the proxy page, rather than in the HTML
+        page downloaded by the client. The browser sends a request (by either GET or POST)
+        to the proxy page. The proxy page then appends the token to the request and forwards
+        the request to the ArcGIS Server computer, then returns the response to the browser.
+        This way, the end user does not have
+        access to the token. This can provide enhanced security for the ArcGIS Server service,
+        provided that the security measures described later in this page are implemented.</p>
+
+    <h4 id="Download_Configure">
+        1.
+        Download and configure the proxy page</h4>
+    <p>
+
+        You must download the proxy page and include it in your Web application. The proxy
+        page runs on your local Web server, not on an ESRI server or on the ArcGIS Server
+        computer (unless your Web server also hosts the ArcGIS Server instance). Three proxy
+        pages are available, each running on a specific server-side platform: ASP.NET, Java/JSP,
+        and PHP. Your Web server must support one of these server-side platforms in order
+        to use the proxy page. Download the appropriate page for your platform.</p>
+    <ul>
+        <li>For ASP.NET: <a href="proxypage_net.zip">proxypage_net.zip</a> (contains proxy.ashx
+            and proxy.config)</li>
+
+        <li>For Java/JSP: Download <a href="proxypage_java.zip">proxypage_java.zip</a> (contains proxy.jsp and web.xml)</li>
+
+        <li>For PHP: Download <a href="proxypage_php.zip">proxypage_php.zip</a> (contains proxy.php)</li> 
+    </ul>
+    <p>
+        Unzip and save the proxy page to your Web application's folder. Then configure your
+        application or server so that it will run the proxy page.</p>
+    <ul>
+        <li>For ASP.NET, ensure that ASP.NET, version 2.0 or higher, is installed on your server
+            and is registered with your Internet Information Services (IIS) Web server. For
+            Windows Server 2003, ensure that ASP.NET is allowed on the server. See <a href="http://www.microsoft.com/technet/prodtechnol/WindowsServer2003/Library/IIS/0e923661-a628-4f16-8e52-9d63587b9d72.mspx?mfr=true"
+                target="_blank">this page at Microsoft</a> or other resources for configuring
+            ASP.NET on your server. The folder for your application does not need to allow script
+            execution, as long as the root Web site is configured for ASP.NET.</li>
+
+        <li>For Java/JSP, unzip the zip file into your Java Web Application Server's web applications directory (for Tomcat, this would be the webapps directory under the base Tomcat folder).</li>
+		
+		<li>For PHP, unzip the file into the Web applications directory. For Apache installs of PHP, this would be a folder under "htdocs" in the Apache install location. For IIS installs, this would be a folder under "wwwroot".</li>
+    </ul>
+    <p>
+        Configure the proxy page for the token.</p>
+
+    <p>For ASP.NET:</p>
+
+    <ol>
+
+        <li>If you will be using the proxy page for <strong>services with token-based authentication</strong>,
+            obtain a token for the service. See instructions at <a href="ags_security.htm">
+
+            Working with secure ArcGIS services</a>. If your application uses multiple ArcGIS
+            Server systems that require tokens, obtain a token for each server.</li>
+        <li>Open the configuration proxy page (proxy.config for ASP.NET) in a text or XML editor.</li>
+        <li>For each ArcGIS Server that will use the proxy page, add a &lt;serverUrl&gt; entry to the configuration XML file within the &lt;serverUrls&gt; section. See the proxy configuration file for examples. The
+            serverUrl element can have these attributes:
+            <ul>
+
+                <li><strong>url</strong>: the URL of the ArcGIS Server machine or the service. If multiple
+                    services in the same server are used in the application, then the url can point
+                    to the services root. If only a single service on the server is used, then the url
+                    can be set to the full service URL.</li>
+
+                <li><strong>matchAll</strong>: whether to use the token for all requests with this URL stem. If this attribute is true and the url attribute is set to the services root,
+                    then the entry can be used for multiple services in the application.</li>
+                <li><strong>token</strong>: the authentication token obtained in step 1. Optional -
+                    used only for services secured with token-based authentication.</li>
+            </ul>
+            If multiple services
+            on the same server are used in the application, the URL may point to the service
+            root (e.g., http://www.example.com/arcgis/rest/services), and the matchAll parameter
+            set to true. See commented examples included
+            in the downloaded file. Multiple server
+            entries may be added if more than one ArcGIS Server computer is used in the application.</li>
+
+        <li>Save the configuration file.</li>
+    </ol>
+    <p>
+        Examples</p>
+        <ul>
+        <li>The service is at http://www.example.com/arcgis/rest/services/MyMapService/MapServer,
+        and the proxy is used because of lengthy requests sent in queries, then the element
+        may be set to:<br />
+            <br />
+
+        &lt;serverUrl url="http://www.example.com/arcgis/rest/services/MyMapService/MapServer"
+        matchAll="false" &gt;&lt;/serverUrl&gt;
+            <br />
+        </li>
+            <li>Two services are used on the same server: http://www.example.com/arcgis/rest/services/MyMapService/MapServer
+                and http://www.example.com/arcgis/rest/services/MyGPService/GPServer. Neither service
+                requires a token, and the proxy is used because of lengthy requests. The serverUrl
+                element would be:<br />
+                <br />
+                &lt;serverUrl url="http://www.example.com/arcgis/rest/services" matchAll="true"
+                &gt;&lt;/serverUrl&gt;
+
+                <br />
+                <br />
+                Alternatively, two serverUrl elements may be added, one for each service, as in
+                the first example.<br />
+            </li>
+            <li>The service is a secured service at https://www.example.com/arcgis/rest/services/MyMapSecureService/MapServer.
+                A token is obtained from the server's token service and added to the entry.<br />
+                <br />
+                &lt;serverUrl url="https://www.example.com/arcgis/rest/services/MyMapSecureService/MapServer"
+                matchAll="false" token="5fFo4%2fI4Tv8IGSqSYbpUNORRD%2fYxXMSPo6NEHNNGMpt9CMknpXIjEVqYGm3uuQnU"
+                &gt;&lt;/serverUrl&gt;</li>
+
+        </ul>
+    <p>
+        The <em>mustMatch</em> attribute in the containing &lt;ProxyConfig&gt; element controls
+        whether only specified sites may be proxied. This attribute should generally be
+        set to true. If set to false, then the proxy page will forward any request to any
+        server. This could potentially allow your proxy page to be used to send requests
+        to third-party servers without your permission.</p>
+
+
+    <p>For Java/JSP:</p>
+
+    <ol>
+    	<li>
+    	If you will be using the proxy page for services with token-based authentication, obtain a token for the service. See instructions at <a href="ags_security.htm">Working with secure ArcGIS services</a>.
+    	If your application uses multiple ArcGIS Server systems that require tokens, obtain a token for each server.
+    	</li>
+    	<li>
+   		Open the configuration proxy page (proxy.jsp) in your favorite editor.
+   		</li>
+   		<li>
+   		The JSP code defines a <code>serverUrls</code> variable. This represents the servers for which you want this JSP to act as a proxy.
+   		It is a String array where each String has the following syntax: <code>"&lt;url&gt;,&lt;token&gt;"</code>. The token is optional.
+   		Add URLs to the services you want to access over here.
+			<br/>
+
+			See commented examples included in the JSP. Multiple server entries may be added if more than one ArcGIS Server computer is used in the application.
+			<br/>
+			<i>Note that while this sample proxy includes the configuration in the JSP itself, you may want to configure the URLs in a separate resource file and have your application reference that file.</i>
+
+   		<li>Save the JSP.</li>
+    </ol>
+
+    <p>For PHP:</p>
+
+    <ol>
+    	<li>If you are using the proxy page for services with token-based authentication, obtain a token for the service. See instructions at <a href="ags_security.htm">Working with secure ArcGIS services</a>. If your application uses multiple ArcGIS Server systems that require tokens, obtain a token for each server.</li>
+		<li>Open the proxy page (proxy.php) in your favorite editor. </li>
+		<li>Using the "mustMatch" variable, specify whether the proxy should forward requests only to specified servers. If this value is true, the proxy will only forward requests to the servers specified in the "serverUrls" variable (see below). If this value is false, then the proxy will forward requests to any server - be warned that this could potentially allow your proxy page to be used to send requests to third-party servers without your permission. </li>
+		<li>Using the "serverUrls" variable, specify the servers that this proxy will forward requests to if "mustMatch" is true. It is an array where each element configures an ArcGIS server or service using an array with keys named "url", "matchAll" and "token". The sematics of these keys are similar to the correspondingly named attributes used in the ASP.NET proxy. </li>
+		<li>Save the PHP file.</li>
+	</ol>
+
+
+
+    <p>All users:  for services with token-based authentication, the URL of the service should use
+        HTTPS, for example, https://www.example.com/arcgis/rest/services/MyMapService/MapServer.
+        This ensures that the token appended to the query string of the request is encrypted
+        and cannot be intercepted and used by unauthorized parties. This would be especially
+        important when the communication between your Web server and the ArcGIS Server service
+        travels over the Internet, and not just on the local network.</p>
+
+    <h4 id="Add_code">
+        2.
+        Add code to use the proxy page</h4>
+    <p>
+        In order for your application's page to send requests through the proxy, you must
+        add code to the page as follows. In the startup function (e.g., OnPageLoad) in
+        the JavaScript code of your page, add a line to set the proxy page. The following
+        example is for the ASP.NET version; substitute proxy.jsp or proxy.php as appropriate. If
+        your proxy page is not in the same directory as the Web application, adjust the
+        path appropriately. The path should use a relative URL (e.g., ../proxy.ashx), or
+        a URL relative to the root (e.g., /Proxy/proxy.ashx).</p>
+		
+	<p><font color="red">If you are using version 1.2 or lower, replace "esri.config" in the examples below with "esriConfig".</font></p>
+    <p>For ASP.NET:</p>
+	
+	<pre>esri.config.defaults.io.proxyUrl = "proxy.ashx";</pre>  (Note:  if you are using version 1.2 or lower, the syntax would be <code>esriConfig.defaults.io.proxyUrl = "proxy.ashx";</code>
+
+    <p>For Java/JSP:</p>
+    <pre>esri.config.defaults.io.proxyUrl = "proxy.jsp"; //relative - if proxy.jsp is in the same application as the web page</pre>
+		Or
+		<pre>esri.config.defaults.io.proxyUrl = "http://samedomain:sameport/proxy/proxy.jsp"; //absolute - if proxy.jsp is in another application in the same domain</pre>
+
+    <p>For PHP:</p>
+    <pre>esri.config.defaults.io.proxyUrl = "proxy.php"; //relative - if proxy.php is in the same application as the web page</pre>
+		Or
+		<pre>esri.config.defaults.io.proxyUrl = "http://samedomain:sameport/proxy/proxy.php"; //absolute - if proxy.php is in another application in the same domain</pre> 
+ 
+    <p>
+        <em>Only if you are using the page with a service secured with tokens</em>: add
+        a statement to use the proxy for every request. Do not add this line if you only
+        need to use the proxy when requests exceed the browser's limit on URL size (see
+        above). If you add this line, the esriConfig.defaults.io.proxyUrl property must also
+        be set.</p>
+
+    <pre>esri.config.defaults.io.alwaysUseProxy = true;</pre>
+    <p>If the alwaysUseProxy property is false (the default), the the proxy page will be
+        used automatically if the Proxy property is set and the request exceeds 2000 characters.</p>
+    <h4 id="Secure_web_app">
+        3.
+        Secure the Web application</h4>
+    <p>
+        This step is essential if the application uses services with token-based security,
+        and the proxy page is configured with the token. <em>If you do not secure the Web application,
+        then anyone can send any request through your proxy page to the ArcGIS Server service,
+        without using your application page.</em> Your proxy page could be used for unauthorized
+        disclosure of data from the service, or for inappropriate or high volume of use
+        of the service.</p>
+
+    <p>
+        To secure the Web application, you need do <strong>both</strong> of the following:</p>
+    <ol>
+        <li>Require users of the application to login (authenticate) in order to use the application.
+            This ensures that only authorized users can use the application, including the proxy
+            page. How you require authentication depends on the type of server software you
+            are using. For IIS/ASP.NET servers, you may use Windows authentication or ASP.NET
+            forms; see <a href="http://msdn2.microsoft.com/en-us/library/aa292471(VS.71).aspx"
+                target="_blank">this page at Microsoft</a> for information and instructions.
+            For other platforms, consult documentation on implementing authentication for your
+            platform.
+            <br />
+
+            -- and --</li>
+
+        <li>Require use of HTTPS via Secure Sockets Layer (SSL). At minimum the login page should
+            be secured, especially if using forms or Basic authentication. For maximum security,
+            you may require HTTPS for all communication in the application. Note that in order
+            to require HTTPS for an application, you must obtain and install a SSL certificate
+            for your Web server. If using IIS, the <a href="http://www.microsoft.com/technet/prodtechnol/WindowsServer2003/Library/IIS/56bdf977-14f8-4867-9c51-34c346d48b04.mspx?mfr=true"
+                target="_blank">Microsoft documentation for IIS</a> describes how to obtain
+            and install SSL certificates.</li>
+    </ol>
+    <h4 id="Test">
+        4.
+        Test and deploy the application</h4>
+
+    <p>
+        Once you have configured the proxy page with the application, test the application
+        to ensure that requests are processed correctly. The application should function
+        normally as it did before the proxy page was implemented. If not, you may need to
+        troubleshoot the proxy. If your application environment supports debugging mode,
+        you may be able to set breakpoint in the proxy page and detect whether it is operating
+        correctly.</p>
+
+    <p>
+        For example, in an IIS/ASP.NET environment, you can open the application in Visual
+        Studio or Visual Web Developer Express, open the proxy.ashx page, and set a break
+        point in the ProcessRequest method. Then run the application with Debug-Start. The
+        execution should halt at the break point, and you should be able to detect where
+        the problem lies. You may also be able to set break points in the JavaScript functions
+        of your application, or insert alert() statements to display values during execution.
+        As a last resort, remove the esriConfig.defaults.io.proxyUrl property value and start
+        over.</p>
+		
+		<br /><br />
+
+<!--***END TEXT - DO NOT WRITE BELOW THIS LINE***-->
+</div>
+
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="ArcGIS JavaScript API" />
+	<link href="jsdoc.css" rel="stylesheet" type="text/css"/>
+	<title>ImageServiceParameters</title>
+</head>
+
+<body id="theBody" >
+
+<div id="pageBanner">类: ImageServiceParameters</div>
+
+<div id="nstext">
+<H4 class=dtH4>描述</H4>
+	<div class="detaildesc">
+	表示用于调用<a href="arcgisimageservicelayer.htm#exportMapImage">ArcGISImageServiceLayer.exportMapImage</a>的图像服务参数选项。
+      <i>(As of v1.2)</i>
+	</div>
+
+<H4 class=dtH4>类层次结构</H4>
+
+<pre class="inherits">
+esri.layers.ImageServiceParameters
+</pre>
+
+<H4 class=dtH4>构造函数</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader" width="20%">构造函数</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr><td class="syntaxTABLE"><a href="#ImageServiceParametersConst">esri.layers.ImageServiceParameters()</a></td>
+		<td class="syntaxTABLE">创建新的ImageServiceParameters对象。构造函数没有参数。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>属性表</H4>
+
+<table CLASS="syntaxTABLE" cellspacing="0">
+<tr>
+	<th class="tableheader">属性</th>
+	<th class="tableheader">类型</th>
+	<th class="tableheader">描述</th>
+	</tr>
+
+<tr>
+		<td class="syntaxTABLE"><a href="#bandIds">bandIds</a></td>
+<td class="syntaxTABLE">
+Number[]
+</td>
+
+<td class="syntaxTABLE">
+当前波段选择的数组。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#compressionQuality">compressionQuality</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+当前压缩质量值。压缩质量控制了有多少损失的图片。仅仅对JPG图片类型有效。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#extent">extent</a></td>
+<td class="syntaxTABLE">
+<a href="extent.htm">Extent</a>
+</td>
+
+<td class="syntaxTABLE">
+导出图像的范围。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#format">format</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+地图图片格式。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#height">height</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+请求图像高（单位：像素）。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#interpolation">interpolation</a></td>
+<td class="syntaxTABLE">
+String
+</td>
+
+<td class="syntaxTABLE">
+当前插值法。插值法影响当栅格数据集变形或改变坐标空间时，栅格数据集如何变换。</td>
+		</tr>
+<tr>
+		<td class="syntaxTABLE"><a href="#width">width</a></td>
+<td class="syntaxTABLE">
+Number
+</td>
+
+<td class="syntaxTABLE">
+请求的图像的高（单位：像素）。</td>
+		</tr>
+</table>
+
+<H4 class=dtH4>常量</H4>
+
+	<table CLASS="syntaxTABLE" cellspacing="0">
+	<tr>
+	<th class="tableheader" width="20%">常量</th>
+		<th class="tableheader">描述</th>
+	</tr>
+
+		<tr>
+		<td class="syntaxTABLE">INTERPOLATION_BILINEAR</td>
+			<td class="syntaxTABLE">			按双线的内插法重新取样像素。		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">INTERPOLATION_CUBICCONVOLUTION</td>
+			<td class="syntaxTABLE">			按立方卷积插值法重新取样像素。		</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">INTERPOLATION_MAJORITY</td>
+			<td class="syntaxTABLE">			按多数值重新取样像素。	</td>
+	</tr>
+
+	<tr>
+		<td class="syntaxTABLE">INTERPOLATION_NEARESTNEIGHBOR</td>
+			<td class="syntaxTABLE">			按最近邻法重新取样像素。	</td>
+	</tr>
+
+</table>
+
+<DIV class=sectionDivider>构造方法详细信息</DIV>
+<div class="detaildiv"><div class="detailname"><a name="ImageServiceParametersConst"></a><H4>esri.layers.ImageServiceParameters()</H4>
+		</div>
+
+<div class="detaildesc">创建新的ImageServiceParameters对象。构造函数没有参数。</div>
+
+</div><div class=sectionDivider>属性详细信息</div>
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="bandIds"></a>
+&lt;Number[]> bandIds</H4></div>
+
+<div class="detaildesc">当前波段选择的数组。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="compressionQuality"></a>
+&lt;Number> compressionQuality</H4></div>
+
+<div class="detaildesc">当前压缩质量值。压缩质量控制了有多少损失的图片。仅仅对JPG图片类型有效。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="extent"></a>
+&lt;<a href="extent.htm">Extent</a>> extent</H4></div>
+
+<div class="detaildesc">导出图像的范围。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="format"></a>
+&lt;String> format</H4></div>
+
+<div class="detaildesc">地图图片格式。</div>
+
+<div class="detaildesc">
+<strong>已知值:</strong> png8 | png24 | jpg | bmp | gif
+			</div>
+
+<div class="detaildesc">
+<strong>默认值:</strong> png8
+			</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="height"></a>
+&lt;Number> height</H4></div>
+
+<div class="detaildesc">请求图像高（单位：像素）。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="interpolation"></a>
+&lt;String> interpolation</H4></div>
+
+<div class="detaildesc">当前插值法。插值法影响当栅格数据集变形或改变坐标空间时，栅格数据集如何变换。</div>
+
+</div>
+
+<div class="detaildiv">		<div class="detailname"><H4>
+		<a name="width"></a>
+&lt;Number> width</H4></div>
+
+<div class="detaildesc">请求的图像的高（单位：像素）。</div>
+
+</div>
+
+<br/></div></body></html> 
