@@ -2,7 +2,7 @@
 JavaScript与jQuery中文在线文档及Demo
   
 ## JavaScript API 语言参考.CHM  离线版本：
- 下载地址：http://ruanxiaoze.github.io/JavaScript-jQuery-Demo/JavaScript与jQuery中文在线文档/jQuery-1.6-api/index.html <br>
+ 下载地址：https://github.com/ruanxiaoze/JavaScript-jQuery-Demo/blob/master/JavaScript与jQuery中文在线文档/JavaScript%20语言参考.CHM <br>
   
 ## W3C_Javascript_API中文版.chm
  下载地址：https://github.com/ruanxiaoze/JavaScript-jQuery-Demo/blob/master/JavaScript与jQuery中文在线文档/W3C_Javascript_API中文版.chm <br>
