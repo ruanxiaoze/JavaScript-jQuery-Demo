@@ -1,20 +1,20 @@
 # JavaScript-jQuery-Demo
 JavaScript与jQuery中文在线文档及Demo
   
- ## JavaScript API 语言参考.CHM  离线版本：
+## JavaScript API 语言参考.CHM  离线版本：
  下载地址：http://ruanxiaoze.github.io/JavaScript-jQuery-Demo/JavaScript与jQuery中文在线文档/jQuery-1.6-api/index.html <br>
   
- ## W3C_Javascript_API中文版.chm
+## W3C_Javascript_API中文版.chm
  下载地址：https://github.com/ruanxiaoze/JavaScript-jQuery-Demo/blob/master/JavaScript与jQuery中文在线文档/W3C_Javascript_API中文版.chm <br>
  
- ## jQuery-api-1.7.1_20120209.chm
+## jQuery-api-1.7.1_20120209.chm
  下载地址：https://github.com/ruanxiaoze/JavaScript-jQuery-Demo/blob/master/JavaScript与jQuery中文在线文档/jQuery-api-1.7.1_20120209.chm <br>
  
- ## jQuery API 中文版文档：
+## jQuery API 中文版文档：
  代码地址：https://github.com/ruanxiaoze/JavaScript-jQuery-Demo/blob/master/JavaScript与jQuery中文在线文档/jQuery-1.6-api/index.html<br><br>
  demo：http://ruanxiaoze.github.io/JavaScript-jQuery-Demo/JavaScript与jQuery中文在线文档/jQuery-1.6-api/index.html <br>  
 
- ## 实现一个表单登录界面效果：
+## 实现一个表单登录界面效果：
  代码地址：https://github.com/ruanxiaoze/JavaScript-jQuery-Demo/blob/master/JavaScript与jQuery中文在线文档/jquery.login-ui/index.html<br><br>
  demo：http://ruanxiaoze.github.io/JavaScript-jQuery-Demo/JavaScript与jQuery中文在线文档/jquery.login-ui/index.html <br>
 
