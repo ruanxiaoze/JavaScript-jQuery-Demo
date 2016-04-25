@@ -13,7 +13,13 @@ JavaScript与jQuery中文在线文档及Demo
 ## jQuery API 中文版文档：
  代码地址：https://github.com/ruanxiaoze/JavaScript-jQuery-Demo/blob/master/JavaScript与jQuery中文在线文档/jQuery-1.6-api/index.html<br><br>
  demo：http://ruanxiaoze.github.io/JavaScript-jQuery-Demo/JavaScript与jQuery中文在线文档/jQuery-1.6-api/index.html <br>  
+ 
+## JAVA_API_1.7中文.chm
+ 下载地址：https://github.com/ruanxiaoze/JavaScript-jQuery-Demo/blob/master/JavaScript与jQuery中文在线文档/JAVA_API_1.7中文.chm <br>
 
+## Java8 API.chm
+ 下载地址：https://github.com/ruanxiaoze/JavaScript-jQuery-Demo/blob/master/JavaScript与jQuery中文在线文档/Java8%20API.chm <br>
+ 
 ## 实现一个表单登录界面效果：
  代码地址：https://github.com/ruanxiaoze/JavaScript-jQuery-Demo/blob/master/JavaScript与jQuery中文在线文档/jquery.login-ui/index.html<br><br>
  demo：http://ruanxiaoze.github.io/JavaScript-jQuery-Demo/JavaScript与jQuery中文在线文档/jquery.login-ui/index.html <br>
